@@ -1,0 +1,44 @@
+{
+  "regressions": {
+    "DRIVER_1_CIVIL_EFH": {
+      "regressor": "Engine Flying Hours (M hrs)",
+      "r_squared": 0.9967,
+      "slope": 573.67,
+      "intercept": 120.27,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_2_DEFENCE": {
+      "regressor": "Sovereign Procurement Backlog Index",
+      "r_squared": 1.0,
+      "slope": 33.87,
+      "intercept": -19.24,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_3_POWER_DC": {
+      "regressor": "Hyperscale Data Center Capacity Index",
+      "r_squared": 1.0,
+      "slope": 27.7,
+      "intercept": -24.84,
+      "gate_status": "PASS (R2 >= 0.85)"
+    }
+  },
+  "dupont": {
+    "tax_burden": 0.8151,
+    "interest_burden": 0.9316,
+    "operating_margin": 0.208,
+    "asset_turnover": 0.5564,
+    "equity_multiplier": 13.98,
+    "roe_calculated": 1.2289
+  },
+  "altman_z": {
+    "X1_working_capital_to_assets": 0.1023,
+    "X2_retained_earnings_to_assets": 0.0394,
+    "X3_ebit_to_assets": 0.1143,
+    "X4_mv_equity_to_total_liabilities": 3.4687,
+    "X5_sales_to_assets": 0.5564,
+    "altman_z_score": 3.192,
+    "zone": "SAFE ZONE (Z > 2.99)"
+  },
+  "piotroski_f_score": 8,
+  "beneish_m_score": -2.78
+}

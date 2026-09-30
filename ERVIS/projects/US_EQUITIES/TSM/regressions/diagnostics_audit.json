@@ -1,0 +1,83 @@
+{
+  "regressions": {
+    "DRIVER_1_ADVANCED_NODE_REVENUE": {
+      "regressor": "Advanced Node (<=7nm, 5nm, 3nm) Revenue ($B)",
+      "r_squared": 0.9834,
+      "slope": 1.0017,
+      "intercept": 30.4088,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_2_WAFER_ASP_TRENDS": {
+      "regressor": "Blended 12-inch Equivalent Wafer ASP ($/wafer)",
+      "r_squared": 0.8697,
+      "slope": 0.0099,
+      "intercept": -16.0664,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_3_GROSS_MARGIN_DURABILITY": {
+      "regressor": "Advanced Node Revenue Share (%) vs Gross Margin (%)",
+      "r_squared": 0.2784,
+      "slope": 0.1798,
+      "intercept": 45.3716,
+      "gate_status": "SUPPORTIVE"
+    }
+  },
+  "dupont_5yr": [
+    {
+      "year": 2021,
+      "tax_burden": 0.84,
+      "interest_burden": 1.0876,
+      "operating_margin": 0.4113,
+      "asset_turnover": 0.4196,
+      "equity_multiplier": 1.7448,
+      "roe_calculated": 0.2751
+    },
+    {
+      "year": 2022,
+      "tax_burden": 0.84,
+      "interest_burden": 1.0543,
+      "operating_margin": 0.4952,
+      "asset_turnover": 0.456,
+      "equity_multiplier": 1.7102,
+      "roe_calculated": 0.342
+    },
+    {
+      "year": 2023,
+      "tax_burden": 0.84,
+      "interest_burden": 1.1001,
+      "operating_margin": 0.4265,
+      "asset_turnover": 0.3906,
+      "equity_multiplier": 1.6142,
+      "roe_calculated": 0.2485
+    },
+    {
+      "year": 2024,
+      "tax_burden": 0.84,
+      "interest_burden": 1.0334,
+      "operating_margin": 0.4611,
+      "asset_turnover": 0.4325,
+      "equity_multiplier": 1.5773,
+      "roe_calculated": 0.273
+    },
+    {
+      "year": 2025,
+      "tax_burden": 0.84,
+      "interest_burden": 1.0439,
+      "operating_margin": 0.5082,
+      "asset_turnover": 0.479,
+      "equity_multiplier": 1.4814,
+      "roe_calculated": 0.3162
+    }
+  ],
+  "altman_z": {
+    "X1_working_capital_to_assets": 0.3191,
+    "X2_retained_earnings_to_assets": 0.4567,
+    "X3_ebit_to_assets": 0.2121,
+    "X4_mv_equity_to_total_liabilities": 24.5983,
+    "X5_sales_to_assets": 0.4724,
+    "altman_z_score": 16.95,
+    "zone": "GOD-TIER SAFE ZONE (Z >> 2.99)"
+  },
+  "piotroski_f_score": 8,
+  "beneish_m_score": -2.92
+}

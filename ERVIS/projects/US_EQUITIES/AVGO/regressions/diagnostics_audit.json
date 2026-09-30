@@ -1,0 +1,78 @@
+{
+  "regressions": {
+    "DRIVER_1_CUSTOM_AI_SILICON": {
+      "regressor": "Hyperscaler Combined CapEx ($B)",
+      "r_squared": 0.9567,
+      "slope": 0.0812,
+      "intercept": -8.41,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_2_TOMAHAWK_JERICHO_NETWORKING": {
+      "regressor": "AI Data Center Bandwidth Index (Tbps)",
+      "r_squared": 0.9852,
+      "slope": 0.0085,
+      "intercept": 0.79,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_3_VMWARE_VCF_ARR_TRANSITION": {
+      "regressor": "VMware Core License Conversion Rate (%)",
+      "r_squared": 0.9997,
+      "slope": 0.1495,
+      "intercept": 2.49,
+      "gate_status": "PASS (R2 >= 0.85)"
+    }
+  },
+  "dupont": {
+    "FY2022": {
+      "tax_burden": 0.95,
+      "interest_burden": 0.8472,
+      "operating_margin": 0.4301,
+      "asset_turnover": 0.4533,
+      "equity_multiplier": 3.2255,
+      "roe": 0.5062
+    },
+    "FY2023": {
+      "tax_burden": 0.9515,
+      "interest_burden": 0.8996,
+      "operating_margin": 0.4593,
+      "asset_turnover": 0.4916,
+      "equity_multiplier": 3.0374,
+      "roe": 0.587
+    },
+    "FY2024": {
+      "tax_burden": 0.8669,
+      "interest_burden": 0.4535,
+      "operating_margin": 0.2908,
+      "asset_turnover": 0.3114,
+      "equity_multiplier": 2.4475,
+      "roe": 0.0871
+    },
+    "FY2025": {
+      "tax_burden": 0.9177,
+      "interest_burden": 0.9664,
+      "operating_margin": 0.4081,
+      "asset_turnover": 0.3734,
+      "equity_multiplier": 2.1047,
+      "roe": 0.2845
+    },
+    "TTM_FY2026": {
+      "tax_burden": 0.922,
+      "interest_burden": 0.9598,
+      "operating_margin": 0.4852,
+      "asset_turnover": 0.4736,
+      "equity_multiplier": 1.8873,
+      "roe": 0.3838
+    }
+  },
+  "altman_z": {
+    "X1_working_capital_to_assets": 0.0857,
+    "X2_retained_earnings_to_assets": 0.0981,
+    "X3_ebit_to_assets": 0.2484,
+    "X4_mv_equity_to_total_liabilities": 19.3275,
+    "X5_sales_to_assets": 0.4736,
+    "altman_z_score": 13.13,
+    "zone": "SAFE ZONE (Z > 2.99, Low Distress Risk)"
+  },
+  "piotroski_f_score": 8,
+  "beneish_m_score": -2.74
+}

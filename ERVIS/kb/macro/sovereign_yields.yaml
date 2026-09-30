@@ -1,0 +1,55 @@
+LAST_GLOBAL_HARVEST: '2026-09-15T19:50:58.638396'
+BENCHMARKS:
+  USD:
+    country: United States
+    benchmark_instrument: US 10-Year Treasury Note
+    risk_free_10y: 0.0458
+    terminal_rate_30y: 0.0475
+    currency: USD
+    updated_at: '2026-09-15'
+  GBP:
+    country: United Kingdom
+    benchmark_instrument: UK 10-Year Gilt
+    risk_free_10y: 0.0405
+    terminal_rate_30y: 0.045
+    currency: GBP
+    updated_at: '2026-09-15'
+  EUR:
+    country: Eurozone / Germany
+    benchmark_instrument: German 10-Year Bund
+    risk_free_10y: 0.0225
+    terminal_rate_30y: 0.025
+    currency: EUR
+    updated_at: '2026-09-15'
+  CHF:
+    country: Switzerland
+    benchmark_instrument: Swiss Confederation 10-Year Bond
+    risk_free_10y: 0.0055
+    terminal_rate_30y: 0.0065
+    currency: CHF
+    updated_at: '2026-09-15'
+  JPY:
+    country: Japan
+    benchmark_instrument: Japan 10-Year JGB
+    risk_free_10y: 0.009
+    terminal_rate_30y: 0.0195
+    currency: JPY
+    updated_at: '2026-09-15'
+  SGD:
+    country: Singapore
+    benchmark_instrument: Singapore 10-Year SGS Bond
+    risk_free_10y: 0.0285
+    terminal_rate_30y: 0.0295
+    currency: SGD
+    updated_at: '2026-09-15'
+  AUD:
+    country: Australia
+    benchmark_instrument: Australia 10-Year Commonwealth Bond
+    risk_free_10y: 0.041
+    terminal_rate_30y: 0.044
+    currency: AUD
+    updated_at: '2026-09-15'
+MACRO_LIQUIDITY_BAROMETERS:
+  GOLD_USD_OUNCE: 4320.3
+  DXY_DOLLAR_INDEX: 99.58
+  BRENT_CRUDE_USD: 72.5

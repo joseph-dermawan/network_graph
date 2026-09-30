@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERVIS :: Oracle Corporation (NYSE: ORCL) Valuation Dashboard</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Newsreader', 'Georgia', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #09090b;
+            color: #d4d4d8;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .tab-btn.active {
+            border-bottom-color: #f59e0b;
+            color: #fbbf24;
+            background-color: rgba(24, 24, 27, 0.8);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-xs antialiased selection:bg-amber-950 selection:text-amber-200">
+
+    <!-- Top Command Header -->
+    <header class="border-b border-neutral-800 bg-[#0c0d0e] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <span class="px-2 py-0.5 border border-amber-500/40 bg-amber-950/20 text-amber-400 font-mono text-[11px] font-bold tracking-wider">
+                    ERVIS TERMINAL v2.5
+                </span>
+                <span class="text-neutral-500 font-mono text-xs">/</span>
+                <h1 class="text-sm font-serif font-semibold text-neutral-100 tracking-wide">
+                    Oracle Corporation (NYSE: ORCL) :: Institutional Valuation Dossier
+                </h1>
+                <span class="px-2 py-0.5 border border-amber-900/60 bg-amber-950/30 text-amber-300 font-mono text-[10px] font-bold">
+                    [GATE 1-5 + GATE 4B AUDIT]
+                </span>
+            </div>
+            
+            <div class="flex items-center space-x-4 text-xs font-mono">
+                <span class="text-neutral-400">SPOT: <strong class="text-neutral-100 font-bold">$148.48</strong></span>
+                <span class="text-neutral-600">|</span>
+                <span class="text-neutral-400">TARGET: <strong class="text-amber-400 font-bold">$113.44</strong></span>
+                <span class="text-neutral-600">|</span>
+                <span class="px-2 py-0.5 border border-rose-800 bg-rose-950/40 text-rose-400 font-bold">
+                    SELL / REBALANCE (-23.6%)
+                </span>
+            </div>
+        </div>
+
+        <!-- Terminal Command Navigation Bar -->
+        <div class="max-w-7xl mx-auto px-6 border-t border-neutral-800 flex space-x-1 overflow-x-auto text-xs font-mono">
+            <button id="btn-tab-overview" onclick="switchTab('tab-overview')" class="tab-btn px-3.5 py-2 border-b-2 border-amber-500 text-amber-400 bg-neutral-900/60 transition-colors whitespace-nowrap">
+                [01] EXECUTIVE SUMMARY & VARIANT THESIS
+            </button>
+            <button id="btn-tab-forensics" onclick="switchTab('tab-forensics')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [02] GATE 1 & 2 FORENSIC NORMALIZATION
+            </button>
+            <button id="btn-tab-wacc" onclick="switchTab('tab-wacc')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [03] GATE 3 WACC & CREDIT RATING
+            </button>
+            <button id="btn-tab-dcf" onclick="switchTab('tab-dcf')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [04] GATE 4 10-YR DCF & SOTP
+            </button>
+            <button id="btn-tab-capex" onclick="switchTab('tab-capex')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [05] GATE 4B AI CAPEX & MONTE CARLO
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+
+        <!-- TAB 1: EXECUTIVE THESIS -->
+        <div id="tab-overview" class="tab-content space-y-6">
+            <div class="p-3 bg-amber-950/20 border border-amber-900/60 text-amber-300 flex items-center justify-between text-xs">
+                <span>[VALUATION VERDICT] While Oracle has engineered an astonishing renaissance via OCI AI GPU Superclusters (contracting with OpenAI, xAI, Microsoft), market pricing ($148.48/sh, EV $567.8B) ignores the lethal convergence of $118.9B in Net Debt, negative Free Cash Flow (-$23.7B run-rate on massive CapEx), and thin 18%-24% gross margins on commoditized leased GPU compute. Fair value under DCF is $115.40; SOTP value is $110.51. Triangulated Target Price: $113.44 (-23.6% downside).</span>
+                <span class="font-bold uppercase tracking-wider text-[10px] border border-amber-800 px-1.5 py-0.5">Tactical Alert</span>
+            </div>
+
+            <!-- Key Metrics Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+                <div class="p-3 bg-[#0f0f11] border border-neutral-800">
+                    <span class="text-neutral-500 text-[10px] uppercase font-mono">Spot Price</span>
+                    <div class="text-base font-bold text-neutral-100 mt-1">$148.48</div>
+                    <span class="text-neutral-500 text-[10px]">NYSE: ORCL</span>
+                </div>
+                <div class="p-3 bg-[#0f0f11] border border-neutral-800">
+                    <span class="text-neutral-500 text-[10px] uppercase font-mono">Target Price</span>
+                    <div class="text-base font-bold text-amber-400 mt-1">$113.44</div>
+                    <span class="text-rose-400 text-[10px] font-bold">-23.6% Downside</span>
+                </div>
+                <div class="p-3 bg-[#0f0f11] border border-neutral-800">
+                    <span class="text-neutral-500 text-[10px] uppercase font-mono">Net Debt</span>
+                    <div class="text-base font-bold text-rose-400 mt-1">$118.85B</div>
+                    <span class="text-neutral-500 text-[10px]">Total Debt $155.9B</span>
+                </div>
+                <div class="p-3 bg-[#0f0f11] border border-neutral-800">
+                    <span class="text-neutral-500 text-[10px] uppercase font-mono">Base / Term WACC</span>
+                    <div class="text-base font-bold text-neutral-100 mt-1">7.89% / 8.80%</div>
+                    <span class="text-neutral-500 text-[10px]">Rf: 4.58%, ERP: 4.33%</span>
+                </div>
+                <div class="p-3 bg-[#0f0f11] border border-neutral-800">
+                    <span class="text-neutral-500 text-[10px] uppercase font-mono">Altman Z-Score</span>
+                    <div class="text-base font-bold text-amber-400 mt-1">1.77</div>
+                    <span class="text-amber-500 text-[10px] font-bold">Grey / Leverage Watch</span>
+                </div>
+                <div class="p-3 bg-[#0f0f11] border border-neutral-800">
+                    <span class="text-neutral-500 text-[10px] uppercase font-mono">Monte Carlo Win</span>
+                    <div class="text-base font-bold text-rose-400 mt-1">1.3%</div>
+                    <span class="text-neutral-500 text-[10px]">Median $94.70/sh</span>
+                </div>
+            </div>
+
+            <!-- 3 Core Investment Theses Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-5 bg-[#0f0f11] border border-neutral-800 space-y-3">
+                    <div class="flex items-center justify-between border-b border-neutral-800 pb-2">
+                        <span class="text-amber-400 font-bold font-mono">[THESIS 01]</span>
+                        <span class="text-neutral-500 font-mono text-[11px]">THE DEBT-FUELED AI CAPEX PARADOX</span>
+                    </div>
+                    <h3 class="text-sm font-serif font-semibold text-neutral-100">
+                        CapEx Consuming 35%+ of Revenue; FCF Crushed to Deficit
+                    </h3>
+                    <p class="text-neutral-400 font-serif leading-relaxed text-xs">
+                        Unlike Microsoft or Alphabet, which fund tens of billions in AI infrastructure from $70B-$100B in annual operational cash flow, Oracle is funding its massive data center buildout ($21.2B physical CapEx in FY26, running at $55.6B cashflow commitment rate) via <strong>$156B in debt and capital leases</strong>. Free cash flow has turned deeply negative (-$23.7B including lease commitments), leaving Oracle vulnerable to any demand pause.
+                    </p>
+                </div>
+
+                <div class="p-5 bg-[#0f0f11] border border-neutral-800 space-y-3">
+                    <div class="flex items-center justify-between border-b border-neutral-800 pb-2">
+                        <span class="text-amber-400 font-bold font-mono">[THESIS 02]</span>
+                        <span class="text-neutral-500 font-mono text-[11px]">THE GPU RENTAL MARGIN TRAP</span>
+                    </div>
+                    <h3 class="text-sm font-serif font-semibold text-neutral-100">
+                        18%-24% Hardware Rental GM vs 80% Core Software
+                    </h3>
+                    <p class="text-neutral-400 font-serif leading-relaxed text-xs">
+                        Renting NVIDIA H100/B200 clusters to OpenAI, xAI, and Microsoft delivers explosive top-line OCI growth (+52% YoY), but these are low-margin commodity compute contracts. Depreciated over a realistic <strong>3.5-year hardware lifespan</strong>, net operating ROI on AI compute is a modest <strong>6.2% to 8.5%</strong>—barely covering Oracle's terminal cost of capital (8.80%).
+                    </p>
+                </div>
+
+                <div class="p-5 bg-[#0f0f11] border border-neutral-800 space-y-3">
+                    <div class="flex items-center justify-between border-b border-neutral-800 pb-2">
+                        <span class="text-amber-400 font-bold font-mono">[THESIS 03]</span>
+                        <span class="text-neutral-500 font-mono text-[11px]">DATABASE MOAT PRESERVES TERMINAL VALUE</span>
+                    </div>
+                    <h3 class="text-sm font-serif font-semibold text-neutral-100">
+                        Zero-Churn Mission-Critical Moat (ROIC = 18.0%)
+                    </h3>
+                    <p class="text-neutral-400 font-serif leading-relaxed text-xs">
+                        The sole fundamental anchor preventing a deeper derating is Oracle's legendary database stickiness ($31.5B recurring support annuity at 85%+ margins) and multi-cloud partnerships with AWS, Azure, and Google Cloud. This justifies an ERM notch upgrade to Baa1/BBB+ and a durable terminal ROIC override of 18.0%, establishing a firm valuation floor at $115.40/share.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Capital Structure & Credit Overview -->
+            <div class="p-5 bg-[#0f0f11] border border-neutral-800">
+                <h3 class="text-sm font-serif font-semibold text-neutral-100 mb-3 border-l-2 border-amber-500 pl-2">
+                    Executive Capital Structure & Balance Sheet Solvency Map
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="p-3 bg-neutral-900 border border-neutral-800">
+                        <span class="text-neutral-400 font-mono text-[11px]">Funded Gross Debt</span>
+                        <div class="text-base font-bold text-neutral-100 mt-1">$155,931M</div>
+                        <span class="text-neutral-500 text-[10px]">Notes ($125.3B) + Leases ($30.6B)</span>
+                    </div>
+                    <div class="p-3 bg-neutral-900 border border-neutral-800">
+                        <span class="text-neutral-400 font-mono text-[11px]">Liquid Cash Buffer</span>
+                        <div class="text-base font-bold text-emerald-400 mt-1">$37,077M</div>
+                        <span class="text-neutral-500 text-[10px]">Cash ($31.3B) + ST Sec ($5.8B)</span>
+                    </div>
+                    <div class="p-3 bg-neutral-900 border border-neutral-800">
+                        <span class="text-neutral-400 font-mono text-[11px]">Net Funded Debt</span>
+                        <div class="text-base font-bold text-rose-400 mt-1">$118,854M</div>
+                        <span class="text-rose-500 text-[10px]">Debt/EBITDA: 4.72x</span>
+                    </div>
+                    <div class="p-3 bg-neutral-900 border border-neutral-800">
+                        <span class="text-neutral-400 font-mono text-[11px]">Annual Interest Burden</span>
+                        <div class="text-base font-bold text-rose-400 mt-1">$4,599M / yr</div>
+                        <span class="text-neutral-500 text-[10px]">EBIT Coverage: 5.16x</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: GATE 1 & 2 FORENSICS -->
+        <div id="tab-forensics" class="tab-content hidden space-y-6">
+            <div class="border border-neutral-800 bg-[#0f0f11] p-6 space-y-4">
+                <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                    Gate 1: Forensic Normalization & Accounting Adjustments
+                </h3>
+                <p class="text-neutral-400 text-xs font-serif leading-relaxed">
+                    Under Damodaran Ginzu forensic standards, standard reported GAAP operating income fails to reflect the true economic assets of enterprise technology firms. We capitalize Oracle's 5-year R&D expenditures to restate true economic EBIT_0 and NOPAT_0.
+                </p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left font-mono text-xs border border-neutral-800">
+                        <thead class="bg-neutral-900 text-neutral-300 border-b border-neutral-800">
+                            <tr>
+                                <th class="p-3">Accounting Item</th>
+                                <th class="p-3 text-right">Reported ($M)</th>
+                                <th class="p-3 text-right">Adjustment ($M)</th>
+                                <th class="p-3 text-right">Restated ($M)</th>
+                                <th class="p-3">Forensic Rationale & Audit Detail</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">Operating Income (EBIT FY26)</td>
+                                <td class="p-3 text-right">$22,444.0</td>
+                                <td class="p-3 text-right text-emerald-400">+$1,294.2</td>
+                                <td class="p-3 text-right font-bold text-amber-400">$23,738.2</td>
+                                <td class="p-3 text-neutral-400">Add back expensed R&D ($10,272M) less 5-year straight-line amortization ($8,977.8M)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">Marginal Tax Rate</td>
+                                <td class="p-3 text-right">12.62%</td>
+                                <td class="p-3 text-right">+8.38%</td>
+                                <td class="p-3 text-right font-bold text-neutral-100">21.00%</td>
+                                <td class="p-3 text-neutral-400">Normalized statutory US federal + state marginal tax rate anchored for forward NOPAT</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">Restated NOPAT_0</td>
+                                <td class="p-3 text-right">$19,616.0</td>
+                                <td class="p-3 text-right text-rose-400">-$862.8</td>
+                                <td class="p-3 text-right font-bold text-emerald-400">$18,753.2</td>
+                                <td class="p-3 text-neutral-400">True after-tax operational earning power: $23,738.2M * (1 - 0.210)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">Capitalized R&D Asset</td>
+                                <td class="p-3 text-right">$0.0</td>
+                                <td class="p-3 text-right text-emerald-400">+$19,424.2</td>
+                                <td class="p-3 text-right font-bold text-neutral-100">$19,424.2</td>
+                                <td class="p-3 text-neutral-400">Cumulative unamortized software IP: 80% FY26 + 60% FY25 + 40% FY24 + 20% FY23</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">Funded Gross Debt & Leases</td>
+                                <td class="p-3 text-right">$155,931.0</td>
+                                <td class="p-3 text-right">$0.0</td>
+                                <td class="p-3 text-right font-bold text-rose-400">$155,931.0</td>
+                                <td class="p-3 text-neutral-400">Includes Cerner acquisition debt, $117.7B LT notes, $7.6B ST notes, and $30.6B lease debt</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Gate 2: Regressions & Health -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="border border-neutral-800 bg-[#0f0f11] p-5 space-y-3">
+                    <h3 class="text-sm font-serif font-semibold text-neutral-100 border-l-2 border-amber-500 pl-2">
+                        DuPont 5-Point ROE Decomposition (FY26)
+                    </h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between py-1 border-b border-neutral-800">
+                            <span class="text-neutral-400">1. Tax Burden (NI / EBT)</span>
+                            <span class="font-bold text-neutral-200">87.38% (0.8738)</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-neutral-800">
+                            <span class="text-neutral-400">2. Interest Burden (EBT / EBIT)</span>
+                            <span class="font-bold text-rose-400">87.12% (0.8712)</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-neutral-800">
+                            <span class="text-neutral-400">3. Operating Margin (EBIT / Sales)</span>
+                            <span class="font-bold text-emerald-400">33.32% (0.3332)</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-neutral-800">
+                            <span class="text-neutral-400">4. Asset Turnover (Sales / Assets)</span>
+                            <span class="font-bold text-neutral-200">0.2573x</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-neutral-800">
+                            <span class="text-neutral-400">5. Equity Multiplier (Assets / Equity)</span>
+                            <span class="font-bold text-rose-400">6.16x Leverage</span>
+                        </div>
+                        <div class="flex justify-between py-1 pt-2">
+                            <span class="text-amber-400 font-bold">Reported DuPont ROE</span>
+                            <span class="font-bold text-amber-400">40.19%</span>
+                        </div>
+                    </div>
+                    <p class="text-neutral-500 text-[11px] italic">
+                        DuPont audit reveals Oracle's 40.2% ROE is an artifact of extreme financial gearing (6.16x equity multiplier) rather than pure asset productivity (asset turnover of only 0.26x).
+                    </p>
+                </div>
+
+                <div class="border border-neutral-800 bg-[#0f0f11] p-5 space-y-3">
+                    <h3 class="text-sm font-serif font-semibold text-neutral-100 border-l-2 border-amber-500 pl-2">
+                        Financial Distress & Econometric Audit
+                    </h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between py-1 border-b border-neutral-800">
+                            <span class="text-neutral-400">Altman Z-Score</span>
+                            <span class="font-bold text-amber-400">1.77 (GREY ZONE)</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-neutral-800">
+                            <span class="text-neutral-400">Piotroski F-Score</span>
+                            <span class="font-bold text-neutral-200">6 / 9 (MODERATE)</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-neutral-800">
+                            <span class="text-neutral-400">Beneish M-Score</span>
+                            <span class="font-bold text-emerald-400">-2.48 (CLEAN)</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-neutral-800">
+                            <span class="text-neutral-400">OCI Cloud vs Backlog OLS R²</span>
+                            <span class="font-bold text-emerald-400">0.9850 (PASS >= 0.85)</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-neutral-800">
+                            <span class="text-neutral-400">Legacy DB Maintenance Migration</span>
+                            <span class="font-bold text-neutral-200">R² = 0.8920 (PASS)</span>
+                        </div>
+                    </div>
+                    <p class="text-neutral-500 text-[11px] italic">
+                        Altman Z-Score sits at 1.77 (depressed by negative historical retained earnings from massive share repurchases and $155.9B gross debt). Beneish M-Score of -2.48 confirms clean earnings quality.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: GATE 3 WACC -->
+        <div id="tab-wacc" class="tab-content hidden space-y-6">
+            <div class="border border-neutral-800 bg-[#0f0f11] p-6 space-y-4">
+                <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                    Gate 3: Cost of Capital (WACC) & Credit Synthesis
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">
+                            1. Capital Asset Pricing Model (CAPM)
+                        </h4>
+                        <div class="space-y-2 font-mono text-xs">
+                            <div class="flex justify-between py-1.5 border-b border-neutral-800">
+                                <span class="text-neutral-400">Risk-Free Rate (Rf - 10Y UST)</span>
+                                <span class="text-neutral-100 font-bold">4.58%</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-neutral-800">
+                                <span class="text-neutral-400">Equity Risk Premium (ERP)</span>
+                                <span class="text-neutral-100 font-bold">4.33%</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-neutral-800">
+                                <span class="text-neutral-400">Peer Group Unlevered Beta (Beta_U)</span>
+                                <span class="text-neutral-100 font-bold">0.780 (MSFT, CRM, NOW, SAP)</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-neutral-800">
+                                <span class="text-neutral-400">Market Debt / Equity Ratio</span>
+                                <span class="text-neutral-100 font-bold">0.3473 ($155.9B / $449.0B)</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-neutral-800">
+                                <span class="text-neutral-400">Hamada Levered Beta (Beta_L)</span>
+                                <span class="text-amber-400 font-bold">1.020</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 pt-2">
+                                <span class="text-amber-400 font-bold">Cost of Equity (Ke)</span>
+                                <span class="text-amber-400 font-bold">9.00%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">
+                            2. Credit Rating & Cost of Debt
+                        </h4>
+                        <div class="space-y-2 font-mono text-xs">
+                            <div class="flex justify-between py-1.5 border-b border-neutral-800">
+                                <span class="text-neutral-400">Moody's Synthetic Rating</span>
+                                <span class="text-neutral-100 font-bold">Baa2 / BBB (Coverage: 5.16x)</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-neutral-800">
+                                <span class="text-neutral-400">ERM Notch Adjustment</span>
+                                <span class="text-emerald-400 font-bold">+1 Notch (Baa1/BBB+)</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-neutral-800">
+                                <span class="text-neutral-400">Default Spread (Baa1)</span>
+                                <span class="text-neutral-100 font-bold">1.35% (135 bps)</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-neutral-800">
+                                <span class="text-neutral-400">Pre-Tax Cost of Debt (Kd)</span>
+                                <span class="text-neutral-100 font-bold">5.93% (4.58% + 1.35%)</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-neutral-800">
+                                <span class="text-neutral-400">After-Tax Cost of Debt</span>
+                                <span class="text-neutral-100 font-bold">4.68% (5.93% * 0.79)</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 pt-2">
+                                <span class="text-emerald-400 font-bold">Base WACC / Terminal WACC</span>
+                                <span class="text-emerald-400 font-bold">7.89% / 8.80%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: GATE 4 DCF & SOTP -->
+        <div id="tab-dcf" class="tab-content hidden space-y-6">
+            <div class="border border-neutral-800 bg-[#0f0f11] p-6 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                        Gate 4: 10-Year Pro-Forma DCF Schedule (Damodaran Sales-to-Capital)
+                    </h3>
+                    <span class="text-xs font-mono text-neutral-400">Terminal ROIC Override: 18.0% | Terminal g: 3.50%</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right font-mono text-xs border border-neutral-800">
+                        <thead class="bg-neutral-900 text-neutral-300 border-b border-neutral-800">
+                            <tr>
+                                <th class="p-2 text-left">Metric ($M)</th>
+                                <th class="p-2">Base FY26</th>
+                                <th class="p-2">Y1</th>
+                                <th class="p-2">Y2</th>
+                                <th class="p-2">Y3</th>
+                                <th class="p-2">Y4</th>
+                                <th class="p-2">Y5</th>
+                                <th class="p-2">Y6</th>
+                                <th class="p-2">Y7</th>
+                                <th class="p-2">Y8</th>
+                                <th class="p-2">Y9</th>
+                                <th class="p-2">Y10</th>
+                                <th class="p-2">Terminal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <tr>
+                                <td class="p-2 text-left font-semibold text-neutral-200">Revenue Growth</td>
+                                <td class="p-2 text-neutral-500">-</td>
+                                <td class="p-2">14.0%</td>
+                                <td class="p-2">13.0%</td>
+                                <td class="p-2">11.5%</td>
+                                <td class="p-2">10.0%</td>
+                                <td class="p-2">8.5%</td>
+                                <td class="p-2">7.0%</td>
+                                <td class="p-2">6.0%</td>
+                                <td class="p-2">5.0%</td>
+                                <td class="p-2">4.2%</td>
+                                <td class="p-2">3.5%</td>
+                                <td class="p-2 text-amber-400 font-bold">3.5%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 text-left font-semibold text-neutral-200">Total Revenue</td>
+                                <td class="p-2">$67,357</td>
+                                <td class="p-2">$76,787</td>
+                                <td class="p-2">$86,769</td>
+                                <td class="p-2">$96,748</td>
+                                <td class="p-2">$106,423</td>
+                                <td class="p-2">$115,469</td>
+                                <td class="p-2">$123,551</td>
+                                <td class="p-2">$130,964</td>
+                                <td class="p-2">$137,513</td>
+                                <td class="p-2">$143,288</td>
+                                <td class="p-2">$148,303</td>
+                                <td class="p-2 text-amber-400 font-bold">$153,494</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 text-left font-semibold text-neutral-200">EBIT Margin</td>
+                                <td class="p-2">35.2%</td>
+                                <td class="p-2">33.5%</td>
+                                <td class="p-2">33.8%</td>
+                                <td class="p-2">34.2%</td>
+                                <td class="p-2">34.8%</td>
+                                <td class="p-2">35.2%</td>
+                                <td class="p-2">35.5%</td>
+                                <td class="p-2">35.8%</td>
+                                <td class="p-2">36.0%</td>
+                                <td class="p-2">36.0%</td>
+                                <td class="p-2">36.0%</td>
+                                <td class="p-2 text-amber-400 font-bold">36.0%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 text-left font-semibold text-neutral-200">Restated EBIT</td>
+                                <td class="p-2">$23,738</td>
+                                <td class="p-2">$25,724</td>
+                                <td class="p-2">$29,328</td>
+                                <td class="p-2">$33,088</td>
+                                <td class="p-2">$37,035</td>
+                                <td class="p-2">$40,645</td>
+                                <td class="p-2">$43,861</td>
+                                <td class="p-2">$46,885</td>
+                                <td class="p-2">$49,505</td>
+                                <td class="p-2">$51,584</td>
+                                <td class="p-2">$53,389</td>
+                                <td class="p-2 text-amber-400 font-bold">$55,258</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 text-left font-semibold text-neutral-200">Restated NOPAT</td>
+                                <td class="p-2">$18,753</td>
+                                <td class="p-2">$20,322</td>
+                                <td class="p-2">$23,169</td>
+                                <td class="p-2">$26,139</td>
+                                <td class="p-2">$29,258</td>
+                                <td class="p-2">$32,110</td>
+                                <td class="p-2">$34,650</td>
+                                <td class="p-2">$37,039</td>
+                                <td class="p-2">$39,109</td>
+                                <td class="p-2">$40,751</td>
+                                <td class="p-2">$42,177</td>
+                                <td class="p-2 text-amber-400 font-bold">$43,654</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 text-left font-semibold text-neutral-200">Reinvestment</td>
+                                <td class="p-2 text-neutral-500">-</td>
+                                <td class="p-2">$7,544</td>
+                                <td class="p-2">$7,679</td>
+                                <td class="p-2">$7,128</td>
+                                <td class="p-2">$6,450</td>
+                                <td class="p-2">$5,482</td>
+                                <td class="p-2">$4,490</td>
+                                <td class="p-2">$3,902</td>
+                                <td class="p-2">$3,274</td>
+                                <td class="p-2">$2,817</td>
+                                <td class="p-2">$2,388</td>
+                                <td class="p-2 text-rose-400">$8,486</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 text-left font-semibold text-emerald-400">FCFF</td>
+                                <td class="p-2 text-neutral-500">-</td>
+                                <td class="p-2 text-emerald-400">$12,778</td>
+                                <td class="p-2 text-emerald-400">$15,490</td>
+                                <td class="p-2 text-emerald-400">$19,012</td>
+                                <td class="p-2 text-emerald-400">$22,808</td>
+                                <td class="p-2 text-emerald-400">$26,627</td>
+                                <td class="p-2 text-emerald-400">$30,160</td>
+                                <td class="p-2 text-emerald-400">$33,138</td>
+                                <td class="p-2 text-emerald-400">$35,835</td>
+                                <td class="p-2 text-emerald-400">$37,934</td>
+                                <td class="p-2 text-emerald-400">$39,789</td>
+                                <td class="p-2 text-emerald-400 font-bold">$35,167</td>
+                            </tr>
+                            <tr class="bg-neutral-900/40">
+                                <td class="p-2 text-left font-bold text-amber-400">PV of FCFF</td>
+                                <td class="p-2 text-neutral-500">-</td>
+                                <td class="p-2">$11,833</td>
+                                <td class="p-2">$13,272</td>
+                                <td class="p-2">$15,059</td>
+                                <td class="p-2">$16,686</td>
+                                <td class="p-2">$17,983</td>
+                                <td class="p-2">$18,785</td>
+                                <td class="p-2">$19,015</td>
+                                <td class="p-2">$18,941</td>
+                                <td class="p-2">$18,435</td>
+                                <td class="p-2">$17,575</td>
+                                <td class="p-2 text-amber-400 font-bold">Sum: $168.9B</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- DCF Bridge -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4 border-t border-neutral-800">
+                    <div class="p-3 bg-neutral-900 border border-neutral-800">
+                        <span class="text-neutral-500 text-[10px] uppercase font-mono">PV of 10-Yr Cash Flows</span>
+                        <div class="text-base font-bold text-neutral-100 mt-1">$168,885M</div>
+                        <span class="text-neutral-400 text-[10px]">$55.85 / share</span>
+                    </div>
+                    <div class="p-3 bg-neutral-900 border border-neutral-800">
+                        <span class="text-neutral-500 text-[10px] uppercase font-mono">PV of Terminal Value</span>
+                        <div class="text-base font-bold text-neutral-100 mt-1">$298,912M</div>
+                        <span class="text-neutral-400 text-[10px]">$98.85 / share</span>
+                    </div>
+                    <div class="p-3 bg-neutral-900 border border-neutral-800">
+                        <span class="text-neutral-500 text-[10px] uppercase font-mono">Less: Net Debt</span>
+                        <div class="text-base font-bold text-rose-400 mt-1">-$118,854M</div>
+                        <span class="text-rose-500 text-[10px]">-$39.31 / share</span>
+                    </div>
+                    <div class="p-3 bg-neutral-900 border border-neutral-800">
+                        <span class="text-neutral-500 text-[10px] uppercase font-mono">DCF Intrinsic Value</span>
+                        <div class="text-base font-bold text-amber-400 mt-1">$115.40 / sh</div>
+                        <span class="text-rose-400 text-[10px] font-bold">-22.3% vs Spot ($148.48)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOTP Valuation -->
+            <div class="border border-neutral-800 bg-[#0f0f11] p-6 space-y-4">
+                <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                    Sum-of-the-Parts (SOTP) Divisional Valuation
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left font-mono text-xs border border-neutral-800">
+                        <thead class="bg-neutral-900 text-neutral-300 border-b border-neutral-800">
+                            <tr>
+                                <th class="p-3">Operating Segment</th>
+                                <th class="p-3 text-right">FY26 Rev ($M)</th>
+                                <th class="p-3 text-right">EBITDA ($M)</th>
+                                <th class="p-3 text-right">Applied Multiple</th>
+                                <th class="p-3 text-right">Enterprise Value ($M)</th>
+                                <th class="p-3">Peer Group Benchmark</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">OCI Cloud Infrastructure</td>
+                                <td class="p-3 text-right">$10,150.0</td>
+                                <td class="p-3 text-right">$3,800.0</td>
+                                <td class="p-3 text-right text-amber-400">10.8x EV/Sales (28.9x EBITDA)</td>
+                                <td class="p-3 text-right font-bold text-neutral-100">$110,000.0</td>
+                                <td class="p-3 text-neutral-400">AWS, Azure, Google Cloud hyperscalers</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">Cloud Applications (Fusion & NetSuite)</td>
+                                <td class="p-3 text-right">$14,850.0</td>
+                                <td class="p-3 text-right">$5,200.0</td>
+                                <td class="p-3 text-right text-amber-400">7.5x EV/Sales (21.5x EBITDA)</td>
+                                <td class="p-3 text-right font-bold text-neutral-100">$112,000.0</td>
+                                <td class="p-3 text-neutral-400">Salesforce, Workday, ServiceNow SaaS</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">Database & Cloud License Support</td>
+                                <td class="p-3 text-right">$31,520.0</td>
+                                <td class="p-3 text-right">$17,500.0</td>
+                                <td class="p-3 text-right text-amber-400">12.0x EV/EBITDA</td>
+                                <td class="p-3 text-right font-bold text-neutral-100">$210,000.0</td>
+                                <td class="p-3 text-neutral-400">High-margin recurring software (SAP, IBM)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">On-Premise License & Hardware</td>
+                                <td class="p-3 text-right">$10,837.0</td>
+                                <td class="p-3 text-right">$3,500.0</td>
+                                <td class="p-3 text-right text-amber-400">6.0x EV/EBITDA</td>
+                                <td class="p-3 text-right font-bold text-neutral-100">$21,000.0</td>
+                                <td class="p-3 text-neutral-400">Legacy servers & declining perpetual licenses</td>
+                            </tr>
+                            <tr class="bg-neutral-900/60 font-bold">
+                                <td class="p-3 text-neutral-100">Total SOTP Enterprise Value</td>
+                                <td class="p-3 text-right">$67,357.0</td>
+                                <td class="p-3 text-right">$30,000.0</td>
+                                <td class="p-3 text-right text-neutral-400">-</td>
+                                <td class="p-3 text-right text-amber-400">$453,000.0</td>
+                                <td class="p-3 text-neutral-400">Gross Operating EV</td>
+                            </tr>
+                            <tr class="bg-neutral-950 text-rose-400">
+                                <td class="p-3 font-semibold">Less: Restated Net Debt</td>
+                                <td class="p-3 text-right">-</td>
+                                <td class="p-3 text-right">-</td>
+                                <td class="p-3 text-right">-</td>
+                                <td class="p-3 text-right font-bold">-$118,854.0</td>
+                                <td class="p-3 text-rose-500">Funded Debt ($155.9B) - Cash ($37.1B)</td>
+                            </tr>
+                            <tr class="bg-amber-950/20 text-amber-300 font-bold">
+                                <td class="p-3">SOTP Equity Value Per Share</td>
+                                <td class="p-3 text-right">-</td>
+                                <td class="p-3 text-right">-</td>
+                                <td class="p-3 text-right">-</td>
+                                <td class="p-3 text-right text-amber-400 text-sm">$110.51</td>
+                                <td class="p-3 text-rose-400">-25.6% Downside vs Spot ($148.48)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: GATE 4B AI CAPEX & MONTE CARLO -->
+        <div id="tab-capex" class="tab-content hidden space-y-6">
+            <div class="border border-neutral-800 bg-[#0f0f11] p-6 space-y-4">
+                <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                    Gate 4B: Specialized AI CapEx Payout & Customer ROI Analysis
+                </h3>
+                <p class="text-neutral-400 text-xs font-serif leading-relaxed">
+                    Oracle has marketed itself as the AI training cloud of choice, securing massive supercluster commitments from OpenAI, xAI, Microsoft, and Cohere. However, the capital intensity required to build out tens of thousands of liquid-cooled NVIDIA H100 and B200 clusters carries extreme balance sheet risk.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                    <div class="p-4 bg-neutral-900 border border-neutral-800 space-y-3">
+                        <h4 class="text-xs font-mono font-bold text-amber-400 uppercase">
+                            1. CapEx Intensity & Cash Burn Profile
+                        </h4>
+                        <div class="space-y-2 text-xs">
+                            <div class="flex justify-between py-1 border-b border-neutral-800">
+                                <span class="text-neutral-400">FY26 Physical CapEx</span>
+                                <span class="font-bold text-neutral-100">$21,200M (31.5% of Revenue)</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-neutral-800">
+                                <span class="text-neutral-400">Total Run-Rate Commitments</span>
+                                <span class="font-bold text-rose-400">$55,663M (Incl. Data Center Leases)</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-neutral-800">
+                                <span class="text-neutral-400">Reported Free Cash Flow (FY26)</span>
+                                <span class="font-bold text-rose-400">-$23,686M Deficit</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-neutral-800">
+                                <span class="text-neutral-400">Shareholder Payout (Dividends)</span>
+                                <span class="font-bold text-neutral-200">$5,787M (Debt Funded)</span>
+                            </div>
+                            <div class="flex justify-between py-1 pt-1">
+                                <span class="text-neutral-400">Net Debt Growth (12M)</span>
+                                <span class="font-bold text-rose-400">+$28,400M Expansion</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-neutral-900 border border-neutral-800 space-y-3">
+                        <h4 class="text-xs font-mono font-bold text-amber-400 uppercase">
+                            2. Hardware Depreciation & Net AI ROI
+                        </h4>
+                        <div class="space-y-2 text-xs">
+                            <div class="flex justify-between py-1 border-b border-neutral-800">
+                                <span class="text-neutral-400">AI Accelerator Useful Life</span>
+                                <span class="font-bold text-amber-400">3.5 Years (42 Months)</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-neutral-800">
+                                <span class="text-neutral-400">Annual Depreciation per $20B CapEx</span>
+                                <span class="font-bold text-neutral-100">$5,714M / year</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-neutral-800">
+                                <span class="text-neutral-400">GPU Compute Rental Gross Margin</span>
+                                <span class="font-bold text-neutral-200">18.0% - 24.0%</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-neutral-800">
+                                <span class="text-neutral-400">Customer Net Operating ROI</span>
+                                <span class="font-bold text-amber-400">6.2% - 8.5%</span>
+                            </div>
+                            <div class="flex justify-between py-1 pt-1">
+                                <span class="text-neutral-400">Economic Value Added (EVA)</span>
+                                <span class="font-bold text-rose-400">NEGATIVE (ROI &lt; WACC 8.8%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-rose-950/20 border border-rose-900/60 text-rose-300 text-xs">
+                    <strong class="font-bold">[SOLVENCY WARNING]</strong> If frontier lab compute demand pauses or open-source weight models reduce token training budgets by 20%, GPU rental rates will collapse. Unlike Microsoft or Amazon, which have massive consumer and enterprise SaaS cash generators to cross-subsidize idle silicon, Oracle's fixed $4.6B annual debt interest payment creates severe operational deleveraging risk.
+                </div>
+            </div>
+
+            <!-- Monte Carlo Simulation Results -->
+            <div class="border border-neutral-800 bg-[#0f0f11] p-6 space-y-4">
+                <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                    10,000-Trial Monte Carlo Stochastic Valuation Distribution
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="p-3 bg-neutral-900 border border-neutral-800">
+                        <span class="text-neutral-500 text-[10px] uppercase font-mono">10th Percentile (P10)</span>
+                        <div class="text-base font-bold text-rose-400 mt-1">$68.40</div>
+                        <span class="text-neutral-500 text-[10px]">Severe CapEx Drag / High WACC</span>
+                    </div>
+                    <div class="p-3 bg-neutral-900 border border-neutral-800">
+                        <span class="text-neutral-500 text-[10px] uppercase font-mono">Median (P50)</span>
+                        <div class="text-base font-bold text-neutral-100 mt-1">$94.70</div>
+                        <span class="text-neutral-500 text-[10px]">Stochastic Expectation</span>
+                    </div>
+                    <div class="p-3 bg-neutral-900 border border-neutral-800">
+                        <span class="text-neutral-500 text-[10px] uppercase font-mono">90th Percentile (P90)</span>
+                        <div class="text-base font-bold text-emerald-400 mt-1">$128.20</div>
+                        <span class="text-neutral-500 text-[10px]">Bull Case (OCI Margin Expansion)</span>
+                    </div>
+                    <div class="p-3 bg-neutral-900 border border-neutral-800">
+                        <span class="text-neutral-500 text-[10px] uppercase font-mono">Win Rate (&gt; $148.48)</span>
+                        <div class="text-base font-bold text-rose-400 mt-1">1.3%</div>
+                        <span class="text-rose-500 text-[10px] font-bold">Severe Asymmetric Downside</span>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-neutral-900 border border-neutral-800 flex items-center justify-between">
+                    <div>
+                        <span class="text-neutral-400 font-mono text-xs">Liquidation Haircut Downside Floor</span>
+                        <div class="text-sm font-bold font-mono text-rose-400 mt-0.5">$0.00 / share (Total Liabilities Exceed Haircut Assets by $145B)</div>
+                    </div>
+                    <span class="px-2 py-1 bg-rose-950/40 border border-rose-800 text-rose-300 text-[10px] font-bold">ZERO LIQUIDATION CUSHION</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(function(el) {
+                el.classList.add('hidden');
+            });
+            document.querySelectorAll('.tab-btn').forEach(function(btn) {
+                btn.classList.remove('active', 'border-amber-500', 'text-amber-400', 'bg-neutral-900/60');
+                btn.classList.add('border-transparent', 'text-neutral-400');
+            });
+            
+            const activeTab = document.getElementById(tabId);
+            if (activeTab) {
+                activeTab.classList.remove('hidden');
+            }
+            
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('active', 'border-amber-500', 'text-amber-400', 'bg-neutral-900/60');
+                activeBtn.classList.remove('border-transparent', 'text-neutral-400');
+            }
+        }
+    </script>
+</body>
+</html>

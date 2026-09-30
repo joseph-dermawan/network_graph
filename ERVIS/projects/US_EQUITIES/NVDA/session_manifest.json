@@ -1,0 +1,24 @@
+{
+  "ticker": "NVDA",
+  "company_name": "NVIDIA Corporation",
+  "market": "US_EQUITIES",
+  "currency": "USD",
+  "session_start": "2026-09-21T22:41:48.471540",
+  "active_rf": 0.0458,
+  "status": "COMPLETED_GATES_1_THROUGH_5",
+  "current_gate": "GATE_5_COMPLETED",
+  "gates_completed": [
+    "GATE_1_INGESTION_AND_FORENSICS",
+    "GATE_2_OPERATIONAL_DRIVERS_AND_HEALTH",
+    "GATE_3_WACC_AND_CREDIT_SYNTHESIS",
+    "GATE_4_VALUATION_ENGINE_AND_SCENARIOS",
+    "GATE_5_PITCH_MEMO_AND_DELIVERABLES"
+  ],
+  "spot_price_usd": 224.23,
+  "final_intrinsic_value_dcf_usd": 95.76,
+  "final_intrinsic_value_sotp_usd": 195.09,
+  "final_target_price_usd": 125.93,
+  "final_rating": "TRIM / TAKE PROFITS (-43.8%)",
+  "tactical_accumulation_zone_usd": "$95.00 - $125.00",
+  "gsheet_url": ""
+}

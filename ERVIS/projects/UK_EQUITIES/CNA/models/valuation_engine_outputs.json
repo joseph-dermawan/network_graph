@@ -1,0 +1,93 @@
+{
+  "ticker": "CNA.L",
+  "currency": "GBP",
+  "shares_outstanding_m": 4619.45,
+  "market_price_gbp": 1.509,
+  "market_price_pence": 150.9,
+  "market_cap_m": 6970.75,
+  "risk_free_rate": 0.0405,
+  "wacc_approved": 0.0646,
+  "terminal_growth": 0.020,
+  "net_cash_bridge_m": 1342.0,
+  "net_cash_per_share_pence": 29.05,
+  
+  "scenarios": {
+    "scenario_1_trough_3a": {
+      "name": "Cyclical Trough Baseline (3A)",
+      "base_ebit_m": 850.0,
+      "operating_margin": 0.0436,
+      "growth_yr1_5": 0.015,
+      "pv_10yr_cashflows_m": 3859.4,
+      "pv_terminal_value_m": 6340.9,
+      "enterprise_operating_assets_m": 10200.3,
+      "total_equity_value_m": 11542.3,
+      "intrinsic_value_per_share_pence": 249.9,
+      "upside_percent": 65.6
+    },
+    "scenario_2_midcycle_3b": {
+      "name": "Mid-Cycle Normalized (3B)",
+      "base_ebit_m": 1400.0,
+      "operating_margin": 0.070,
+      "growth_yr1_5": 0.025,
+      "pv_10yr_cashflows_m": 6836.9,
+      "pv_terminal_value_m": 11183.1,
+      "enterprise_operating_assets_m": 18020.1,
+      "total_equity_value_m": 19362.1,
+      "intrinsic_value_per_share_pence": 419.1,
+      "upside_percent": 177.8
+    },
+    "scenario_3_bull_nuclear_3c": {
+      "name": "Bull Nuclear & AI PPA Re-rating (3C)",
+      "base_ebit_m": 1900.0,
+      "operating_margin": 0.090,
+      "growth_yr1_5": 0.040,
+      "terminal_moat_roic": 0.120,
+      "total_equity_value_m": 31086.0,
+      "intrinsic_value_per_share_pence": 672.9,
+      "upside_percent": 345.9
+    }
+  },
+
+  "sum_of_the_parts_sotp": {
+    "british_gas_retail_and_services": {
+      "ebitda_m": 650.0,
+      "multiple_ev_ebitda": 5.5,
+      "ev_m": 3575.0,
+      "per_share_pence": 77.4
+    },
+    "centrica_storage_and_peakers": {
+      "ebitda_m": 350.0,
+      "multiple_ev_ebitda": 7.0,
+      "ev_m": 2450.0,
+      "per_share_pence": 53.0
+    },
+    "nuclear_fleet_20pct_stake": {
+      "ebitda_m": 450.0,
+      "multiple_ev_ebitda": 11.0,
+      "ev_m": 4950.0,
+      "per_share_pence": 107.2
+    },
+    "total_enterprise_value_m": 10975.0,
+    "net_cash_added_m": 1342.0,
+    "total_equity_value_m": 12317.0,
+    "target_price_pence": 266.6,
+    "upside_percent": 76.7,
+    "key_insight": "Retail (77.4p) + Storage (53.0p) + Net Cash (29.1p) = 159.5p. At current price of 150.9p, the entire 20% Nuclear Fleet (107.2p/sh) is priced at NEGATIVE 8.6p (completely free)!"
+  },
+
+  "monte_carlo_simulation_10k": {
+    "trials": 10000,
+    "p10_floor_pence": 262.2,
+    "median_pence": 369.6,
+    "mean_pence": 372.7,
+    "p90_ceiling_pence": 483.5,
+    "win_rate_percent": 100.0
+  },
+
+  "liquidation_haircut_floor": {
+    "gross_liquidation_proceeds_m": 9854.0,
+    "net_proceeds_for_equity_m": 2058.4,
+    "floor_price_per_share_pence": 44.6,
+    "max_downside_percent": -70.5
+  }
+}

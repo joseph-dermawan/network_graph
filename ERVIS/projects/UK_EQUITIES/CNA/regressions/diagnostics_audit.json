@@ -1,0 +1,49 @@
+{
+  "ticker": "CNA.L",
+  "audit_date": "2026-09-13T19:09:00Z",
+  "dupont_5_point": {
+    "2023_crisis_peak": {
+      "roe": 1.013,
+      "tax_burden": 0.61,
+      "interest_burden": 0.86,
+      "operating_margin": 0.285,
+      "asset_turnover": 1.24,
+      "equity_multiplier": 5.51,
+      "driver_note": "Crisis windfall gains; 28.5% operating margin created anomalous 100%+ ROE."
+    },
+    "2024_normalization": {
+      "roe": 0.301,
+      "tax_burden": 0.79,
+      "interest_burden": 0.86,
+      "operating_margin": 0.098,
+      "asset_turnover": 1.06,
+      "equity_multiplier": 4.24,
+      "driver_note": "Normalizing commodity spreads; healthy 30% operational ROE."
+    },
+    "2025_cyclical_trough": {
+      "roe": -0.023,
+      "tax_burden": -0.64,
+      "interest_burden": 0.15,
+      "operating_margin": 0.040,
+      "asset_turnover": 1.26,
+      "equity_multiplier": 5.00,
+      "driver_note": "Cyclical trough; 4.0% operating margin due to mild winter and price cap resets. Zero debt distress."
+    }
+  },
+  "altman_z_score": {
+    "total_assets_gbp": 15410000000.0,
+    "working_capital_gbp": 3270000000.0,
+    "retained_earnings_gbp": 2980000000.0,
+    "ebit_trough_gbp": 771000000.0,
+    "market_cap_gbp": 6970000000.0,
+    "total_liabilities_gbp": 11920000000.0,
+    "x1_working_capital_to_assets": 0.212,
+    "x2_retained_earnings_to_assets": 0.193,
+    "x3_ebit_to_assets": 0.050,
+    "x4_market_equity_to_liabilities": 0.585,
+    "x5_sales_to_assets": 1.264,
+    "final_altman_z": 2.30,
+    "zone": "GREY_ZONE_TRANSITIONAL",
+    "credit_interpretation": "Score is dampened by non-debt utility liabilities (derivative hedges and customer bill deposits). Pure financial debt solvency is AAA-grade due to +£1.34B net cash."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "ticker": "AVGO",
+  "company_name": "Broadcom Inc.",
+  "provider_internal": {
+    "revenue_m": 89104.0,
+    "physical_capex_m": 1250.0,
+    "capex_intensity_pct": 1.4,
+    "free_cash_flow_m": 39403.0,
+    "fcf_conversion_pct": 96.93,
+    "internal_economic_roic_pct": 24.27,
+    "shareholder_payout_m": 17452.0,
+    "payout_ratio_of_fcf_pct": 44.29
+  },
+  "customer_ecosystem": {
+    "hyperscaler_total_capex_b": 425.0,
+    "ai_hardware_purchases_b": 24.5,
+    "capex_payout_ratio_pct": 5.76,
+    "customer_incremental_ai_rev_b": 58.0,
+    "customer_ai_gross_profit_b": 37.7,
+    "annual_hardware_depreciation_b": 7.0,
+    "customer_net_ai_operating_income_b": 30.7,
+    "customer_net_roi_pct": 125.31,
+    "customer_payback_years": 0.65,
+    "hardware_useful_life_years": 3.5,
+    "hardware_obsolescence_gap_years": -2.85,
+    "status": "VALUE ACCRETIVE"
+  },
+  "breakeven_monetization": {
+    "target_customer_roic_pct": 15.0,
+    "required_annual_ai_rev_b": 16.42,
+    "actual_realized_ai_rev_b": 58.0,
+    "annual_revenue_gap_deficit_b": -41.58
+  }
+}

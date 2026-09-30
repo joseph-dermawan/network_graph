@@ -1,0 +1,85 @@
+{
+  "regressions": {
+    "DRIVER_1_HYPERSCALER_AI_CAPEX": {
+      "regressor": "Hyperscaler AI Infrastructure CapEx ($B)",
+      "r_squared": 0.9957,
+      "slope": 51.27,
+      "intercept": -6823.28,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_2_EPYC_SERVER_SHARE": {
+      "regressor": "x86 Server CPU Unit Market Share (%)",
+      "r_squared": 0.9763,
+      "slope": 372.82,
+      "intercept": -1730.5,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_3_CLIENT_AI_PC_INDEX": {
+      "regressor": "Client PC & AI PC Volume Index",
+      "r_squared": 0.9732,
+      "slope": 168.75,
+      "intercept": -10119.59,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_4_GAMING_EMBEDDED_CYCLE": {
+      "regressor": "Gaming Console & Embedded Cyclical Index",
+      "r_squared": 0.9807,
+      "slope": 163.54,
+      "intercept": -7326.24,
+      "gate_status": "PASS (R2 >= 0.85)"
+    }
+  },
+  "dupont_5yr": {
+    "2022": {
+      "tax_burden": 1.1149,
+      "interest_burden": 0.9367,
+      "op_margin": 0.0536,
+      "asset_turnover": 0.3492,
+      "equity_mult": 1.2343,
+      "roe": 0.0241
+    },
+    "2023": {
+      "tax_burden": 1.7358,
+      "interest_burden": 1.2269,
+      "op_margin": 0.0177,
+      "asset_turnover": 0.3341,
+      "equity_mult": 1.2146,
+      "roe": 0.0153
+    },
+    "2024": {
+      "tax_burden": 0.825,
+      "interest_burden": 0.9535,
+      "op_margin": 0.0809,
+      "asset_turnover": 0.3725,
+      "equity_mult": 1.2025,
+      "roe": 0.0285
+    },
+    "2025": {
+      "tax_burden": 1.0471,
+      "interest_burden": 1.1207,
+      "op_margin": 0.1066,
+      "asset_turnover": 0.4503,
+      "equity_mult": 1.2211,
+      "roe": 0.0688
+    },
+    "2026_TTM": {
+      "tax_burden": 0.9147,
+      "interest_burden": 1.0842,
+      "op_margin": 0.1571,
+      "asset_turnover": 0.489,
+      "equity_mult": 1.2565,
+      "roe": 0.0957
+    }
+  },
+  "altman_z": {
+    "X1_working_capital_to_assets": 0.2302,
+    "X2_retained_earnings_to_assets": 0.07,
+    "X3_ebit_to_assets": 0.1325,
+    "X4_mv_equity_to_total_liabilities": 58.2239,
+    "X5_sales_to_assets": 0.489,
+    "altman_z_score": 36.23,
+    "zone": "ULTRA-SAFE ZONE (Z >> 2.99)"
+  },
+  "piotroski_f_score": 8,
+  "beneish_m_score": -2.68
+}

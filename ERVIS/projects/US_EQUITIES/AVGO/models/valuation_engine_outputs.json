@@ -1,0 +1,20 @@
+{
+  "ticker": "AVGO",
+  "company_name": "Broadcom Inc.",
+  "spot_price_usd": 358.15,
+  "dcf_intrinsic_value_usd": 213.73,
+  "sotp_intrinsic_value_usd": 232.94,
+  "monte_carlo_median_usd": 495.76,
+  "monte_carlo_p10_usd": 193.29,
+  "monte_carlo_p90_usd": 625.45,
+  "monte_carlo_win_rate_pct": 65.43,
+  "liquidation_floor_usd": 0.0,
+  "final_target_price_usd": 247.7,
+  "upside_downside_pct": -30.84,
+  "recommendation": "TRIM / TAKE PROFITS (-30.8%)",
+  "wacc_base_pct": 9.34,
+  "wacc_terminal_pct": 9.0,
+  "normalized_ebit_0_m": 46743.64,
+  "normalized_nopat_0_m": 40433.25,
+  "true_net_debt_m": 37594.0
+}

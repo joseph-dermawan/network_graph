@@ -1,0 +1,65 @@
+{
+  "ticker": "GOOGL",
+  "company_name": "Alphabet Inc.",
+  "currency": "USD",
+  "spot_price_usd": 355.24,
+  "shares_outstanding_m": 12230.0,
+  "market_cap_m": 4344585.2,
+  "wacc_schedule": {
+    "base_wacc": 0.0911,
+    "terminal_wacc": 0.09,
+    "cost_of_equity": 0.0918,
+    "after_tax_cost_of_debt": 0.0423,
+    "hamada_beta": 1.063
+  },
+  "dcf_schedule": {
+    "pv_10yr_fcff_m": 1135052.3,
+    "pv_terminal_value_m": 1765867.9,
+    "enterprise_value_m": 2900920.1,
+    "equity_bridge_net_cash_m": 64665.0,
+    "equity_value_m": 2965585.1,
+    "dcf_intrinsic_value_usd": 242.48
+  },
+  "sotp_divisional": {
+    "google_services_ev_m": 2945000.0,
+    "google_cloud_ev_m": 403000.0,
+    "other_bets_waymo_ev_m": 85000.0,
+    "total_sotp_ev_m": 3433000.0,
+    "sotp_intrinsic_usd": 285.99
+  },
+  "monte_carlo_10k": {
+    "trials": 10000,
+    "p10_usd": 176.19,
+    "median_usd": 209.75,
+    "p90_usd": 249.46,
+    "win_rate_percent": 0.01
+  },
+  "ai_capex_audit": {
+    "googl_own_annual_capex_m": 91447.0,
+    "googl_capex_as_pct_rev": 22.7,
+    "googl_fcf_conversion_pct": 44.48,
+    "ai_infra_capex_m": 64012.9,
+    "ai_cloud_incremental_rev_m": 8500.0,
+    "internal_tpu_cost_savings_m": 14200.0,
+    "total_ai_gross_economic_benefit_m": 19725.0,
+    "annual_hardware_depreciation_m": 18289.4,
+    "net_ai_operating_income_m": 1435.6,
+    "net_ai_roi_pct": 2.24,
+    "ai_payback_years": 3.25,
+    "hardware_useful_life_years": 3.5,
+    "status": "VALUE ACCRETIVE (Payback within 3.5-Yr cycle)",
+    "search_defense_economics": {
+      "core_search_revenue_b": 225.1,
+      "protected_query_share_pct": 5.0,
+      "preserved_annual_revenue_b": 11.26,
+      "preserved_annual_operating_income_b": 5.5,
+      "strategic_verdict": "CRITICAL EXISTENTIAL MOAT DEFENSE (Preserving 5% Search query share shields $11.3B revenue and $5.5B EBIT)"
+    }
+  },
+  "liquidation_floor_usd": 4.11,
+  "final_triangulation": {
+    "target_price_usd": 252.8,
+    "upside_percent": -28.84,
+    "rating": "TRIM / TAKE PROFITS"
+  }
+}

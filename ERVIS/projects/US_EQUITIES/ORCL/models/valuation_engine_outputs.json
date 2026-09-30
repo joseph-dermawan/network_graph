@@ -1,0 +1,73 @@
+{
+  "ticker": "ORCL",
+  "company_name": "Oracle Corporation",
+  "currency": "USD",
+  "spot_price_usd": 148.48,
+  "shares_outstanding_m": 3023.74,
+  "market_cap_m": 448964.9,
+  "wacc_schedule": {
+    "base_wacc": 0.078,
+    "terminal_wacc": 0.088,
+    "cost_of_equity": 0.0888,
+    "pre_tax_cost_of_debt": 0.0593,
+    "after_tax_cost_of_debt": 0.0468,
+    "hamada_beta": 0.994,
+    "peer_unlevered_beta": 0.78,
+    "market_de_ratio": 0.3473,
+    "rating": "Baa1/BBB+ (Base Baa2 + 1-Notch ERM Upgrade)"
+  },
+  "forensics_gate_1": {
+    "reported_ebit_fy26_m": 22444.0,
+    "rd_asset_capitalized_m": 19424.2,
+    "rd_amortization_fy26_m": 8977.8,
+    "restated_ebit_0_m": 23738.2,
+    "restated_nopat_0_m": 18753.2,
+    "total_balance_sheet_debt_m": 155931.0,
+    "cash_and_short_term_investments_m": 37077.0,
+    "net_debt_m": 118854.0
+  },
+  "dcf_schedule": {
+    "pv_10yr_fcff_m": 168884.8,
+    "pv_terminal_value_m": 298911.7,
+    "enterprise_value_m": 467796.5,
+    "net_debt_deduction_m": 118854.0,
+    "equity_value_m": 348942.5,
+    "dcf_intrinsic_value_usd": 115.4,
+    "terminal_growth_rate": 0.035,
+    "terminal_roic_override": 0.18,
+    "terminal_reinvestment_rate": 0.1944
+  },
+  "sotp_divisional": {
+    "oci_cloud_infrastructure_ev_m": 110000.0,
+    "cloud_applications_fusion_netsuite_ev_m": 112000.0,
+    "database_cloud_license_support_ev_m": 210000.0,
+    "on_premise_license_and_hardware_ev_m": 21000.0,
+    "total_sotp_ev_m": 453000.0,
+    "net_debt_m": 118854.0,
+    "sotp_equity_value_m": 334146.0,
+    "sotp_intrinsic_usd": 110.51
+  },
+  "monte_carlo_10k": {
+    "trials": 10000,
+    "p10_usd": 70.75,
+    "median_usd": 94.7,
+    "p90_usd": 123.49,
+    "win_rate_percent": 1.27
+  },
+  "gate_4b_ai_capex_audit": {
+    "annual_ai_capex_intensity": "31.5% to 37.1% of Revenue ($21.2B - $25.0B/yr)",
+    "hardware_lifespan_depreciation": "3.5-Year Straight Line Obsolescence ($5.7B - $7.1B/yr)",
+    "customer_profile": "OpenAI, xAI, Microsoft, Cohere, Enterprise LLM workloads",
+    "gross_margin_gpu_rental": "18.0% - 24.0% vs Core Software 78.0%",
+    "net_ai_roi": "6.2% - 8.5% (Barely covers Cost of Capital of 7.9% - 8.8%)",
+    "solvency_and_pricing_risk": "HIGH: $118.8B Net Debt with $4.6B annual fixed interest service leaves little safety margin if GPU token rental prices compress"
+  },
+  "liquidation_haircut_floor_usd": 0.0,
+  "final_triangulation": {
+    "dcf_weight": 0.6,
+    "sotp_weight": 0.4,
+    "target_price_usd": 113.44,
+    "upside_percent": -23.6,
+    "rating": "TRIM / SELL"
+  }
+}

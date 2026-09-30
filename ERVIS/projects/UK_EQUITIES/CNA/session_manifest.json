@@ -1,0 +1,9 @@
+{
+  "ticker": "CNA",
+  "market": "UK_EQUITIES",
+  "currency": "GBP",
+  "session_start": "2026-09-13T18:52:10.984500",
+  "active_rf": 0.0458,
+  "status": "DRAFT_ANALYSIS",
+  "gsheet_url": ""
+}

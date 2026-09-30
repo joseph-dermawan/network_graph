@@ -1,0 +1,35 @@
+{
+  "regressions": {
+    "OCI_CLOUD_VS_BACKLOG": {
+      "regressor": "AI Supercluster Backlog / Customer Commitments ($B)",
+      "r_squared": 0.9979,
+      "slope": 0.1563,
+      "intercept": 1.6165,
+      "status": "PASS (R2 >= 0.85)"
+    },
+    "LEGACY_SUPPORT_VS_CLOUD_MIGRATION": {
+      "regressor": "Cloud Services & Database Migration ($B)",
+      "r_squared": 0.8288,
+      "status": "MODERATE CORRELATION"
+    }
+  },
+  "dupont_5_point": {
+    "tax_burden": 0.8738,
+    "interest_burden": 0.8712,
+    "operating_margin": 0.3332,
+    "asset_turnover": 0.2573,
+    "equity_multiplier": 6.1579,
+    "calculated_roe": 0.402
+  },
+  "altman_z_score": {
+    "x1_working_capital_to_assets": 0.0183,
+    "x2_retained_earnings_to_assets": -0.0165,
+    "x3_ebit_to_assets": 0.0857,
+    "x4_market_equity_to_liabilities": 2.0529,
+    "x5_sales_to_assets": 0.2573,
+    "altman_z_score": 1.77,
+    "zone": "GREY ZONE / LEVERAGE WATCH (Z = 1.77, impacted by past share repurchases and $156B debt)"
+  },
+  "piotroski_f_score": 6,
+  "beneish_m_score": -2.48
+}

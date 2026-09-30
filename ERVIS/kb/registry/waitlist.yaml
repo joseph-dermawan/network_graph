@@ -1,0 +1,95 @@
+# ERVIS Institutional Backlog & Candidate Waitlist
+# Generated: 2026-09-13
+# Strategic Theme: Electrification, AI-Adjacent Hard Assets, Low-Leverage Flight-to-Safety Candidates
+
+ACTIVE_SESSION:
+  ticker: "CNA"
+  full_symbol: "CNA.L"
+  company_name: "Centrica plc"
+  exchange: "London Stock Exchange (FTSE 100)"
+  market: "UK_EQUITIES"
+  currency: "GBP"
+  thesis: "20% UK nuclear baseload fleet owner with £2.5B net cash fortress balance sheet, trading at 52-week low floor (~7.5x P/E)."
+  status: "IN_PROGRESS"
+
+WAITLIST:
+  # Category 1: Electrification & High-Voltage Cabling Monopolies
+  - ticker: "PRY.MI"
+    company_name: "Prysmian S.p.A."
+    exchange: "Borsa Italiana (Milan)"
+    market: "EU_EQUITIES"
+    currency: "EUR"
+    core_thesis: "#1 Global HVDC power cabling monopolist with €18B+ locked sovereign grid backlog; ~1.1x net debt."
+    recent_price_setup: "19% pullback from all-time highs; testing 50-day SMA support."
+    priority: "HIGH"
+
+  - ticker: "NKT.CO"
+    company_name: "NKT A/S"
+    exchange: "Nasdaq Copenhagen"
+    market: "EU_EQUITIES"
+    currency: "DKK"
+    core_thesis: "Pure-play Nordic HVDC transmission specialist with €11B+ locked order book connecting offshore wind/nuclear to data centers."
+    recent_price_setup: "18% pullback from 52-week peak; clean equity-funded balance sheet."
+    priority: "MEDIUM"
+
+  # Category 2: Grid Balancing & Standby Power
+  - ticker: "WRT1V.HE"
+    company_name: "Wärtsilä Corporation"
+    exchange: "Nasdaq Helsinki"
+    market: "EU_EQUITIES"
+    currency: "EUR"
+    core_thesis: "Global #1 in rapid-start (0-2 min) grid-balancing power engines & BESS; negative net debt (net cash)."
+    recent_price_setup: "29% cyclical selloff from 52-week high; sitting near strong technical floor."
+    priority: "HIGH"
+
+  - ticker: "RR.L"
+    company_name: "Rolls-Royce Holdings plc"
+    exchange: "London Stock Exchange"
+    market: "UK_EQUITIES"
+    currency: "GBP"
+    core_thesis: "Global #1 hyperscale data center backup gensets (mtu) + UK SMR nuclear consortium leader + Royal Navy submarine propulsion."
+    recent_price_setup: "Consolidating near 52-week highs (-8.3% dip); strong multi-year momentum."
+    priority: "MEDIUM"
+    status: "VALUATION_COMPLETED (Target: 860.4p | Rating: SELL/REBALANCE)"
+
+  # Category 3: Mission-Critical Water & Chemistry Monopolies
+  - ticker: "BMI"
+    company_name: "Badger Meter, Inc."
+    exchange: "NYSE"
+    market: "US_EQUITIES"
+    currency: "USD"
+    core_thesis: "Zero-debt net-cash fortress; smart water flow telemetry required for data center municipal water scarcity permits."
+    priority: "MEDIUM"
+
+  - ticker: "VIE.PA"
+    company_name: "Veolia Environnement S.A."
+    exchange: "Euronext Paris"
+    market: "EU_EQUITIES"
+    currency: "EUR"
+    core_thesis: "World #1 water titan; contractual inflation pass-through; primary builder of European data center cooling networks."
+    priority: "MEDIUM"
+
+  - ticker: "GEBN.SW"
+    company_name: "Geberit AG"
+    exchange: "SIX Swiss Exchange"
+    market: "EU_EQUITIES"
+    currency: "CHF"
+    core_thesis: "Swiss Franc safe-haven asset; near-zero debt; ROIC > 25%; precision water infrastructure."
+    priority: "LOW"
+
+  # Category 4: Nuclear Engineering & Fuel
+  - ticker: "BWXT"
+    company_name: "BWX Technologies, Inc."
+    exchange: "NYSE"
+    market: "US_EQUITIES"
+    currency: "USD"
+    core_thesis: "Sole-source US Navy nuclear submarine propulsion monopoly + commercial SMR fuel fabricator."
+    priority: "MEDIUM"
+
+  - ticker: "CCJ"
+    company_name: "Cameco Corporation"
+    exchange: "NYSE / TSX"
+    market: "US_EQUITIES"
+    currency: "USD"
+    core_thesis: "Global uranium fuel monopolist with 49% stake in Westinghouse reactor servicing; <1.0x net debt."
+    priority: "MEDIUM"

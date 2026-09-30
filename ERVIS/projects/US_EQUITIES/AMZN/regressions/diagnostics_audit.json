@@ -1,0 +1,85 @@
+{
+  "regressions": {
+    "DRIVER_1_AWS_CLOUD_REVENUE": {
+      "regressor": "Global Cloud Infrastructure Spend ($B)",
+      "r_squared": 0.9888,
+      "slope": 0.3104,
+      "intercept": 10.76,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_2_AWS_OPERATING_PROFIT": {
+      "regressor": "AWS Cloud Revenue Run-Rate ($B)",
+      "r_squared": 0.9322,
+      "slope": 0.4447,
+      "intercept": -11.49,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_3_NORTH_AMERICA_RETAIL": {
+      "regressor": "US Total E-Commerce Spend ($B)",
+      "r_squared": 0.9988,
+      "slope": 0.4263,
+      "intercept": -90.01,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_4_ADVERTISING_SERVICES": {
+      "regressor": "Global Digital Advertising Market ($B)",
+      "r_squared": 0.9952,
+      "slope": 0.1181,
+      "intercept": -27.75,
+      "gate_status": "PASS (R2 >= 0.85)"
+    }
+  },
+  "dupont_5yr_history": {
+    "2021": {
+      "tax_burden": 0.8745,
+      "interest_burden": 1.5335,
+      "operating_margin": 0.053,
+      "asset_turnover": 1.1172,
+      "equity_multiplier": 3.04,
+      "roe": 0.2413
+    },
+    "2022": {
+      "tax_burden": 0.4586,
+      "interest_burden": -0.4847,
+      "operating_margin": 0.0238,
+      "asset_turnover": 1.1109,
+      "equity_multiplier": 3.17,
+      "roe": -0.0186
+    },
+    "2023": {
+      "tax_burden": 0.8101,
+      "interest_burden": 1.0191,
+      "operating_margin": 0.0641,
+      "asset_turnover": 1.0889,
+      "equity_multiplier": 2.61,
+      "roe": 0.1507
+    },
+    "2024": {
+      "tax_burden": 0.8635,
+      "interest_burden": 1.0003,
+      "operating_margin": 0.1075,
+      "asset_turnover": 1.0209,
+      "equity_multiplier": 2.19,
+      "roe": 0.2072
+    },
+    "2025": {
+      "tax_burden": 0.7982,
+      "interest_burden": 1.2168,
+      "operating_margin": 0.1116,
+      "asset_turnover": 0.8764,
+      "equity_multiplier": 1.99,
+      "roe": 0.1889
+    }
+  },
+  "altman_z": {
+    "X1_working_capital_to_assets": 0.0135,
+    "X2_retained_earnings_to_assets": 0.2139,
+    "X3_ebit_to_assets": 0.1353,
+    "X4_mv_equity_to_total_liabilities": 6.7769,
+    "X5_sales_to_assets": 0.8764,
+    "altman_z_score": 5.7,
+    "zone": "SAFE ZONE (Z >> 2.99)"
+  },
+  "piotroski_f_score": 8,
+  "beneish_m_score": -2.74
+}

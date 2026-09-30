@@ -1,0 +1,183 @@
+REGISTRY_CONFIG:
+  default_drive_folder_id: ''
+  auto_sync: true
+COMPANIES:
+  KO:
+    company_name: The Coca-Cola Company
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: 1wBFDDikiaw-9R-xu6ZKVLz-So3Ij2XNDnPtf951yF6k
+    gsheet_url: https://docs.google.com/spreadsheets/d/1wBFDDikiaw-9R-xu6ZKVLz-So3Ij2XNDnPtf951yF6k/edit
+    drive_folder_id: ''
+    current_status: PUBLISHED
+    last_published_version: v1.0
+    last_published_at: '2026-09-13T13:57:00Z'
+    last_intrinsic_value: 39.94
+    published_rating: OVERVALUED (81.0%)
+  POWL:
+    company_name: Powell Industries, Inc.
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    drive_folder_id: ''
+    current_status: DRAFT
+    last_published_version: ''
+    last_published_at: ''
+    last_intrinsic_value: null
+    published_rating: ''
+  SATS:
+    company_name: SATS Ltd.
+    market: SG_EQUITIES
+    currency: SGD
+    gsheet_id: ''
+    gsheet_url: ''
+    drive_folder_id: ''
+    current_status: DRAFT
+    last_published_version: ''
+    last_published_at: ''
+    last_intrinsic_value: null
+    published_rating: ''
+  CNA:
+    company_name: CNA
+    market: UK_EQUITIES
+    currency: GBP
+    gsheet_id: ''
+    gsheet_url: ''
+    current_status: DRAFT
+    last_published_version: ''
+    last_published_at: ''
+  RR:
+    company_name: Rolls-Royce Holdings plc
+    market: UK_EQUITIES
+    currency: GBP
+    gsheet_id: ''
+    gsheet_url: ''
+    current_status: VALUATION_COMPLETED
+    last_intrinsic_value: 8.6
+    published_rating: SELL / REBALANCE (-42.3%)
+    last_published_version: draft_v1.0
+    last_published_at: '2026-09-21T20:10:00Z'
+  NVDA:
+    company_name: NVIDIA Corporation
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    current_status: VALUATION_COMPLETED
+    last_intrinsic_value: 125.93
+    published_rating: TRIM / TAKE PROFITS (-43.8%)
+    last_published_version: draft_v1.0
+    last_published_at: '2026-09-21T22:43:00Z'
+  GOOGL:
+    company_name: Alphabet Inc.
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    current_status: PUBLISHED
+    last_intrinsic_value: 252.8
+    published_rating: TRIM / TAKE PROFITS (-28.8%)
+    last_published_version: v1.0
+    last_published_at: '2026-09-21T23:01:52.646527'
+  MSFT:
+    company_name: Microsoft Corporation
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    current_status: VALUATION_COMPLETED
+    last_intrinsic_value: 447.71
+    published_rating: HOLD / ACCUMULATE ON PULLBACK (-9.4%)
+    last_published_version: draft_v1.0
+    last_published_at: '2026-09-21T23:02:00Z'
+  AAPL:
+    company_name: Apple Inc.
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    current_status: VALUATION_COMPLETED
+    last_intrinsic_value: 176.57
+    published_rating: TRIM / TAKE PROFITS (-47.7%)
+    last_published_version: draft_v1.0
+    last_published_at: '2026-09-21T23:05:00Z'
+  AMD:
+    company_name: Advanced Micro Devices, Inc.
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    current_status: PUBLISHED
+    last_intrinsic_value: 201.44
+    published_rating: TRIM / TAKE PROFITS (-67.2%)
+    last_published_version: v1.0
+    last_published_at: '2026-09-21T23:04:24.596629'
+  AMZN:
+    company_name: Amazon.com, Inc.
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    current_status: VALUATION_COMPLETED
+    last_intrinsic_value: 203.46
+    published_rating: TRIM / TAKE PROFITS (-20.4%)
+    last_published_version: draft_v1.0
+    last_published_at: '2026-09-21T23:02:00Z'
+  META:
+    company_name: Meta Platforms, Inc.
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    current_status: VALUATION_COMPLETED
+    last_intrinsic_value: 736.95
+    published_rating: ACCUMULATE / HOLD (+4.0%)
+    last_published_version: draft_v1.0
+    last_published_at: '2026-09-21T23:02:49Z'
+  ORCL:
+    company_name: Oracle Corporation
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    current_status: VALUATION_COMPLETED
+    last_intrinsic_value: 113.44
+    published_rating: SELL / REBALANCE (-23.6%)
+    last_published_version: draft_v1.0
+    last_published_at: '2026-09-21T23:02:00Z'
+  TSM:
+    company_name: Taiwan Semiconductor Manufacturing Company Limited
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    current_status: VALUATION_COMPLETED
+    last_intrinsic_value: 290.23
+    published_rating: TRIM / TAKE PROFITS (-34.1%)
+    last_published_version: draft_v1.0
+    last_published_at: '2026-09-21T23:03:00Z'
+  AVGO:
+    company_name: Broadcom Inc.
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    drive_folder_id: ''
+    current_status: VALUATION_COMPLETED
+    last_intrinsic_value: 247.7
+    published_rating: TRIM / TAKE PROFITS (-30.8%)
+    last_published_version: draft_v1.0
+    last_published_at: '2026-09-21T23:00:00Z'
+  PLTR:
+    company_name: Palantir Technologies Inc.
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    drive_folder_id: ''
+    current_status: VALUATION_COMPLETED
+    last_published_version: v1.0-agy
+    last_published_at: '2026-09-30T13:07:17.176300'
+    last_intrinsic_value: 16.78
+    published_rating: SELL / REBALANCE (-91.03%)

@@ -1,0 +1,9 @@
+{
+  "ticker": "KO",
+  "market": "US_EQUITIES",
+  "currency": "USD",
+  "session_start": "2026-09-13T14:27:17.640015",
+  "active_rf": 0.0458,
+  "current_gate": "GATE_1_INGESTION_AND_FORENSICS",
+  "gates_completed": []
+}

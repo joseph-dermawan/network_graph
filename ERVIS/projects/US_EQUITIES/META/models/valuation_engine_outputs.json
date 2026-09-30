@@ -1,0 +1,78 @@
+{
+  "ticker": "META",
+  "company_name": "Meta Platforms, Inc.",
+  "spot_price_usd": 708.42,
+  "shares_outstanding_m": 2529.64,
+  "market_cap_m": 1792047.5687999998,
+  "gate_1_forensic_normalization": {
+    "reported_ebit_0": 83276.0,
+    "operating_lease_discounted_debt": 25153.0,
+    "operating_lease_interest_addback": 1302.9254,
+    "capitalized_rd_asset": 134626.4,
+    "rd_annual_amortization": 39944.2,
+    "rd_ebit_adjustment": 17427.800000000003,
+    "normalized_ebit_0": 102006.72540000001,
+    "normalized_nopat_0": 83645.51482800001,
+    "funded_debt": 58744.0,
+    "total_adjusted_debt": 83897.0,
+    "cash_and_liquid_investments": 109116.0,
+    "net_cash_total": 25219.0
+  },
+  "gate_2_financial_health": {
+    "altman_z_score": 9.21,
+    "piotroski_f_score": 9,
+    "beneish_m_score": -3.07
+  },
+  "gate_3_cost_of_capital": {
+    "unlevered_beta": 1.05,
+    "hamada_levered_beta": 1.09,
+    "moodys_synthetic_rating": "Aa3 / AA-",
+    "default_spread_bps": 60,
+    "pre_tax_kd": 0.0518,
+    "after_tax_kd": 0.0425,
+    "risk_free_rate": 0.0458,
+    "equity_risk_premium": 0.0433,
+    "cost_of_equity": 0.093,
+    "base_wacc": 0.0908,
+    "terminal_wacc": 0.09
+  },
+  "gate_4_valuation": {
+    "dcf_intrinsic_value_usd": 717.63,
+    "dcf_pv_discrete_fcff_m": 699318.2,
+    "dcf_pv_terminal_val_m": 1090804.6,
+    "dcf_terminal_roic": 0.2,
+    "sotp_intrinsic_value_usd": 772.82,
+    "sotp_foa_core_m": 1836750.0,
+    "sotp_whatsapp_biz_m": 168000.0,
+    "sotp_reality_labs_drag_m": -75000.0,
+    "monte_carlo_10k": {
+      "median_usd": 663.63,
+      "mean_usd": 672.65,
+      "p10_usd": 539.93,
+      "p90_usd": 815.72,
+      "win_rate_pct": 34.0
+    },
+    "liquidation_haircut_floor_usd": 14.49,
+    "final_target_price_usd": 736.95,
+    "final_rating": "ACCUMULATE / HOLD (+4.0%)",
+    "upside_pct": 4.0
+  },
+  "gate_4b_ai_capex_roi": {
+    "annual_ai_capex_surge_m": 68000.0,
+    "hardware_useful_life_yrs": 3.5,
+    "annual_hardware_depreciation_m": 19428.6,
+    "direct_software_licensing_revenue_m": 0.0,
+    "incremental_ad_revenue_base_m": 19091.8,
+    "incremental_ad_gross_profit_base_m": 15655.3,
+    "net_ai_operating_income_m": -3773.3,
+    "net_ai_roi_pct": -5.55,
+    "payback_years": 4.34,
+    "obsolescence_deficit_years": 0.84,
+    "required_break_even_ad_lift_m": 36132.4,
+    "required_break_even_ad_lift_pct": 18.0,
+    "shareholder_total_payout_m": 31572.0,
+    "shareholder_payout_ratio_fcf_pct": 68.5,
+    "capex_intensity_pct": 34.7,
+    "fcf_conversion_pct": 39.8
+  }
+}

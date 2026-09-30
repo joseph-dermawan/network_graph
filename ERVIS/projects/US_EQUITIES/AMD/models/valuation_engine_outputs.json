@@ -1,0 +1,87 @@
+{
+  "ticker": "AMD",
+  "company_name": "Advanced Micro Devices, Inc.",
+  "currency": "USD",
+  "spot_price_usd": 614.88,
+  "shares_outstanding_m": 1632.48,
+  "market_cap_m": 1003779.3,
+  "wacc_schedule": {
+    "base_wacc": 0.1021,
+    "terminal_wacc": 0.09,
+    "cost_of_equity": 0.1023,
+    "after_tax_cost_of_debt": 0.05,
+    "hamada_beta": 1.306
+  },
+  "dcf_schedule": {
+    "pv_10yr_fcff_m": 120422.2,
+    "pv_terminal_value_m": 200951.1,
+    "enterprise_value_m": 321373.3,
+    "equity_bridge_net_cash_m": 7824.9,
+    "equity_value_m": 329198.2,
+    "dcf_intrinsic_value_usd": 201.66
+  },
+  "sotp_divisional": {
+    "data_center_ev_m": 280500.0,
+    "client_pc_ev_m": 39168.0,
+    "gaming_ev_m": 6912.0,
+    "embedded_xilinx_ev_m": 24624.0,
+    "total_sotp_ev_m": 351204.0,
+    "sotp_intrinsic_usd": 219.93
+  },
+  "monte_carlo_10k": {
+    "trials": 10000,
+    "p10_usd": 125.37,
+    "median_usd": 157.6,
+    "p90_usd": 198.59,
+    "win_rate_percent": 0.0
+  },
+  "ai_capex_audit": {
+    "amd_own_annual_capex_m": 1677.0,
+    "amd_own_capex_as_pct_rev": 4.06,
+    "amd_fcf_conversion_pct": 83.36,
+    "amd_annual_rd_m": 9394.0,
+    "amd_rd_as_pct_rev": 22.74,
+    "merchant_ai_accelerator_volume_share_pct": {
+      "NVIDIA": 86.0,
+      "AMD": 7.0,
+      "Custom_ASIC_CSPs": 7.0
+    },
+    "tco_hardware_pricing": {
+      "amd_mi300x_mi325x_node_cost_usd": 150000.0,
+      "nvda_h100_h200_node_cost_usd": 290000.0,
+      "hardware_capex_discount_pct": 48.28,
+      "memory_capacity_hbm3e_gb": {
+        "AMD_MI325X": 256,
+        "NVDA_H200": 141
+      },
+      "memory_bandwidth_tb_s": {
+        "AMD_MI325X": 6.0,
+        "NVDA_H200": 4.8
+      }
+    },
+    "software_friction_audit": {
+      "ecosystem": "ROCm 6.2 vs CUDA 12.x",
+      "developer_overhead": "Requires dedicated Triton / vLLM kernel engineering teams at hyperscalers",
+      "compiler_friction": "Porting latency of non-standard LLM architectures",
+      "tco_offset_pct": "Software engineering overhead offsets ~15-20% of raw hardware price discount"
+    },
+    "customer_payback_and_roi": {
+      "top_4_hyperscaler_combined_capex_b": 408.0,
+      "amd_data_center_ai_revenue_m": 14000.0,
+      "amd_capex_payout_ratio_pct": 3.43,
+      "nvda_capex_payout_ratio_pct": 45.34,
+      "estimated_customer_payback_years": "3.8 to 4.5 Years",
+      "hardware_useful_life_years": 3.5,
+      "obsolescence_deficit_months": "3.6 to 12.0 Months (Deficit Window)",
+      "break_even_ai_revenue_required_usd_b": 58.5,
+      "break_even_market_share_required_pct": 28.5,
+      "structural_fragility_evaluation": "ASYMMETRIC DOWNWARD RISK: Current $614+ market price discounts AMD capturing 28-30% of global AI silicon by 2029, whereas actual merchant run-rate is 7% facing severe ASIC internal substitution by Google, AWS, and Meta."
+    }
+  },
+  "liquidation_floor_usd": 5.3,
+  "final_triangulation": {
+    "target_price_usd": 201.44,
+    "upside_percent": -67.24,
+    "rating": "TRIM / TAKE PROFITS (-65.2%)"
+  }
+}

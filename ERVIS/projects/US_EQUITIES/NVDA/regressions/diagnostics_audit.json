@@ -1,0 +1,37 @@
+{
+  "regressions": {
+    "DRIVER_1_HYPERSCALER_CAPEX": {
+      "regressor": "Big 4 Hyperscaler Combined CapEx ($B)",
+      "r_squared": 0.9493,
+      "slope": 0.55,
+      "intercept": -32.41,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_2_AI_VOLUME_INDEX": {
+      "regressor": "AI Accelerator Volume & ASP Index",
+      "r_squared": 1.0,
+      "slope": 270.08,
+      "intercept": 212.49,
+      "gate_status": "PASS (R2 >= 0.85)"
+    }
+  },
+  "dupont": {
+    "tax_burden": 0.8638,
+    "interest_burden": 1.0661,
+    "operating_margin": 0.6038,
+    "asset_turnover": 1.0442,
+    "equity_multiplier": 1.31,
+    "roe_calculated": 0.7633
+  },
+  "altman_z": {
+    "X1_working_capital_to_assets": 0.4518,
+    "X2_retained_earnings_to_assets": 0.5319,
+    "X3_ebit_to_assets": 0.6696,
+    "X4_mv_equity_to_total_liabilities": 109.3614,
+    "X5_sales_to_assets": 1.0442,
+    "altman_z_score": 70.16,
+    "zone": "GOD-TIER SAFE ZONE (Z >> 2.99)"
+  },
+  "piotroski_f_score": 9,
+  "beneish_m_score": -2.85
+}

@@ -1,0 +1,294 @@
+#!/usr/bin/env python3
+"""
+ERVIS :: Equity Research and Valuation Investment System
+CLI Session Initiator, Registry Manager & Publication Pipeline
+Usage:
+    ./initiate-ervis <TICKER> [--market MARKET] [--currency CURRENCY]
+    ./initiate-ervis publish <TICKER> [--notes "Quarterly update"]
+    ./initiate-ervis list
+    ./initiate-ervis link-drive <FOLDER_ID>
+"""
+
+import sys
+import os
+import shutil
+import json
+import yaml
+import argparse
+from datetime import datetime
+
+# ANSI Color Codes
+AMBER = "\033[38;5;214m"
+AMBER_BOLD = "\033[1;38;5;214m"
+WHITE_BOLD = "\033[1;37m"
+GRAY = "\033[38;5;244m"
+GREEN = "\033[38;5;114m"
+RED = "\033[38;5;203m"
+CYAN = "\033[38;5;81m"
+RESET = "\033[0m"
+
+REGISTRY_PATH = "ERVIS/kb/registry/company_sheets.yaml"
+
+BANNER = f"""{AMBER}
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│  ███████╗██████╗ ██╗   ██╗██╗███████╗    EQUITY RESEARCH & VALUATION INVESTMENT SYSTEM │
+│  ██╔════╝██╔══██╗██║   ██║██║██╔════╝    Institutional Dual-Engine Valuation Framework │
+│  █████╗  ██████╔╝██║   ██║██║███████╗    Damodaran FCFF Ginzu x NUS CFA Global Champion│
+│  ██╔══╝  ██╔══██╗╚██╗ ██╔╝██║╚════██║                                                  │
+│  ███████╗██║  ██║ ╚████╔╝ ██║███████║    Session Initiator & Publication Manager       │
+│  ╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚══════╝    Version 2.5-PRO (Terminal Edition)            │
+└────────────────────────────────────────────────────────────────────────────────────────┘{RESET}"""
+
+def load_registry():
+    if not os.path.exists(REGISTRY_PATH):
+        return {"REGISTRY_CONFIG": {}, "COMPANIES": {}}
+    with open(REGISTRY_PATH, "r") as f:
+        return yaml.safe_load(f) or {"REGISTRY_CONFIG": {}, "COMPANIES": {}}
+
+def save_registry(data):
+    os.makedirs(os.path.dirname(REGISTRY_PATH), exist_ok=True)
+    with open(REGISTRY_PATH, "w") as f:
+        yaml.dump(data, f, default_flow_style=False, sort_keys=False)
+
+def cmd_garage():
+    print(BANNER)
+    print(f"\n{WHITE_BOLD}=== ERVIS GARAGE CALIBRATION WORKBENCH [SETUP MODE] ==={RESET}")
+    print(f"{GRAY}Tuning foundational macroeconomic instruments before company valuation runs.{RESET}\n")
+
+    macro_path = "ERVIS/kb/macro/sovereign_yields.yaml"
+    rf_rate = 0.0458
+    if os.path.exists(macro_path):
+        try:
+            with open(macro_path) as f:
+                data = yaml.safe_load(f)
+                rf_rate = data.get("BENCHMARKS", {}).get("USD", {}).get("risk_free_10y", 0.0458)
+        except Exception:
+            pass
+
+    print(f"{WHITE_BOLD}[INSTRUMENT 1: RISK-FREE RATE ANCHOR (Rf)]{RESET}")
+    print(f"  * Current Active 10-Yr US Treasury Yield: {AMBER}{rf_rate*100:.2f}%{RESET}")
+    print(f"  * Source: US Treasury Par Yield Curve (Automated background cron)\n")
+
+    print(f"{WHITE_BOLD}[INSTRUMENT 2: EQUITY RISK PREMIUM (ERP) ENGINE]{RESET}")
+    print(f"  * Active Model:          {AMBER}Damodaran Implied S&P 500 DDM (4.33%){RESET}")
+    print(f"  * Alternative Options:    1) Historical Geometric Mean (4.30%)")
+    print(f"                            2) Historical Arithmetic Mean (6.40%)")
+    print(f"                            3) Institutional Consensus / Fernandez Survey (5.25%)")
+    print(f"                            4) Live S&P 500 Internal Rate of Return (IRR) Solver\n")
+
+    print(f"{WHITE_BOLD}[INSTRUMENT 3: COUNTRY RISK PREMIUM (CRP) MULTIPLIER]{RESET}")
+    print(f"  * Sovereign Bond Spread x Relative Equity Volatility Multiplier (1.25x)")
+    print(f"  * Destination Revenue Weighted (Cross-border multinational allocation)\n")
+
+    print(f"{WHITE_BOLD}[INSTRUMENT 4: TERMINAL MOAT ROIC CONSTRAINT]{RESET}")
+    print(f"  * Default Base Policy:   {CYAN}Zero Excess Return (ROIC_terminal = WACC_terminal){RESET}")
+    print(f"  * Override Policy:       Durable Franchise Moat (ROIC_terminal > WACC, e.g. 15.0%)\n")
+    print(f"{GRAY}To calibrate or modify settings, edit ERVIS/kb/macro/sovereign_yields.yaml or run pairing session with Gate 3.{RESET}\n")
+
+def cmd_list():
+    reg = load_registry()
+    companies = reg.get("COMPANIES", {})
+    folder_id = reg.get("REGISTRY_CONFIG", {}).get("default_drive_folder_id", "Not set")
+    print(BANNER)
+    print(f"\n{WHITE_BOLD}=== ERVIS COMPANY REGISTRY & GOOGLE SHEETS ADDRESS BOOK ==={RESET}")
+    print(f"{GRAY}Default Google Drive Folder ID:{RESET} {AMBER}{folder_id or 'Not linked (use ./initiate-ervis link-drive <ID>)'}{RESET}\n")
+
+    print(f"{'TICKER':<8} {'COMPANY NAME':<26} {'STATUS':<12} {'VALUATION':<14} {'GOOGLE SHEET URL'}")
+    print("-" * 105)
+    for ticker, info in companies.items():
+        status_color = GREEN if info.get("current_status") == "PUBLISHED" else AMBER
+        val = f"${info.get('last_intrinsic_value', 'N/A')}" if info.get("last_intrinsic_value") else "Unfinalized"
+        url = info.get("gsheet_url") or f"{GRAY}[No sheet bound]{RESET}"
+        print(f"{WHITE_BOLD}{ticker:<8}{RESET} {info.get('company_name', ticker):<26} {status_color}{info.get('current_status', 'DRAFT'):<12}{RESET} {val:<14} {url}")
+    print()
+
+def cmd_link_drive(folder_id):
+    reg = load_registry()
+    if "REGISTRY_CONFIG" not in reg:
+        reg["REGISTRY_CONFIG"] = {}
+    reg["REGISTRY_CONFIG"]["default_drive_folder_id"] = folder_id
+    save_registry(reg)
+    print(f"{GREEN}[SUCCESS]{RESET} Bound default Google Drive Folder ID: {AMBER}{folder_id}{RESET}")
+
+def cmd_publish(ticker, notes=""):
+    reg = load_registry()
+    ticker = ticker.upper()
+    print(BANNER)
+    print(f"\n{WHITE_BOLD}[PUBLISH ACTION] FINALIZING & RELEASING: {ticker}...{RESET}")
+
+    # Determine project dir
+    market = "US_EQUITIES"
+    if ticker in reg.get("COMPANIES", {}):
+        market = reg["COMPANIES"][ticker].get("market", "US_EQUITIES")
+    project_dir = f"ERVIS/projects/{market}/{ticker}"
+
+    if not os.path.exists(project_dir):
+        print(f"{RED}[ERROR]{RESET} Project directory not found: {project_dir}. Run ./initiate-ervis {ticker} first.")
+        return
+
+    # Count existing publications
+    published_base = f"{project_dir}/published"
+    os.makedirs(published_base, exist_ok=True)
+    existing_versions = [d for d in os.listdir(published_base) if os.path.isdir(f"{published_base}/{d}")]
+    version = f"v{len(existing_versions) + 1}.0"
+    target_pub_dir = f"{published_base}/{version}"
+    os.makedirs(target_pub_dir, exist_ok=True)
+
+    # Copy clean deliverables into published folder
+    copied = []
+    for candidate in ["reports/dashboard.html", "models/model.xlsx", "thesis_dossier.md"]:
+        src = f"{project_dir}/{candidate}"
+        if os.path.exists(src):
+            dest = f"{target_pub_dir}/{os.path.basename(candidate)}"
+            shutil.copy2(src, dest)
+            copied.append(os.path.basename(candidate))
+
+    # Read latest valuation if available in manifest
+    manifest_path = f"{project_dir}/session_manifest.json"
+    int_val = None
+    if os.path.exists(manifest_path):
+        with open(manifest_path) as f:
+            man = json.load(f)
+            int_val = man.get("final_intrinsic_value")
+
+    # Update manifest
+    pub_meta = {
+        "published_version": version,
+        "published_at": datetime.now().isoformat(),
+        "notes": notes,
+        "clean_deliverables": copied
+    }
+    with open(f"{target_pub_dir}/publish_metadata.json", "w") as f:
+        json.dump(pub_meta, f, indent=2)
+
+    # Update Registry
+    if ticker not in reg["COMPANIES"]:
+        reg["COMPANIES"][ticker] = {"company_name": ticker, "market": market}
+    reg["COMPANIES"][ticker]["current_status"] = "PUBLISHED"
+    reg["COMPANIES"][ticker]["last_published_version"] = version
+    reg["COMPANIES"][ticker]["last_published_at"] = datetime.now().isoformat()
+    if int_val:
+        reg["COMPANIES"][ticker]["last_intrinsic_value"] = int_val
+    save_registry(reg)
+
+    print(f"{GREEN}[SUCCESS]{RESET} Published {WHITE_BOLD}{version}{RESET} successfully!")
+    print(f"  * Released to: {AMBER}{target_pub_dir}{RESET}")
+    print(f"  * Deliverables Bundled: {', '.join(copied) if copied else 'Draft files archived'}")
+    print(f"  * Working draft files in {project_dir}/ remain intact for future iterations.\n")
+
+def cmd_initiate(ticker, market, currency):
+    reg = load_registry()
+    ticker = ticker.upper()
+    print(BANNER)
+
+    # Check registry binding
+    is_registered = ticker in reg.get("COMPANIES", {})
+    comp_info = reg.get("COMPANIES", {}).get(ticker, {})
+    sheet_url = comp_info.get("gsheet_url", "")
+    existing_status = comp_info.get("current_status", "NEW DRAFT")
+
+    print(f"\n{WHITE_BOLD}[SYS.01] REGISTRY & ADDRESS BOOK AUDIT...{RESET}")
+    if is_registered and sheet_url:
+        print(f"  * Found Existing Authoritative GSheet: {GREEN}{sheet_url}{RESET}")
+        print(f"  * Current Publication Status:        {AMBER}{existing_status}{RESET}")
+        print(f"  * Re-valuation Mode:                  {CYAN}UPDATING EXISTING ASSET (No Duplication){RESET}")
+        market = comp_info.get("market", market)
+        currency = comp_info.get("currency", currency)
+    else:
+        print(f"  * Ticker {ticker} is not yet bound to a Google Sheet.")
+        print(f"  * Draft Workspace Mode:               {GREEN}INITIALIZING NEW COMPANY VAULT{RESET}")
+
+    # Readiness checks
+    kb_path = "ERVIS/kb/methodology"
+    macro_path = "ERVIS/kb/macro/sovereign_yields.yaml"
+    rf_rate = 0.0458
+    if os.path.exists(macro_path):
+        try:
+            with open(macro_path) as f:
+                data = yaml.safe_load(f)
+                rf_rate = data.get("BENCHMARKS", {}).get("USD", {}).get("risk_free_10y", 0.0458)
+        except Exception:
+            pass
+
+    # Provision project workspace
+    project_dir = f"ERVIS/projects/{market}/{ticker}"
+    for sd in ["raw_filings", "regressions", "models", "reports", "scratch_drafts"]:
+        os.makedirs(f"{project_dir}/{sd}", exist_ok=True)
+
+    manifest_file = f"{project_dir}/session_manifest.json"
+    manifest = {
+        "ticker": ticker,
+        "market": market,
+        "currency": currency,
+        "session_start": datetime.now().isoformat(),
+        "active_rf": rf_rate,
+        "status": "DRAFT_ANALYSIS",
+        "gsheet_url": sheet_url
+    }
+    with open(manifest_file, "w") as f:
+        json.dump(manifest, f, indent=2)
+
+    # Register in address book if new
+    if not is_registered:
+        if "COMPANIES" not in reg:
+            reg["COMPANIES"] = {}
+        reg["COMPANIES"][ticker] = {
+            "company_name": ticker,
+            "market": market,
+            "currency": currency,
+            "gsheet_id": "",
+            "gsheet_url": "",
+            "current_status": "DRAFT",
+            "last_published_version": "",
+            "last_published_at": ""
+        }
+        save_registry(reg)
+
+    print(f"\n{AMBER_BOLD}========================================================================================{RESET}")
+    print(f"{WHITE_BOLD}                  ERVIS PAIRING SESSION :: {ticker} [DRAFT / ANALYSIS MODE]{RESET}")
+    print(f"{AMBER_BOLD}========================================================================================{RESET}")
+    print(f"""
+{GRAY}Session Mode:{RESET}       {CYAN}Development & Working Scratchpad (Unfinalized Numbers Allowed){RESET}
+{GRAY}Target Ticker:{RESET}      {WHITE_BOLD}{ticker}{RESET} ({currency})
+{GRAY}Bound GSheet:{RESET}       {sheet_url or '[Will create in linked Drive folder during Gate 4]' }
+{GRAY}Risk-Free Anchor:{RESET}   {AMBER}{rf_rate*100:.2f}% (10-Yr Benchmark){RESET}
+{GRAY}Local Workspace:{RESET}    {project_dir}/
+
+{WHITE_BOLD}WORKING WORKFLOW PROTOCOL:{RESET}
+1. Conduct roughwork and analysis in {project_dir}/scratch_drafts/ and models/.
+2. Run through Gate 1 -> Gate 2 -> Gate 3 -> Gate 4 collaboratively.
+3. When valuation numbers are finalized and agreed upon, run:
+   {AMBER}./initiate-ervis publish {ticker} --notes "Finalized Base Valuation"{RESET}
+   This bundles clean deliverables into {project_dir}/published/ and locks the release.
+""")
+
+def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "garage":
+        cmd_garage()
+        return
+    if len(sys.argv) > 1 and sys.argv[1] == "list":
+        cmd_list()
+        return
+    if len(sys.argv) > 2 and sys.argv[1] == "link-drive":
+        cmd_link_drive(sys.argv[2])
+        return
+    if len(sys.argv) > 2 and sys.argv[1] == "publish":
+        notes = "Session finalized"
+        if "--notes" in sys.argv:
+            idx = sys.argv.index("--notes")
+            if idx + 1 < len(sys.argv):
+                notes = sys.argv[idx + 1]
+        cmd_publish(sys.argv[2], notes)
+        return
+
+    # Default initiate
+    parser = argparse.ArgumentParser(description="Initiate or resume an ERVIS session")
+    parser.add_argument("ticker", nargs="?", default="KO")
+    parser.add_argument("--market", default="US_EQUITIES")
+    parser.add_argument("--currency", default="USD")
+    args = parser.parse_args()
+
+    cmd_initiate(args.ticker, args.market, args.currency)
+
+if __name__ == "__main__":
+    main()

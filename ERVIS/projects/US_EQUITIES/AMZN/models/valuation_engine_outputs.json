@@ -1,0 +1,87 @@
+{
+  "ticker": "AMZN",
+  "company_name": "Amazon.com, Inc.",
+  "currency": "USD",
+  "spot_price_usd": 255.7,
+  "shares_outstanding_m": 10786.31,
+  "market_cap_m": 2758059.5,
+  "wacc_schedule": {
+    "base_wacc": 0.0927,
+    "terminal_wacc": 0.09,
+    "cost_of_equity": 0.0957,
+    "after_tax_cost_of_debt": 0.0425,
+    "hamada_beta": 1.152
+  },
+  "dcf_schedule": {
+    "pv_10yr_fcff_m": 745870.0,
+    "pv_terminal_value_m": 1308863.5,
+    "enterprise_value_m": 2054733.5,
+    "equity_bridge_net_debt_m": 39458.0,
+    "equity_value_m": 2015275.5,
+    "dcf_intrinsic_value_usd": 186.84
+  },
+  "sotp_divisional": {
+    "aws_ev_m": 1276000.0,
+    "retail_and_stores_ev_m": 540000.0,
+    "advertising_services_ev_m": 720000.0,
+    "subscription_prime_ev_m": 194400.0,
+    "total_sotp_ev_m": 2730400.0,
+    "net_debt_m": 39458.0,
+    "sotp_intrinsic_usd": 249.48
+  },
+  "monte_carlo_10k": {
+    "trials": 10000,
+    "p10_usd": 139.47,
+    "median_usd": 165.11,
+    "p90_usd": 195.38,
+    "win_rate_percent": 0.06
+  },
+  "gate_4b_capex_roi": {
+    "ticker": "AMZN",
+    "company_name": "Amazon.com, Inc.",
+    "provider_internal": {
+      "revenue_m": 716924.0,
+      "physical_capex_m": 131819.0,
+      "capex_intensity_pct": 18.39,
+      "free_cash_flow_m": 7695.0,
+      "fcf_conversion_pct": 5.52,
+      "internal_economic_roic_pct": 18.67,
+      "shareholder_payout_m": 0.0,
+      "payout_ratio_of_fcf_pct": 0.0,
+      "capex_to_cfo_pct": 94.48,
+      "fcf_contraction_pct": -76.6
+    },
+    "customer_ecosystem": {
+      "hyperscaler_total_capex_b": 408.0,
+      "ai_hardware_purchases_b": 50.0,
+      "capex_payout_ratio_pct": 12.25,
+      "customer_incremental_ai_rev_b": 15.0,
+      "customer_ai_gross_profit_b": 9.75,
+      "annual_hardware_depreciation_b": 14.29,
+      "customer_net_ai_operating_income_b": -4.54,
+      "customer_net_roi_pct": -9.07,
+      "customer_payback_years": 5.13,
+      "hardware_useful_life_years": 3.5,
+      "hardware_obsolescence_gap_years": 1.63,
+      "status": "OBSOLESCENCE DEFICIT"
+    },
+    "breakeven_monetization": {
+      "target_customer_roic_pct": 15.0,
+      "required_annual_ai_rev_b": 33.52,
+      "actual_realized_ai_rev_b": 15.0,
+      "annual_revenue_gap_deficit_b": 18.52
+    },
+    "strategic_findings": {
+      "capex_supercycle": "Amazon deployed $131.8B in CapEx in FY2025 (18.4% of sales), with ~$105B focused on AWS datacenters and custom silicon (Trainium2/Inferentia) plus Nvidia Blackwell clusters.",
+      "fcf_drag": "CapEx absorbed 94.5% of Operating Cash Flow, reducing FCF from $32.9B in 2024 to $7.7B in 2025. Shareholder cash returns remain zero ($0 dividends, $0 repurchases).",
+      "hardware_payback_deficit": "At 65% software gross margin on $15B realized GenAI revenue ($9.75B GP), annual straight-line depreciation of $50B hardware over 3.5 years is $14.29B, resulting in a Net AI Operating Deficit of -$4.54B (-9.1% ROI) and a 5.13-year payback period versus the 3.5-year hardware obsolescence window.",
+      "breakeven_monetization_gap": "To achieve a 15% target ROIC on $50B AI compute infrastructure, AWS and its ecosystem require $33.52B in annual GenAI software revenue, leaving an annual monetization gap of $18.52B that must be bridged by enterprise workflow adoption."
+    }
+  },
+  "liquidation_floor_usd": 0.0,
+  "final_triangulation": {
+    "target_price_usd": 203.46,
+    "upside_percent": -20.43,
+    "rating": "TRIM / TAKE PROFITS"
+  }
+}

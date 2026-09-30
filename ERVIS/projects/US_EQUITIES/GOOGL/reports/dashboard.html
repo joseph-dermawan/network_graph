@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERVIS :: Alphabet Inc. (NASDAQ: GOOGL) Valuation Dashboard</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Newsreader', 'Georgia', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #09090b;
+            color: #d4d4d8;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .tab-btn.active {
+            border-bottom-color: #f59e0b;
+            color: #fbbf24;
+            background-color: rgba(24, 24, 27, 0.8);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-xs antialiased selection:bg-amber-950 selection:text-amber-200">
+
+    <!-- Top Command Header -->
+    <header class="border-b border-neutral-800 bg-[#0c0d0e] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <span class="px-2 py-0.5 border border-amber-500/40 bg-amber-950/20 text-amber-400 font-mono text-[11px] font-bold tracking-wider">
+                    ERVIS TERMINAL v2.5
+                </span>
+                <span class="text-neutral-500 font-mono text-xs">/</span>
+                <h1 class="text-sm font-serif font-semibold text-neutral-100 tracking-wide">
+                    Alphabet Inc. (NASDAQ: GOOGL) :: Institutional Valuation Dossier
+                </h1>
+                <span class="px-2 py-0.5 border border-amber-900/60 bg-amber-950/30 text-amber-300 font-mono text-[10px] font-bold">
+                    [AI TITANS CAMPAIGN #02]
+                </span>
+            </div>
+            
+            <div class="flex items-center space-x-4 text-xs font-mono">
+                <span class="text-neutral-400">SPOT: <strong class="text-neutral-100 font-bold">$355.24</strong></span>
+                <span class="text-neutral-600">|</span>
+                <span class="text-neutral-400">INTRINSIC: <strong class="text-amber-400 font-bold">$252.80</strong></span>
+                <span class="text-neutral-600">|</span>
+                <span class="px-2 py-0.5 border border-rose-800 bg-rose-950/40 text-rose-400 font-bold">
+                    TRIM / TAKE PROFITS (-28.8%)
+                </span>
+            </div>
+        </div>
+
+        <!-- Terminal Command Navigation Bar -->
+        <div class="max-w-7xl mx-auto px-6 border-t border-neutral-800 flex space-x-1 overflow-x-auto text-xs font-mono">
+            <button id="btn-tab-overview" onclick="switchTab('tab-overview')" class="tab-btn px-3.5 py-2 border-b-2 border-amber-500 text-amber-400 bg-neutral-900/60 transition-colors whitespace-nowrap">
+                [01] EXECUTIVE THESIS & DUAL-ENGINE TRIANGULATION
+            </button>
+            <button id="btn-tab-sotp" onclick="switchTab('tab-sotp')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [02] SUM-OF-THE-PARTS (SOTP)
+            </button>
+            <button id="btn-tab-dcf" onclick="switchTab('tab-dcf')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [03] 10-YR GINZU DCF SCHEDULE
+            </button>
+            <button id="btn-tab-scenarios" onclick="switchTab('tab-scenarios')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [04] SCENARIOS & 10K MONTE CARLO
+            </button>
+            <button id="btn-tab-diagnostics" onclick="switchTab('tab-diagnostics')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [05] GATE 4B AI CAPEX & ROI AUDIT
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+
+        <!-- TAB 1: EXECUTIVE THESIS -->
+        <div id="tab-overview" class="tab-content space-y-6">
+            <div class="p-3 bg-amber-950/20 border border-amber-900/60 text-amber-300 flex items-center justify-between text-xs">
+                <span>[VALUATION VERDICT] Alphabet is the world's most resilient computing franchise ($402.8B revenue, $73.3B FCF, +$64.7B Net Cash Fortress), yet at $355.24 ($4.34T market cap), the equity is aggressively pricing near-perpetual 30x+ multiples and flawless AI monetization. Fundamental 10-Yr DCF fair value is $242.48; SOTP relative value is $285.99. Triangulated target: $252.80 (-28.8% implied gap). Rating: TRIM / TAKE PROFITS.</span>
+                <span class="font-bold uppercase tracking-wider text-[10px] border border-amber-800 px-1.5 py-0.5">Tactical Alert</span>
+            </div>
+
+            <!-- 3 Core Investment Theses Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-5 bg-[#0f0f11] border border-neutral-800 space-y-3">
+                    <div class="flex items-center justify-between border-b border-neutral-800 pb-2">
+                        <span class="text-amber-400 font-bold font-mono">[THESIS 01]</span>
+                        <span class="text-neutral-500 font-mono text-[11px]">THE NET CASH FORTRESS</span>
+                    </div>
+                    <h3 class="text-sm font-serif font-semibold text-neutral-100">
+                        +$64.7B Net Cash & 31.8% ROE
+                    </h3>
+                    <p class="text-neutral-400 font-serif leading-relaxed text-xs">
+                        Alphabet holds <strong>$126.8B</strong> in cash and short-term securities against just $62.2B in total adjusted debt (including $15.6B in synthetic leases). Forensic capitalization of $149.9B in R&D assets expands normalized EBIT_0 to <strong>$145.5B</strong> with an Altman Z-score of 16.94 and Moody's Aa1/AA+ credit rating.
+                    </p>
+                </div>
+
+                <div class="p-5 bg-[#0f0f11] border border-neutral-800 space-y-3">
+                    <div class="flex items-center justify-between border-b border-neutral-800 pb-2">
+                        <span class="text-amber-400 font-bold font-mono">[THESIS 02]</span>
+                        <span class="text-neutral-500 font-mono text-[11px]">THE TPU SILICON ARBITRAGE</span>
+                    </div>
+                    <h3 class="text-sm font-serif font-semibold text-neutral-100">
+                        $14.2B Hardware Tax Avoidance
+                    </h3>
+                    <p class="text-neutral-400 font-serif leading-relaxed text-xs">
+                        Unlike rivals entirely beholden to NVIDIA merchant GPUs, Alphabet deploys custom <strong>TPU v5p, v5e, and v6 (Trillium)</strong>. By avoiding NVIDIA's 75% gross margin hardware tax across Search AI Overviews, YouTube, and Gemini, Google captures an estimated <strong>$14.2B/yr</strong> in pure compute cost savings, driving AI CapEx payback to 3.25 years.
+                    </p>
+                </div>
+
+                <div class="p-5 bg-[#0f0f11] border border-neutral-800 space-y-3">
+                    <div class="flex items-center justify-between border-b border-neutral-800 pb-2">
+                        <span class="text-amber-400 font-bold font-mono">[THESIS 03]</span>
+                        <span class="text-neutral-500 font-mono text-[11px]">THE VALUATION CHASM</span>
+                    </div>
+                    <h3 class="text-sm font-serif font-semibold text-neutral-100">
+                        Spot at $355.24 vs. DCF $242.48
+                    </h3>
+                    <p class="text-neutral-400 font-serif leading-relaxed text-xs">
+                        Even underwriting durable search moat economics (22.0% terminal ROIC override vs. 9.0% terminal WACC) and 14% near-term growth, the DCF model prices Alphabet at <strong>$242.48/sh</strong>. The market price reflects euphoria around multi-agent Gemini and autonomous Waymo expansion beyond fundamentally discountable cash flows.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Master Valuation Summary Table -->
+            <div class="bg-[#0f0f11] border border-neutral-800 p-6 space-y-4">
+                <div class="border-b border-neutral-800 pb-3 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                            Master Valuation Triangulation Schedule
+                        </h3>
+                        <p class="text-xs font-mono text-neutral-400 mt-1">Audited FY2025 Financials | Benchmark Rf: 4.58% | Damodaran ERP: 4.33% | Base WACC: 9.11%</p>
+                    </div>
+                    <span class="px-2.5 py-1 bg-[#141416] border border-neutral-800 text-amber-400 font-bold font-mono">
+                        BLENDED TARGET: $252.80 (-28.8%)
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto border border-neutral-800">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-[#0c0d0e] text-neutral-400 uppercase border-b border-neutral-800">
+                            <tr>
+                                <th class="p-3">Valuation Methodology</th>
+                                <th class="p-3">Core Levers & Calibration</th>
+                                <th class="p-3 text-right">Enterprise Value</th>
+                                <th class="p-3 text-right">Net Cash Bridge</th>
+                                <th class="p-3 text-right">Target Price</th>
+                                <th class="p-3 text-right">Upside / Downside</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">10-Yr Discrete Ginzu DCF</td>
+                                <td class="p-3 text-neutral-400">14.0% Y1 -> 3.8% terminal g, 36.1% -> 35.0% margin, 22.0% Moat ROIC</td>
+                                <td class="p-3 text-right font-mono">$2,900,920M</td>
+                                <td class="p-3 text-right text-emerald-400 font-mono">+$64,665M (+$5.29)</td>
+                                <td class="p-3 text-right text-neutral-100 font-bold font-mono">$242.48</td>
+                                <td class="p-3 text-right text-rose-400 font-bold font-mono">-31.7%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">Sum-of-the-Parts (SOTP) Multiples</td>
+                                <td class="p-3 text-neutral-400">Services (19x EBITDA), Cloud (26x EBITDA), Other Bets / Waymo ($85B)</td>
+                                <td class="p-3 text-right font-mono">$3,433,000M</td>
+                                <td class="p-3 text-right text-emerald-400 font-mono">+$64,665M (+$5.29)</td>
+                                <td class="p-3 text-right text-neutral-100 font-bold font-mono">$285.99</td>
+                                <td class="p-3 text-right text-rose-400 font-bold font-mono">-19.5%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">10,000-Trial Monte Carlo Median</td>
+                                <td class="p-3 text-neutral-400">Stochastic trials across growth (7-12%), margins (32-40%), WACC (8.6-9.4%)</td>
+                                <td class="p-3 text-right font-mono">$2,500,600M</td>
+                                <td class="p-3 text-right text-emerald-400 font-mono">+$64,665M</td>
+                                <td class="p-3 text-right text-neutral-100 font-bold font-mono">$209.75</td>
+                                <td class="p-3 text-right text-rose-400 font-bold font-mono">-41.0%</td>
+                            </tr>
+                            <tr class="bg-amber-950/10 font-bold">
+                                <td class="p-3 font-serif text-amber-300">Blended Institutional Target Price</td>
+                                <td class="p-3 text-amber-400/80">50% DCF Intrinsic + 35% SOTP Multiple + 15% Monte Carlo Median</td>
+                                <td class="p-3 text-right text-amber-400 font-mono">$3,027,200M</td>
+                                <td class="p-3 text-right text-emerald-400 font-mono">+$64,665M</td>
+                                <td class="p-3 text-right text-amber-400 text-sm font-mono">$252.80</td>
+                                <td class="p-3 text-right text-rose-400 text-sm font-mono">-28.8% [TRIM]</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-400 italic">Downside Net Liquidation Floor</td>
+                                <td class="p-3 text-neutral-500">Cash 100%, Receivables 75%, PP&E 30%, Intangibles 5% less Liabilities</td>
+                                <td class="p-3 text-right text-neutral-500 font-mono">-</td>
+                                <td class="p-3 text-right text-neutral-500 font-mono">-</td>
+                                <td class="p-3 text-right text-neutral-400 font-mono">$4.11</td>
+                                <td class="p-3 text-right text-rose-400 font-mono">-98.8%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: SUM-OF-THE-PARTS (SOTP) -->
+        <div id="tab-sotp" class="tab-content space-y-6 hidden">
+            <div class="bg-[#0f0f11] border border-neutral-800 p-6 space-y-4">
+                <div class="border-b border-neutral-800 pb-3 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                            Sum-of-the-Parts (SOTP) Divisional Carve-Out
+                        </h3>
+                        <p class="text-xs font-mono text-neutral-400 mt-1">Multiples calibrated to peer pure-play public comparables (Meta, AWS/Azure, Waymo Private Rounds)</p>
+                    </div>
+                    <span class="px-2.5 py-1 bg-[#141416] border border-neutral-800 text-amber-400 font-bold font-mono">
+                        SOTP VALUE: $285.99 ($3,498B Equity)
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto border border-neutral-800">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-[#0c0d0e] text-neutral-400 uppercase border-b border-neutral-800">
+                            <tr>
+                                <th class="p-3">Operating Segment</th>
+                                <th class="p-3">Core Economic Engine</th>
+                                <th class="p-3 text-right">FY25 Revenue</th>
+                                <th class="p-3 text-right">FY25 EBITDA</th>
+                                <th class="p-3 text-right">Multiple</th>
+                                <th class="p-3 text-right">Enterprise Value</th>
+                                <th class="p-3 text-right">EV / Share</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">Google Services (Search, YouTube, Ads, Android)</td>
+                                <td class="p-3 text-neutral-400">Commercial query dominance, YouTube connected TV, App store commission</td>
+                                <td class="p-3 text-right font-mono">$343,500M</td>
+                                <td class="p-3 text-right font-mono">$155,000M</td>
+                                <td class="p-3 text-right font-mono text-amber-400">19.0x EV/EBITDA</td>
+                                <td class="p-3 text-right font-mono font-bold text-neutral-100">$2,945,000M</td>
+                                <td class="p-3 text-right font-mono">$240.80</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">Google Cloud (GCP + Workspace)</td>
+                                <td class="p-3 text-neutral-400">Hyper-scale cloud infra, Vertex AI model garden, TPU instances, Workspace AI</td>
+                                <td class="p-3 text-right font-mono">$58,120M</td>
+                                <td class="p-3 text-right font-mono">$15,500M</td>
+                                <td class="p-3 text-right font-mono text-amber-400">26.0x EV/EBITDA</td>
+                                <td class="p-3 text-right font-mono font-bold text-neutral-100">$403,000M</td>
+                                <td class="p-3 text-right font-mono">$32.95</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">Other Bets (Waymo, Verily, Calico)</td>
+                                <td class="p-3 text-neutral-400">Autonomous commercial robotaxi fleet (150k+ weekly paid trips), life sciences</td>
+                                <td class="p-3 text-right font-mono">$1,216M</td>
+                                <td class="p-3 text-right font-mono">-$3,500M</td>
+                                <td class="p-3 text-right font-mono text-amber-400">Carve-out Mkt Val</td>
+                                <td class="p-3 text-right font-mono font-bold text-neutral-100">$85,000M</td>
+                                <td class="p-3 text-right font-mono">$6.95</td>
+                            </tr>
+                            <tr class="bg-neutral-900/60 font-bold">
+                                <td class="p-3 font-serif text-neutral-100" colspan="5">Consolidated Sum-of-the-Parts Enterprise Value</td>
+                                <td class="p-3 text-right font-mono text-amber-400 font-bold">$3,433,000M</td>
+                                <td class="p-3 text-right font-mono">$280.70</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-neutral-400" colspan="5">(+) Net Cash Fortress (Cash $126.8B - Funded Debt $46.5B - Leases $15.6B)</td>
+                                <td class="p-3 text-right font-mono text-emerald-400 font-bold">+$64,665M</td>
+                                <td class="p-3 text-right font-mono text-emerald-400">+$5.29</td>
+                            </tr>
+                            <tr class="bg-amber-950/20 font-bold border-t-2 border-amber-500/50">
+                                <td class="p-3 font-serif text-amber-300 text-sm" colspan="5">Implied Total SOTP Equity Value</td>
+                                <td class="p-3 text-right font-mono text-amber-400 text-sm">$3,497,665M</td>
+                                <td class="p-3 text-right font-mono text-amber-400 text-sm">$285.99</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: 10-YR GINZU DCF SCHEDULE -->
+        <div id="tab-dcf" class="tab-content space-y-6 hidden">
+            <div class="bg-[#0f0f11] border border-neutral-800 p-6 space-y-4">
+                <div class="border-b border-neutral-800 pb-3 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                            10-Year Discrete Pro-Forma DCF Schedule (Ginzu FCFF Pipeline)
+                        </h3>
+                        <p class="text-xs font-mono text-neutral-400 mt-1">Reinvestment determined via Damodaran Sales-to-Capital Ratio (2.60x) | Terminal Moat ROIC: 22.0%</p>
+                    </div>
+                    <span class="px-2.5 py-1 bg-[#141416] border border-neutral-800 text-amber-400 font-bold font-mono">
+                        DCF VALUE: $242.48 / SHARE
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto border border-neutral-800">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-[#0c0d0e] text-neutral-400 uppercase border-b border-neutral-800">
+                            <tr>
+                                <th class="p-2.5">Metric ($M)</th>
+                                <th class="p-2.5 text-right">Base FY25</th>
+                                <th class="p-2.5 text-right">FY26E</th>
+                                <th class="p-2.5 text-right">FY27E</th>
+                                <th class="p-2.5 text-right">FY28E</th>
+                                <th class="p-2.5 text-right">FY29E</th>
+                                <th class="p-2.5 text-right">FY30E</th>
+                                <th class="p-2.5 text-right">FY31E</th>
+                                <th class="p-2.5 text-right">FY32E</th>
+                                <th class="p-2.5 text-right">FY33E</th>
+                                <th class="p-2.5 text-right">FY34E</th>
+                                <th class="p-2.5 text-right">FY35E</th>
+                                <th class="p-2.5 text-right text-amber-400">Terminal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <tr>
+                                <td class="p-2.5 font-semibold text-neutral-100">Revenue</td>
+                                <td class="p-2.5 text-right font-mono">$402,836</td>
+                                <td class="p-2.5 text-right font-mono">$459,233</td>
+                                <td class="p-2.5 text-right font-mono">$516,637</td>
+                                <td class="p-2.5 text-right font-mono">$573,467</td>
+                                <td class="p-2.5 text-right font-mono">$627,947</td>
+                                <td class="p-2.5 text-right font-mono">$678,183</td>
+                                <td class="p-2.5 text-right font-mono">$725,655</td>
+                                <td class="p-2.5 text-right font-mono">$769,195</td>
+                                <td class="p-2.5 text-right font-mono">$807,654</td>
+                                <td class="p-2.5 text-right font-mono">$841,576</td>
+                                <td class="p-2.5 text-right font-mono">$873,556</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$906,751</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 text-neutral-400">Growth Rate %</td>
+                                <td class="p-2.5 text-right font-mono">-</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">14.0%</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">12.5%</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">11.0%</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">9.5%</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">8.0%</td>
+                                <td class="p-2.5 text-right font-mono">7.0%</td>
+                                <td class="p-2.5 text-right font-mono">6.0%</td>
+                                <td class="p-2.5 text-right font-mono">5.0%</td>
+                                <td class="p-2.5 text-right font-mono">4.2%</td>
+                                <td class="p-2.5 text-right font-mono">3.8%</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">3.8%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 text-neutral-400">Operating Margin %</td>
+                                <td class="p-2.5 text-right font-mono">36.1%</td>
+                                <td class="p-2.5 text-right font-mono">36.1%</td>
+                                <td class="p-2.5 text-right font-mono">36.8%</td>
+                                <td class="p-2.5 text-right font-mono">37.2%</td>
+                                <td class="p-2.5 text-right font-mono">37.0%</td>
+                                <td class="p-2.5 text-right font-mono">36.5%</td>
+                                <td class="p-2.5 text-right font-mono">36.0%</td>
+                                <td class="p-2.5 text-right font-mono">35.5%</td>
+                                <td class="p-2.5 text-right font-mono">35.2%</td>
+                                <td class="p-2.5 text-right font-mono">35.0%</td>
+                                <td class="p-2.5 text-right font-mono">35.0%</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">35.0%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-semibold text-neutral-200">EBIT (Op Profit)</td>
+                                <td class="p-2.5 text-right font-mono">$145,540</td>
+                                <td class="p-2.5 text-right font-mono">$165,783</td>
+                                <td class="p-2.5 text-right font-mono">$190,122</td>
+                                <td class="p-2.5 text-right font-mono">$213,329</td>
+                                <td class="p-2.5 text-right font-mono">$232,340</td>
+                                <td class="p-2.5 text-right font-mono">$247,537</td>
+                                <td class="p-2.5 text-right font-mono">$261,236</td>
+                                <td class="p-2.5 text-right font-mono">$273,064</td>
+                                <td class="p-2.5 text-right font-mono">$284,294</td>
+                                <td class="p-2.5 text-right font-mono">$294,551</td>
+                                <td class="p-2.5 text-right font-mono">$305,744</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$317,363</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 text-neutral-300">NOPAT (t=16.78%)</td>
+                                <td class="p-2.5 text-right font-mono">$121,118</td>
+                                <td class="p-2.5 text-right font-mono">$137,965</td>
+                                <td class="p-2.5 text-right font-mono">$158,219</td>
+                                <td class="p-2.5 text-right font-mono">$177,533</td>
+                                <td class="p-2.5 text-right font-mono">$193,353</td>
+                                <td class="p-2.5 text-right font-mono">$206,000</td>
+                                <td class="p-2.5 text-right font-mono">$217,400</td>
+                                <td class="p-2.5 text-right font-mono">$227,244</td>
+                                <td class="p-2.5 text-right font-mono">$236,589</td>
+                                <td class="p-2.5 text-right font-mono">$245,125</td>
+                                <td class="p-2.5 text-right font-mono">$254,440</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$264,110</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 text-rose-300/80">(-) Reinvestment</td>
+                                <td class="p-2.5 text-right font-mono">-</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">$21,691</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">$22,078</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">$21,858</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">$20,954</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">$19,321</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">$18,258</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">$16,746</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">$14,792</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">$13,047</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">$12,300</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">$45,612</td>
+                            </tr>
+                            <tr class="font-bold text-neutral-100 bg-neutral-900/40">
+                                <td class="p-2.5">Free Cash Flow (FCFF)</td>
+                                <td class="p-2.5 text-right font-mono">$73,266</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">$116,274</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">$136,141</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">$155,675</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">$172,399</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">$186,679</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">$199,142</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">$210,498</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">$221,797</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">$232,078</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400">$242,140</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400 font-bold">$218,498</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 text-neutral-400">Discount Factor (WACC)</td>
+                                <td class="p-2.5 text-right font-mono">1.000</td>
+                                <td class="p-2.5 text-right font-mono">0.916</td>
+                                <td class="p-2.5 text-right font-mono">0.840</td>
+                                <td class="p-2.5 text-right font-mono">0.770</td>
+                                <td class="p-2.5 text-right font-mono">0.706</td>
+                                <td class="p-2.5 text-right font-mono">0.647</td>
+                                <td class="p-2.5 text-right font-mono">0.594</td>
+                                <td class="p-2.5 text-right font-mono">0.544</td>
+                                <td class="p-2.5 text-right font-mono">0.499</td>
+                                <td class="p-2.5 text-right font-mono">0.458</td>
+                                <td class="p-2.5 text-right font-mono">0.420</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400 font-bold">0.420</td>
+                            </tr>
+                            <tr class="bg-amber-950/10 font-bold">
+                                <td class="p-2.5 text-amber-300">Present Value of FCFF</td>
+                                <td class="p-2.5 text-right font-mono">-</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$106,566</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$114,342</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$119,850</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$121,700</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$120,860</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$118,250</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$114,600</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$110,750</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$106,300</td>
+                                <td class="p-2.5 text-right font-mono text-amber-400">$101,834</td>
+                                <td class="p-2.5 text-right font-mono text-emerald-400 font-bold">PV(TV): $1,765,868</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- DCF Bridge Card -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-neutral-800">
+                    <div class="p-3 bg-neutral-900/40 border border-neutral-800">
+                        <div class="text-neutral-500 font-mono text-[10px]">PV OF 10-YR FCFF</div>
+                        <div class="text-neutral-100 font-mono text-sm font-bold mt-1">$1,135,052M</div>
+                        <div class="text-neutral-500 text-[10px]">39.1% of Enterprise Value</div>
+                    </div>
+                    <div class="p-3 bg-neutral-900/40 border border-neutral-800">
+                        <div class="text-neutral-500 font-mono text-[10px]">PV OF TERMINAL VALUE</div>
+                        <div class="text-neutral-100 font-mono text-sm font-bold mt-1">$1,765,868M</div>
+                        <div class="text-neutral-500 text-[10px]">60.9% of Enterprise Value</div>
+                    </div>
+                    <div class="p-3 bg-neutral-900/40 border border-neutral-800">
+                        <div class="text-neutral-500 font-mono text-[10px]">NET CASH FORTRESS</div>
+                        <div class="text-emerald-400 font-mono text-sm font-bold mt-1">+$64,665M</div>
+                        <div class="text-neutral-500 text-[10px]">+$5.29 per share cash cushion</div>
+                    </div>
+                    <div class="p-3 bg-neutral-900/40 border border-neutral-800">
+                        <div class="text-neutral-500 font-mono text-[10px]">DCF FAIR VALUE</div>
+                        <div class="text-amber-400 font-mono text-sm font-bold mt-1">$242.48 / SHARE</div>
+                        <div class="text-rose-400 text-[10px]">-31.7% vs Spot ($355.24)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: SCENARIOS & MONTE CARLO -->
+        <div id="tab-scenarios" class="tab-content space-y-6 hidden">
+            <div class="bg-[#0f0f11] border border-neutral-800 p-6 space-y-4">
+                <div class="border-b border-neutral-800 pb-3 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                            10,000-Trial Stochastic Monte Carlo Simulation
+                        </h3>
+                        <p class="text-xs font-mono text-neutral-400 mt-1">Simulating simultaneous fluctuations in top-line growth (normal), operating margin (triangular), and terminal WACC</p>
+                    </div>
+                    <span class="px-2.5 py-1 bg-[#141416] border border-neutral-800 text-amber-400 font-bold font-mono">
+                        MEDIAN: $209.75 | WIN RATE: 0.01%
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="p-4 bg-neutral-900/40 border border-neutral-800">
+                        <span class="text-neutral-500 text-[10px]">BEAR CASE (P10)</span>
+                        <div class="text-lg font-bold text-rose-400 font-mono mt-1">$176.19</div>
+                        <p class="text-neutral-400 text-[11px] mt-1">Search ad growth slows to 6%, AI Overviews cannibalize clicks, WACC 9.4%.</p>
+                    </div>
+                    <div class="p-4 bg-neutral-900/40 border border-neutral-800">
+                        <span class="text-neutral-500 text-[10px]">BASE MEDIAN (P50)</span>
+                        <div class="text-lg font-bold text-neutral-100 font-mono mt-1">$209.75</div>
+                        <p class="text-neutral-400 text-[11px] mt-1">Expected mean path with TPU silicon savings offset by elevated infrastructure capex.</p>
+                    </div>
+                    <div class="p-4 bg-neutral-900/40 border border-neutral-800">
+                        <span class="text-neutral-500 text-[10px]">BULL CASE (P90)</span>
+                        <div class="text-lg font-bold text-emerald-400 font-mono mt-1">$249.46</div>
+                        <p class="text-neutral-400 text-[11px] mt-1">Cloud scales to 30% margin, Gemini enterprise subscription explosion, 12% growth.</p>
+                    </div>
+                    <div class="p-4 bg-neutral-900/40 border border-neutral-800">
+                        <span class="text-neutral-500 text-[10px]">CURRENT SPOT PREMIUM</span>
+                        <div class="text-lg font-bold text-amber-400 font-mono mt-1">$355.24</div>
+                        <p class="text-rose-400 text-[11px] mt-1">Spot price exceeds 99.99% of all 10,000 empirical stochastic simulation trials.</p>
+                    </div>
+                </div>
+
+                <!-- Scenario Sensitivity Grid -->
+                <div class="overflow-x-auto border border-neutral-800 mt-4">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-[#0c0d0e] text-neutral-400 uppercase border-b border-neutral-800">
+                            <tr>
+                                <th class="p-3">WACC \ Terminal Growth</th>
+                                <th class="p-3 text-center">2.8% (Stagnation)</th>
+                                <th class="p-3 text-center">3.3% (Conservative)</th>
+                                <th class="p-3 text-center text-amber-400">3.8% (Base Case)</th>
+                                <th class="p-3 text-center">4.3% (Expansion)</th>
+                                <th class="p-3 text-center">4.8% (Bull Moat)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">8.00% (Low Cost of Capital)</td>
+                                <td class="p-3 text-center font-mono">$242.10</td>
+                                <td class="p-3 text-center font-mono">$264.80</td>
+                                <td class="p-3 text-center font-mono text-emerald-400 font-bold">$293.40</td>
+                                <td class="p-3 text-center font-mono">$330.15</td>
+                                <td class="p-3 text-center font-mono text-amber-400">$378.90</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">8.50% (Moderated WACC)</td>
+                                <td class="p-3 text-center font-mono">$216.45</td>
+                                <td class="p-3 text-center font-mono">$234.10</td>
+                                <td class="p-3 text-center font-mono font-bold">$255.80</td>
+                                <td class="p-3 text-center font-mono">$282.90</td>
+                                <td class="p-3 text-center font-mono">$317.50</td>
+                            </tr>
+                            <tr class="bg-amber-950/20 font-bold">
+                                <td class="p-3 font-semibold text-amber-300">9.00% (Base Model Terminal)</td>
+                                <td class="p-3 text-center font-mono">$195.20</td>
+                                <td class="p-3 text-center font-mono">$209.60</td>
+                                <td class="p-3 text-center font-mono text-amber-400 text-sm font-bold">$242.48</td>
+                                <td class="p-3 text-center font-mono">$248.10</td>
+                                <td class="p-3 text-center font-mono">$273.40</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">9.50% (Elevated Spread)</td>
+                                <td class="p-3 text-center font-mono">$177.30</td>
+                                <td class="p-3 text-center font-mono">$189.10</td>
+                                <td class="p-3 text-center font-mono">$203.20</td>
+                                <td class="p-3 text-center font-mono">$220.50</td>
+                                <td class="p-3 text-center font-mono">$241.80</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-neutral-200">10.00% (High Inflation Shock)</td>
+                                <td class="p-3 text-center font-mono">$162.10</td>
+                                <td class="p-3 text-center font-mono">$172.00</td>
+                                <td class="p-3 text-center font-mono">$183.80</td>
+                                <td class="p-3 text-center font-mono">$198.10</td>
+                                <td class="p-3 text-center font-mono">$215.60</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: GATE 4B AI CAPEX AUDIT & HEALTH -->
+        <div id="tab-diagnostics" class="tab-content space-y-6 hidden">
+            <div class="bg-[#0f0f11] border border-neutral-800 p-6 space-y-4">
+                <div class="border-b border-neutral-800 pb-3 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                            Gate 4B: Specialized AI CapEx Payout, ROI & Search Defense Audit
+                        </h3>
+                        <p class="text-xs font-mono text-neutral-400 mt-1">Dissecting Alphabet's $91.4B CapEx: Cloud AI + Gemini monetization vs. TPU silicon cost savings</p>
+                    </div>
+                    <span class="px-2.5 py-1 bg-[#141416] border border-neutral-800 text-emerald-400 font-bold font-mono">
+                        PAYBACK: 3.25 YRS (ACCRETIVE)
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-neutral-900/40 border border-neutral-800 space-y-2">
+                        <span class="text-amber-400 font-mono text-xs font-bold">[ENGINE 01: HARDWARE SILICON SAVINGS]</span>
+                        <div class="text-lg font-bold text-neutral-100 font-mono">$14.2B / Year</div>
+                        <p class="text-neutral-400 text-xs font-serif leading-relaxed">
+                            Alphabet serves over 8 billion queries daily. By migrating AI Overviews, YouTube ranking algorithms, and Gemini training to in-house <strong>TPU v5e and v6 (Trillium)</strong>, Alphabet bypasses NVIDIA's 75% gross margin markup, capturing $14.2B in pure cost avoidance.
+                        </p>
+                    </div>
+                    <div class="p-4 bg-neutral-900/40 border border-neutral-800 space-y-2">
+                        <span class="text-amber-400 font-mono text-xs font-bold">[ENGINE 02: CLOUD AI MONETIZATION]</span>
+                        <div class="text-lg font-bold text-neutral-100 font-mono">$8.5B Run-Rate</div>
+                        <p class="text-neutral-400 text-xs font-serif leading-relaxed">
+                            Vertex AI model consumption, Gemini Enterprise workspace seats, and TPU infrastructure rentals contributed $8.5B in incremental run-rate cloud revenue, generating <strong>$5.53B in software gross profit</strong> at a 65% gross margin.
+                        </p>
+                    </div>
+                    <div class="p-4 bg-neutral-900/40 border border-neutral-800 space-y-2">
+                        <span class="text-amber-400 font-mono text-xs font-bold">[ENGINE 03: SEARCH MOAT DEFENSE]</span>
+                        <div class="text-lg font-bold text-neutral-100 font-mono">$11.3B Protected</div>
+                        <p class="text-neutral-400 text-xs font-serif leading-relaxed">
+                            Defending Google's core $225B search revenue against AI answer engines (ChatGPT, Perplexity) is an existential necessity. Protecting just <strong>5% market share</strong> preserves $11.3B in annual top-line revenue and $5.5B in operating profit.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CapEx Economics Table -->
+                <div class="overflow-x-auto border border-neutral-800 mt-4">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-[#0c0d0e] text-neutral-400 uppercase border-b border-neutral-800">
+                            <tr>
+                                <th class="p-3">Gate 4B Metric / Economic Parameter</th>
+                                <th class="p-3 text-right">Value ($M)</th>
+                                <th class="p-3">Methodology & Strategic Evaluation</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">Alphabet Total FY2025 CapEx</td>
+                                <td class="p-3 text-right font-mono font-bold text-neutral-100">$91,447M</td>
+                                <td class="p-3 text-neutral-400">22.7% of total revenue ($402.8B) deployed into data centers, servers, liquid cooling</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">AI Compute & Infrastructure Allocation (70%)</td>
+                                <td class="p-3 text-right font-mono text-amber-400 font-bold">$64,013M</td>
+                                <td class="p-3 text-neutral-400">Server clusters, TPU v5/v6 silicon, optical circuit switches, megawatt power contracts</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">Annual Infrastructure Depreciation (3.5-Yr Life)</td>
+                                <td class="p-3 text-right font-mono text-rose-400">-$18,289M</td>
+                                <td class="p-3 text-neutral-400">Straight-line depreciation over 3.50-year server / accelerator useful life window</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">Cloud AI Software Gross Profit (65% margin)</td>
+                                <td class="p-3 text-right font-mono text-emerald-400">+$5,525M</td>
+                                <td class="p-3 text-neutral-400">Realized cash contribution from Vertex AI, Gemini Enterprise, and Cloud TPU API</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">Internal TPU Cost Savings vs. Third-Party GPUs</td>
+                                <td class="p-3 text-right font-mono text-emerald-400">+$14,200M</td>
+                                <td class="p-3 text-neutral-400">Avoidance of NVIDIA commercial gross margin markup on billions of search & video queries</td>
+                            </tr>
+                            <tr class="bg-neutral-900/60 font-bold">
+                                <td class="p-3 font-serif text-amber-300">Total Annual Gross Economic Benefit</td>
+                                <td class="p-3 text-right font-mono text-emerald-400 font-bold text-sm">+$19,725M</td>
+                                <td class="p-3 text-neutral-300">Software Gross Profit ($5.53B) + TPU In-House Cost Avoidance ($14.2B)</td>
+                            </tr>
+                            <tr class="bg-amber-950/20 font-bold border-t border-b border-amber-500/40">
+                                <td class="p-3 font-serif text-amber-400 text-sm">Net AI Operating Income & ROI</td>
+                                <td class="p-3 text-right font-mono text-amber-400 text-sm">+$1,436M (ROI: +2.24%)</td>
+                                <td class="p-3 text-amber-300">Accretive operating profit above full annual physical depreciation charge</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">AI Infrastructure Payback Duration</td>
+                                <td class="p-3 text-right font-mono font-bold text-emerald-400">3.25 Years</td>
+                                <td class="p-3 text-emerald-400 font-semibold">VALUE ACCRETIVE: Payback achieved within the 3.50-year hardware obsolescence window</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Forensic Health Audit Badges -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-neutral-800">
+                    <div class="p-3 bg-neutral-900/40 border border-neutral-800">
+                        <div class="text-neutral-500 font-mono text-[10px]">ALTMAN Z-SCORE</div>
+                        <div class="text-emerald-400 font-mono text-sm font-bold mt-1">16.94</div>
+                        <div class="text-neutral-500 text-[10px]">GOD-TIER SAFE ZONE (>> 2.99)</div>
+                    </div>
+                    <div class="p-3 bg-neutral-900/40 border border-neutral-800">
+                        <div class="text-neutral-500 font-mono text-[10px]">PIOTROSKI F-SCORE</div>
+                        <div class="text-emerald-400 font-mono text-sm font-bold mt-1">8 / 9</div>
+                        <div class="text-neutral-500 text-[10px]">Top-Decile Fundamental Health</div>
+                    </div>
+                    <div class="p-3 bg-neutral-900/40 border border-neutral-800">
+                        <div class="text-neutral-500 font-mono text-[10px]">BENEISH M-SCORE</div>
+                        <div class="text-emerald-400 font-mono text-sm font-bold mt-1">-2.88</div>
+                        <div class="text-neutral-500 text-[10px]">Safe Zone (< -1.78 non-manipulator)</div>
+                    </div>
+                    <div class="p-3 bg-neutral-900/40 border border-neutral-800">
+                        <div class="text-neutral-500 font-mono text-[10px]">5-PT DUPONT ROE</div>
+                        <div class="text-neutral-100 font-mono text-sm font-bold mt-1">31.83%</div>
+                        <div class="text-neutral-500 text-[10px]">Operating Margin 39.6% x Turnover 0.68x</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Interactive Script for Tab Switching -->
+    <script>
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(el => el.classList.add('hidden'));
+            
+            // Remove active classes from buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active', 'border-amber-500', 'text-amber-400', 'bg-neutral-900/60');
+                btn.classList.add('border-transparent', 'text-neutral-400');
+            });
+            
+            // Show selected tab content
+            const activeTab = document.getElementById(tabId);
+            if (activeTab) {
+                activeTab.classList.remove('hidden');
+            }
+            
+            // Highlight active button
+            const btnId = 'btn-' + tabId;
+            const activeBtn = document.getElementById(btnId);
+            if (activeBtn) {
+                activeBtn.classList.add('active', 'border-amber-500', 'text-amber-400', 'bg-neutral-900/60');
+                activeBtn.classList.remove('border-transparent', 'text-neutral-400');
+            }
+        }
+    </script>
+</body>
+</html>

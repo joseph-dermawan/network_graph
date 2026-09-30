@@ -1,0 +1,78 @@
+{
+  "regressions": {
+    "DRIVER_1_AZURE_CLOUD_GROWTH": {
+      "regressor": "Global Cloud Infrastructure Spend ($B)",
+      "r_squared": 0.9988,
+      "slope": 0.32,
+      "intercept": -23.17,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_2_COPILOT_ADOPTION": {
+      "regressor": "Commercial Copilot Paid Seats (M)",
+      "r_squared": 0.9573,
+      "slope": 3.41,
+      "intercept": 118.77,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_3_IAAS_VOLUME_INDEX": {
+      "regressor": "Global IaaS/PaaS Workload Compute Index",
+      "r_squared": 0.995,
+      "slope": 0.85,
+      "intercept": 107.66,
+      "gate_status": "PASS (R2 >= 0.85)"
+    }
+  },
+  "dupont_5yr": {
+    "FY2022": {
+      "tax_burden": 0.8686,
+      "interest_burden": 1.0036,
+      "operating_margin": 0.4206,
+      "asset_turnover": 0.5436,
+      "equity_multiplier": 2.19,
+      "roe": 0.4368
+    },
+    "FY2023": {
+      "tax_burden": 0.8102,
+      "interest_burden": 1.0089,
+      "operating_margin": 0.4177,
+      "asset_turnover": 0.5144,
+      "equity_multiplier": 2.0,
+      "roe": 0.3509
+    },
+    "FY2024": {
+      "tax_burden": 0.8177,
+      "interest_burden": 0.985,
+      "operating_margin": 0.4464,
+      "asset_turnover": 0.4786,
+      "equity_multiplier": 1.91,
+      "roe": 0.3283
+    },
+    "FY2025": {
+      "tax_burden": 0.8237,
+      "interest_burden": 0.9619,
+      "operating_margin": 0.4562,
+      "asset_turnover": 0.4551,
+      "equity_multiplier": 1.8,
+      "roe": 0.2965
+    },
+    "FY2026": {
+      "tax_burden": 0.806,
+      "interest_burden": 1.0689,
+      "operating_margin": 0.4678,
+      "asset_turnover": 0.4376,
+      "equity_multiplier": 1.71,
+      "roe": 0.3023
+    }
+  },
+  "altman_z": {
+    "X1_working_capital_to_assets": 0.0513,
+    "X2_retained_earnings_to_assets": 0.4325,
+    "X3_ebit_to_assets": 0.2134,
+    "X4_mv_equity_to_total_liabilities": 11.6061,
+    "X5_sales_to_assets": 0.4376,
+    "altman_z_score": 8.77,
+    "zone": "GOD-TIER SAFE ZONE (Z >> 2.99)"
+  },
+  "piotroski_f_score": 8,
+  "beneish_m_score": -2.78
+}

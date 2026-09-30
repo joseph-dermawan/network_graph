@@ -1,0 +1,78 @@
+{
+  "regressions": {
+    "DRIVER_1_SERVICES_VS_INSTALLED_BASE": {
+      "regressor": "Active iPhone Installed Base (M Devices) vs Services Revenue ($M)",
+      "r_squared": 0.9969,
+      "slope": 91.19,
+      "intercept": -27402.9,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_2_PRO_MIX_VS_IPHONE_ASP": {
+      "regressor": "iPhone Pro Mix (%) vs Blended Unit ASP ($)",
+      "r_squared": 0.99,
+      "slope": 6.17,
+      "intercept": 541.1,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_3_APPLE_INTELLIGENCE_SUBS_ATTACH": {
+      "regressor": "Apple Intelligence Device Adoption (%) vs Paid Subscriptions (M)",
+      "r_squared": 0.9846,
+      "slope": 8.05,
+      "intercept": 738.92,
+      "gate_status": "PASS (R2 >= 0.85)"
+    }
+  },
+  "dupont_5yr": {
+    "FY2021": {
+      "tax_burden": 0.867,
+      "interest_burden": 1.0024,
+      "operating_margin": 0.2978,
+      "asset_turnover": 1.0422,
+      "equity_multiplier": 5.56,
+      "roe": 1.5007
+    },
+    "FY2022": {
+      "tax_burden": 0.838,
+      "interest_burden": 0.9972,
+      "operating_margin": 0.3029,
+      "asset_turnover": 1.1179,
+      "equity_multiplier": 6.96,
+      "roe": 1.9696
+    },
+    "FY2023": {
+      "tax_burden": 0.8528,
+      "interest_burden": 0.9951,
+      "operating_margin": 0.2982,
+      "asset_turnover": 1.0871,
+      "equity_multiplier": 5.67,
+      "roe": 1.5608
+    },
+    "FY2024": {
+      "tax_burden": 0.7591,
+      "interest_burden": 1.0022,
+      "operating_margin": 0.3151,
+      "asset_turnover": 1.0714,
+      "equity_multiplier": 6.41,
+      "roe": 1.6459
+    },
+    "FY2025": {
+      "tax_burden": 0.839,
+      "interest_burden": 1.0034,
+      "operating_margin": 0.3197,
+      "asset_turnover": 1.1584,
+      "equity_multiplier": 4.87,
+      "roe": 1.5191
+    }
+  },
+  "altman_z": {
+    "X1_working_capital_to_assets": 0.0014,
+    "X2_retained_earnings_to_assets": 0.0334,
+    "X3_ebit_to_assets": 0.3883,
+    "X4_mv_equity_to_total_liabilities": 17.2416,
+    "X5_sales_to_assets": 1.1584,
+    "altman_z_score": 12.83,
+    "zone": "ULTRA SAFE ZONE (Z >> 2.99)"
+  },
+  "piotroski_f_score": 8,
+  "beneish_m_score": -2.92
+}

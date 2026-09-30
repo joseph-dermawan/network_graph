@@ -1,0 +1,25 @@
+{
+  "ticker": "AVGO",
+  "company_name": "Broadcom Inc.",
+  "market": "US_EQUITIES",
+  "currency": "USD",
+  "session_start": "2026-09-21T23:00:00.000000",
+  "active_rf": 0.0458,
+  "status": "COMPLETED_GATES_1_THROUGH_5",
+  "current_gate": "GATE_5_COMPLETED",
+  "gates_completed": [
+    "GATE_1_INGESTION_AND_FORENSICS",
+    "GATE_2_OPERATIONAL_DRIVERS_AND_HEALTH",
+    "GATE_3_WACC_AND_CREDIT_SYNTHESIS",
+    "GATE_4_VALUATION_ENGINE_AND_SCENARIOS",
+    "GATE_4B_CAPEX_PAYOUT_AND_ROI",
+    "GATE_5_PITCH_MEMO_AND_DELIVERABLES"
+  ],
+  "spot_price_usd": 358.15,
+  "final_intrinsic_value_dcf_usd": 213.73,
+  "final_intrinsic_value_sotp_usd": 232.94,
+  "final_target_price_usd": 247.7,
+  "final_rating": "TRIM / TAKE PROFITS (-30.8%)",
+  "tactical_accumulation_zone_usd": ".29 - .73",
+  "gsheet_url": ""
+}

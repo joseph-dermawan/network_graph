@@ -1,0 +1,93 @@
+{
+  "regressions": {
+    "DRIVER_1_AD_IMPRESSIONS": {
+      "regressor": "Family of Apps Ad Impressions Index (2022=100)",
+      "r_squared": 0.9947,
+      "slope": 1.206,
+      "intercept": -8.1972,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_2_PRICE_PER_AD": {
+      "regressor": "Price Per Ad Index (2022=100)",
+      "r_squared": 0.4161,
+      "slope": 2.1512,
+      "intercept": -59.814,
+      "gate_status": "MONITOR"
+    },
+    "DRIVER_3_AI_RECOMMENDATION_ENGAGEMENT": {
+      "regressor": "AI Recommendation Engine Feed Dwell / Unconnected Mix (%)",
+      "r_squared": 0.9889,
+      "slope": 2.7425,
+      "intercept": 74.0312,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_4_REALITY_LABS_LOSSES": {
+      "regressor": "Reality Labs Cumulative Annual R&D/CapEx Spend ($B)",
+      "r_squared": 0.9989,
+      "slope": -0.9548,
+      "intercept": 1.6625,
+      "gate_status": "PASS (R2 >= 0.85)"
+    }
+  },
+  "dupont_5point": {
+    "2021": {
+      "tax_burden": 0.8326,
+      "interest_burden": 1.0114,
+      "operating_margin": 0.3965,
+      "asset_turnover": 0.7105,
+      "equity_multiplier": 1.3292,
+      "roe_pct": 31.53
+    },
+    "2022": {
+      "tax_burden": 0.805,
+      "interest_burden": 0.9957,
+      "operating_margin": 0.2482,
+      "asset_turnover": 0.6279,
+      "equity_multiplier": 1.4774,
+      "roe_pct": 18.45
+    },
+    "2023": {
+      "tax_burden": 0.8244,
+      "interest_burden": 1.0145,
+      "operating_margin": 0.3466,
+      "asset_turnover": 0.5875,
+      "equity_multiplier": 1.4991,
+      "roe_pct": 25.53
+    },
+    "2024": {
+      "tax_burden": 0.8825,
+      "interest_burden": 1.0185,
+      "operating_margin": 0.4218,
+      "asset_turnover": 0.5959,
+      "equity_multiplier": 1.5115,
+      "roe_pct": 34.14
+    },
+    "2025": {
+      "tax_burden": 0.7036,
+      "interest_burden": 1.0319,
+      "operating_margin": 0.4144,
+      "asset_turnover": 0.5491,
+      "equity_multiplier": 1.6848,
+      "roe_pct": 27.83
+    }
+  },
+  "altman_z": {
+    "X1_working_capital_to_assets": 0.1827,
+    "X2_retained_earnings_to_assets": 0.3311,
+    "X3_ebit_to_assets": 0.2275,
+    "X4_mkt_equity_to_liabilities": 12.0451,
+    "X5_sales_to_assets": 0.5491,
+    "z_score": 9.21,
+    "status": "SAFE ZONE (Z > 2.99)"
+  },
+  "piotroski_f": {
+    "score": 9,
+    "max_score": 9,
+    "status": "VERY STRONG FINANCIAL QUALITY (8-9)"
+  },
+  "beneish_m": {
+    "score": -3.07,
+    "threshold": -1.78,
+    "status": "NON-MANIPULATOR (M < -1.78, Clean Accounting)"
+  }
+}

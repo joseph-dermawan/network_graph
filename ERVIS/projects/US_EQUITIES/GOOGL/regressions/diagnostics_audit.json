@@ -1,0 +1,44 @@
+{
+  "regressions": {
+    "DRIVER_1_GOOGLE_CLOUD_GROWTH": {
+      "regressor": "Enterprise Cloud Infrastructure Spend Index ($B)",
+      "r_squared": 1.0,
+      "slope": 0.228,
+      "intercept": -1.02,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_2_SEARCH_REVENUE_RESILIENCE": {
+      "regressor": "Global Commercial Search Query Index",
+      "r_squared": 1.0,
+      "slope": 1.657,
+      "intercept": -3.12,
+      "gate_status": "PASS (R2 >= 0.85)"
+    },
+    "DRIVER_3_YOUTUBE_AD_YIELD": {
+      "regressor": "Connected TV & Digital Video Ad Spend ($B)",
+      "r_squared": 1.0,
+      "slope": 0.578,
+      "intercept": 3.22,
+      "gate_status": "PASS (R2 >= 0.85)"
+    }
+  },
+  "dupont": {
+    "tax_burden": 0.8322,
+    "interest_burden": 0.9954,
+    "operating_margin": 0.3961,
+    "asset_turnover": 0.6767,
+    "equity_multiplier": 1.4335,
+    "roe_calculated": 0.3183
+  },
+  "altman_z": {
+    "X1_working_capital_to_assets": 0.1492,
+    "X2_retained_earnings_to_assets": 0.5712,
+    "X3_ebit_to_assets": 0.2445,
+    "X4_mv_equity_to_total_liabilities": 24.1344,
+    "X5_sales_to_assets": 0.6767,
+    "altman_z_score": 16.94,
+    "zone": "GOD-TIER SAFE ZONE (Z >> 2.99)"
+  },
+  "piotroski_f_score": 8,
+  "beneish_m_score": -2.88
+}

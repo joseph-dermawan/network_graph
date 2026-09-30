@@ -1,0 +1,66 @@
+{
+  "ticker": "PLTR",
+  "company_name": "Palantir Technologies Inc.",
+  "currency": "USD",
+  "spot_price_usd": 186.97,
+  "spot_price_pence": null,
+  "shares_outstanding_m": 2300.71,
+  "market_cap_m": 449299.8,
+  "wacc_schedule": {
+    "base_wacc": 0.1236,
+    "terminal_wacc": 0.09,
+    "cost_of_equity": 0.1236,
+    "after_tax_cost_of_debt": 0.0849,
+    "hamada_beta": 1.621,
+    "synthetic_rating": "Caa/CCC",
+    "interest_coverage": 0.0
+  },
+  "dcf_schedule": {
+    "pv_10yr_fcff_m": 11645.1,
+    "pv_terminal_value_m": 30687.8,
+    "enterprise_value_m": 42332.9,
+    "equity_bridge_net_cash_m": 1194.5,
+    "equity_value_m": 43527.4,
+    "dcf_intrinsic_value_usd": 18.92,
+    "dcf_intrinsic_pence": null,
+    "pro_forma_growth_rate": 35.0,
+    "target_ebit_margin": 36.3
+  },
+  "sotp_divisional": {
+    "core_segment_ev_m": 17425.9,
+    "forward_ev_ebitda_multiple": 12.1,
+    "total_sotp_ev_m": 17425.9,
+    "sotp_intrinsic_usd": 8.09,
+    "sotp_intrinsic_pence": null
+  },
+  "monte_carlo_10k": {
+    "trials": 10000,
+    "p10_usd": 14.65,
+    "median_usd": 19.0,
+    "p90_usd": 23.2,
+    "win_rate_percent": 0.0
+  },
+  "financial_health": {
+    "dupont_roe_pct": 9.57,
+    "tax_burden": 1.0,
+    "interest_burden": 0.5,
+    "operating_margin_pct": 31.59,
+    "asset_turnover": 0.5,
+    "equity_multiplier": 1.2,
+    "altman_z_score": 180.74,
+    "altman_zone": "SAFE ZONE"
+  },
+  "ai_capex_audit": {
+    "annual_capex_m": 33.9,
+    "capex_as_pct_rev": 0.76,
+    "fcf_conversion_pct": 148.56,
+    "structural_fragility_evaluation": "AUTO-GENERATED VALUATION PROFILE VIA AGY BRIDGE"
+  },
+  "liquidation_floor_usd": 2.18,
+  "final_triangulation": {
+    "target_price_usd": 16.78,
+    "target_price_pence": null,
+    "upside_percent": -91.03,
+    "rating": "SELL / REBALANCE"
+  }
+}

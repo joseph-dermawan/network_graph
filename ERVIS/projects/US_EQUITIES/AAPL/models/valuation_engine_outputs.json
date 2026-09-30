@@ -1,0 +1,93 @@
+{
+  "ticker": "AAPL",
+  "company_name": "Apple Inc.",
+  "currency": "USD",
+  "spot_price_usd": 337.3,
+  "shares_outstanding_m": 14594.18,
+  "market_cap_m": 4922616.9,
+  "wacc_schedule": {
+    "base_wacc": 0.0872,
+    "terminal_wacc": 0.09,
+    "cost_of_equity": 0.0882,
+    "after_tax_cost_of_debt": 0.0438,
+    "hamada_beta": 0.978,
+    "unlevered_beta": 0.96,
+    "credit_rating": "Aaa / AAA",
+    "default_spread_bps": 59.0
+  },
+  "dcf_schedule": {
+    "pv_10yr_fcff_m": 947936.0,
+    "pv_terminal_value_m": 1288894.3,
+    "enterprise_value_m": 2236830.3,
+    "equity_bridge_net_cash_m": 20563.0,
+    "equity_value_m": 2257393.3,
+    "dcf_intrinsic_value_usd": 154.68,
+    "terminal_moat_roic": 0.28,
+    "terminal_growth_rate": 0.035
+  },
+  "sotp_divisional": {
+    "iphone_ev_m": 1053500.0,
+    "services_ev_m": 1965600.0,
+    "wearables_home_ev_m": 148960.0,
+    "mac_ipad_ev_m": 194880.0,
+    "total_sotp_ev_m": 3362940.0,
+    "sotp_intrinsic_usd": 231.84
+  },
+  "monte_carlo_10k": {
+    "trials": 10000,
+    "p10_usd": 124.89,
+    "median_usd": 142.08,
+    "p90_usd": 161.91,
+    "win_rate_percent": 0.0
+  },
+  "gate_4b_ai_capex_audit": {
+    "ticker": "AAPL",
+    "company_name": "Apple Inc.",
+    "provider_internal": {
+      "revenue_m": 416161.0,
+      "physical_capex_m": 12715.0,
+      "capex_intensity_pct": 3.06,
+      "free_cash_flow_m": 98767.0,
+      "fcf_conversion_pct": 88.59,
+      "internal_economic_roic_pct": 81.21,
+      "shareholder_payout_m": 106132.0,
+      "payout_ratio_of_fcf_pct": 107.46
+    },
+    "customer_ecosystem": {
+      "hyperscaler_total_capex_b": 408.0,
+      "ai_hardware_purchases_b": 15.0,
+      "capex_payout_ratio_pct": 3.68,
+      "customer_incremental_ai_rev_b": 28.0,
+      "customer_ai_gross_profit_b": 20.72,
+      "annual_hardware_depreciation_b": 3.75,
+      "customer_net_ai_operating_income_b": 16.97,
+      "customer_net_roi_pct": 113.13,
+      "customer_payback_years": 0.72,
+      "hardware_useful_life_years": 4.0,
+      "hardware_obsolescence_gap_years": -3.28,
+      "status": "VALUE ACCRETIVE"
+    },
+    "breakeven_monetization": {
+      "target_customer_roic_pct": 20.0,
+      "required_annual_ai_rev_b": 9.12,
+      "actual_realized_ai_rev_b": 28.0,
+      "annual_revenue_gap_deficit_b": -18.88
+    },
+    "apple_edge_architecture": {
+      "private_cloud_compute_pcc": "Apple Silicon (M-series Ultra) server clusters with end-to-end cryptographic privacy",
+      "on_device_inference_pct": "85%+ local inference executed on A17 Pro / A18 / A19 / M4 Neural Engines",
+      "consumer_hardware_financing": "Consumers self-finance the AI inference hardware via $1,000+ iPhone upgrade purchases",
+      "upgrade_catalyst_pool": "1.4 Billion active iPhones, of which ~80% lack 8GB RAM required for Apple Intelligence",
+      "services_attach_synergy": "Apple Intelligence functions as the system-level broker for OpenAI ChatGPT, Gemini, and App Store AI apps, capturing 15-30% monetization fee without infrastructure depreciation burden"
+    }
+  },
+  "liquidation_floor_usd": 0.0,
+  "final_triangulation": {
+    "dcf_weight": 0.6,
+    "sotp_weight": 0.3,
+    "monte_carlo_weight": 0.1,
+    "target_price_usd": 176.57,
+    "upside_percent": -47.65,
+    "rating": "TRIM / TAKE PROFITS"
+  }
+}

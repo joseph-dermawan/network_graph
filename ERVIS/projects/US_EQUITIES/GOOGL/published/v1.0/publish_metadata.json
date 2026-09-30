@@ -1,0 +1,9 @@
+{
+  "published_version": "v1.0",
+  "published_at": "2026-09-21T23:01:52.646375",
+  "notes": "Complete 5-Gate and Gate 4B Institutional Valuation",
+  "clean_deliverables": [
+    "dashboard.html",
+    "model.xlsx"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "ticker": "MSFT",
+  "company_name": "Microsoft Corporation",
+  "currency": "USD",
+  "spot_price_usd": 493.89,
+  "shares_outstanding_m": 7425.55,
+  "market_cap_m": 3667404.9,
+  "wacc_schedule": {
+    "base_wacc": 0.088,
+    "terminal_wacc": 0.09,
+    "cost_of_equity": 0.0889,
+    "after_tax_cost_of_debt": 0.0404,
+    "hamada_beta": 0.996
+  },
+  "dcf_schedule": {
+    "pv_10yr_fcff_m": 1280430.7,
+    "pv_terminal_value_m": 1943436.6,
+    "enterprise_value_m": 3223867.3,
+    "equity_bridge_net_cash_m": 2025.0,
+    "equity_value_m": 3225892.3,
+    "dcf_intrinsic_value_usd": 434.43
+  },
+  "sotp_divisional": {
+    "productivity_and_business_processes_ev_m": 1170400.0,
+    "intelligent_cloud_ev_m": 1970800.0,
+    "more_personal_computing_ev_m": 611200.0,
+    "total_sotp_ev_m": 3752400.0,
+    "sotp_intrinsic_usd": 505.61
+  },
+  "monte_carlo_10k": {
+    "trials": 10000,
+    "p10_usd": 298.6,
+    "median_usd": 353.64,
+    "p90_usd": 419.09,
+    "win_rate_percent": 0.67
+  },
+  "ai_capex_audit": {
+    "msft_own_annual_capex_b": 115.948,
+    "msft_capex_as_pct_revenue": 34.94,
+    "msft_fcf_conversion_pct": 36.62,
+    "ai_gpu_hardware_component_b": 75.37,
+    "incremental_ai_revenue_b": 18.0,
+    "ai_gross_profit_b": 11.7,
+    "gpu_annual_depreciation_b": 21.53,
+    "net_ai_operating_income_gpu_b": -9.83,
+    "net_ai_roi_gpu_percent": -13.0,
+    "net_ai_operating_income_total_b": -21.43,
+    "net_ai_roi_total_percent": -18.5,
+    "payback_period_gpu_years": 6.44,
+    "payback_period_total_years": 9.91,
+    "hardware_useful_life_years": 3.5,
+    "obsolescence_deficit_years": 2.94,
+    "breakeven_ai_revenue_gpu_b": 33.13,
+    "monetization_gap_gpu_b": 15.13,
+    "breakeven_ai_revenue_total_b": 50.97,
+    "monetization_gap_total_b": 32.97,
+    "required_revenue_for_15pct_roic_b": 77.72,
+    "monetization_gap_for_15pct_roic_b": 59.72,
+    "structural_fragility_evaluation": "HIGH AI DEPRECIATION HEADWIND: At $115.9B annual CapEx, GPU amortization ($21.5B - $33.1B/yr) outpaces current AI monetization ($18B rev / $11.7B GP). Payback period (6.4 - 9.9 yrs) exceeds 3.5-yr useful life by 2.9 to 6.4 years."
+  },
+  "liquidation_floor_usd": 0.0,
+  "final_triangulation": {
+    "target_price_usd": 447.71,
+    "upside_percent": -9.35,
+    "rating": "HOLD / ACCUMULATE ON PULLBACK"
+  }
+}

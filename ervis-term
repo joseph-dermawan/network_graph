@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# ERVIS TERMINAL v1.0 LAUNCHER
+# Institutional Financial Terminal Workstation for macOS / Linux
+# ==============================================================================
+
+# Resolve symlinks to find the real physical project directory
+SOURCE="${BASH_SOURCE[0]}"
+while [ -L "$SOURCE" ]; do
+    DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+PROJECT_DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+
+# Absolute canonical fallback
+if [ ! -d "$PROJECT_DIR/ERVIS" ]; then
+    PROJECT_DIR="/Users/worldofmadness/Documents/VS Code/Personal Projects/NetworkGraph"
+fi
+
+PYTHON_EXEC="/Library/Frameworks/Python.framework/Versions/3.10/bin/python3"
+
+# Fallback to system python3 if 3.10 path doesn't exist
+if [ ! -f "$PYTHON_EXEC" ]; then
+    PYTHON_EXEC="$(which python3)"
+fi
+
+# ------------------------------------------------------------------------------
+# Install Helper: Symlinks into ~/.local/bin for global terminal access
+# ------------------------------------------------------------------------------
+if [ "$1" == "--install" ] || [ "$1" == "install" ]; then
+    INSTALL_DIR="$HOME/.local/bin"
+    mkdir -p "$INSTALL_DIR"
+    ln -sf "$PROJECT_DIR/ervis-term" "$INSTALL_DIR/ervis-term"
+    ln -sf "$PROJECT_DIR/ervis-term" "$INSTALL_DIR/ervis"
+    
+    echo "======================================================================"
+    echo " [OK] ERVIS Terminal installed globally!"
+    echo " Symlinked:"
+    echo "   $INSTALL_DIR/ervis-term"
+    echo "   $INSTALL_DIR/ervis"
+    echo ""
+    echo " Ensure '$INSTALL_DIR' is in your PATH. (Already standard in modern zsh)"
+    echo " You can now launch ERVIS from ANY terminal window by typing:"
+    echo "   ervis-term"
+    echo "   ervis"
+    echo "======================================================================"
+    exit 0
+fi
+
+# ------------------------------------------------------------------------------
+# Interactive Vector Chart Launcher (GRPH <GO> in Browser)
+# ------------------------------------------------------------------------------
+if [ "$1" == "--chart" ] || [ "$1" == "--graph" ] || [ "$1" == "-g" ] || [ "$1" == "grph" ] || [ "$1" == "chart" ]; then
+    shift
+    export PYTHONPATH="$PROJECT_DIR:$PYTHONPATH"
+    "$PYTHON_EXEC" -c "
+import sys
+from ERVIS.terminal.chart_generator import open_beta_chart
+target = sys.argv[1].upper() if len(sys.argv) > 1 else 'NVDA'
+chart_path = open_beta_chart(target)
+print(f'[OK] Opened Bloomberg interactive chart: {chart_path}')
+" "$@"
+    exit 0
+fi
+
+# ------------------------------------------------------------------------------
+# Direct CLI Print Mode (for quick inspection without entering TUI)
+# ------------------------------------------------------------------------------
+if [ "$1" == "--print" ] || [ "$1" == "-p" ]; then
+    shift
+    export PYTHONPATH="$PROJECT_DIR:$PYTHONPATH"
+    "$PYTHON_EXEC" -c "
+import sys
+from ERVIS.terminal.renderer import (
+    render_overview, render_fa_screen, render_dcf_screen,
+    render_gate_4b, render_beta_screen, render_top10_matrix_panel,
+    render_portfolio_desk, render_news_screen, render_help
+)
+from ERVIS.terminal.chart_generator import open_beta_chart
+from rich.console import Console
+import shutil
+
+term_w = shutil.get_terminal_size(fallback=(115, 24)).columns
+console = Console(width=max(115, term_w))
+target = sys.argv[1].upper() if len(sys.argv) > 1 else 'RV'
+
+if target in ['RV', 'TOP10', 'MATRIX', 'S&P']:
+    console.print(render_top10_matrix_panel())
+elif target in ['PORT', 'PORTFOLIO', 'WEBULL']:
+    console.print(render_portfolio_desk())
+elif target in ['TOP', 'NEWS', 'BRIEF']:
+    console.print(render_news_screen())
+elif target in ['HELP', '?']:
+    console.print(render_help())
+else:
+    sub = sys.argv[2].upper() if len(sys.argv) > 2 else 'DES'
+    if sub in ['FA', 'FIN', 'FINANCIALS']:
+        console.print(render_fa_screen(target))
+    elif sub in ['DCF', 'DDCF', 'VAL']:
+        console.print(render_dcf_screen(target))
+    elif sub in ['OVML', '4B', 'CAPEX', 'AI']:
+        console.print(render_gate_4b(target))
+    elif sub in ['BETA', 'HETA', 'CAPM']:
+        console.print(render_beta_screen(target))
+    elif sub in ['GRPH', 'CHART', 'GRAPH']:
+        open_beta_chart(target)
+    else:
+        console.print(render_overview(target))
+" "$@"
+    exit 0
+fi
+
+# ------------------------------------------------------------------------------
+# Interactive TUI Workstation Mode (Default)
+# ------------------------------------------------------------------------------
+export PYTHONPATH="$PROJECT_DIR:$PYTHONPATH"
+exec "$PYTHON_EXEC" -m ERVIS.terminal.app "$@"

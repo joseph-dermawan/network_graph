@@ -1,0 +1,26 @@
+{
+  "ticker": "AAPL",
+  "market": "US_EQUITIES",
+  "currency": "USD",
+  "session_start": "2026-09-13T14:27:25.907165",
+  "last_updated": "2026-09-21T23:00:00.000000",
+  "active_rf": 0.0458,
+  "current_gate": "GATE_5_INSTITUTIONAL_DELIVERABLES_COMPLETED",
+  "gates_completed": [
+    "GATE_1_INGESTION_AND_FORENSICS",
+    "GATE_2_OPERATIONAL_REGRESSIONS_AND_HEALTH",
+    "GATE_3_COST_OF_CAPITAL_AND_CREDIT",
+    "GATE_4_VALUATION_ENGINE_AND_SCENARIOS",
+    "GATE_4B_AI_CAPEX_PAYOUT_AND_ROI",
+    "GATE_5_INSTITUTIONAL_DELIVERABLES"
+  ],
+  "valuation_summary": {
+    "spot_price_usd": 337.3,
+    "dcf_intrinsic_usd": 154.68,
+    "sotp_intrinsic_usd": 231.84,
+    "monte_carlo_median_usd": 142.08,
+    "triangulated_target_usd": 176.57,
+    "upside_percent": -47.65,
+    "rating": "TRIM / TAKE PROFITS"
+  }
+}

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERVIS BLOOMBERG - NVDA BETA &lt;GO&gt;</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "SF Mono", "Menlo", "Monaco", "Courier New", monospace !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+        body {
+            background: #000000;
+            color: #ffffff;
+            padding: 12px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        /* Bloomberg Top Header */
+        .bb-header {
+            background: #141414;
+            border: 1px solid #ffb000;
+            padding: 6px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .bb-title {
+            color: #ffb000;
+            font-weight: bold;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+        .bb-status {
+            color: #00ff66;
+            font-weight: bold;
+        }
+        .bb-clock {
+            color: #00e5ff;
+        }
+        /* Bloomberg Command Prompt Bar */
+        .bb-cmd-bar {
+            background: #0d0d0d;
+            border: 1px solid #333333;
+            border-left: 4px solid #ffb000;
+            padding: 6px 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .bb-cmd-label {
+            color: #ffb000;
+            font-weight: bold;
+        }
+        .bb-cmd-text {
+            color: #ffffff;
+            background: #000000;
+            border: 1px solid #333333;
+            padding: 2px 8px;
+            flex-grow: 1;
+        }
+        /* Main Two-Column Terminal Layout */
+        .bb-workspace {
+            display: grid;
+            grid-template-columns: 1.7fr 1.3fr;
+            gap: 10px;
+        }
+        /* Terminal Panels */
+        .bb-panel {
+            background: #0d0d0d;
+            border: 1px solid #333333;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .bb-panel-title {
+            color: #ffb000;
+            font-weight: bold;
+            font-size: 12px;
+            border-bottom: 1px solid #262626;
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        /* Vector Chart Viewport */
+        .chart-box {
+            background: #000000;
+            border: 1px solid #333333;
+            position: relative;
+            height: 480px;
+            width: 100%;
+        }
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+        /* Terminal Toolbar Buttons */
+        .bb-toolbar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        .bb-btn {
+            background: #141414;
+            color: #cccccc;
+            border: 1px solid #333333;
+            padding: 4px 10px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        .bb-btn:hover {
+            background: #222222;
+            color: #ffffff;
+            border-color: #ffb000;
+        }
+        .bb-btn.active {
+            background: #ffb000;
+            color: #000000;
+            font-weight: bold;
+            border-color: #ffb000;
+        }
+        /* Monospace Crosshair Tooltip */
+        .bb-tooltip {
+            position: absolute;
+            background: #0d0d0d;
+            border: 1px solid #ffb000;
+            padding: 6px 10px;
+            font-size: 11px;
+            pointer-events: none;
+            display: none;
+            z-index: 100;
+        }
+        /* Terminal Data Tables */
+        table.bb-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            margin-bottom: 8px;
+        }
+        table.bb-table th {
+            background: #141414;
+            color: #ffb000;
+            text-align: left;
+            padding: 4px 6px;
+            border: 1px solid #222222;
+            font-weight: bold;
+        }
+        table.bb-table td {
+            padding: 4px 6px;
+            border: 1px solid #1a1a1a;
+            color: #ffffff;
+        }
+        table.bb-table tr:hover td {
+            background: #181818;
+        }
+        .text-right { text-align: right; }
+        .text-green { color: #00ff66; }
+        .text-red { color: #ff3333; }
+        .text-yellow { color: #ffb000; }
+        .text-dim { color: #888888; }
+        /* Legend */
+        .bb-legend {
+            display: flex;
+            gap: 16px;
+            margin-top: 6px;
+            font-size: 11px;
+            color: #888888;
+        }
+        .bb-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-indicator {
+            width: 12px;
+            height: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bloomberg Top Bar -->
+    <div class="bb-header">
+        <span class="bb-title">ERVIS BLOOMBERG WORKSTATION :: [SYS.24]</span>
+        <span class="bb-status">ACTIVE: [NVDA US EQUITY]</span>
+        <span class="bb-clock">BENCHMARK: SPX Index (S&P 500) | OBS: 156 WEEKS</span>
+    </div>
+
+    <!-- Bloomberg Command Prompt -->
+    <div class="bb-cmd-bar">
+        <span class="bb-cmd-label">CMD &gt;</span>
+        <span class="bb-cmd-text">NVDA US Equity BETA &lt;GO&gt;</span>
+        <button class="bb-btn" onclick="window.print()">[PRINT SCREEN]</button>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="bb-workspace">
+        
+        <!-- Left: High-Precision Vector Plot -->
+        <div>
+            <div class="bb-panel" style="margin-bottom: 0;">
+                <div class="bb-panel-title">
+                    <span>2D OLS RETURN SCATTER &amp; CAPM FITTED TRAJECTORY</span>
+                    <span class="text-dim">WEEKLY RETURNS (2023 - 2026)</span>
+                </div>
+
+                <div class="bb-toolbar">
+                    <button class="bb-btn active" id="btn-ols" onclick="toggleLayer('ols')">[1] RAW OLS (β=1.38)</button>
+                    <button class="bb-btn active" id="btn-blume" onclick="toggleLayer('blume')">[2] BLUME ADJ (β=1.25)</button>
+                    <button class="bb-btn active" id="btn-band" onclick="toggleLayer('band')">[3] 95% CI BAND</button>
+                    <button class="bb-btn" id="btn-mkt" onclick="toggleLayer('mkt')">[4] BENCHMARK (β=1.00)</button>
+                </div>
+
+                <div class="chart-box" id="chart-container">
+                    <svg id="beta-svg" viewBox="0 0 740 480" preserveAspectRatio="none">
+                        <!-- Grid Lines -->
+                        <g id="grid-lines"></g>
+
+                        <!-- CI Band -->
+                        <polygon id="ci-band" fill="rgba(255, 176, 0, 0.08)" stroke="#443300" stroke-width="1" stroke-dasharray="2,2" />
+
+                        <!-- Regression Lines -->
+                        <line id="line-mkt" stroke="#555555" stroke-width="1.5" stroke-dasharray="3,3" opacity="0" />
+                        <line id="line-blume" stroke="#00ff66" stroke-width="2" stroke-dasharray="4,2" />
+                        <line id="line-ols" stroke="#ffb000" stroke-width="2.5" />
+
+                        <!-- Discrete Scatter Dots -->
+                        <g id="scatter-dots"></g>
+
+                        <!-- Crosshair -->
+                        <g id="crosshair" opacity="0">
+                            <line id="ch-x" stroke="#ffb000" stroke-width="1" stroke-dasharray="2,2" />
+                            <line id="ch-y" stroke="#ffb000" stroke-width="1" stroke-dasharray="2,2" />
+                        </g>
+                    </svg>
+
+                    <div class="bb-tooltip" id="tooltip"></div>
+                </div>
+
+                <div class="bb-legend">
+                    <div class="bb-legend-item">
+                        <div class="legend-indicator" style="background: #ffb000; height: 3px;"></div>
+                        <span>OLS Fitted Line (β = 1.38, α = +14.2%)</span>
+                    </div>
+                    <div class="bb-legend-item">
+                        <div class="legend-indicator" style="background: #00ff66; height: 2px;"></div>
+                        <span>Blume Adjusted Beta (β = 1.25)</span>
+                    </div>
+                    <div class="bb-legend-item">
+                        <span style="color: #00e5ff;">●</span>
+                        <span>Empirical Observations (R² = 0.68)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Bloomberg Alphanumeric Data Panels -->
+        <div>
+            <!-- OLS Statistics -->
+            <div class="bb-panel">
+                <div class="bb-panel-title">OLS ECONOMETRIC REGRESSION SUMMARY</div>
+                <table class="bb-table">
+                    <tr><th>METRIC</th><th class="text-right">VALUE</th><th>INTERPRETATION</th></tr>
+                    <tr><td>Raw Historical Beta (β)</td><td class="text-right text-yellow">1.38</td><td class="text-dim">Empirical OLS Slope</td></tr>
+                    <tr><td>Blume Adjusted Beta</td><td class="text-right text-green">1.25</td><td class="text-dim">0.67*Raw + 0.33 Forward</td></tr>
+                    <tr><td>Jensen's Alpha (Annualized)</td><td class="text-right text-green">+14.20%</td><td class="text-dim">Excess Return vs CAPM</td></tr>
+                    <tr><td>Coefficient of Det (R²)</td><td class="text-right">0.68</td><td class="text-dim">68% Systematic Covariance</td></tr>
+                    <tr><td>Correlation Coefficient (r)</td><td class="text-right">0.825</td><td class="text-dim">Benchmark Co-Movement</td></tr>
+                    <tr><td>Standard Error of Beta SE(β)</td><td class="text-right">±0.080</td><td class="text-dim">Slope Precision Band</td></tr>
+                    <tr><td>t-Statistic (Significance)</td><td class="text-right text-green">17.25</td><td class="text-dim">Significant (p &lt; 0.001)</td></tr>
+                </table>
+            </div>
+
+            <!-- Hamada Decomposition -->
+            <div class="bb-panel">
+                <div class="bb-panel-title">HAMADA CAPITAL STRUCTURE DECOMPOSITION</div>
+                <table class="bb-table">
+                    <tr><th>FACTOR</th><th class="text-right">VALUE</th><th>THEORETICAL DERIVATION</th></tr>
+                    <tr><td>Hamada Levered Beta (β_L)</td><td class="text-right text-yellow">1.000</td><td class="text-dim">Equity Systematic Risk</td></tr>
+                    <tr><td>Unlevered Moat Beta (β_U)</td><td class="text-right text-green">1.240</td><td class="text-dim">Pure Operating Business Risk</td></tr>
+                    <tr><td>Net Debt / Equity (D/E)</td><td class="text-right">+0.0%</td><td class="text-dim">Net Cash Cushion</td></tr>
+                    <tr><td>Risk-Free Rate (Rf)</td><td class="text-right">4.58%</td><td class="text-dim">US 10-Yr Benchmark Yield</td></tr>
+                    <tr><td>Equity Risk Premium (ERP)</td><td class="text-right">4.33%</td><td class="text-dim">Damodaran Implied Premium</td></tr>
+                    <tr><td>Derived Cost of Equity (Ke)</td><td class="text-right text-yellow">10.00%</td><td class="text-dim">Ke = Rf + β_L * ERP</td></tr>
+                    <tr><td>Base WACC Discount Rate</td><td class="text-right text-green">9.00%</td><td class="text-dim">Hurdle Rate for Discrete DCF</td></tr>
+                </table>
+            </div>
+
+            <!-- Risk Classification Memo -->
+            <div class="bb-panel">
+                <div class="bb-panel-title">SYSTEMATIC RISK PROFILE AUDIT</div>
+                <div style="color: #ffffff; margin-bottom: 4px; font-weight: bold;">
+                    CLASSIFICATION: <span class="text-yellow">HIGH-BETA EXPONENTIAL GROWTH (Hardware Tollbooth Extractor)</span>
+                </div>
+                <div style="color: #888888; font-size: 11px;">
+                    Unlevered Asset Moat Beta of <span class="text-green">1.24</span> demonstrates that 
+                    virtually 100% of systematic variance is technological and operational rather than financial leverage.
+                    Terminal Blume mean-reversion establishes fair cost of capital at <span class="text-yellow">9.00%</span>.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const rawBeta = 1.38;
+        const adjBeta = 1.25;
+        const alphaWeekly = 0.2731;
+        const stdError = 0.08;
+        const points = [{"obs": 1, "week": "W-156", "x": 4.44, "y": 4.1, "res": -2.3}, {"obs": 2, "week": "W-155", "x": -0.71, "y": -0.06, "res": 0.64}, {"obs": 3, "week": "W-154", "x": -1.67, "y": -1.43, "res": 0.61}, {"obs": 4, "week": "W-153", "x": 0.2, "y": -0.25, "res": -0.8}, {"obs": 5, "week": "W-152", "x": 0.73, "y": 3.61, "res": 2.34}, {"obs": 6, "week": "W-151", "x": -0.13, "y": -1.35, "res": -1.44}, {"obs": 7, "week": "W-150", "x": -1.71, "y": -3.75, "res": -1.66}, {"obs": 8, "week": "W-149", "x": -3.02, "y": -7.5, "res": -3.6}, {"obs": 9, "week": "W-148", "x": 1.1, "y": 1.55, "res": -0.24}, {"obs": 10, "week": "W-147", "x": -0.68, "y": -0.15, "res": 0.51}, {"obs": 11, "week": "W-146", "x": 2.02, "y": 4.88, "res": 1.82}, {"obs": 12, "week": "W-145", "x": 1.96, "y": 2.76, "res": -0.22}, {"obs": 13, "week": "W-144", "x": 1.61, "y": 6.44, "res": 3.94}, {"obs": 14, "week": "W-143", "x": 0.77, "y": 1.53, "res": 0.2}, {"obs": 15, "week": "W-142", "x": -1.48, "y": -3.39, "res": -1.63}, {"obs": 16, "week": "W-141", "x": 4.11, "y": 7.81, "res": 1.87}, {"obs": 17, "week": "W-140", "x": -2.56, "y": -5.54, "res": -2.29}, {"obs": 18, "week": "W-139", "x": -1.41, "y": 2.49, "res": 4.16}, {"obs": 19, "week": "W-138", "x": 1.08, "y": 1.97, "res": 0.21}, {"obs": 20, "week": "W-137", "x": 1.35, "y": 0.41, "res": -1.72}, {"obs": 21, "week": "W-136", "x": 3.43, "y": 7.86, "res": 2.86}, {"obs": 22, "week": "W-135", "x": 0.44, "y": 1.63, "res": 0.75}, {"obs": 23, "week": "W-134", "x": 1.57, "y": 1.77, "res": -0.67}, {"obs": 24, "week": "W-133", "x": 1.69, "y": 4.73, "res": 2.13}, {"obs": 25, "week": "W-132", "x": -0.96, "y": 1.28, "res": 2.33}, {"obs": 26, "week": "W-131", "x": -1.42, "y": -0.38, "res": 1.31}, {"obs": 27, "week": "W-130", "x": -1.01, "y": 2.07, "res": 3.19}, {"obs": 28, "week": "W-129", "x": 0.66, "y": 0.94, "res": -0.25}, {"obs": 29, "week": "W-128", "x": -2.08, "y": -5.31, "res": -2.71}, {"obs": 30, "week": "W-127", "x": 1.48, "y": 2.35, "res": 0.04}, {"obs": 31, "week": "W-126", "x": -0.79, "y": -2.13, "res": -1.31}, {"obs": 32, "week": "W-125", "x": -0.22, "y": -2.06, "res": -2.03}, {"obs": 33, "week": "W-124", "x": 3.81, "y": 7.63, "res": 2.1}, {"obs": 34, "week": "W-123", "x": -1.01, "y": -0.51, "res": 0.62}, {"obs": 35, "week": "W-122", "x": -3.43, "y": -2.89, "res": 1.57}, {"obs": 36, "week": "W-121", "x": 0.24, "y": 1.84, "res": 1.24}, {"obs": 37, "week": "W-120", "x": 2.34, "y": 3.3, "res": -0.21}, {"obs": 38, "week": "W-119", "x": 1.47, "y": 5.36, "res": 3.06}, {"obs": 39, "week": "W-118", "x": -0.58, "y": -0.76, "res": -0.24}, {"obs": 40, "week": "W-117", "x": 3.06, "y": 4.23, "res": -0.26}, {"obs": 41, "week": "W-116", "x": 0.22, "y": 3.51, "res": 2.93}, {"obs": 42, "week": "W-115", "x": 0.09, "y": -0.14, "res": -0.54}, {"obs": 43, "week": "W-114", "x": -2.07, "y": -2.02, "res": 0.57}, {"obs": 44, "week": "W-113", "x": -2.38, "y": -3.47, "res": -0.46}, {"obs": 45, "week": "W-112", "x": 0.46, "y": 0.2, "res": -0.7}, {"obs": 46, "week": "W-111", "x": -2.67, "y": -0.78, "res": 2.62}, {"obs": 47, "week": "W-110", "x": -0.54, "y": -1.58, "res": -1.1}, {"obs": 48, "week": "W-109", "x": -1.24, "y": -1.65, "res": -0.21}, {"obs": 49, "week": "W-108", "x": 2.75, "y": 7.03, "res": 2.96}, {"obs": 50, "week": "W-107", "x": -0.71, "y": -2.2, "res": -1.49}, {"obs": 51, "week": "W-106", "x": -1.97, "y": -0.57, "res": 1.88}, {"obs": 52, "week": "W-105", "x": 2.48, "y": 6.41, "res": 2.71}, {"obs": 53, "week": "W-104", "x": 1.18, "y": -0.2, "res": -2.1}, {"obs": 54, "week": "W-103", "x": 0.91, "y": 1.42, "res": -0.11}, {"obs": 55, "week": "W-102", "x": -2.21, "y": -0.53, "res": 2.25}, {"obs": 56, "week": "W-101", "x": 0.81, "y": 3.4, "res": 2.01}, {"obs": 57, "week": "W-100", "x": 0.32, "y": 1.17, "res": 0.45}, {"obs": 58, "week": "W-99", "x": -0.65, "y": -2.73, "res": -2.11}, {"obs": 59, "week": "W-98", "x": -1.2, "y": -3.08, "res": -1.7}, {"obs": 60, "week": "W-97", "x": 2.45, "y": 4.68, "res": 1.03}, {"obs": 61, "week": "W-96", "x": -1.2, "y": -1.72, "res": -0.34}, {"obs": 62, "week": "W-95", "x": 0.77, "y": -0.77, "res": -2.11}, {"obs": 63, "week": "W-94", "x": 0.15, "y": 1.02, "res": 0.54}, {"obs": 64, "week": "W-93", "x": -0.61, "y": -0.48, "res": 0.09}, {"obs": 65, "week": "W-92", "x": -0.03, "y": 1.02, "res": 0.78}, {"obs": 66, "week": "W-91", "x": -2.4, "y": -5.49, "res": -2.45}, {"obs": 67, "week": "W-90", "x": -0.93, "y": -0.33, "res": 0.67}, {"obs": 68, "week": "W-89", "x": 0.5, "y": -0.05, "res": -1.0}, {"obs": 69, "week": "W-88", "x": -0.85, "y": -1.69, "res": -0.8}, {"obs": 70, "week": "W-87", "x": 0.29, "y": 1.9, "res": 1.23}, {"obs": 71, "week": "W-86", "x": 1.99, "y": 2.68, "res": -0.33}, {"obs": 72, "week": "W-85", "x": -0.74, "y": -1.83, "res": -1.09}, {"obs": 73, "week": "W-84", "x": -2.06, "y": -0.86, "res": 1.71}, {"obs": 74, "week": "W-83", "x": 1.34, "y": 1.78, "res": -0.35}, {"obs": 75, "week": "W-82", "x": 0.38, "y": 1.36, "res": 0.56}, {"obs": 76, "week": "W-81", "x": 3.38, "y": 6.29, "res": 1.35}, {"obs": 77, "week": "W-80", "x": -0.34, "y": 1.2, "res": 1.4}, {"obs": 78, "week": "W-79", "x": -3.21, "y": -4.26, "res": -0.1}, {"obs": 79, "week": "W-78", "x": -0.46, "y": 0.14, "res": 0.5}, {"obs": 80, "week": "W-77", "x": -2.37, "y": -4.56, "res": -1.56}, {"obs": 81, "week": "W-76", "x": 1.24, "y": 3.85, "res": 1.86}, {"obs": 82, "week": "W-75", "x": 1.88, "y": 1.12, "res": -1.75}, {"obs": 83, "week": "W-74", "x": -0.48, "y": -0.28, "res": 0.11}, {"obs": 84, "week": "W-73", "x": 1.75, "y": 3.0, "res": 0.31}, {"obs": 85, "week": "W-72", "x": -1.41, "y": -2.86, "res": -1.18}, {"obs": 86, "week": "W-71", "x": -2.04, "y": -1.85, "res": 0.69}, {"obs": 87, "week": "W-70", "x": -5.1, "y": -6.72, "res": 0.04}, {"obs": 88, "week": "W-69", "x": -3.49, "y": -7.98, "res": -3.43}, {"obs": 89, "week": "W-68", "x": 1.71, "y": 2.23, "res": -0.4}, {"obs": 90, "week": "W-67", "x": 0.86, "y": 2.03, "res": 0.58}, {"obs": 91, "week": "W-66", "x": 0.05, "y": 1.63, "res": 1.29}, {"obs": 92, "week": "W-65", "x": -1.35, "y": -1.23, "res": 0.36}, {"obs": 93, "week": "W-64", "x": 1.49, "y": 1.28, "res": -1.05}, {"obs": 94, "week": "W-63", "x": -1.78, "y": -0.68, "res": 1.5}, {"obs": 95, "week": "W-62", "x": -0.47, "y": 1.59, "res": 1.96}, {"obs": 96, "week": "W-61", "x": -1.35, "y": 0.31, "res": 1.89}, {"obs": 97, "week": "W-60", "x": -0.2, "y": 0.59, "res": 0.6}, {"obs": 98, "week": "W-59", "x": 0.61, "y": 4.74, "res": 3.62}, {"obs": 99, "week": "W-58", "x": -0.81, "y": 1.67, "res": 2.51}, {"obs": 100, "week": "W-57", "x": 2.06, "y": 6.41, "res": 3.3}, {"obs": 101, "week": "W-56", "x": 2.37, "y": 2.57, "res": -0.97}, {"obs": 102, "week": "W-55", "x": 4.21, "y": 4.44, "res": -1.65}, {"obs": 103, "week": "W-54", "x": -1.77, "y": -0.0, "res": 2.17}, {"obs": 104, "week": "W-53", "x": 0.26, "y": 0.47, "res": -0.16}, {"obs": 105, "week": "W-52", "x": 0.76, "y": 1.29, "res": -0.03}, {"obs": 106, "week": "W-51", "x": 1.76, "y": 2.46, "res": -0.24}, {"obs": 107, "week": "W-50", "x": -2.41, "y": -0.3, "res": 2.75}, {"obs": 108, "week": "W-49", "x": -0.64, "y": 1.46, "res": 2.08}, {"obs": 109, "week": "W-48", "x": -2.25, "y": -7.3, "res": -4.46}, {"obs": 110, "week": "W-47", "x": 0.21, "y": 3.04, "res": 2.49}, {"obs": 111, "week": "W-46", "x": 0.2, "y": -0.38, "res": -0.93}, {"obs": 112, "week": "W-45", "x": 0.58, "y": 1.97, "res": 0.9}, {"obs": 113, "week": "W-44", "x": 2.62, "y": 3.19, "res": -0.7}, {"obs": 114, "week": "W-43", "x": 1.58, "y": 4.12, "res": 1.66}, {"obs": 115, "week": "W-42", "x": -1.42, "y": 1.92, "res": 3.61}, {"obs": 116, "week": "W-41", "x": 1.99, "y": 5.28, "res": 2.26}, {"obs": 117, "week": "W-40", "x": -0.6, "y": -2.29, "res": -1.74}, {"obs": 118, "week": "W-39", "x": -2.72, "y": -4.16, "res": -0.68}, {"obs": 119, "week": "W-38", "x": -0.78, "y": -3.29, "res": -2.49}, {"obs": 120, "week": "W-37", "x": -2.13, "y": -2.89, "res": -0.23}, {"obs": 121, "week": "W-36", "x": 1.76, "y": 5.09, "res": 2.39}, {"obs": 122, "week": "W-35", "x": 3.49, "y": 5.11, "res": 0.02}, {"obs": 123, "week": "W-34", "x": 2.62, "y": 6.01, "res": 2.12}, {"obs": 124, "week": "W-33", "x": 1.53, "y": 1.46, "res": -0.92}, {"obs": 125, "week": "W-32", "x": 2.41, "y": -0.56, "res": -4.15}, {"obs": 126, "week": "W-31", "x": -3.57, "y": -5.38, "res": -0.73}, {"obs": 127, "week": "W-30", "x": 1.91, "y": 3.53, "res": 0.63}, {"obs": 128, "week": "W-29", "x": -0.45, "y": 1.77, "res": 2.12}, {"obs": 129, "week": "W-28", "x": 0.46, "y": 1.68, "res": 0.77}, {"obs": 130, "week": "W-27", "x": -0.89, "y": 1.51, "res": 2.46}, {"obs": 131, "week": "W-26", "x": -0.64, "y": -2.45, "res": -1.84}, {"obs": 132, "week": "W-25", "x": -0.4, "y": -3.11, "res": -2.82}, {"obs": 133, "week": "W-24", "x": 3.95, "y": 5.12, "res": -0.61}, {"obs": 134, "week": "W-23", "x": 1.96, "y": 6.54, "res": 3.57}, {"obs": 135, "week": "W-22", "x": -0.41, "y": -0.54, "res": -0.25}, {"obs": 136, "week": "W-21", "x": -0.89, "y": 0.97, "res": 1.93}, {"obs": 137, "week": "W-20", "x": -1.69, "y": 0.01, "res": 2.07}, {"obs": 138, "week": "W-19", "x": 0.99, "y": 4.18, "res": 2.54}, {"obs": 139, "week": "W-18", "x": 0.48, "y": -1.18, "res": -2.11}, {"obs": 140, "week": "W-17", "x": 2.5, "y": 4.27, "res": 0.55}, {"obs": 141, "week": "W-16", "x": -0.94, "y": 0.66, "res": 1.68}, {"obs": 142, "week": "W-15", "x": -1.84, "y": -1.57, "res": 0.69}, {"obs": 143, "week": "W-14", "x": -1.19, "y": -0.18, "res": 1.19}, {"obs": 144, "week": "W-13", "x": 2.53, "y": 2.67, "res": -1.09}, {"obs": 145, "week": "W-12", "x": 3.53, "y": 3.19, "res": -1.96}, {"obs": 146, "week": "W-11", "x": 1.08, "y": 0.43, "res": -1.33}, {"obs": 147, "week": "W-10", "x": 1.34, "y": 6.98, "res": 4.86}, {"obs": 148, "week": "W-9", "x": 4.73, "y": 2.09, "res": -4.7}, {"obs": 149, "week": "W-8", "x": 2.2, "y": -1.89, "res": -5.19}, {"obs": 150, "week": "W-7", "x": -4.43, "y": -4.45, "res": 1.39}, {"obs": 151, "week": "W-6", "x": -1.19, "y": -2.36, "res": -1.0}, {"obs": 152, "week": "W-5", "x": -0.61, "y": 1.54, "res": 2.11}, {"obs": 153, "week": "W-4", "x": -0.61, "y": 0.48, "res": 1.05}, {"obs": 154, "week": "W-3", "x": -1.53, "y": 0.17, "res": 2.0}, {"obs": 155, "week": "W-2", "x": 1.69, "y": 5.74, "res": 3.14}, {"obs": 156, "week": "W-1", "x": -0.06, "y": 0.57, "res": 0.37}];
+
+        const width = 740;
+        const height = 480;
+        const padding = { top: 25, right: 30, bottom: 40, left: 55 };
+        const plotW = width - padding.left - padding.right;
+        const plotH = height - padding.top - padding.bottom;
+
+        const xMin = -7.0, xMax = 7.0;
+        const yMin = -9.0, yMax = 9.0;
+
+        function scaleX(val) {
+            return padding.left + ((val - xMin) / (xMax - xMin)) * plotW;
+        }
+        function scaleY(val) {
+            return padding.top + ((yMax - val) / (yMax - yMin)) * plotH;
+        }
+
+        // Draw Sharp Grid
+        const gridG = document.getElementById("grid-lines");
+
+        // Vertical lines
+        for (let x = -6; x <= 6; x += 2) {
+            const sx = scaleX(x);
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", sx); line.setAttribute("y1", padding.top);
+            line.setAttribute("x2", sx); line.setAttribute("y2", height - padding.bottom);
+            line.setAttribute("stroke", x === 0 ? "#444444" : "#1a1a1a");
+            line.setAttribute("stroke-width", "1");
+            gridG.appendChild(line);
+
+            const txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            txt.setAttribute("x", sx); txt.setAttribute("y", height - padding.bottom + 16);
+            txt.setAttribute("fill", x === 0 ? "#ffb000" : "#666666");
+            txt.setAttribute("font-size", "10");
+            txt.setAttribute("font-family", "monospace");
+            txt.setAttribute("text-anchor", "middle");
+            txt.textContent = (x > 0 ? "+" : "") + x + "%";
+            gridG.appendChild(txt);
+        }
+
+        // Horizontal lines
+        for (let y = -8; y <= 8; y += 2) {
+            const sy = scaleY(y);
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", padding.left); line.setAttribute("y1", sy);
+            line.setAttribute("x2", width - padding.right); line.setAttribute("y2", sy);
+            line.setAttribute("stroke", y === 0 ? "#444444" : "#1a1a1a");
+            line.setAttribute("stroke-width", "1");
+            gridG.appendChild(line);
+
+            const txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            txt.setAttribute("x", padding.left - 8); txt.setAttribute("y", sy + 3);
+            txt.setAttribute("fill", y === 0 ? "#ffb000" : "#666666");
+            txt.setAttribute("font-size", "10");
+            txt.setAttribute("font-family", "monospace");
+            txt.setAttribute("text-anchor", "end");
+            txt.textContent = (y > 0 ? "+" : "") + y + "%";
+            gridG.appendChild(txt);
+        }
+
+        // Set Regression Lines
+        function setLine(id, slope, intercept) {
+            const l = document.getElementById(id);
+            const x1 = xMin, y1 = intercept + slope * x1;
+            const x2 = xMax, y2 = intercept + slope * x2;
+            l.setAttribute("x1", scaleX(x1)); l.setAttribute("y1", scaleY(y1));
+            l.setAttribute("x2", scaleX(x2)); l.setAttribute("y2", scaleY(y2));
+        }
+        setLine("line-ols", rawBeta, alphaWeekly);
+        setLine("line-blume", adjBeta, alphaWeekly);
+        setLine("line-mkt", 1.0, 0.0);
+
+        // Confidence Band
+        const ciBand = document.getElementById("ci-band");
+        let polyPts = [];
+        for (let x = xMin; x <= xMax; x += 0.5) {
+            const yHat = alphaWeekly + rawBeta * x;
+            const band = 1.96 * stdError * 3.5;
+            polyPts.push(`${scaleX(x)},${scaleY(yHat + band)}`);
+        }
+        for (let x = xMax; x >= xMin; x -= 0.5) {
+            const yHat = alphaWeekly + rawBeta * x;
+            const band = 1.96 * stdError * 3.5;
+            polyPts.push(`${scaleX(x)},${scaleY(yHat - band)}`);
+        }
+        ciBand.setAttribute("points", polyPts.join(" "));
+
+        // Scatter Dots (Solid, clean circles)
+        const dotsG = document.getElementById("scatter-dots");
+        const tooltip = document.getElementById("tooltip");
+        const crosshair = document.getElementById("crosshair");
+        const chX = document.getElementById("ch-x");
+        const chY = document.getElementById("ch-y");
+
+        points.forEach(pt => {
+            const cx = scaleX(pt.x);
+            const cy = scaleY(pt.y);
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("cx", cx);
+            circle.setAttribute("cy", cy);
+            circle.setAttribute("r", "3");
+            circle.setAttribute("fill", "#00e5ff");
+            circle.setAttribute("stroke", "#004466");
+            circle.setAttribute("stroke-width", "1");
+            circle.style.cursor = "crosshair";
+
+            circle.addEventListener("mouseenter", () => {
+                circle.setAttribute("r", "5");
+                circle.setAttribute("fill", "#ffb000");
+
+                tooltip.style.display = "block";
+                tooltip.style.left = (cx + 12) + "px";
+                tooltip.style.top = (cy - 16) + "px";
+                tooltip.innerHTML = `
+                    <div style="color: #ffb000; font-weight: bold; margin-bottom: 2px;">OBS: ${pt.week}</div>
+                    <div>SPX: ${pt.x > 0 ? "+" : ""}${pt.x}%</div>
+                    <div>NVDA: ${pt.y > 0 ? "+" : ""}${pt.y}%</div>
+                    <div style="color: ${pt.res >= 0 ? '#00ff66' : '#ff3333'}">RESIDUAL: ${pt.res > 0 ? "+" : ""}${pt.res}%</div>
+                `;
+            });
+
+            circle.addEventListener("mouseleave", () => {
+                circle.setAttribute("r", "3");
+                circle.setAttribute("fill", "#00e5ff");
+                tooltip.style.display = "none";
+            });
+
+            dotsG.appendChild(circle);
+        });
+
+        // Crosshairs
+        const container = document.getElementById("chart-container");
+        container.addEventListener("mousemove", (e) => {
+            const rect = container.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            if (mouseX >= padding.left && mouseX <= width - padding.right &&
+                mouseY >= padding.top && mouseY <= height - padding.bottom) {
+                crosshair.setAttribute("opacity", "1");
+                chX.setAttribute("x1", padding.left); chX.setAttribute("y1", mouseY);
+                chX.setAttribute("x2", width - padding.right); chX.setAttribute("y2", mouseY);
+                chY.setAttribute("x1", mouseX); chY.setAttribute("y1", padding.top);
+                chY.setAttribute("x2", mouseX); chY.setAttribute("y2", height - padding.bottom);
+            } else {
+                crosshair.setAttribute("opacity", "0");
+            }
+        });
+        container.addEventListener("mouseleave", () => {
+            crosshair.setAttribute("opacity", "0");
+        });
+
+        // Layer toggles
+        const layers = {
+            ols: { el: document.getElementById("line-ols"), btn: document.getElementById("btn-ols"), visible: true },
+            blume: { el: document.getElementById("line-blume"), btn: document.getElementById("btn-blume"), visible: true },
+            band: { el: document.getElementById("ci-band"), btn: document.getElementById("btn-band"), visible: true },
+            mkt: { el: document.getElementById("line-mkt"), btn: document.getElementById("btn-mkt"), visible: false }
+        };
+
+        function toggleLayer(key) {
+            const l = layers[key];
+            l.visible = !l.visible;
+            l.el.setAttribute("opacity", l.visible ? "1" : "0");
+            if (l.visible) {
+                l.btn.classList.add("active");
+            } else {
+                l.btn.classList.remove("active");
+            }
+        }
+    </script>
+</body>
+</html>

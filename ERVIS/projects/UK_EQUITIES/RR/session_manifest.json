@@ -1,0 +1,24 @@
+{
+  "ticker": "RR",
+  "company_name": "Rolls-Royce Holdings plc",
+  "market": "UK_EQUITIES",
+  "currency": "GBP",
+  "session_start": "2026-09-21T20:07:57.729315",
+  "active_rf": 0.0405,
+  "status": "COMPLETED_GATES_1_THROUGH_5",
+  "current_gate": "GATE_5_COMPLETED",
+  "gates_completed": [
+    "GATE_1_INGESTION_AND_FORENSICS",
+    "GATE_2_OPERATIONAL_DRIVERS_AND_HEALTH",
+    "GATE_3_WACC_AND_CREDIT_SYNTHESIS",
+    "GATE_4_VALUATION_ENGINE_AND_SCENARIOS",
+    "GATE_5_PITCH_MEMO_AND_DELIVERABLES"
+  ],
+  "spot_price_pence": 1490.7,
+  "final_intrinsic_value_dcf_pence": 692.3,
+  "final_intrinsic_value_sotp_pence": 1261.6,
+  "final_target_price_pence": 860.4,
+  "final_rating": "SELL / REBALANCE (-42.3%)",
+  "tactical_entry_zone_pence": "1,275p - 1,295p (200-SMA)",
+  "gsheet_url": ""
+}
