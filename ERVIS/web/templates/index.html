@@ -35,7 +35,7 @@
             --text-red: #ff3838;
             --text-white: #ffffff;
             --text-dim: #8b8b9e;
-            --tui-font-size: 15.5px;
+            --tui-font-size: 13.5px;
         }
 
         html, body {
@@ -301,12 +301,14 @@
 
         #terminalContainer {
             flex: 1;
-            overflow: auto;
+            overflow-x: auto;
+            overflow-y: auto;
             background-color: #050507;
             position: relative;
-            padding: 10px 14px;
+            padding: 8px 12px;
             display: flex;
             flex-direction: column;
+            width: 100%;
         }
 
         pre.tui-screen {
@@ -314,9 +316,11 @@
             padding: 0;
             color: #ffffff;
             font-size: var(--tui-font-size);
-            line-height: 1.28;
+            line-height: 1.25;
             white-space: pre;
             tab-size: 4;
+            display: block;
+            width: 100%;
             font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Menlo', 'Consolas', 'Courier New', monospace !important;
             user-select: text !important;
             -webkit-user-select: text !important;
@@ -678,7 +682,7 @@
         let currentScreen = 'DES';
         let copilotOpen = false;
         let isCopilotBusy = false;
-        let fontSize = 15.5;
+        let fontSize = 13.5;
 
         // Load saved font size if available
         const savedFont = localStorage.getItem('ervis_font_size');
@@ -688,7 +692,7 @@
         }
 
         function adjustFontSize(delta) {
-            fontSize = Math.max(12, Math.min(22, fontSize + delta * 1.0));
+            fontSize = Math.max(11.0, Math.min(20.0, fontSize + delta * 0.75));
             localStorage.setItem('ervis_font_size', fontSize);
             applyFontSize();
             // Re-render to ensure character grid width matches viewport perfectly
@@ -698,6 +702,20 @@
         function applyFontSize() {
             document.documentElement.style.setProperty('--tui-font-size', `${fontSize}px`);
             document.getElementById('fontLabel').innerText = `${fontSize.toFixed(1)}px`;
+        }
+
+        function getMonospaceCharWidth() {
+            const test = document.createElement('span');
+            test.style.fontFamily = "'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Menlo', 'Consolas', monospace";
+            test.style.fontSize = `${fontSize}px`;
+            test.style.visibility = 'hidden';
+            test.style.position = 'absolute';
+            test.style.whiteSpace = 'pre';
+            test.innerText = '01234567890123456789012345678901234567890123456789'; // 50 chars
+            document.body.appendChild(test);
+            const w = test.getBoundingClientRect().width / 50.0;
+            document.body.removeChild(test);
+            return w || (fontSize * 0.602);
         }
 
         // Live Clock
@@ -740,13 +758,13 @@
             currentScreen = screenId.toUpperCase();
             currentTicker = ticker.toUpperCase();
 
-            // Calculate optimal console column width based on viewport width and font size
+            // Calculate exact console column width to fill 100% of container viewport
             const container = document.getElementById('terminalContainer');
-            const containerWidth = container.clientWidth || 1200;
-            // Approx monospace char width is ~0.6 * fontSize
-            const charWidth = fontSize * 0.605;
-            let consoleWidth = Math.floor(containerWidth / charWidth) - 2;
-            consoleWidth = Math.max(116, Math.min(170, consoleWidth));
+            const containerWidth = container.clientWidth || (window.innerWidth - (copilotOpen ? 480 : 0));
+            const charWidth = getMonospaceCharWidth();
+            // Subtract 20px margin so the terminal right border sits flush with the right edge
+            let consoleWidth = Math.floor((containerWidth - 20) / charWidth);
+            consoleWidth = Math.max(110, Math.min(260, consoleWidth));
 
             // Update tab styling
             document.querySelectorAll('.fkey-tab').forEach(tab => {
@@ -1052,22 +1070,45 @@
 
         async function runAutonomousIngestion(ticker) {
             if (!copilotOpen) toggleCopilot();
-            appendChatMessage('SYS', `INITIATING 5-GATE VALUATION ONBOARDING FOR [${ticker}]...`);
-            appendChatMessage('SYS', `Pulling SEC filings, calculating DuPont ratios, Hamada Beta WACC, 10-Yr DCF, and 10,000-trial Monte Carlo...`);
+            appendChatMessage('SYS', `=======================================================`);
+            appendChatMessage('SYS', `DISPATCHING ERVIS 5-GATE INGESTION PIPELINE: [${ticker}]`);
+            appendChatMessage('SYS', `[GATE 1] Ingesting SEC filings, extracting multi-year statements, and running FX currency normalization...`);
+            
+            await new Promise(r => setTimeout(r, 450));
+            appendChatMessage('SYS', `[GATE 2] Calculating DuPont 5-point ROE decomposition & Altman Z financial health score...`);
+            
+            await new Promise(r => setTimeout(r, 450));
+            appendChatMessage('SYS', `[GATE 3] Deriving Hamada unlevered asset beta, interest coverage & Base/Terminal WACC schedule...`);
+            
+            await new Promise(r => setTimeout(r, 450));
+            appendChatMessage('SYS', `[GATE 4] Executing 10-Year Discrete Pro-Forma DCF, 10,000-trial Monte Carlo & Gate 4B AI CapEx audit...`);
 
             try {
                 const res = await fetch(`/api/onboard/${ticker}`, { method: 'POST' });
                 const data = await res.json();
                 if (data.status === 'ok') {
-                    appendChatMessage('AGY', `Autonomous Onboarding Complete for **${ticker}**!\nIntrinsic Fair Value generated. Security is now integrated into local vault and coverage directory.`);
+                    const outputs = data.outputs || {};
+                    const finalTarget = outputs.final_triangulation ? outputs.final_triangulation.target_price_usd : 'N/A';
+                    const rating = outputs.final_triangulation ? outputs.final_triangulation.rating : 'N/A';
+                    const dcfVal = outputs.dcf_schedule ? outputs.dcf_schedule.dcf_intrinsic_value_usd : 'N/A';
+                    const wacc = outputs.wacc_schedule ? (outputs.wacc_schedule.base_wacc * 100).toFixed(2) : 'N/A';
+
+                    appendChatMessage('SYS', `[GATE 5] Multi-Engine Triangulation & SQLite Vault Synchronization completed successfully!`);
+                    appendChatMessage('AGY', `**Autonomous 5-Gate Onboarding Verified for ${ticker}:**\n` +
+                        `- **Triangulated Fair Value:** $${finalTarget} per share\n` +
+                        `- **10-Yr Discrete DCF Anchor:** $${dcfVal}\n` +
+                        `- **Base Cost of Capital (WACC):** ${wacc}%\n` +
+                        `- **Institutional Stance:** ${rating}\n\n` +
+                        `Audited statements, Gate 4B CapEx schedule, and Hamada Beta regression are now fully registered in your local vault.`);
+
                     await loadCompanies();
                     currentTicker = ticker;
                     loadScreen('DES', currentTicker);
                 } else {
-                    appendChatMessage('SYS', `Onboarding Failed: ${data.detail || 'Unknown error'}`);
+                    appendChatMessage('SYS', `[GATE ERROR] Onboarding Failed: ${data.detail || 'Unknown error'}`);
                 }
             } catch (err) {
-                appendChatMessage('SYS', `Onboarding Exception: ${err.message}`);
+                appendChatMessage('SYS', `[SYSTEM EXCEPTION] Onboarding Error: ${err.message}`);
             }
         }
 

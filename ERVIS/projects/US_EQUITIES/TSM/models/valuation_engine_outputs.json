@@ -1,106 +1,66 @@
 {
   "ticker": "TSM",
-  "company_name": "Taiwan Semiconductor Manufacturing Company Limited",
+  "company_name": "Taiwan Semiconductor Manufactur",
   "currency": "USD",
-  "spot_price_usd": 440.13,
-  "shares_outstanding_m": 5186.474,
-  "market_cap_m": 2282722.8,
-  "forensic_normalization": {
-    "reported_ebit_0_m": 60881.0,
-    "normalized_ebit_0_m": 62698.2,
-    "normalized_nopat_0_m": 52666.5,
-    "capitalized_rd_asset_m": 19466.4,
-    "synthetic_lease_debt_m": 1050.0,
-    "total_adjusted_debt_m": 34630.0,
-    "cash_and_st_investments_m": 113430.0,
-    "true_net_cash_m": 78800.0
-  },
+  "spot_price_usd": 456.94,
+  "spot_price_pence": null,
+  "shares_outstanding_m": 5186.47,
+  "market_cap_m": 2369907.3,
   "wacc_schedule": {
-    "base_wacc": 0.0979,
+    "base_wacc": 0.104,
     "terminal_wacc": 0.095,
-    "cost_of_equity": 0.0988,
-    "after_tax_cost_of_debt": 0.0448,
-    "hamada_beta": 1.0634,
-    "taiwan_crp": 0.0065,
-    "credit_rating": "Aa3 / AA-"
+    "cost_of_equity": 0.1049,
+    "after_tax_cost_of_debt": 0.0412,
+    "hamada_beta": 1.247,
+    "synthetic_rating": "Aaa/AAA",
+    "interest_coverage": 99.9
   },
   "dcf_schedule": {
-    "pv_10yr_fcff_m": 504882.7,
-    "pv_terminal_value_m": 790019.3,
-    "enterprise_value_m": 1294902.0,
-    "true_net_cash_bridge_m": 78800.0,
-    "equity_value_m": 1373702.0,
-    "dcf_intrinsic_value_per_adr_usd": 264.86
+    "pv_10yr_fcff_m": 807456.4,
+    "pv_terminal_value_m": 1461896.5,
+    "enterprise_value_m": 2269352.9,
+    "equity_bridge_net_cash_m": 53486.4,
+    "equity_value_m": 2322839.3,
+    "dcf_intrinsic_value_usd": 447.86,
+    "dcf_intrinsic_pence": null,
+    "pro_forma_growth_rate": 35.0,
+    "target_ebit_margin": 53.4
   },
   "sotp_divisional": {
-    "advanced_nodes_ev_m": 904800.0,
-    "finfet_nodes_ev_m": 691920.0,
-    "mature_specialty_ev_m": 193600.0,
-    "total_sotp_ev_m": 1790320.0,
-    "sotp_intrinsic_per_adr_usd": 360.38
+    "core_segment_ev_m": 1186634.2,
+    "forward_ev_ebitda_multiple": 14.4,
+    "total_sotp_ev_m": 1186634.2,
+    "sotp_intrinsic_usd": 239.11,
+    "sotp_intrinsic_pence": null
   },
   "monte_carlo_10k": {
     "trials": 10000,
-    "p10_usd": 191.9,
-    "median_usd": 231.98,
-    "p90_usd": 280.72,
-    "win_rate_percent": 0.0
+    "p10_usd": 346.83,
+    "median_usd": 449.77,
+    "p90_usd": 549.28,
+    "win_rate_percent": 46.2
   },
-  "liquidation_haircut_floor": {
-    "recoverable_assets_m": 166250.3,
-    "total_liabilities_m": 92800.0,
-    "liquidation_floor_per_adr_usd": 14.16
+  "financial_health": {
+    "dupont_roe_pct": 31.7,
+    "tax_burden": 0.88,
+    "interest_burden": 0.99,
+    "operating_margin_pct": 50.83,
+    "asset_turnover": 0.48,
+    "equity_multiplier": 1.48,
+    "altman_z_score": 19.67,
+    "altman_zone": "SAFE ZONE"
   },
-  "gate_4b_ai_capex": {
-    "tsmc_annual_fab_capex_b": 40.33,
-    "tsmc_capex_intensity_pct": 33.66,
-    "tsmc_fcf_conversion_pct": 43.63,
-    "hyperscaler_total_capex_b": 408.0,
-    "tsmc_ai_silicon_rev_b": 26.5,
-    "tsmc_capex_payout_ratio_pct": 6.5,
-    "tool_depreciation_cycle_years": 5.0,
-    "annual_new_tool_depreciation_b": 8.07,
-    "fab_economic_roic_pct": 36.88,
-    "customer_payback_sensitivity": [
-      {
-        "scenario": "Base Case (Unchanged)",
-        "hyperscaler_capex_b": 408.0,
-        "tsm_utilization_pct": 100.0,
-        "tsm_gross_margin_pct": 59.8,
-        "tsm_eps_usd": 13.39,
-        "impact": "Baseline full capacity"
-      },
-      {
-        "scenario": "Mild Digestion (-10% CapEx)",
-        "hyperscaler_capex_b": 367.2,
-        "tsm_utilization_pct": 92.0,
-        "tsm_gross_margin_pct": 56.5,
-        "tsm_eps_usd": 11.95,
-        "impact": "-10.8% EPS drag; CoWoS remains 100% booked"
-      },
-      {
-        "scenario": "Severe Pause (-20% CapEx)",
-        "hyperscaler_capex_b": 326.4,
-        "tsm_utilization_pct": 84.0,
-        "tsm_gross_margin_pct": 52.8,
-        "tsm_eps_usd": 10.15,
-        "impact": "-24.2% EPS drag; fab depreciation creates fixed cost drag"
-      },
-      {
-        "scenario": "Cyclical Winter (-30% CapEx)",
-        "hyperscaler_capex_b": 285.6,
-        "tsm_utilization_pct": 76.0,
-        "tsm_gross_margin_pct": 48.2,
-        "tsm_eps_usd": 8.2,
-        "impact": "-38.8% EPS drag; gross margin falls below 50% threshold"
-      }
-    ],
-    "choke_point_evaluation": "ABSOLUTE MONOPOLY: TSMC controls 100% of sub-4nm AI accelerators and CoWoS advanced packaging. Even if hyperscalers slow hardware builds, TSMC's multi-customer diversification (Apple, AMD, Broadcom, Qualcomm, MediaTek) insulates fab utilization significantly better than pure-play GPU designers."
+  "ai_capex_audit": {
+    "annual_capex_m": 40276.3,
+    "capex_as_pct_rev": 33.67,
+    "fcf_conversion_pct": 51.26,
+    "structural_fragility_evaluation": "CRITICAL SEMICONDUCTOR TOLLBOOTH (DURABLE CASH SPREAD)"
   },
+  "liquidation_floor_usd": 11.77,
   "final_triangulation": {
-    "target_price_usd": 290.23,
-    "spot_price_usd": 440.13,
-    "upside_percent": -34.06,
+    "target_price_usd": 406.68,
+    "target_price_pence": null,
+    "upside_percent": -11.0,
     "rating": "TRIM / TAKE PROFITS"
   }
 }

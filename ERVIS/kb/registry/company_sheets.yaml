@@ -147,16 +147,17 @@ COMPANIES:
     last_published_version: draft_v1.0
     last_published_at: '2026-09-21T23:02:00Z'
   TSM:
-    company_name: Taiwan Semiconductor Manufacturing Company Limited
+    company_name: Taiwan Semiconductor Manufactur
     market: US_EQUITIES
     currency: USD
     gsheet_id: ''
     gsheet_url: ''
+    drive_folder_id: ''
     current_status: VALUATION_COMPLETED
-    last_intrinsic_value: 290.23
-    published_rating: TRIM / TAKE PROFITS (-34.1%)
-    last_published_version: draft_v1.0
-    last_published_at: '2026-09-21T23:03:00Z'
+    last_published_version: v1.0-agy
+    last_published_at: '2026-09-30T14:34:13.376106'
+    last_intrinsic_value: 406.68
+    published_rating: TRIM / TAKE PROFITS (-11.0%)
   AVGO:
     company_name: Broadcom Inc.
     market: US_EQUITIES

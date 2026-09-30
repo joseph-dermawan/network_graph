@@ -141,8 +141,8 @@ async def render_terminal_screen(screen: str, ticker: str, width: int = 132):
     norm_ticker = resolve_ticker(ticker)
     screen_upper = screen.upper()
     
-    # Restrict width between 110 and 180 to guarantee clean tabular alignment
-    w = max(110, min(180, width))
+    # Allow width up to 260 characters to fill 100% of widescreen displays
+    w = max(110, min(260, width))
     console = Console(record=True, width=w, force_terminal=True)
     
     if screen_upper in ["DES", "OVW"]:
