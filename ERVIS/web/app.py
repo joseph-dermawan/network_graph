@@ -37,10 +37,49 @@ from ERVIS.terminal.renderer import (
     render_help,
     render_unknown_ticker
 )
+import asyncio
+from datetime import datetime
+from contextlib import asynccontextmanager
 from rich.console import Console
 from ERVIS.terminal.agy_bridge import get_agy_bridge
 
-app = FastAPI(title="ERVIS Institutional Web Workstation", version="2.0")
+scheduler_state = {
+    "status": "RUNNING",
+    "interval_seconds": 900,
+    "last_sync": datetime.now().isoformat(),
+    "last_sync_display": datetime.now().strftime("%H:%M:%S SGT"),
+    "sync_count": 1
+}
+
+async def background_scheduler():
+    # Wait 30 seconds after server boot before running the first scheduled sync
+    await asyncio.sleep(30)
+    while True:
+        try:
+            from ERVIS.models.refresh_universe import refresh_all_data
+            print("[AUTO-SCHEDULER] Periodic 15-minute universe synchronization starting...")
+            await asyncio.to_thread(refresh_all_data)
+            now = datetime.now()
+            scheduler_state["last_sync"] = now.isoformat()
+            scheduler_state["last_sync_display"] = now.strftime("%H:%M:%S SGT")
+            scheduler_state["sync_count"] += 1
+            print(f"[AUTO-SCHEDULER] Universe synchronization complete at {scheduler_state['last_sync_display']}.")
+        except Exception as e:
+            print(f"[AUTO-SCHEDULER ERROR] {e}")
+        
+        await asyncio.sleep(900)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    task = asyncio.create_task(background_scheduler())
+    yield
+    task.cancel()
+    try:
+        await task
+    except asyncio.CancelledError:
+        pass
+
+app = FastAPI(title="ERVIS Institutional Web Workstation", version="2.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -136,12 +175,24 @@ async def onboard_security(ticker: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/api/scheduler/status")
+async def get_scheduler_status():
+    return scheduler_state
+
 @app.post("/api/refresh")
 async def refresh_universe_endpoint():
     from ERVIS.models.refresh_universe import refresh_all_data
     try:
-        report = refresh_all_data()
-        return {"status": "ok", "report": report}
+        report = await asyncio.to_thread(refresh_all_data)
+        now = datetime.now()
+        scheduler_state["last_sync"] = now.isoformat()
+        scheduler_state["last_sync_display"] = now.strftime("%H:%M:%S SGT")
+        scheduler_state["sync_count"] += 1
+        return {
+            "status": "ok",
+            "last_sync": scheduler_state["last_sync_display"],
+            "report": report
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

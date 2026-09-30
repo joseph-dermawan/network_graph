@@ -674,6 +674,7 @@
             <span>[F10] AGY</span>
         </div>
         <div class="footer-right">
+            <span>FEED: <strong style="color: var(--text-green);" id="schedulerStatusLabel">AUTO-SYNC (15M)</strong></span>
             <span>TERMINAL: <strong class="status-online">ONLINE (PORT 8000)</strong></span>
             <span>AI ENGINE: <strong style="color: var(--text-cyan);">AGY LOCAL</strong></span>
         </div>
@@ -734,6 +735,19 @@
         }
         setInterval(updateClock, 1000);
         updateClock();
+
+        async function updateSchedulerStatus() {
+            try {
+                const res = await fetch('/api/scheduler/status');
+                const data = await res.json();
+                const el = document.getElementById('schedulerStatusLabel');
+                if (el && data.last_sync_display) {
+                    el.innerText = `AUTO-SYNC (${data.last_sync_display.substring(0, 5)})`;
+                }
+            } catch (e) {}
+        }
+        setInterval(updateSchedulerStatus, 30000);
+        updateSchedulerStatus();
 
         // Populate covered tickers dropdown
         async function loadCompanies() {
