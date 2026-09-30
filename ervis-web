@@ -43,5 +43,5 @@ echo "==========================================================================
     fi
 ) &
 
-# Run FastAPI backend via Uvicorn
-exec "$PYTHON_EXEC" -m uvicorn ERVIS.web.app:app --host 127.0.0.1 --port "$PORT" --log-level warning
+# Run FastAPI backend via Uvicorn with auto-reload
+exec "$PYTHON_EXEC" -m uvicorn ERVIS.web.app:app --host 127.0.0.1 --port "$PORT" --reload --log-level warning

@@ -25,6 +25,19 @@ from ERVIS.terminal.data_loader import (
     get_covered_companies,
     get_all_active_tickers
 )
+from ERVIS.terminal.renderer import (
+    render_overview,
+    render_fa_screen,
+    render_dcf_screen,
+    render_beta_screen,
+    render_gate_4b,
+    render_top10_matrix_panel,
+    render_portfolio_desk,
+    render_news_screen,
+    render_help,
+    render_unknown_ticker
+)
+from rich.console import Console
 from ERVIS.terminal.agy_bridge import get_agy_bridge
 
 app = FastAPI(title="ERVIS Institutional Web Workstation", version="2.0")
@@ -122,6 +135,55 @@ async def onboard_security(ticker: str):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/render/{screen}/{ticker}")
+async def render_terminal_screen(screen: str, ticker: str, width: int = 132):
+    norm_ticker = resolve_ticker(ticker)
+    screen_upper = screen.upper()
+    
+    # Restrict width between 110 and 180 to guarantee clean tabular alignment
+    w = max(110, min(180, width))
+    console = Console(record=True, width=w, force_terminal=True)
+    
+    if screen_upper in ["DES", "OVW"]:
+        panel = render_overview(norm_ticker)
+    elif screen_upper == "FA":
+        panel = render_fa_screen(norm_ticker)
+    elif screen_upper in ["DCF", "VAL"]:
+        panel = render_dcf_screen(norm_ticker)
+    elif screen_upper in ["BETA", "CAPM", "HETA"]:
+        panel = render_beta_screen(norm_ticker)
+    elif screen_upper in ["OVML", "4B"]:
+        panel = render_gate_4b(norm_ticker)
+    elif screen_upper in ["RV", "TOP10"]:
+        panel = render_top10_matrix_panel()
+    elif screen_upper == "PORT":
+        panel = render_portfolio_desk()
+    elif screen_upper in ["TOP", "NEWS"]:
+        panel = render_news_screen()
+    elif screen_upper == "HELP":
+        panel = render_help()
+    else:
+        panel = render_overview(norm_ticker)
+        
+    console.print(panel)
+    html_snippet = console.export_html(inline_styles=True, code_format="{code}")
+    
+    # Basic company stats for synchronized header display
+    comp_data = load_company_data(norm_ticker) or {}
+    
+    return {
+        "screen": screen_upper,
+        "ticker": norm_ticker,
+        "html": html_snippet,
+        "stats": {
+            "name": comp_data.get("company_name", norm_ticker),
+            "spot": comp_data.get("spot_price"),
+            "target": comp_data.get("target_price"),
+            "rating": comp_data.get("rating", "N/A"),
+            "currency": comp_data.get("currency", "USD"),
+        }
+    }
 
 if __name__ == "__main__":
     import uvicorn
