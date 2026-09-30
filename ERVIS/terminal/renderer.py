@@ -167,7 +167,7 @@ def render_overview(ticker: str, theme: str = "amber") -> Panel:
     bridge_table = Table(title="[bold yellow]VALUATION ENGINE TRIANGULATION BRIDGE[/bold yellow]", border_style="dim white", expand=True)
     bridge_table.add_column("ENGINE / METHODOLOGY", style="bold cyan")
     bridge_table.add_column("INTRINSIC VALUE", style="white")
-    bridge_table.add_column("GAP vs SPOT", style="white")
+    bridge_table.add_column("GAP / AUDIT METRIC", style="white")
 
     dcf = data.get("dcf_value")
     dcf_gap = f"{((dcf - spot) / spot)*100.0:+.1f}%" if spot and dcf else "N/A"
@@ -181,6 +181,33 @@ def render_overview(ticker: str, theme: str = "amber") -> Panel:
     mc_gap = f"{((mc - spot) / spot)*100.0:+.1f}%" if spot and mc else "N/A"
     win_rate = f" (Win: {data.get('mc_win_rate', 0):.1f}%)" if data.get("mc_win_rate") is not None else ""
     bridge_table.add_row("10,000-Trial Monte Carlo Median", format_currency(mc, curr) + win_rate, mc_gap)
+
+    raw = data.get("raw_json", {})
+    liq = raw.get("liquidation_floor_usd") or (raw.get("liquidation_floor_pence", 0) / 100.0 if raw.get("liquidation_floor_pence") else None)
+    if liq:
+        liq_gap = f"{((liq - spot) / spot)*100.0:+.1f}%" if spot and liq else "N/A"
+        bridge_table.add_row("Net Asset Liquidation Floor", format_currency(liq, curr), liq_gap)
+
+    ai_audit = raw.get("ai_capex_audit", {})
+    if ai_audit:
+        payback = ai_audit.get("payback_period_gpu_years") or ai_audit.get("estimated_customer_payback_years")
+        fcf_conv = ai_audit.get("fcf_conversion_pct") or ai_audit.get("nvda_fcf_conversion_pct")
+        if payback:
+            p_str = f"{payback} Yrs" if isinstance(payback, (int, float)) else str(payback)
+            bridge_table.add_row("Gate 4B AI CapEx Payback", p_str, "Useful: 3.5 Yrs")
+        elif fcf_conv:
+            bridge_table.add_row("Gate 4B FCF Conversion", f"{fcf_conv:.1f}%", "Cash Accretive")
+
+    fin_health = raw.get("financial_health", {})
+    if fin_health:
+        z = fin_health.get("altman_z_score")
+        zone = fin_health.get("altman_zone", "SAFE")
+        if z is not None:
+            z_style = GREEN_STYLE if "SAFE" in zone else (AMBER_STYLE if "GREY" in zone else RED_STYLE)
+            bridge_table.add_row("Altman Z-Score (Gate 1)", f"[{z_style}]{z:.2f} [{zone}][/{z_style}]", "Credit Health")
+        roe = fin_health.get("dupont_roe_pct")
+        if roe is not None:
+            bridge_table.add_row("DuPont 5-Stage ROE", f"{roe:.1f}%", f"OPM: {fin_health.get('operating_margin_pct', 0):.1f}%")
 
     # Bottom notes
     gap_str = f"{gap:+.1f}%" if gap is not None else "N/A"
