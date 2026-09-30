@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERVIS :: Bloomberg Institutional Web Workstation</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                        serif: ['Newsreader', 'Georgia', 'serif']
+                    },
+                    colors: {
+                        bbAmber: '#ffb000',
+                        bbCyan: '#00e5ff',
+                        bbGreen: '#00ff66',
+                        bbRed: '#ff3333',
+                        bbDark: '#0a0a0c',
+                        bbCard: '#111215',
+                        bbBorder: '#27272a'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #08080a;
+            color: #d4d4d8;
+            font-family: 'JetBrains Mono', monospace;
+            user-select: text; /* Native mouse selection enabled! */
+        }
+        ::selection {
+            background-color: #f59e0b;
+            color: #000000;
+        }
+        .active-tab {
+            border-bottom: 2px solid #ffb000;
+            color: #ffb000 !important;
+            background-color: #18181b;
+        }
+        /* Custom sleek scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d0e12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffb000;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-xs antialiased flex flex-col h-screen overflow-hidden">
+
+    <!-- Top Institutional Header -->
+    <header class="border-b border-bbBorder bg-[#0e0f13] flex-shrink-0 px-4 py-2 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <span class="px-2 py-0.5 border border-bbAmber/60 bg-amber-950/30 text-bbAmber font-bold text-[11px] tracking-wider">
+                ERVIS WORKSTATION v2.0
+            </span>
+            <span class="text-neutral-600">|</span>
+            <div class="flex items-center space-x-2">
+                <span class="text-neutral-400 font-bold" id="headerActiveTicker">ACTIVE: [NVDA]</span>
+                <span class="text-neutral-500 font-serif italic text-sm" id="headerCompanyName">NVIDIA Corporation</span>
+                <span class="px-1.5 py-0.2 border border-neutral-700 bg-neutral-900 text-[10px] text-bbCyan" id="headerMarketTag">US EQUITIES</span>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <div class="text-neutral-400 font-mono text-[11px] flex items-center space-x-3">
+                <span>SPOT: <strong class="text-white" id="headerSpotPrice">$224.23</strong></span>
+                <span>TARGET: <strong class="text-bbGreen" id="headerTargetPrice">$125.93</strong></span>
+                <span>RATING: <span class="px-1 py-0.5 bg-neutral-800 text-bbRed font-bold text-[10px]" id="headerRating">TRIM / TAKE PROFITS</span></span>
+            </div>
+            <span class="text-neutral-600">|</span>
+            <span class="text-bbCyan text-[11px]" id="liveClock">2026-09-30 13:30:00 SGT</span>
+            <button onclick="toggleCopilot()" class="px-2.5 py-1 bg-amber-500/10 border border-bbAmber text-bbAmber hover:bg-bbAmber hover:text-black transition font-bold text-[10px] flex items-center space-x-1">
+                <span>⚡ AGY COPILOT [F10]</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Bloomberg Command Line & Navigation Ribbon -->
+    <nav class="border-b border-bbBorder bg-[#121318] flex-shrink-0 px-4 py-1.5 flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center space-x-2 flex-grow max-w-xl">
+            <span class="text-bbAmber font-bold text-xs">CMD &gt;</span>
+            <div class="relative flex-grow">
+                <input type="text" id="cmdInput" placeholder="Type ticker/cmd (e.g. MSFT DCF, INGEST ARM, or ask AGY)..." 
+                       class="w-full bg-[#08080a] border border-bbBorder text-white px-3 py-1 text-xs focus:outline-none focus:border-bbAmber placeholder-neutral-600 font-mono">
+            </div>
+            <button onclick="executeCommand()" class="px-3 py-1 bg-bbAmber text-black font-bold hover:bg-yellow-400 text-xs transition">
+                &lt;GO&gt;
+            </button>
+            <select id="tickerDropdown" onchange="onSelectTicker(this.value)" class="bg-[#08080a] border border-bbCyan/60 text-bbCyan px-2 py-1 text-xs focus:outline-none font-mono">
+                <option value="NVDA">NVDA - NVIDIA Corp</option>
+            </select>
+        </div>
+
+        <!-- Screen Navigation Tabs -->
+        <div class="flex items-center space-x-1 font-mono text-[11px]">
+            <button onclick="switchScreen('DES')" class="screen-tab px-3 py-1 text-neutral-400 hover:text-white border-b-2 border-transparent transition" data-screen="DES">DES [F2]</button>
+            <button onclick="switchScreen('FA')" class="screen-tab px-3 py-1 text-neutral-400 hover:text-white border-b-2 border-transparent transition" data-screen="FA">FA [F3]</button>
+            <button onclick="switchScreen('DCF')" class="screen-tab px-3 py-1 text-neutral-400 hover:text-white border-b-2 border-transparent transition" data-screen="DCF">DCF [F4]</button>
+            <button onclick="switchScreen('BETA')" class="screen-tab px-3 py-1 text-neutral-400 hover:text-white border-b-2 border-transparent transition" data-screen="BETA">BETA [F9]</button>
+            <button onclick="switchScreen('OVML')" class="screen-tab px-3 py-1 text-neutral-400 hover:text-white border-b-2 border-transparent transition" data-screen="OVML">OVML [F5]</button>
+            <button onclick="switchScreen('RV')" class="screen-tab px-3 py-1 text-neutral-400 hover:text-white border-b-2 border-transparent transition" data-screen="RV">RV [F6]</button>
+            <button onclick="switchScreen('PORT')" class="screen-tab px-3 py-1 text-neutral-400 hover:text-white border-b-2 border-transparent transition" data-screen="PORT">PORT [F7]</button>
+            <button onclick="switchScreen('TOP')" class="screen-tab px-3 py-1 text-neutral-400 hover:text-white border-b-2 border-transparent transition" data-screen="TOP">TOP [F8]</button>
+            <button onclick="switchScreen('HELP')" class="screen-tab px-3 py-1 text-neutral-400 hover:text-white border-b-2 border-transparent transition" data-screen="HELP">HELP [F1]</button>
+        </div>
+    </nav>
+
+    <!-- Main Body Workspace (Split View with AGY Copilot Drawer) -->
+    <main class="flex-grow flex overflow-hidden relative">
+
+        <!-- Left / Center Main Screen Viewport -->
+        <div id="viewportContainer" class="flex-grow overflow-y-auto p-4 transition-all duration-200">
+
+            <!-- DES SCREEN -->
+            <div id="screen_DES" class="screen-content space-y-4">
+                <!-- Summary Card Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                    <div class="border border-bbBorder bg-bbCard p-3">
+                        <div class="text-neutral-500 text-[10px]">SPOT PRICE</div>
+                        <div class="text-xl font-bold text-white mt-1" id="des_spotPrice">$224.23</div>
+                        <div class="text-[10px] text-neutral-400 mt-1" id="des_mcap">Market Cap: $5.41T</div>
+                    </div>
+                    <div class="border border-bbBorder bg-bbCard p-3">
+                        <div class="text-neutral-500 text-[10px]">INTRINSIC TARGET</div>
+                        <div class="text-xl font-bold text-bbGreen mt-1" id="des_targetPrice">$125.93</div>
+                        <div class="text-[10px] text-bbRed mt-1" id="des_upside">-43.8% Downside</div>
+                    </div>
+                    <div class="border border-bbBorder bg-bbCard p-3">
+                        <div class="text-neutral-500 text-[10px]">WACC / COST OF CAPITAL</div>
+                        <div class="text-xl font-bold text-bbCyan mt-1" id="des_wacc">9.99%</div>
+                        <div class="text-[10px] text-neutral-400 mt-1" id="des_beta">Hamada Beta: 1.25</div>
+                    </div>
+                    <div class="border border-bbBorder bg-bbCard p-3">
+                        <div class="text-neutral-500 text-[10px]">VALUATION RATING</div>
+                        <div class="text-lg font-bold text-bbRed mt-1" id="des_ratingBadge">TRIM / TAKE PROFITS</div>
+                        <div class="text-[10px] text-neutral-400 mt-1">Dual-Engine Triangulation</div>
+                    </div>
+                </div>
+
+                <!-- Valuation Bridge & SOTP Card -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border border-bbBorder bg-bbCard p-4">
+                        <div class="border-b border-bbBorder pb-2 mb-3 flex items-center justify-between">
+                            <h2 class="font-bold text-bbAmber">DISCOUNTED CASH FLOW VALUE BRIDGE</h2>
+                            <span class="text-[10px] text-neutral-500">10-YR FCFF MODEL</span>
+                        </div>
+                        <table class="w-full text-left text-xs">
+                            <tbody class="divide-y divide-neutral-800">
+                                <tr>
+                                    <td class="py-1.5 text-neutral-400">PV of 10-Yr Discrete FCFF</td>
+                                    <td class="py-1.5 text-right font-mono text-white" id="des_pvFcff">$995,640.9M</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-neutral-400">PV of Moat Terminal Value</td>
+                                    <td class="py-1.5 text-right font-mono text-white" id="des_pvTv">$1,267,758.3M</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-neutral-300 font-bold">Consolidated Enterprise Value (EV)</td>
+                                    <td class="py-1.5 text-right font-mono font-bold text-bbCyan" id="des_ev">$2,263,399.2M</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-neutral-400">Net Cash (+) / Net Debt (-) Bridge</td>
+                                    <td class="py-1.5 text-right font-mono text-bbGreen" id="des_netCash">+$48,944.0M</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-neutral-300 font-bold">Implied Equity Value</td>
+                                    <td class="py-1.5 text-right font-mono font-bold text-bbAmber" id="des_equityVal">$2,312,343.2M</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-white font-bold text-sm">Standalone DCF Intrinsic Value</td>
+                                    <td class="py-1.5 text-right font-mono font-bold text-bbGreen text-sm" id="des_dcfPerShare">$95.76 / share</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="border border-bbBorder bg-bbCard p-4">
+                        <div class="border-b border-bbBorder pb-2 mb-3 flex items-center justify-between">
+                            <h2 class="font-bold text-bbCyan">SUM-OF-THE-PARTS & LIQUIDATION FLOOR</h2>
+                            <span class="text-[10px] text-neutral-500">SEGMENT MULTIPLES</span>
+                        </div>
+                        <table class="w-full text-left text-xs">
+                            <tbody class="divide-y divide-neutral-800">
+                                <tr>
+                                    <td class="py-1.5 text-neutral-400">SOTP Total Enterprise Value</td>
+                                    <td class="py-1.5 text-right font-mono text-white" id="des_sotpEv">$4,662,000.0M</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-neutral-400">SOTP Intrinsic Fair Value</td>
+                                    <td class="py-1.5 text-right font-mono text-bbCyan" id="des_sotpIntrinsic">$195.09 / share</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-neutral-400">Monte Carlo 10k Trial Median</td>
+                                    <td class="py-1.5 text-right font-mono text-bbGreen" id="des_mcMedian">$99.49 / share</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-neutral-400">Monte Carlo Win Rate (% trials &gt; spot)</td>
+                                    <td class="py-1.5 text-right font-mono text-bbRed font-bold" id="des_mcWinRate">0.0%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-neutral-400">Liquidation Haircut Balance Sheet Floor</td>
+                                    <td class="py-1.5 text-right font-mono text-neutral-400" id="des_liqFloor">$2.12 / share</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-white font-bold text-sm">Blended Target Price</td>
+                                    <td class="py-1.5 text-right font-mono font-bold text-bbAmber text-sm" id="des_blendedTarget">$125.93 / share</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Text-Selectable Institutional Memo Card -->
+                <div class="border border-bbBorder bg-bbCard p-4">
+                    <div class="border-b border-bbBorder pb-2 mb-2 flex items-center justify-between">
+                        <span class="text-bbAmber font-bold text-xs">SENIOR EQUITY RESEARCH ASSOCIATE DOSSIER NOTE</span>
+                        <button onclick="copyElementText('des_memo_text')" class="px-2 py-0.5 border border-neutral-700 hover:border-white text-[10px] text-neutral-300">
+                            📋 COPY TEXT
+                        </button>
+                    </div>
+                    <div id="des_memo_text" class="text-neutral-300 font-serif text-sm leading-relaxed whitespace-pre-line select-text">
+                        NVIDIA trades at an unsustainable disconnect from cash-flow-backed fundamentals. The market is pricing perpetual 35-40% revenue growth and terminal operating margins exceeding 58% in perpetuity. 
+
+                        Under our standardized 10-year discrete FCFF baseline, fair value anchors at $95.76 per share. Factoring in net cash reserves of $48.91B and non-core IP/software option value, our composite blended intrinsic target reconciles to $125.93 (-43.8% vs spot). Scale buy orders strictly at or below $105.00–$115.00 zone.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FA SCREEN (Financial Analysis) -->
+            <div id="screen_FA" class="screen-content hidden space-y-4">
+                <div class="border border-bbBorder bg-bbCard p-4">
+                    <div class="border-b border-bbBorder pb-2 mb-3 flex items-center justify-between">
+                        <h2 class="font-bold text-bbAmber">DUPONT 5-POINT ROE DECOMPOSITION & FINANCIAL HEALTH</h2>
+                        <span class="text-[10px] text-neutral-500">GATE 2 AUDIT</span>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-6 gap-2 text-center" id="fa_dupontGrid">
+                        <div class="border border-neutral-800 p-2 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">Tax Burden</div>
+                            <div class="text-sm font-bold text-white mt-1">0.88</div>
+                        </div>
+                        <div class="border border-neutral-800 p-2 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">Interest Burden</div>
+                            <div class="text-sm font-bold text-white mt-1">0.99</div>
+                        </div>
+                        <div class="border border-neutral-800 p-2 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">EBIT Margin</div>
+                            <div class="text-sm font-bold text-bbGreen mt-1">54.2%</div>
+                        </div>
+                        <div class="border border-neutral-800 p-2 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">Asset Turnover</div>
+                            <div class="text-sm font-bold text-white mt-1">1.12x</div>
+                        </div>
+                        <div class="border border-neutral-800 p-2 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">Equity Multiplier</div>
+                            <div class="text-sm font-bold text-white mt-1">1.45x</div>
+                        </div>
+                        <div class="border border-neutral-800 p-2 bg-amber-950/20 border-amber-900/40">
+                            <div class="text-[10px] text-bbAmber">DuPont ROE</div>
+                            <div class="text-sm font-bold text-bbAmber mt-1">77.3%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Statement Time Series Table -->
+                <div class="border border-bbBorder bg-bbCard p-4">
+                    <div class="border-b border-bbBorder pb-2 mb-3 flex items-center justify-between">
+                        <h2 class="font-bold text-bbCyan">MULTI-YEAR AUDITED FINANCIAL STATEMENT TIME-SERIES ($M)</h2>
+                        <button onclick="copyTableToClipboard('fa_table')" class="px-2 py-0.5 border border-neutral-700 hover:border-white text-[10px] text-neutral-300">
+                            📋 COPY TABLE TO EXCEL
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table id="fa_table" class="w-full text-left text-xs font-mono select-text">
+                            <thead>
+                                <tr class="border-b border-neutral-800 text-neutral-500">
+                                    <th class="py-2">LINE ITEM</th>
+                                    <th class="py-2 text-right">FY21</th>
+                                    <th class="py-2 text-right">FY22</th>
+                                    <th class="py-2 text-right">FY23</th>
+                                    <th class="py-2 text-right">FY24</th>
+                                    <th class="py-2 text-right text-bbAmber">FY25 (AUDITED)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-neutral-900" id="fa_tableBody">
+                                <tr>
+                                    <td class="py-1.5 text-white font-bold">Total Revenue</td>
+                                    <td class="py-1.5 text-right text-neutral-400">16,675</td>
+                                    <td class="py-1.5 text-right text-neutral-400">26,914</td>
+                                    <td class="py-1.5 text-right text-neutral-400">26,974</td>
+                                    <td class="py-1.5 text-right text-neutral-400">60,922</td>
+                                    <td class="py-1.5 text-right text-bbGreen font-bold">130,497</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-neutral-300">Gross Profit</td>
+                                    <td class="py-1.5 text-right text-neutral-400">10,396</td>
+                                    <td class="py-1.5 text-right text-neutral-400">17,475</td>
+                                    <td class="py-1.5 text-right text-neutral-400">15,356</td>
+                                    <td class="py-1.5 text-right text-neutral-400">44,301</td>
+                                    <td class="py-1.5 text-right text-white">97,880</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-neutral-300">Operating Income (EBIT)</td>
+                                    <td class="py-1.5 text-right text-neutral-400">4,532</td>
+                                    <td class="py-1.5 text-right text-neutral-400">10,041</td>
+                                    <td class="py-1.5 text-right text-neutral-400">4,224</td>
+                                    <td class="py-1.5 text-right text-neutral-400">32,972</td>
+                                    <td class="py-1.5 text-right text-bbCyan font-bold">78,450</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 text-neutral-300">Free Cash Flow (FCF)</td>
+                                    <td class="py-1.5 text-right text-neutral-400">4,694</td>
+                                    <td class="py-1.5 text-right text-neutral-400">8,132</td>
+                                    <td class="py-1.5 text-right text-neutral-400">3,808</td>
+                                    <td class="py-1.5 text-right text-neutral-400">27,021</td>
+                                    <td class="py-1.5 text-right text-bbGreen font-bold">60,854</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DCF SCREEN (Discounted Cash Flow) -->
+            <div id="screen_DCF" class="screen-content hidden space-y-4">
+                <div class="border border-bbBorder bg-bbCard p-4">
+                    <div class="border-b border-bbBorder pb-2 mb-3 flex items-center justify-between">
+                        <h2 class="font-bold text-bbAmber">10-YEAR PRO-FORMA DCF CASH FLOW SCHEDULE ($M)</h2>
+                        <span class="text-[10px] text-bbCyan">DAMODARAN GINZU DUAL-ENGINE</span>
+                    </div>
+                    <div class="text-neutral-300 text-xs mb-3">
+                        Model assumes pro-forma CAGR of <strong class="text-bbGreen" id="dcf_cagr">35.0%</strong> in Years 1–5 tapering linearly to risk-free rate of <strong class="text-bbCyan">4.25%</strong> in Year 10. Target operating margin converges to <strong class="text-white" id="dcf_targetMargin">54.2%</strong>.
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-neutral-500 text-[10px]">BASE WACC</div>
+                            <div class="text-lg font-bold text-bbCyan mt-1" id="dcf_baseWacc">9.99%</div>
+                            <div class="text-[10px] text-neutral-400 mt-1">Cost of Equity: 10.0% | Ke = Rf + β*ERP</div>
+                        </div>
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-neutral-500 text-[10px]">TERMINAL WACC</div>
+                            <div class="text-lg font-bold text-white mt-1" id="dcf_terminalWacc">9.00%</div>
+                            <div class="text-[10px] text-neutral-400 mt-1">Terminal Growth: 3.00%</div>
+                        </div>
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-neutral-500 text-[10px]">MOAT REINVESTMENT RATE</div>
+                            <div class="text-lg font-bold text-bbGreen mt-1">10.0%</div>
+                            <div class="text-[10px] text-neutral-400 mt-1">Reinv = g / Terminal ROIC (30.0%)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OVML SCREEN (Gate 4B AI CapEx Payback) -->
+            <div id="screen_OVML" class="screen-content hidden space-y-4">
+                <div class="border border-bbBorder bg-bbCard p-4">
+                    <div class="border-b border-bbBorder pb-2 mb-3 flex items-center justify-between">
+                        <h2 class="font-bold text-bbAmber">GATE 4B :: AI CAPEX PAYBACK & CUSTOMER ROI AUDIT</h2>
+                        <span class="text-[10px] text-bbRed font-bold">[OBSOLESCENCE DEFICIT SCORECARD]</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-neutral-500 text-[10px]">ESTIMATED PAYBACK PERIOD</div>
+                            <div class="text-xl font-bold text-bbGreen mt-1" id="ovml_payback">0.45 - 1.20 Yrs</div>
+                            <div class="text-[10px] text-neutral-400 mt-1">Hardware Tollbooth Seller Advantage</div>
+                        </div>
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-neutral-500 text-[10px]">GPU USEFUL LIFE</div>
+                            <div class="text-xl font-bold text-white mt-1">3.50 Years</div>
+                            <div class="text-[10px] text-neutral-400 mt-1">Rapid Blackwell Architecture Cycles</div>
+                        </div>
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-neutral-500 text-[10px]">CAPEX PAYOUT RATIO (CPR)</div>
+                            <div class="text-xl font-bold text-bbAmber mt-1" id="ovml_cpr">45.3%</div>
+                            <div class="text-[10px] text-neutral-400 mt-1">Hyperscaler Spend Capture</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 border border-red-900/40 bg-red-950/20 text-red-300 text-xs leading-relaxed" id="ovml_riskText">
+                        <strong>Structural Concentration Fragility:</strong> Top 4 hyperscalers capture ~42% of revenue. If customer CapEx growth decelerates by 15%, Data Center revenue falls ~25%.
+                    </div>
+                </div>
+            </div>
+
+            <!-- BETA SCREEN -->
+            <div id="screen_BETA" class="screen-content hidden space-y-4">
+                <div class="border border-bbBorder bg-bbCard p-4">
+                    <div class="border-b border-bbBorder pb-2 mb-3 flex items-center justify-between">
+                        <h2 class="font-bold text-bbGreen">HISTORICAL BETA & CAPITAL ASSET PRICING REGRESSION</h2>
+                        <button onclick="launchVectorChart()" class="px-2.5 py-1 bg-bbCyan/10 border border-bbCyan text-bbCyan hover:bg-bbCyan hover:text-black transition text-xs font-bold">
+                            📈 OPEN VECTOR CHART
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">RAW OLS BETA</div>
+                            <div class="text-xl font-bold text-white mt-1" id="beta_raw">1.34</div>
+                        </div>
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">BLUME ADJUSTED BETA</div>
+                            <div class="text-xl font-bold text-bbCyan mt-1" id="beta_blume">1.23</div>
+                        </div>
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">HAMADA UNLEVERED (β_U)</div>
+                            <div class="text-xl font-bold text-bbGreen mt-1" id="beta_unlevered">1.18</div>
+                        </div>
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">R-SQUARED (R²)</div>
+                            <div class="text-xl font-bold text-bbAmber mt-1">0.89</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RV SCREEN (Relative Valuation Top 10) -->
+            <div id="screen_RV" class="screen-content hidden space-y-4">
+                <div class="border border-bbBorder bg-bbCard p-4">
+                    <div class="border-b border-bbBorder pb-2 mb-3 flex items-center justify-between">
+                        <h2 class="font-bold text-bbAmber">S&P 500 TOP 10 RELATIVE VALUATION MATRIX</h2>
+                        <span class="text-[10px] text-neutral-500">ACTIVE COVERAGE DESK</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs font-mono select-text" id="rvTable">
+                            <thead>
+                                <tr class="border-b border-neutral-800 text-neutral-500">
+                                    <th class="py-2">TICKER</th>
+                                    <th class="py-2">NAME</th>
+                                    <th class="py-2 text-right">SPOT</th>
+                                    <th class="py-2 text-right">TARGET</th>
+                                    <th class="py-2 text-right">GAP (%)</th>
+                                    <th class="py-2 text-center">RATING</th>
+                                    <th class="py-2 text-right">WACC</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-neutral-900" id="rvTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PORT SCREEN -->
+            <div id="screen_PORT" class="screen-content hidden space-y-4">
+                <div class="border border-bbBorder bg-bbCard p-4">
+                    <div class="border-b border-bbBorder pb-2 mb-3 flex items-center justify-between">
+                        <h2 class="font-bold text-bbGreen">WEBULL $200 SEED PORTFOLIO DESK</h2>
+                        <span class="text-[10px] text-bbCyan">BI-WEEKLY DCA EXECUTION</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">CASH BALANCE</div>
+                            <div class="text-xl font-bold text-bbGreen mt-1">$200.00 USD</div>
+                        </div>
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">TOTAL CAPITAL PLAN</div>
+                            <div class="text-xl font-bold text-white mt-1">$800.00 USD</div>
+                        </div>
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">CADENCE</div>
+                            <div class="text-lg font-bold text-bbCyan mt-1">Bi-Weekly ($100)</div>
+                        </div>
+                        <div class="border border-neutral-800 p-3 bg-[#0d0e12]">
+                            <div class="text-[10px] text-neutral-500">AUTO-SWEEP APY</div>
+                            <div class="text-lg font-bold text-bbAmber mt-1">4.50% - 4.80%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOP SCREEN -->
+            <div id="screen_TOP" class="screen-content hidden space-y-4">
+                <div class="border border-bbBorder bg-bbCard p-4">
+                    <div class="border-b border-bbBorder pb-2 mb-3 flex items-center justify-between">
+                        <h2 class="font-bold text-bbAmber">TOP NEWS & DAILY MACRO INTELLIGENCE BRIEF</h2>
+                        <span class="text-[10px] text-bbCyan">SOVEREIGN YIELD MONITOR</span>
+                    </div>
+                    <div class="space-y-3" id="topNewsList">
+                        <div class="border border-neutral-800 p-3 hover:border-neutral-700 transition">
+                            <span class="text-[10px] text-bbAmber font-bold">[MACRO.01]</span>
+                            <h3 class="text-sm font-bold text-white mt-1">US 10-Year Treasury Yield Anchors at 4.25%</h3>
+                            <p class="text-neutral-400 text-xs mt-1">Risk-free hurdle anchored across all 10-Yr discrete DCF pro-forma schedules.</p>
+                        </div>
+                        <div class="border border-neutral-800 p-3 hover:border-neutral-700 transition">
+                            <span class="text-[10px] text-bbCyan font-bold">[TECH.02]</span>
+                            <h3 class="text-sm font-bold text-white mt-1">Hyperscaler Annualized CapEx Run-Rate Tops $400B</h3>
+                            <p class="text-neutral-400 text-xs mt-1">Gate 4B monitoring customer software monetization payback vs 3.5-year GPU useful life.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HELP SCREEN -->
+            <div id="screen_HELP" class="screen-content hidden space-y-4">
+                <div class="border border-bbBorder bg-bbCard p-4">
+                    <div class="border-b border-bbBorder pb-2 mb-3 flex items-center justify-between">
+                        <h2 class="font-bold text-bbAmber">BLOOMBERG TERMINAL COMMAND & MNEMONIC DIRECTORY</h2>
+                        <span class="text-[10px] text-neutral-500">HOTKEY REFERENCE</span>
+                    </div>
+                    <table class="w-full text-left text-xs font-mono select-text">
+                        <tbody class="divide-y divide-neutral-800">
+                            <tr><td class="py-2 text-bbCyan font-bold">&lt;TICKER&gt; DES &lt;GO&gt;</td><td class="py-2 text-white font-bold">[F2]</td><td class="py-2 text-neutral-400">Security Description, spot price, target, and DCF valuation bridge</td></tr>
+                            <tr><td class="py-2 text-bbCyan font-bold">&lt;TICKER&gt; FA &lt;GO&gt;</td><td class="py-2 text-white font-bold">[F3]</td><td class="py-2 text-neutral-400">Financial Analysis: 5-Year Balance Sheet, Cash Flow, and DuPont ROE</td></tr>
+                            <tr><td class="py-2 text-bbCyan font-bold">&lt;TICKER&gt; DCF &lt;GO&gt;</td><td class="py-2 text-white font-bold">[F4]</td><td class="py-2 text-neutral-400">Discounted Cash Flow schedule, WACC, and terminal assumptions</td></tr>
+                            <tr><td class="py-2 text-bbCyan font-bold">&lt;TICKER&gt; BETA &lt;GO&gt;</td><td class="py-2 text-white font-bold">[F9]</td><td class="py-2 text-neutral-400">Historical Beta Regression: OLS Slope, Blume Adj Beta, Hamada β_U</td></tr>
+                            <tr><td class="py-2 text-bbCyan font-bold">&lt;TICKER&gt; OVML &lt;GO&gt;</td><td class="py-2 text-white font-bold">[F5]</td><td class="py-2 text-neutral-400">Overlay Model: Gate 4B AI CapEx Payback & Obsolescence Scorecard</td></tr>
+                            <tr><td class="py-2 text-bbAmber font-bold">AGY &lt;GO&gt; / CHAT &lt;GO&gt;</td><td class="py-2 text-white font-bold">[F10]</td><td class="py-2 text-neutral-300">Toggle AGY AI Research Copilot Drawer</td></tr>
+                            <tr><td class="py-2 text-bbGreen font-bold">INGEST &lt;TICKER&gt; &lt;GO&gt;</td><td class="py-2 text-white font-bold">Auto-Onboard</td><td class="py-2 text-neutral-300">Dispatches AGY autonomous 5-Gate valuation engine for new tickers</td></tr>
+                            <tr><td class="py-2 text-bbCyan font-bold">RV &lt;GO&gt;</td><td class="py-2 text-white font-bold">[F6]</td><td class="py-2 text-neutral-400">Relative Valuation: S&P 500 Top 10 comparative matrix</td></tr>
+                            <tr><td class="py-2 text-bbCyan font-bold">PORT &lt;GO&gt;</td><td class="py-2 text-white font-bold">[F7]</td><td class="py-2 text-neutral-400">Portfolio Desk: Webull $200 Seed Allocation and DCA schedule</td></tr>
+                            <tr><td class="py-2 text-bbCyan font-bold">TOP &lt;GO&gt;</td><td class="py-2 text-white font-bold">[F8]</td><td class="py-2 text-neutral-400">Top News & Daily Macro Intelligence Brief</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT-HAND AGY RESEARCH COPILOT DRAWER [F10] -->
+        <aside id="copilotDrawer" class="w-96 border-l border-bbBorder bg-[#0c0d11] flex flex-col flex-shrink-0 transition-all duration-300">
+            <!-- Copilot Header -->
+            <div class="border-b border-bbBorder p-3 flex items-center justify-between bg-[#111217]">
+                <div class="flex items-center space-x-2">
+                    <span class="text-bbAmber font-bold text-xs">⚡ AGY RESEARCH COPILOT</span>
+                    <span class="px-1.5 py-0.2 border border-green-800 text-[10px] text-bbGreen bg-green-950/30">ONLINE</span>
+                </div>
+                <button onclick="toggleCopilot()" class="text-neutral-500 hover:text-white text-xs px-1">✕</button>
+            </div>
+
+            <!-- Active Copilot Context Badge -->
+            <div class="px-3 py-1.5 bg-neutral-900 border-b border-bbBorder text-[10px] flex items-center justify-between text-neutral-400">
+                <span>CONTEXT: <strong class="text-white" id="copilotActiveTicker">NVDA</strong></span>
+                <span class="text-bbCyan" id="copilotContextStats">WACC: 9.99% | Target: $125.93</span>
+            </div>
+
+            <!-- Quick Action Chips -->
+            <div class="p-2 border-b border-bbBorder bg-[#0a0a0c] flex items-center space-x-1.5 overflow-x-auto text-[10px]">
+                <button onclick="sendQuickPrompt('Explain sensitivity of DCF intrinsic value to operating margin')" class="px-2 py-0.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700 whitespace-nowrap">
+                    Margin Sensitivity
+                </button>
+                <button onclick="sendQuickPrompt('Evaluate Gate 4B AI CapEx payback vs 3.5yr useful life')" class="px-2 py-0.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700 whitespace-nowrap">
+                    CapEx Payback
+                </button>
+                <button onclick="sendQuickPrompt('Break down the Altman Z-score components and safe zone')" class="px-2 py-0.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700 whitespace-nowrap">
+                    Altman Z
+                </button>
+            </div>
+
+            <!-- Scrollable Message Stream -->
+            <div id="copilotMessages" class="flex-grow overflow-y-auto p-3 space-y-3 select-text font-mono text-xs">
+                <div class="p-3 bg-[#13141b] border border-neutral-800 text-neutral-300 rounded leading-relaxed text-[11px]">
+                    <div class="text-bbAmber font-bold mb-1">SENIOR EQUITY RESEARCH ASSOCIATE</div>
+                    Pairing desk online. I have ingested the valuation models and financial statements for <strong class="text-white" id="welcomeTicker">NVDA</strong>. Ask any question regarding valuation drivers, test sensitivity, or type <code class="text-bbGreen">INGEST &lt;TICKER&gt;</code> to onboard new global equities.
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="copilotLoading" class="hidden px-3 py-2 border-t border-bbBorder bg-amber-950/20 text-bbAmber text-[11px] flex items-center space-x-2">
+                <span class="animate-spin">⠋</span>
+                <span>AGY Research Associate analyzing models...</span>
+            </div>
+
+            <!-- Copilot Input Bar -->
+            <div class="border-t border-bbBorder p-2.5 bg-[#121318] flex items-center space-x-2">
+                <input type="text" id="copilotInput" placeholder="Ask AGY Copilot (or 'INGEST <TICKER>')..." 
+                       class="flex-grow bg-[#08080a] border border-bbBorder text-white px-3 py-1.5 text-xs focus:outline-none focus:border-bbAmber placeholder-neutral-600 font-mono">
+                <button onclick="submitCopilotPrompt()" class="px-3 py-1.5 bg-bbAmber text-black font-bold hover:bg-yellow-400 text-xs transition">
+                    SEND
+                </button>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- Footer Status Ribbon -->
+    <footer class="border-t border-bbBorder bg-[#0c0d10] flex-shrink-0 px-4 py-1 text-[11px] text-neutral-500 font-mono flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <span>READY</span>
+            <span>|</span>
+            <span>MODEL: DAMODARAN DUAL-ENGINE GINZU</span>
+            <span>|</span>
+            <span>NATIVE CLIPBOARD: <strong class="text-bbGreen">ENABLED</strong></span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span>[F1-F10] HOTKEYS ACTIVE</span>
+            <span>|</span>
+            <span class="text-neutral-400">PORT: 8000</span>
+        </div>
+    </footer>
+
+    <!-- Client-Side Workstation Logic -->
+    <script>
+        let currentTicker = 'NVDA';
+        let currentScreen = 'DES';
+        let companyDataCache = {};
+        let copilotOpen = true;
+
+        // Initialize Workstation on Load
+        document.addEventListener('DOMContentLoaded', async () => {
+            updateLiveClock();
+            setInterval(updateLiveClock, 1000);
+            await loadCompanyUniverse();
+            await loadCompanyData(currentTicker);
+            setupKeyboardShortcuts();
+            switchScreen('DES');
+        });
+
+        function updateLiveClock() {
+            const now = new Date();
+            document.getElementById('liveClock').innerText = now.toISOString().replace('T', ' ').substring(0, 19) + ' SGT';
+        }
+
+        async function loadCompanyUniverse() {
+            try {
+                const res = await fetch('/api/companies');
+                const companies = await res.json();
+                const sel = document.getElementById('tickerDropdown');
+                sel.innerHTML = '';
+                companies.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.ticker;
+                    opt.innerText = `${c.ticker.padEnd(6, ' ')} - ${c.name.substring(0, 20)}`;
+                    if (c.ticker === currentTicker) opt.selected = true;
+                    sel.appendChild(opt);
+                });
+            } catch (err) {
+                console.error('Failed to load companies:', err);
+            }
+        }
+
+        async function loadCompanyData(ticker) {
+            ticker = ticker.toUpperCase();
+            try {
+                const res = await fetch(`/api/company/${ticker}`);
+                const payload = await res.json();
+
+                if (payload.status === 'UNMODELED') {
+                    handleUnmodeledSecurity(ticker);
+                    return;
+                }
+
+                const d = payload.data;
+                companyDataCache[ticker] = d;
+                currentTicker = ticker;
+
+                // Update Header
+                document.getElementById('headerActiveTicker').innerText = `ACTIVE: [${ticker}]`;
+                document.getElementById('headerCompanyName').innerText = d.company_name || ticker;
+                document.getElementById('headerSpotPrice').innerText = d.spot_price ? `$${Number(d.spot_price).toFixed(2)}` : 'N/A';
+                document.getElementById('headerTargetPrice').innerText = d.target_price ? `$${Number(d.target_price).toFixed(2)}` : 'N/A';
+                document.getElementById('headerRating').innerText = d.rating || 'N/A';
+
+                // Update DES Screen
+                document.getElementById('des_spotPrice').innerText = d.spot_price ? `$${Number(d.spot_price).toFixed(2)}` : 'N/A';
+                document.getElementById('des_targetPrice').innerText = d.target_price ? `$${Number(d.target_price).toFixed(2)}` : 'N/A';
+                document.getElementById('des_mcap').innerText = d.market_cap_b ? `Market Cap: $${d.market_cap_b}B` : '';
+                document.getElementById('des_wacc').innerText = d.wacc_base ? `${(d.wacc_base * 100).toFixed(2)}%` : '9.00%';
+                document.getElementById('des_ratingBadge').innerText = d.rating || 'N/A';
+
+                // Raw JSON extracts
+                const raw = d.raw_json || {};
+                const dcf = raw.dcf_schedule || {};
+                const sotp = raw.sotp_divisional || {};
+                const mc = raw.monte_carlo_10k || {};
+
+                document.getElementById('des_pvFcff').innerText = dcf.pv_10yr_fcff_m ? `$${Number(dcf.pv_10yr_fcff_m).toLocaleString()}M` : 'N/A';
+                document.getElementById('des_pvTv').innerText = dcf.pv_terminal_value_m ? `$${Number(dcf.pv_terminal_value_m).toLocaleString()}M` : 'N/A';
+                document.getElementById('des_ev').innerText = dcf.enterprise_value_m ? `$${Number(dcf.enterprise_value_m).toLocaleString()}M` : 'N/A';
+                document.getElementById('des_netCash').innerText = dcf.equity_bridge_net_cash_m ? `+$${Number(dcf.equity_bridge_net_cash_m).toLocaleString()}M` : 'N/A';
+                document.getElementById('des_equityVal').innerText = dcf.equity_value_m ? `$${Number(dcf.equity_value_m).toLocaleString()}M` : 'N/A';
+                document.getElementById('des_dcfPerShare').innerText = d.dcf_value ? `$${Number(d.dcf_value).toFixed(2)} / share` : 'N/A';
+
+                document.getElementById('des_sotpEv').innerText = sotp.total_sotp_ev_m ? `$${Number(sotp.total_sotp_ev_m).toLocaleString()}M` : 'N/A';
+                document.getElementById('des_sotpIntrinsic').innerText = d.sotp_value ? `$${Number(d.sotp_value).toFixed(2)} / share` : 'N/A';
+                document.getElementById('des_mcMedian').innerText = d.mc_median ? `$${Number(d.mc_median).toFixed(2)} / share` : 'N/A';
+                document.getElementById('des_mcWinRate').innerText = d.mc_win_rate !== undefined ? `${d.mc_win_rate}%` : 'N/A';
+                document.getElementById('des_liqFloor').innerText = raw.liquidation_floor_usd ? `$${raw.liquidation_floor_usd} / share` : 'N/A';
+                document.getElementById('des_blendedTarget').innerText = d.target_price ? `$${Number(d.target_price).toFixed(2)} / share` : 'N/A';
+
+                // Copilot Context
+                document.getElementById('copilotActiveTicker').innerText = ticker;
+                document.getElementById('welcomeTicker').innerText = ticker;
+                document.getElementById('copilotContextStats').innerText = `WACC: ${(d.wacc_base * 100 || 9.0).toFixed(2)}% | Target: $${d.target_price || 'N/A'}`;
+
+            } catch (err) {
+                console.error('Error loading company data:', err);
+            }
+        }
+
+        function switchScreen(screenId) {
+            currentScreen = screenId;
+            document.querySelectorAll('.screen-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.screen-tab').forEach(el => el.classList.remove('active-tab'));
+
+            const target = document.getElementById(`screen_${screenId}`);
+            if (target) target.classList.remove('hidden');
+
+            const tab = document.querySelector(`.screen-tab[data-screen="${screenId}"]`);
+            if (tab) tab.classList.add('active-tab');
+
+            if (screenId === 'RV') loadRelativeValuation();
+        }
+
+        async function loadRelativeValuation() {
+            try {
+                const res = await fetch('/api/matrix');
+                const matrix = await res.json();
+                const tbody = document.getElementById('rvTableBody');
+                tbody.innerHTML = '';
+                matrix.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-neutral-900 cursor-pointer transition";
+                    tr.onclick = () => { onSelectTicker(row.ticker); switchScreen('DES'); };
+                    const isPositive = row.gap_pct >= 0;
+                    tr.innerHTML = `
+                        <td class="py-2 text-bbCyan font-bold">${row.ticker}</td>
+                        <td class="py-2 text-white">${row.name}</td>
+                        <td class="py-2 text-right">$${row.spot.toFixed(2)}</td>
+                        <td class="py-2 text-right text-bbGreen">$${row.target.toFixed(2)}</td>
+                        <td class="py-2 text-right ${isPositive ? 'text-bbGreen' : 'text-bbRed'} font-bold">${isPositive ? '+' : ''}${row.gap_pct}%</td>
+                        <td class="py-2 text-center"><span class="px-1 py-0.5 bg-neutral-800 text-[10px]">${row.rating}</span></td>
+                        <td class="py-2 text-right text-bbCyan">${row.wacc}%</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error('Failed to load matrix:', err);
+            }
+        }
+
+        function toggleCopilot() {
+            const drawer = document.getElementById('copilotDrawer');
+            copilotOpen = !copilotOpen;
+            if (copilotOpen) {
+                drawer.classList.remove('hidden');
+                document.getElementById('copilotInput').focus();
+            } else {
+                drawer.classList.add('hidden');
+            }
+        }
+
+        async function submitCopilotPrompt() {
+            const input = document.getElementById('copilotInput');
+            const prompt = input.value.trim();
+            if (!prompt) return;
+            input.value = '';
+
+            // Render PM Prompt
+            appendMessage('PM', prompt);
+
+            // Handle INGEST command
+            if (prompt.toUpperCase().startsWith('INGEST ') || prompt.toUpperCase().startsWith('ONBOARD ')) {
+                const parts = prompt.toUpperCase().split(' ');
+                if (parts.length > 1) {
+                    await runOnboardingPipeline(parts[1]);
+                    return;
+                }
+            }
+
+            // Call AGY Copilot API
+            showLoading(true);
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt, ticker: currentTicker })
+                });
+                const data = await res.json();
+                appendMessage('AGY', data.response);
+            } catch (err) {
+                appendMessage('SYS', `Error contacting AGY: ${err.message}`);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function runOnboardingPipeline(ticker) {
+            ticker = ticker.toUpperCase();
+            appendMessage('SYS', `Dispatched AGY 5-Gate autonomous pipeline for ${ticker}...`);
+            showLoading(true);
+            try {
+                const res = await fetch(`/api/onboard/${ticker}`, { method: 'POST' });
+                const result = await res.json();
+                const out = result.outputs;
+                const tp = out.final_triangulation?.target_price_usd || 'N/A';
+                const rating = out.final_triangulation?.rating || 'N/A';
+                appendMessage('AGY', `### 5-GATE ONBOARDING COMPLETE FOR ${ticker}\n- **Company**: ${out.company_name}\n- **Market Spot**: $${out.spot_price_usd || 'N/A'}\n- **Intrinsic DCF Target**: $${tp} (${rating})\n- **WACC**: ${(out.wacc_schedule?.base_wacc * 100).toFixed(2)}%\n- **Altman Z**: ${out.financial_health?.altman_z_score} (${out.financial_health?.altman_zone})\n\nScreens hot-reloaded!`);
+                await loadCompanyUniverse();
+                await loadCompanyData(ticker);
+                switchScreen('DES');
+            } catch (err) {
+                appendMessage('SYS', `Failed to onboard ${ticker}: ${err.message}`);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function sendQuickPrompt(prompt) {
+            document.getElementById('copilotInput').value = prompt;
+            submitCopilotPrompt();
+        }
+
+        function appendMessage(role, content) {
+            const container = document.getElementById('copilotMessages');
+            const div = document.createElement('div');
+            div.className = "p-3 rounded leading-relaxed text-xs border select-text ";
+
+            if (role === 'PM') {
+                div.className += "bg-amber-950/20 border-amber-900/40 text-amber-200";
+                div.innerHTML = `<div class="text-[10px] text-bbAmber font-bold mb-1">PORTFOLIO MANAGER &gt;</div><div class="whitespace-pre-line">${escapeHtml(content)}</div>`;
+            } else if (role === 'AGY') {
+                div.className += "bg-[#13141b] border-neutral-800 text-neutral-200";
+                const parsedMarkdown = marked.parse(content);
+                div.innerHTML = `<div class="text-[10px] text-bbGreen font-bold mb-1 flex items-center justify-between">
+                    <span>RESEARCH ASSOCIATE (AGY) &gt;</span>
+                    <button onclick="copyToClipboard(this)" class="text-neutral-500 hover:text-white text-[10px]">COPY</button>
+                </div><div class="markdown-body prose-invert prose-xs">${parsedMarkdown}</div>`;
+            } else {
+                div.className += "bg-cyan-950/20 border-cyan-900/40 text-cyan-300";
+                div.innerHTML = `<div class="text-[10px] text-bbCyan font-bold mb-1">[SYS.STATUS]</div><div>${escapeHtml(content)}</div>`;
+            }
+
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function showLoading(show) {
+            const loader = document.getElementById('copilotLoading');
+            if (show) loader.classList.remove('hidden');
+            else loader.classList.add('hidden');
+        }
+
+        function executeCommand() {
+            const cmdInput = document.getElementById('cmdInput');
+            const raw = cmdInput.value.trim();
+            if (!raw) return;
+            cmdInput.value = '';
+
+            const upper = raw.toUpperCase().replace('<GO>', '').trim();
+
+            if (upper.startsWith('INGEST ') || upper.startsWith('ONBOARD ')) {
+                if (!copilotOpen) toggleCopilot();
+                document.getElementById('copilotInput').value = raw;
+                submitCopilotPrompt();
+                return;
+            }
+
+            if (upper.startsWith('AGY ') || upper.startsWith('ASK ') || upper.includes('?')) {
+                if (!copilotOpen) toggleCopilot();
+                document.getElementById('copilotInput').value = raw.replace(/^AGY\s+/i, '').replace(/^ASK\s+/i, '');
+                submitCopilotPrompt();
+                return;
+            }
+
+            const parts = upper.split(' ');
+            if (parts.length > 0) {
+                const cand = parts[0];
+                const screens = ['DES', 'FA', 'DCF', 'BETA', 'OVML', 'RV', 'PORT', 'TOP', 'HELP'];
+                if (screens.includes(cand)) {
+                    switchScreen(cand);
+                    return;
+                }
+                onSelectTicker(cand);
+                if (parts.length > 1 && screens.includes(parts[1])) {
+                    switchScreen(parts[1]);
+                }
+            }
+        }
+
+        function onSelectTicker(ticker) {
+            loadCompanyData(ticker);
+            const sel = document.getElementById('tickerDropdown');
+            sel.value = ticker;
+        }
+
+        function handleUnmodeledSecurity(ticker) {
+            if (!copilotOpen) toggleCopilot();
+            appendMessage('SYS', `Security [${ticker}] is currently unmodeled. Press below to run autonomous 5-Gate onboarding:`);
+            const container = document.getElementById('copilotMessages');
+            const btn = document.createElement('button');
+            btn.className = "w-full py-2 bg-bbGreen text-black font-bold text-xs hover:bg-green-400 mt-2 transition";
+            btn.innerText = `RUN AUTONOMOUS 5-GATE INGESTION FOR ${ticker}`;
+            btn.onclick = () => runOnboardingPipeline(ticker);
+            container.appendChild(btn);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'F1') { e.preventDefault(); switchScreen('HELP'); }
+                if (e.key === 'F2') { e.preventDefault(); switchScreen('DES'); }
+                if (e.key === 'F3') { e.preventDefault(); switchScreen('FA'); }
+                if (e.key === 'F4') { e.preventDefault(); switchScreen('DCF'); }
+                if (e.key === 'F5') { e.preventDefault(); switchScreen('OVML'); }
+                if (e.key === 'F6') { e.preventDefault(); switchScreen('RV'); }
+                if (e.key === 'F7') { e.preventDefault(); switchScreen('PORT'); }
+                if (e.key === 'F8') { e.preventDefault(); switchScreen('TOP'); }
+                if (e.key === 'F9') { e.preventDefault(); switchScreen('BETA'); }
+                if (e.key === 'F10') { e.preventDefault(); toggleCopilot(); }
+                if (e.key === 'Escape') { e.preventDefault(); document.getElementById('cmdInput').focus(); }
+                if (e.key === 'Enter') {
+                    if (document.activeElement === document.getElementById('cmdInput')) {
+                        executeCommand();
+                    } else if (document.activeElement === document.getElementById('copilotInput')) {
+                        submitCopilotPrompt();
+                    }
+                }
+            });
+        }
+
+        function copyElementText(elementId) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                navigator.clipboard.writeText(el.innerText);
+                alert('Copied to clipboard!');
+            }
+        }
+
+        function copyTableToClipboard(tableId) {
+            const table = document.getElementById(tableId);
+            if (table) {
+                navigator.clipboard.writeText(table.innerText);
+                alert('Table text copied to clipboard! You can paste directly into Excel.');
+            }
+        }
+
+        function copyToClipboard(btn) {
+            const parent = btn.closest('div').parentElement;
+            navigator.clipboard.writeText(parent.innerText);
+            btn.innerText = 'COPIED!';
+            setTimeout(() => btn.innerText = 'COPY', 2000);
+        }
+
+        function launchVectorChart() {
+            window.open(`/ERVIS/vault/charts/${currentTicker}_beta_regression.html`, '_blank');
+        }
+
+        function escapeHtml(text) {
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+    </script>
+</body>
+</html>

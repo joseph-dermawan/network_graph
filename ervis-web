@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# ERVIS WEB WORKSTATION v2.0 LAUNCHER
+# Institutional Financial Terminal Web Application for macOS / Linux
+# ==============================================================================
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -L "$SOURCE" ]; do
+    DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+PROJECT_DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+
+if [ ! -d "$PROJECT_DIR/ERVIS" ]; then
+    PROJECT_DIR="/Users/worldofmadness/Documents/VS Code/Personal Projects/NetworkGraph"
+fi
+
+cd "$PROJECT_DIR" || exit 1
+
+PYTHON_EXEC="/Library/Frameworks/Python.framework/Versions/3.10/bin/python3"
+if [ ! -f "$PYTHON_EXEC" ]; then
+    PYTHON_EXEC="$(which python3)"
+fi
+
+PORT=8000
+URL="http://localhost:${PORT}"
+
+echo "================================================================================"
+echo "ERVIS :: BLOOMBERG INSTITUTIONAL WEB WORKSTATION v2.0"
+echo "URL: $URL | NATIVE CLIPBOARD: ENABLED | AGY COPILOT: READY"
+echo "================================================================================"
+
+# Launch browser after a brief delay in the background
+(
+    sleep 1.5
+    # Try Chrome in native App Mode (frameless standalone window), fallback to default browser
+    if [ -d "/Applications/Google Chrome.app" ]; then
+        open -na "Google Chrome" --args --app="$URL"
+    else
+        open "$URL"
+    fi
+) &
+
+# Run FastAPI backend via Uvicorn
+exec "$PYTHON_EXEC" -m uvicorn ERVIS.web.app:app --host 127.0.0.1 --port "$PORT" --log-level warning
