@@ -17,6 +17,7 @@ if [ ! -d "$PROJECT_DIR/ERVIS" ]; then
 fi
 
 cd "$PROJECT_DIR" || exit 1
+export PYTHONPATH="$PROJECT_DIR:$PYTHONPATH"
 
 PYTHON_EXEC="/Library/Frameworks/Python.framework/Versions/3.10/bin/python3"
 if [ ! -f "$PYTHON_EXEC" ]; then
