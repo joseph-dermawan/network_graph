@@ -2,9 +2,9 @@
   "ticker": "AAPL",
   "company_name": "Apple Inc.",
   "currency": "USD",
-  "spot_price_usd": 337.3,
+  "spot_price_usd": 329.4,
   "shares_outstanding_m": 14594.18,
-  "market_cap_m": 4922616.9,
+  "market_cap_m": 4807320.0,
   "wacc_schedule": {
     "base_wacc": 0.0872,
     "terminal_wacc": 0.09,
@@ -87,7 +87,8 @@
     "sotp_weight": 0.3,
     "monte_carlo_weight": 0.1,
     "target_price_usd": 176.57,
-    "upside_percent": -47.65,
-    "rating": "TRIM / TAKE PROFITS"
+    "upside_percent": -46.4,
+    "rating": "UNDERWEIGHT / SELL (-46.4%)",
+    "updated_at": "2026-09-30T15:48:23.632310"
   }
 }

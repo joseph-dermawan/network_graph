@@ -2,9 +2,9 @@
   "ticker": "MSFT",
   "company_name": "Microsoft Corporation",
   "currency": "USD",
-  "spot_price_usd": 493.89,
+  "spot_price_usd": 508.96,
   "shares_outstanding_m": 7425.55,
-  "market_cap_m": 3667404.9,
+  "market_cap_m": 3779310.0,
   "wacc_schedule": {
     "base_wacc": 0.088,
     "terminal_wacc": 0.09,
@@ -61,7 +61,8 @@
   "liquidation_floor_usd": 0.0,
   "final_triangulation": {
     "target_price_usd": 447.71,
-    "upside_percent": -9.35,
-    "rating": "HOLD / ACCUMULATE ON PULLBACK"
+    "upside_percent": -12.03,
+    "rating": "TRIM / TAKE PROFITS (-12.0%)",
+    "updated_at": "2026-09-30T15:48:23.273470"
   }
 }

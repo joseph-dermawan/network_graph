@@ -55,9 +55,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 8.6
-    published_rating: SELL / REBALANCE (-42.3%)
+    published_rating: UNDERWEIGHT / SELL (-42.5%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-21T20:10:00Z'
+    last_published_at: '2026-09-30T15:48:25.968874'
+    last_spot_price: 14.968
   NVDA:
     company_name: NVIDIA Corporation
     market: US_EQUITIES
@@ -66,9 +67,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 125.93
-    published_rating: TRIM / TAKE PROFITS (-43.8%)
+    published_rating: UNDERWEIGHT / SELL (-44.6%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-21T22:43:00Z'
+    last_published_at: '2026-09-30T15:48:22.864285'
+    last_spot_price: 227.21
   GOOGL:
     company_name: Alphabet Inc.
     market: US_EQUITIES
@@ -77,9 +79,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: PUBLISHED
     last_intrinsic_value: 252.8
-    published_rating: TRIM / TAKE PROFITS (-28.8%)
+    published_rating: UNDERWEIGHT / SELL (-25.9%)
     last_published_version: v1.0
-    last_published_at: '2026-09-21T23:01:52.646527'
+    last_published_at: '2026-09-30T15:48:23.910422'
+    last_spot_price: 340.92
   MSFT:
     company_name: Microsoft Corporation
     market: US_EQUITIES
@@ -88,9 +91,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 447.71
-    published_rating: HOLD / ACCUMULATE ON PULLBACK (-9.4%)
+    published_rating: TRIM / TAKE PROFITS (-12.0%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-21T23:02:00Z'
+    last_published_at: '2026-09-30T15:48:23.273797'
+    last_spot_price: 508.96
   AAPL:
     company_name: Apple Inc.
     market: US_EQUITIES
@@ -99,9 +103,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 176.57
-    published_rating: TRIM / TAKE PROFITS (-47.7%)
+    published_rating: UNDERWEIGHT / SELL (-46.4%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-21T23:05:00Z'
+    last_published_at: '2026-09-30T15:48:23.632858'
+    last_spot_price: 329.4
   AMD:
     company_name: Advanced Micro Devices, Inc.
     market: US_EQUITIES
@@ -110,9 +115,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: PUBLISHED
     last_intrinsic_value: 201.44
-    published_rating: TRIM / TAKE PROFITS (-67.2%)
+    published_rating: UNDERWEIGHT / SELL (-66.8%)
     last_published_version: v1.0
-    last_published_at: '2026-09-21T23:04:24.596629'
+    last_published_at: '2026-09-30T15:48:25.415925'
+    last_spot_price: 607.57
   AMZN:
     company_name: Amazon.com, Inc.
     market: US_EQUITIES
@@ -121,9 +127,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 203.46
-    published_rating: TRIM / TAKE PROFITS (-20.4%)
+    published_rating: UNDERWEIGHT / SELL (-17.5%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-21T23:02:00Z'
+    last_published_at: '2026-09-30T15:48:24.171430'
+    last_spot_price: 246.67
   META:
     company_name: Meta Platforms, Inc.
     market: US_EQUITIES
@@ -132,9 +139,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 736.95
-    published_rating: ACCUMULATE / HOLD (+4.0%)
+    published_rating: NEUTRAL / HOLD (-0.2%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-21T23:02:49Z'
+    last_published_at: '2026-09-30T15:48:24.447297'
+    last_spot_price: 738.79
   ORCL:
     company_name: Oracle Corporation
     market: US_EQUITIES
@@ -143,9 +151,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 113.44
-    published_rating: SELL / REBALANCE (-23.6%)
+    published_rating: UNDERWEIGHT / SELL (-17.7%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-21T23:02:00Z'
+    last_published_at: '2026-09-30T15:48:25.674315'
+    last_spot_price: 137.79
   TSM:
     company_name: Taiwan Semiconductor Manufactur
     market: US_EQUITIES
@@ -155,9 +164,10 @@ COMPANIES:
     drive_folder_id: ''
     current_status: VALUATION_COMPLETED
     last_published_version: v1.0-agy
-    last_published_at: '2026-09-30T14:34:13.376106'
+    last_published_at: '2026-09-30T15:48:25.150578'
     last_intrinsic_value: 406.68
     published_rating: TRIM / TAKE PROFITS (-11.0%)
+    last_spot_price: 456.94
   AVGO:
     company_name: Broadcom Inc.
     market: US_EQUITIES
@@ -167,9 +177,10 @@ COMPANIES:
     drive_folder_id: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 247.7
-    published_rating: TRIM / TAKE PROFITS (-30.8%)
+    published_rating: UNDERWEIGHT / SELL (-30.2%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-21T23:00:00Z'
+    last_published_at: '2026-09-30T15:48:24.834883'
+    last_spot_price: 355.1
   PLTR:
     company_name: Palantir Technologies Inc.
     market: US_EQUITIES
@@ -179,6 +190,7 @@ COMPANIES:
     drive_folder_id: ''
     current_status: VALUATION_COMPLETED
     last_published_version: v1.0-agy
-    last_published_at: '2026-09-30T13:07:17.176300'
+    last_published_at: '2026-09-30T15:48:26.316125'
     last_intrinsic_value: 16.78
-    published_rating: SELL / REBALANCE (-91.03%)
+    published_rating: UNDERWEIGHT / SELL (-91.0%)
+    last_spot_price: 186.97

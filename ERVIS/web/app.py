@@ -136,6 +136,15 @@ async def onboard_security(ticker: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/api/refresh")
+async def refresh_universe_endpoint():
+    from ERVIS.models.refresh_universe import refresh_all_data
+    try:
+        report = refresh_all_data()
+        return {"status": "ok", "report": report}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/api/render/{screen}/{ticker}")
 async def render_terminal_screen(screen: str, ticker: str, width: int = 132):
     norm_ticker = resolve_ticker(ticker)
@@ -160,7 +169,7 @@ async def render_terminal_screen(screen: str, ticker: str, width: int = 132):
     elif screen_upper == "PORT":
         panel = render_portfolio_desk()
     elif screen_upper in ["TOP", "NEWS"]:
-        panel = render_news_screen()
+        panel = render_news_screen(norm_ticker)
     elif screen_upper == "HELP":
         panel = render_help()
     else:

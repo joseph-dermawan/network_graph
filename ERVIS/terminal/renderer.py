@@ -4,6 +4,8 @@ Formats institutional financial data into authentic Bloomberg Terminal panels
 using Rich tables, panels, and text layouts.
 """
 
+import os
+import json
 from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
@@ -233,13 +235,13 @@ def render_top10_matrix_panel() -> Panel:
     table = Table(border_style="dim white", expand=True)
     table.add_column("#", style="dim white", width=3)
     table.add_column("TICKER", style="bold yellow", width=8)
-    table.add_column("COMPANY NAME", style="white", width=22)
-    table.add_column("SPOT ($)", style="bold cyan", justify="right", width=10)
-    table.add_column("TARGET ($)", style="bold white", justify="right", width=10)
-    table.add_column("GAP (%)", justify="right", width=10)
-    table.add_column("RATING", width=20)
-    table.add_column("WACC", justify="right", width=8)
-    table.add_column("NET DEBT", justify="right", width=14)
+    table.add_column("COMPANY NAME", style="white", width=32)
+    table.add_column("SPOT ($)", style="bold cyan", justify="right", width=12)
+    table.add_column("TARGET ($)", style="bold white", justify="right", width=12)
+    table.add_column("GAP (%)", justify="right", width=12)
+    table.add_column("INSTITUTIONAL RATING", width=28)
+    table.add_column("WACC", justify="right", width=9)
+    table.add_column("NET DEBT / CASH", justify="right", width=18)
 
     total_mcap = 0.0
     gaps = []
@@ -258,11 +260,11 @@ def render_top10_matrix_panel() -> Panel:
         table.add_row(
             f"{i:02d}",
             row["ticker"],
-            row["name"][:20],
+            row["name"][:30],
             f"${row['spot']:,.2f}",
             f"${row['target']:,.2f}",
             f"[{gap_style}]{gap:+.1f}%[/{gap_style}]",
-            f"[{r_style}]{rating[:18]}[/{r_style}]",
+            f"[{r_style}]{rating}[/{r_style}]",
             f"{row['wacc']:.1f}%",
             f"[{nd_style}]{nd_str}[/{nd_style}]"
         )
@@ -623,45 +625,74 @@ def render_dcf_screen(ticker: str) -> Panel:
 
     return Panel(Group(table, Text(""), snap_table, Text(""), summary), title=f"[bold green] DISCOUNTED CASH FLOW ENGINE: {ticker} [/bold green]", border_style=BORDER_COLOR)
 
-def render_news_screen() -> Panel:
-    table = Table(title="[bold yellow]TOP NEWS & DAILY MACRO INTELLIGENCE BRIEF (TOP / NEWS)[/bold yellow]", border_style="dim white", expand=True)
-    table.add_column("TIME / TAG", style="bold cyan", width=16)
-    table.add_column("HEADLINE & STRATEGIC DEVELOPMENTS", style="bold white", width=40)
+def render_news_screen(ticker: Optional[str] = None) -> Panel:
+    from ERVIS.terminal.data_loader import BASE_DIR, resolve_ticker
+    news_file = os.path.join(BASE_DIR, "vault", "live_news.json")
+    items = []
+    updated_at = "LIVE"
+    
+    if os.path.exists(news_file):
+        try:
+            with open(news_file, "r", encoding="utf-8") as f:
+                d = json.load(f)
+                all_news = d.get("news", [])
+                updated_at = d.get("updated_at", "")[:16].replace("T", " ")
+                if ticker:
+                    norm = resolve_ticker(ticker)
+                    items = [n for n in all_news if n.get("ticker") == norm]
+                if len(items) < 5:
+                    seen_ids = {n.get("id") for n in items}
+                    for n in all_news:
+                        if n.get("id") not in seen_ids:
+                            items.append(n)
+                            seen_ids.add(n.get("id"))
+                        if len(items) >= 9:
+                            break
+        except Exception:
+            pass
+
+    display_ticker = resolve_ticker(ticker) if ticker else "GLOBAL COVERAGE"
+    table = Table(
+        title=f"[bold yellow]TOP NEWS & REAL-TIME INSTITUTIONAL INTELLIGENCE :: SYNCED {updated_at}[/bold yellow]",
+        border_style="dim white",
+        expand=True
+    )
+    table.add_column("TIME / TAG", style="bold cyan", width=18)
+    table.add_column("HEADLINE & STRATEGIC DEVELOPMENTS", style="bold white", width=56)
     table.add_column("MARKET IMPLICATION & ASSET CLASS IMPACT", style="dim white")
 
-    table.add_row(
-        "2026-09-25 [ORCL]",
-        "Oracle Issues Force Majeure Notice on 2.45 GW 'Project Jupiter'",
-        "Blue Owl Capital datacenter faces power grid bottlenecks in New Mexico. Confirms AI CapEx hitting utility-scale transmission delays."
-    )
-    table.add_row(
-        "2026-09-25 [MACRO]",
-        "US 10-Yr Treasury Yield Holds at 4.58%; Equity Multiple Pressure",
-        "Higher-for-longer hurdle rates penalize capital-strained cloud buyers. S&P 500 AI leaders trade at -30.2% valuation gap."
-    )
-    table.add_row(
-        "2026-09-24 [UK/LSE]",
-        "UK FTSE Industrial Turnaround Accelerates; Forward P/E at 11.5x",
-        "UK equities offer a 38% valuation discount to S&P 500. Rolls-Royce and EWU core holdings remain prime beneficiaries of global re-alignment."
-    )
-    table.add_row(
-        "2026-09-24 [BROKER]",
-        "Webull Singapore Cash Sweep (Moneybull) Yields ~4.8% APY",
-        "Recommended cash parking vehicle for $30 dry powder float ahead of next week's seed deployment."
-    )
+    if not items:
+        table.add_row(
+            "2026-09-30 [MACRO]",
+            "US 10-Yr Treasury Yield Holds at 4.58%; Equity Multiple Pressure\n[dim cyan]Source: Bloomberg Markets[/dim cyan]",
+            "Higher-for-longer hurdle rates penalize capital-strained cloud buyers. S&P 500 AI leaders trade at valuation premium."
+        )
+    else:
+        for item in items[:9]:
+            t_sym = item.get("ticker", "MKT")
+            tag = f"{item.get('date_str', '2026-09-30')}\n[{t_sym}]"
+            src = item.get("provider", "Marketwire")
+            headline = f"[bold white]{item.get('title', '')}[/bold white]\n[dim cyan]Source: {src}[/dim cyan]"
+            implication = item.get("implication") or item.get("summary", "")[:140]
+            table.add_row(tag, headline, implication)
 
+    memo_content = (
+        f"[bold yellow]PORTFOLIO STRATEGY DIRECTIVE ({display_ticker}):[/bold yellow] "
+        "Global AI infrastructure buildout continues to run at unprecedented velocity. "
+        "Maintain disciplined [bold green]Equal-Weight S&P (RSP)[/bold green] and [bold green]UK Core (EWU)[/bold green] allocations. "
+        "CapEx discipline and Gate 4B 3.5-Yr obsolescence limits remain the governing gatekeeper."
+    )
     memo = Panel(
-        Text.from_markup(
-            "[bold yellow]PORTFOLIO STRATEGY DIRECTIVE:[/bold yellow] "
-            "Oracle's force majeure confirms the physical wall of AI scaling. "
-            "Maintain disciplined [bold green]Equal-Weight S&P (RSP)[/bold green] and [bold green]UK Core (EWU)[/bold green] allocations. "
-            "Stand by for limit order fill on [bold yellow]RYCEY at $16.80[/bold yellow]."
-        ),
+        Text.from_markup(memo_content),
         border_style="yellow",
         padding=(0, 1)
     )
 
-    return Panel(Group(table, Text(""), memo), title="[bold green] TOP NEWS & MACRO INTELLIGENCE DESK [/bold green]", border_style=BORDER_COLOR)
+    return Panel(
+        Group(table, Text(""), memo),
+        title=f"[bold green] TOP NEWS & MACRO INTELLIGENCE DESK :: {display_ticker} [/bold green]",
+        border_style=BORDER_COLOR
+    )
 
 def draw_beta_scatter_plot(beta: float, alpha: float, r2: float, width: int = 56, height: int = 11) -> str:
     """Renders a calibrated, non-distorted 2D coordinate return scatter plot and OLS regression slope line."""

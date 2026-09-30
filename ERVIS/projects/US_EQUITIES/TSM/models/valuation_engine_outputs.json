@@ -5,7 +5,7 @@
   "spot_price_usd": 456.94,
   "spot_price_pence": null,
   "shares_outstanding_m": 5186.47,
-  "market_cap_m": 2369907.3,
+  "market_cap_m": 2369910.0,
   "wacc_schedule": {
     "base_wacc": 0.104,
     "terminal_wacc": 0.095,
@@ -61,6 +61,7 @@
     "target_price_usd": 406.68,
     "target_price_pence": null,
     "upside_percent": -11.0,
-    "rating": "TRIM / TAKE PROFITS"
+    "rating": "TRIM / TAKE PROFITS (-11.0%)",
+    "updated_at": "2026-09-30T15:48:25.150337"
   }
 }

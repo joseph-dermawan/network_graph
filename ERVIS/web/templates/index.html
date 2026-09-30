@@ -589,6 +589,9 @@
             <button class="btn-action" onclick="reloadCurrentScreen()" title="Reload screen">
                 [RELOAD]
             </button>
+            <button class="btn-action" onclick="triggerUniverseRefresh()" style="border-color: var(--border-amber); color: var(--text-amber);" title="Synchronize all covered securities with live market quotes and breaking news">
+                [SYNC MKT &amp; NEWS]
+            </button>
         </div>
     </nav>
 
@@ -840,6 +843,19 @@
             loadScreen(currentScreen, currentTicker);
         }
 
+        async function triggerUniverseRefresh() {
+            showTransientAlert("DISPATCHING REFRESH: FETCHING LIVE SPOT PRICES & 95+ BREAKING NEWS...");
+            try {
+                const res = await fetch('/api/refresh', { method: 'POST' });
+                const data = await res.json();
+                showTransientAlert("UNIVERSE REFRESH COMPLETE: ALL MARKET QUOTES & LIVE NEWS SYNCHRONIZED");
+                await loadCompanies();
+                loadScreen(currentScreen, currentTicker);
+            } catch (err) {
+                showTransientAlert("REFRESH FAILED: " + err);
+            }
+        }
+
         // Toggle AGY Copilot Drawer (Collapsed by default)
         function toggleCopilot() {
             copilotOpen = !copilotOpen;
@@ -920,6 +936,12 @@
             // 1. HELP command
             if (first === 'HELP' || first === 'H' || first === '?') {
                 switchScreen('HELP');
+                return;
+            }
+
+            // REFRESH / SYNC command
+            if (first === 'REFRESH' || first === 'SYNC') {
+                triggerUniverseRefresh();
                 return;
             }
 

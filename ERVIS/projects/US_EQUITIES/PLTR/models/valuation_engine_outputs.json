@@ -5,7 +5,7 @@
   "spot_price_usd": 186.97,
   "spot_price_pence": null,
   "shares_outstanding_m": 2300.71,
-  "market_cap_m": 449299.8,
+  "market_cap_m": 449300.0,
   "wacc_schedule": {
     "base_wacc": 0.1236,
     "terminal_wacc": 0.09,
@@ -61,6 +61,7 @@
     "target_price_usd": 16.78,
     "target_price_pence": null,
     "upside_percent": -91.03,
-    "rating": "SELL / REBALANCE"
+    "rating": "UNDERWEIGHT / SELL (-91.0%)",
+    "updated_at": "2026-09-30T15:48:26.315786"
   }
 }

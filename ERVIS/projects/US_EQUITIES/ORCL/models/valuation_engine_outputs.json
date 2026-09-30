@@ -2,9 +2,9 @@
   "ticker": "ORCL",
   "company_name": "Oracle Corporation",
   "currency": "USD",
-  "spot_price_usd": 148.48,
+  "spot_price_usd": 137.79,
   "shares_outstanding_m": 3023.74,
-  "market_cap_m": 448964.9,
+  "market_cap_m": 417710.0,
   "wacc_schedule": {
     "base_wacc": 0.078,
     "terminal_wacc": 0.088,
@@ -67,7 +67,8 @@
     "dcf_weight": 0.6,
     "sotp_weight": 0.4,
     "target_price_usd": 113.44,
-    "upside_percent": -23.6,
-    "rating": "TRIM / SELL"
+    "upside_percent": -17.67,
+    "rating": "UNDERWEIGHT / SELL (-17.7%)",
+    "updated_at": "2026-09-30T15:48:25.674000"
   }
 }

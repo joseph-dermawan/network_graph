@@ -2,9 +2,9 @@
   "ticker": "GOOGL",
   "company_name": "Alphabet Inc.",
   "currency": "USD",
-  "spot_price_usd": 355.24,
+  "spot_price_usd": 340.92,
   "shares_outstanding_m": 12230.0,
-  "market_cap_m": 4344585.2,
+  "market_cap_m": 4169430.0,
   "wacc_schedule": {
     "base_wacc": 0.0911,
     "terminal_wacc": 0.09,
@@ -59,7 +59,8 @@
   "liquidation_floor_usd": 4.11,
   "final_triangulation": {
     "target_price_usd": 252.8,
-    "upside_percent": -28.84,
-    "rating": "TRIM / TAKE PROFITS"
+    "upside_percent": -25.85,
+    "rating": "UNDERWEIGHT / SELL (-25.9%)",
+    "updated_at": "2026-09-30T15:48:23.910132"
   }
 }
