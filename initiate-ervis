@@ -244,12 +244,24 @@ def cmd_initiate(ticker, market, currency):
         }
         save_registry(reg)
 
+    # Retrieve live market quote
+    live_quote_str = ""
+    try:
+        from ERVIS.terminal.data_loader import load_company_data
+        comp = load_company_data(ticker)
+        if comp.get("spot_price"):
+            tgt = comp.get("target_price")
+            gp = round(((tgt - comp["spot_price"]) / comp["spot_price"]) * 100, 1) if tgt else 0.0
+            live_quote_str = f"\n{GRAY}Live Market Quote:{RESET} {GREEN}${comp['spot_price']:,.2f}{RESET} (Intrinsic Target: ${tgt:,.2f} | Gap: {gp:+.1f}%)"
+    except Exception:
+        pass
+
     print(f"\n{AMBER_BOLD}========================================================================================{RESET}")
     print(f"{WHITE_BOLD}                  ERVIS PAIRING SESSION :: {ticker} [DRAFT / ANALYSIS MODE]{RESET}")
     print(f"{AMBER_BOLD}========================================================================================{RESET}")
     print(f"""
 {GRAY}Session Mode:{RESET}       {CYAN}Development & Working Scratchpad (Unfinalized Numbers Allowed){RESET}
-{GRAY}Target Ticker:{RESET}      {WHITE_BOLD}{ticker}{RESET} ({currency})
+{GRAY}Target Ticker:{RESET}      {WHITE_BOLD}{ticker}{RESET} ({currency}){live_quote_str}
 {GRAY}Bound GSheet:{RESET}       {sheet_url or '[Will create in linked Drive folder during Gate 4]' }
 {GRAY}Risk-Free Anchor:{RESET}   {AMBER}{rf_rate*100:.2f}% (10-Yr Benchmark){RESET}
 {GRAY}Local Workspace:{RESET}    {project_dir}/

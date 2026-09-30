@@ -2,10 +2,10 @@
   "ticker": "RR.L",
   "company_name": "Rolls-Royce Holdings plc",
   "currency": "GBP",
-  "spot_price_gbp": 14.964,
-  "spot_price_pence": 1496.4,
+  "spot_price_gbp": 14.984,
+  "spot_price_pence": 1498.4,
   "shares_outstanding_m": 8234.55,
-  "market_cap_m": 123190.0,
+  "market_cap_m": 123360.0,
   "wacc_schedule": {
     "base_wacc": 0.0939,
     "terminal_wacc": 0.09,
@@ -41,8 +41,8 @@
   "final_triangulation": {
     "target_price_gbp": 8.6,
     "target_price_pence": 860.4,
-    "upside_percent": -42.53,
-    "rating": "UNDERWEIGHT / SELL (-42.5%)",
-    "updated_at": "2026-09-30T15:51:42.227861"
+    "upside_percent": -42.61,
+    "rating": "UNDERWEIGHT / SELL (-42.6%)",
+    "updated_at": "2026-09-30T16:08:03.198838"
   }
 }

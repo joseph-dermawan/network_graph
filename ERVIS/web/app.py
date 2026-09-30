@@ -52,12 +52,14 @@ scheduler_state = {
 }
 
 async def background_scheduler():
-    # Wait 30 seconds after server boot before running the first scheduled sync
-    await asyncio.sleep(30)
+    # Immediate startup sync 2 seconds after server boot
+    await asyncio.sleep(2)
+    is_initial = True
     while True:
         try:
             from ERVIS.models.refresh_universe import refresh_all_data
-            print("[AUTO-SCHEDULER] Periodic 15-minute universe synchronization starting...")
+            mode_label = "Startup synchronization" if is_initial else "Periodic 15-minute sync"
+            print(f"[AUTO-SCHEDULER] {mode_label} starting...")
             await asyncio.to_thread(refresh_all_data)
             now = datetime.now()
             scheduler_state["last_sync"] = now.isoformat()
@@ -67,6 +69,7 @@ async def background_scheduler():
         except Exception as e:
             print(f"[AUTO-SCHEDULER ERROR] {e}")
         
+        is_initial = False
         await asyncio.sleep(900)
 
 @asynccontextmanager

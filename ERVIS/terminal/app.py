@@ -271,9 +271,20 @@ class ERVISTerminalApp(App):
 
         yield Footer()
 
+    @work(thread=True)
+    def auto_sync_universe_background(self) -> None:
+        try:
+            from ERVIS.models.refresh_universe import refresh_all_data
+            refresh_all_data()
+            self.app.call_from_thread(self.refresh_all_views)
+        except Exception:
+            pass
+
     def on_mount(self) -> None:
         self.refresh_all_views()
         self.set_interval(1.0, self.update_clock)
+        self.auto_sync_universe_background()
+        self.set_interval(900.0, self.auto_sync_universe_background)
         if self.initial_tab == "tab_agy":
             try:
                 self.query_one("#agy_input", Input).focus()
