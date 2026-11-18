@@ -1,0 +1,175 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ValuationWiki//Damodaran Valuation Schedule//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Damodaran Valuation Spring Course
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 5 (Today)
+DESCRIPTION:Lecture 5 - Financial Statements & Normalization. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260823
+DTEND;VALUE=DATE:20260824
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 6
+DESCRIPTION:Lecture 6 - Risk & Return Foundations & ERP. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260824
+DTEND;VALUE=DATE:20260825
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 7
+DESCRIPTION:Lecture 7 - Geographic ERP & Country Risk. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260825
+DTEND;VALUE=DATE:20260826
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 8
+DESCRIPTION:Lecture 8 - Bottom-Up Betas & Operating Leverage. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260826
+DTEND;VALUE=DATE:20260827
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 9
+DESCRIPTION:Lecture 9 - Cost of Debt & Synthetic Ratings. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260827
+DTEND;VALUE=DATE:20260828
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 10
+DESCRIPTION:Lecture 10 - Capital Structure & WACC Derivation. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260828
+DTEND;VALUE=DATE:20260829
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 11
+DESCRIPTION:Lecture 11 - R&D Capitalization & Amortization. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260829
+DTEND;VALUE=DATE:20260830
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 12
+DESCRIPTION:Lecture 12 - Operating Lease PV Conversion. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260830
+DTEND;VALUE=DATE:20260831
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 13
+DESCRIPTION:Lecture 13 - Reinvestment & Capital Spending. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260831
+DTEND;VALUE=DATE:20260901
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 14
+DESCRIPTION:Lecture 14 - Sales-to-Capital Ratio & ROIC. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260901
+DTEND;VALUE=DATE:20260902
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 15
+DESCRIPTION:Lecture 15 - Fundamental Growth Forecasting. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260902
+DTEND;VALUE=DATE:20260903
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 16
+DESCRIPTION:Lecture 16 - Terminal Value & Gordon Growth. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260903
+DTEND;VALUE=DATE:20260904
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 17
+DESCRIPTION:Lecture 17 - Transition Period & Stable Growth. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260904
+DTEND;VALUE=DATE:20260905
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 18
+DESCRIPTION:Lecture 18 - Value per Share Bridge & Cash/Debt. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260905
+DTEND;VALUE=DATE:20260906
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 19
+DESCRIPTION:Lecture 19 - Options, Cross-Holdings, NCI & Pensions. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260906
+DTEND;VALUE=DATE:20260907
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 20
+DESCRIPTION:Lecture 20 - Valuing Financial Service Firms. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260907
+DTEND;VALUE=DATE:20260908
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 21
+DESCRIPTION:Lecture 21 - Valuing Young Growth & Tech Companies. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260908
+DTEND;VALUE=DATE:20260909
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 22
+DESCRIPTION:Lecture 22 - Valuing Distressed & Decline Companies. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260909
+DTEND;VALUE=DATE:20260910
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 23
+DESCRIPTION:Lecture 23 - Relative Valuation Multiples Mechanics. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260910
+DTEND;VALUE=DATE:20260911
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 24
+DESCRIPTION:Lecture 24 - Relative Valuation Regressions. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260911
+DTEND;VALUE=DATE:20260912
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation: Lecture 25
+DESCRIPTION:Lecture 25 - Private Company Valuation & Discounts. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260912
+DTEND;VALUE=DATE:20260913
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Course Synthesis & Excel Testing (Day 1)
+DESCRIPTION:Reviewing course concepts against custom Excel model. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260913
+DTEND;VALUE=DATE:20260914
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Course Synthesis & Excel Testing (Day 2)
+DESCRIPTION:Reviewing course concepts against custom Excel model. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260914
+DTEND;VALUE=DATE:20260915
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Damodaran Valuation Course Completion Milestone 🎉
+DESCRIPTION:Course complete! Ready for analyst portfolio applications. Playlist: https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+DTSTART;VALUE=DATE:20260915
+DTEND;VALUE=DATE:20260916
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

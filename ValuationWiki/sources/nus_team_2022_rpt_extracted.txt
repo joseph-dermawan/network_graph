@@ -1,0 +1,1902 @@
+
+--- PAGE 1 ---
+CFA Institute Research Challenge
+Hosted by
+CFA Society Singapore
+Sapphire Capital
+The CFA Institute Research Challenge is a global competition that tests the equity research and valuation, investment report
+writing, and presentation skills of university students. The following report was prepared in compliance with the Official Rules of the
+CFA Institute Research Challenge, is submitted by a team of university students as part of this annual educational initiative and
+should not be considered a professional report.
+Disclosures:
+Ownership and material conflicts of interest:
+The author(s), or a member of their household, of this report hold a financial interest in the securities of this company.
+The author(s), or a member of their household, of this report does not know of the existence of any conflicts of interest that might bias
+the content or publication of this report.
+Receipt of compensation:
+Compensation of the author(s) of this report is not based on investment banking revenue.
+Position as an officer or director:
+The author(s), or a member of their household, does not serve as an officer, director or advisory board member of the subject
+company.
+Market making:
+The author(s) does not act as a market maker in the subject company’s securities.
+Disclaimer:
+The information set forth herein has been obtained or derived from sources generally available to the public and believed by the
+author(s) to be reliable, but the author(s) does not make any representation or warranty, express or implied, as to its accuracy or
+completeness. The information is not intended to be used as the basis of any investment decisions by any person or entity. This
+information does not constitute investment advice, nor is it an offer or a solicitation of an offer to buy or sell any security. This report
+should not be considered to be a recommendation by any individual affiliated with CFA Society Singapore, CFA Institute or the CFA
+Institute Research Challenge with regard to this company’s stock.
+--- PAGE 2 ---
+SATS Limited | SGX: S58
+Mi
+Bound for take-off Initiation: BUY
+Current Price: S$3.85
+Target: S$4.97 (+29.1%)
+Sing apore | Airport Services Dat2e8: t2h5 Jtha Oncutaorbye r2 2002221
+Analysts SATS Ltd., (“SATS”) provides gateway services and food solutions in Singapore, Japan, and other
+Chur Calvin international markets. It is best known to be the chief ground-handling and in-flight catering service
+Tan Hui Ling provider at Singapore’s Changi Airport.
+Tan MingZhuang, Jovian
+Goh Ping Min, Perry Executive Summary
+We are initiating coverage of SATS with a BUY rating and a $4.97 12M price target. Our first thesis covers
+Stock Data
+52-wk range (S$) 3.55 - 4.56 past events that have over-penalized SATS’ stock price. Our second thesis covers present events that have
+Market Cap (mil) 4320.3 made SATS stronger than before. Our third thesis covers future events that will drive long-term value.
+Shares Outstanding (bn) 1.12
+Free Float (bn) 0.67 Buying opportunity before excessive COVID-19 pessimism reverses
+Avg. Vol (mil) 1.75 Capitalise on the recovery potential of travel-related stocks with capped downside: While most
+EPS (TTM) 0.0100 sectors have returned to their pre-pandemic valuations, travel-related stocks remain handicapped. This
+ROE (TTM) -0.5% creates an opportunity for upside potential as we believe air travel has arrived at an inflection point.
+Major Shareholders SATS is well-positioned to weather the COVID-19 storm: SATS ability to outperform its peers by
+retaining 50.0% of pre-pandemic revenue, along with high positive cash flow is a testament to the strength
+of its business. We believe this momentum will continue even with the reduced government reliefs.
+Worries over the latest Omicron developments are overblown: When news of Omicron was reported,
+SATS’ share price fell 6.6%. We believe that this creates a unique discounted entry point for buying the stock
+as Omicron is less virulent than previous mutations and travel restrictions is expected to be lifted soon.
+Unprecedented pandemic has made SATS better than before
+Key Executives Non-travel revenues continue to be a bright spot, with momentum expected to accelerate: SATS’ early
+Kerry Mok President and CEO in-roads into non-travel related services has expanded over the years growing at CAGR of 22% from FY2018
+Euleen Goh Chairman to FY2021. Shareholders can expect this to continue as management aims to further build on this segment.
+Seah Kok Khong CFO
+Tan Chuan Lye Chairman, Food Solutions New CEO spearheading non-aviation business efforts: SATS newly appointed CEO Mr Kerry Mok,
+Yacoob Piperdi CEO, Gateway Services previously headed the non-aviation business in SATS and have deep experience in supply chain. We believe
+the appointment will provide the expertise and vision to further succeed in the non-travel segment.
+1-Year Price Chart
+Well diversified geographically, with overseas businesses poised for strong recovery & growth:
+SATS’ overseas markets, which make up c.30% of its revenues, indicate a recovery trajectory with earnings
+turning positive to $2.1M in 2Q22. Strategic focus on ventures in overseas markets will help SATS succeed.
+Yielding the fruits of an underappreciated cash war chest
+Pursuing strategic new ventures: SATS management plans to spend over $1bn in investments over the
+next 3 years, expected to bring in over ~$900m of new revenue sources. With cheap internal financing from
+cash balances and the potential to take on more leverage, larger acquisitions can re-rate the stock price.
+Undervalued compared to regional peers Developing productivity capabilities: Cost of labour makes up the largest proportion of expenses at
+~40%. SATS management aims to increase productivity with past and future technological investments,
+with huge potential for margin expansions when they are realized in the future.
+Sustaining long term innovation: SATS Global Innovation Centre aims to bring innovative and sustainable
+food products and services to market. We believe that new developments from SATS innovation initiatives
+will help to preserve and grow their technology edge, differentiating products from competitors.
+Compelling Valuation
+Using DCF (equal blend of Gordon Growth and Exit
+Multiple Method) as our primary valuation methodology
+and performing sanity check against trading
+comparables by employing a sum-of-the-parts approach
+(valuing SATS’ business segments separately) using
+Forward EV/Revenue+1 multiple, we arrive at a target
+price of SGD$4.97. Whilst we have conducted a
+precedent transaction analysis, we placed less reliance
+on it due to the inclusion of control premium driving
+valuation up. We estimate EPS to reach SGD$0.24 by
+2024, which is in line with pre-pandemic levels.
+Historical and Forecasted Financials
+FY FY2017 FY2018 FY2019 FY2020 FY2021 FY2022E FY2023E FY2024E FY2025E FY2026E
+FY ending 31/3/2017 31/3/2018 31/3/2019 31/3/2020 31/3/2021 31/3/2022 31/3/2023 31/3/2024 31/3/2025 31/3/2026
+Revenue 1,729.4 1,724.6 1,828.0 1,941.2 970.0 1,191.9 1,595.2 2,069.1 2,305.8 2,446.2
+EBITDA 314.0 325.5 330.4 323.5 48.7 2 00.1 2 72.9 4 01.2 5 02.1 5 91.3
+EBITDA Margins (%) 18.2% 18.9% 18.1% 16.7% 5.0% 16.8% 17.1% 19.4% 21.8% 24.2%
+Net Profit 257.9 261.5 248.4 168.4 (78.9) 1 03.4 1 88.3 2 71.1 3 28.6 3 89.7
+Net Profit Margins (%) 14.9% 15.2% 13.6% 8.7% -8.1% 8.7% 11.8% 13.1% 14.2% 15.9%
+EPS 0.23 0.23 0.22 0.15 (0.07) 0.09 0.17 0.24 0.29 0.35
+ROE 16.1% 16.0% 15.1% 10.4% -5.1% 6.4% 11.6% 16.8% 20.5% 24.3%
+.
+1
+--- PAGE 3 ---
+Figure 1.1: SATS’ Geographical Presence 1. Business Description
+Overview
+Established in 1947, SATS Ltd., (“SATS”) specializes in customized gateway services and food solutions
+for its clients. With presence across Asia Pacific, the Middle East, and Europe, SATS has footprint in 55
+locations and 13 countries worldwide. Singapore (87.7%) and Japan (6.1%) are its key revenue drivers
+[Figure 1.1]. SATS’ gateway services (~40% of total revenue) offer airfreight, cargo, ramp and baggage
+handling, passenger services, aviation security services, aircraft cleaning, and cruise centre
+management. Its food solutions business (~60% of total revenue) comprises airline and institutional
+catering, aviation laundry, food distribution and logistics [Figure 1.2]. To leverage on the synergies
+Source: SATS Annual Report across these two main revenue streams, SATS also offers an integrated food solutions and gateway
+services under one roof for many airlines and airports globally. Besides the aviation sector, SATS has
+Figure 1.2: SATS’ Revenue by Biz Segments extended its reach to industries such as healthcare, hospitality, and government sectors.
+1,941
+1,828
+1,729 1,725 Business Segments
+2
+1 1 2 Food Solutions – From institutional catering for healthcare and events, to launching ready-to-eat meals
+869 in retail chains, SATS has been gaining momentum in new food segments beyond aviation catering. This
+755 777 838 970
+move to pivot into non-aviation food segments is driven by last year’s 46.4% decline in SATS Food
+6
+Solutions’ revenue, precipitated by sharp reductions in aviation volumes.
+390
+973 947 988 1,070
+574 Gateway Services – With rapidly increasing global air cargo demand, SATS’ cargo businesses expanded
+steadily and contributed to more than a third of SATS’ Gateway Services’ revenue. While steep fall in
+FY17A FY18A FY19A FY20A FY21A
+demand for air travel has caused SATS Gateway Services’ revenue to contract 55.1% last year, the
+Food Solutions Gateway Services Others business line has doubled down on its air cargo services to handle eCommerce as well as vaccine and
+oxygen concentrators shipments across geographies.
+Exposure to Travel and Overseas Segments
+With a substantial portion of its revenue coming from the aviation and travel industry [Figure 1.3], SATS
+has looked to diversify more of its revenue streams to the non-travel sector in the past year, to mitigate
+the impact of COVID-related risks on the travel industry and support future growth.
+Looking at SATS combined revenue which includes all associates and joint ventures, revenues from
+Singapore are now 68%, an improvement from the 87.7% when only considering the main company
+Source: SATS Annual Report [Figure 1.4]. As SATS continues to invest overseas, this number is expected to further improve.
+Figure 1.3: SATS’ Revenue by Travel Split 2a. Industry Overview (Food Solutions)
+1,729 1,725 1,828 1,941 Within the food solutions space, new food segments are emerging as lockdowns, work-from-home
+arrangements and new status quos within the foodservice sector evolve with the COVID-19 pandemic.
+234 236 261 337 970 As such, we expect stronger growth in the food solutions industry to be propelled by two main key
+demand drivers: (1) changing food consumption behaviours, and (2) new food production trends.
+1,496 1,489 1,567 1,604 433
+537 Food Consumption Trends
+Ready-to-Eat Meals: Driven by changing consumer preferences amid the pandemic and the long-term
+FY17A FY18A FY19A FY20A FY21A
+trend of rapid urbanisation, Asia’s ready-to-eat meals market is expected to grow annually by 5% (CAGR
+Travel Related Non-Travel Related
+2021-2025). Across channels of food purchasing, consumers across countries report a 30%-70% drop
+in their preference for dine-in spending, and an increase in grocery shopping and purchases of ready-
+made food which consumers tend to prefer more than meal delivery from restaurants [Appendix A].
+Alternative Proteins: One of the current largest food adoption trends is in alternative protein, due to
+changing consumer behaviour and growing interest in sustainable protein sources caused by
+environmental and health concerns. The alternative protein market is projected to grow annually by
+Source: SATS Annual Report
+11.2% (CAGR 2020-2027) to reach US$27.1 bn in 2027. There is strong growth in APAC and Singapore
+is poised to be at the forefront of alternative protein driven by (1) rising government support (2) strong
+Figure 1.4: SATS’ Combined Revenue
+consumer interest, and (3) wealth of funding and training opportunities.
+2,587 2,622
+2,318 2,413 71 52 Food Production Trends
+63 68 156 152 Central Kitchens: As more food solution providers are choosing to make more of their food
+1 1 3 0 0 0 1 1 5 1 4 4 2 1 5 8 7 1 2 2 6 4 2 3 components in-house, the central kitchen model has become popular. By harnessing the central kitchen
+267 248 capabilities, food solution providers can scale production while ensuring consistency in food quality and
+223 262 292 309 better waste control. However, central kitchens are more than just a mere cost reduction facility, as
+1,264
+operators can generate additional revenue by improving efficiency through advanced technology
+26
+89 68 solutions and undertaking OEM production of food.
+64
+1,537 1,567 1,630 1,604
+160
+Extended Shelf-Life Tech: New technologies have been slowly rolled out into the market, such as High-
+857
+Pressure Processing (HPP) and new food packaging materials that prevent oxygen from entering the
+packaging. The pandemic has caused supply chain disruptions and more efforts were placed to finding
+FY17A FY18A FY19A FY20A FY21A ways to increase the storage duration of perishable foods. New innovations include utilising silk
+proteins as a food coating, intelligent packaging, and time-temperature sensors. Once fully
+Singapore Greater China Japan
+commercialized, they will help to reduce waste and improve inventory turnover of food products.
+Asean (ex-SG) India Others
+Source: SATS Annual Report
+.
+2
+--- PAGE 4 ---
+Figure 2.1: Change in Air Freight Traffic over 2b. Industry Overview (Gateway Services)
+2019 based on Freight Tonne-Kilometres (FTK)
+With rising vaccination rates and the urgency to revive export and tourism-dependent economies that
+have languished for nearly two years now, governments are set on easing travel curbs and countries are
+reopening for vaccinated tourists. As such, we expect stronger growth in the gateway services industry
+to be propelled by two main key demand drivers: (1) a vaccine-led recovery and revival of the aviation
+industry, and (2) a more resilient global air cargo demand.
+The Inevitable Transition from Pandemic to Endemic
+Revival of the aviation industry: As governments recognise the endemic nature of the virus, many
+countries in ASEAN are shifting and adapting their strategies to learn to live with COVID-19. Therefore,
+as travel demand increases, aviation catering, passenger, laundry, and security services for airlines and
+Source: IATA
+air transport will consequently see a similar surge in demand. This augurs well for the aviation industry,
+which is anticipated to register an annual growth of 4% (CAGR 2021 – 2026).
+Figure 2.2: Global Air Cargo Demand based on
+CTK Levels
+Return of air travel faster than expected in Singapore: Singapore has also launched its Vaccinated
+Travel Lane (VTL) scheme where fully vaccinated tourists from countries under the VTLs may travel
+without quarantine. The global aviation industry faces an uneven recovery from the pandemic, and
+regions with greater tourism-dependent markets, faster vaccination rollouts and less restrictive
+government policies like Singapore will see a faster recovery in its aviation industry.
+A More Resilient Air Cargo Industry
+Air cargo had a stellar 2021: While global passenger movements remain significantly below pre-
+COVID levels, global air cargo demand continues its upswing against a better macroeconomic backdrop
+[Figure 2.1]. According to the International Air Transport Association (IATA), global air freight demand,
+measured in cargo tonne-kilometres (CTKs), was +8.9% in December and +6.9% for 2021 compared to
+2019 (pre-crisis), and seasonally adjusted CTKs continue to trend sideways close to the all-time high at
+Source: IATA
+levels higher than pre-pandemic. [Figure 2.2]. The outlook for air cargo demand remains strong largely
+due to the structural acceleration of e-commerce and continuous demand for medical supplies.
+Figure 3.1: In-fight Catering Services Market
+Growing demand for transportation & distribution of medical supplies: A key criteria for countries
+to reopen their borders is total vaccination coverage for the population. Closer to home, Singapore’s
+Changi Airport Group (CAG) has positioned herself to serve as the regional hub in South-east Asia to
+support efficient distribution of vaccines and oxygen concentrators. To cater to this demand, players in
+the gateway services industry are increasing the capabilities of their temperature-controlled
+environments, enhancing their cool chain infrastructure and equipment. As the global vaccine transport
+and logistics industry is expected to grow by 7.1% (CAGR 2021-2026), this bodes well for airfreight
+handling and logistics providers to capture future growth opportunities within the market.
+3. Competitive Positioning
+Source: SATS Investor Presentation
+In-flight Catering Services | A Fairly Fragmented Market
+While a few major players dominate the market for in-flight catering in other regions, the industry is a
+Figure 3.2: Key Players within the In-flight
+fragmented and competitive market in Asia-Pacific (APAC), SATS’ primary market [Figure 3.1]. Pre-
+Catering Services Market in Asia-Pacific
+pandemic, APAC’s in-flight catering market is the region with the highest demand and growth potential.
+This is mainly attributed to the robust growth in low-cost carriers and a steady increase in passenger
+traffic in countries like China, Japan, India, Thailand, and Singapore.
+Globally, in-flight caterers are on a race to increase their R&D spending exponentially to integrate
+service innovation with culinary excellence, to offer the premium quality food that consumers want.
+Mergers and acquisitions, along with collaborations by major companies, are raking up competition
+even further. For example, The Emirates Group acquired Qantas Airways’ catering business in 2018, and
+LSG Sky Chefs extended its catering partnership with Cathay Dragon in Hong Kong through till 2025.
+Source: Various Company Websites Focusing on APAC, the in-flight catering market is consolidated with five players accounting for >60%
+of the share in the market. The major players in the market are: LSG Sky Chefs, Cathay Pacific Catering
+Figure 3.3: Market Share of Ground Handling Services, SATS Ltd., GateGroup, and The Emirates Group [Figure 3.2].
+Services at Changi Airport, Singapore
+Gateway Services | Almost a Monopoly in Singapore
+Although ground handling services at Changi Airport are subject to open tenders, SATS controls nearly
+80% of the market share, with Dubai’s dnata controlling the other 20% [Figure 3.3]. Previous entrants
+like Swissport and ASIG have exited the market in 2009 and 2015 respectively as they were unable to
+Source: Various Company Websites
+compete effectively. In the battle to service airlines operating at Changi Airport, price wars occurred
+between SATS and dnata, dragging pricing rates down to as much as 30% in 2016 when contracts were
+up for renewal. The competition has impacted their profitability as costs escalate amid headwinds like
+supply chain disruption, inflation of goods, rising energy prices, and manpower shortages.
+As the larger player, SATS has the upper hand in the rivalry against dnata. With its larger regional
+network advantage, SATS can leverage on its scale to increase its resource, supply chain, and operational
+productivity. Yet, even so, intensifying competition between the two suppliers may not be sustainable
+for SATS in the long term, as Singapore becomes a more expensive place to operate, and volumes in the
+airline business remain below pre-pandemic levels [Appendix B].
+.
+3
+--- PAGE 5 ---
+Figure 3.4: Porters’ Five Forces for SATS Porters Five Forces Analysis (Figure 3.4)
+Gateway Services Food Solutions
+Buyer Power Ground Handling: Aviation Food Catering:
+(Moderate – 3) Many customers in industry, low Dominant market player
+buyer concentration
+Non-aviation Food Catering:
+Cruise Terminal: Well-placed to compete with other
+Infancy of building up branding institutional caterers in market
+Supplier Power - Labour-intensive cost structure - Increasing food & labour costs
+(Moderate – 4) - High raw materials costs amidst supply chain disruptions and
+rising inflationary pressures
+Degree of rivalry - Two main players in Singapore, - Established foothold in catering
+(Moderate – 4) SATS and dnata, competing segment, extensive distribution
+aggressively on prices network of specialised vehicles
+Threat of new - High barrier of entry with - High barrier of entry with huge
+Source: Sapphire Capital Analysis entrants (Low – 2) licensing requirements and low investments in specialised
+profit margins and yields equipment and facilities
+Figure 4.1: SGX large-cap stocks ranked by Threat of substitutes - No substitute products - No substitute products
+share price recovery from Jan 2020 – Feb 2022 (Low – 1)
+*Based on team’s own estimates [Appendix C]
+4. Investment Summary
+Thesis 1: Buying opportunity before excessive COVID-19 pessimism reverses
+Prior to the onset of COVID-19, SATS traded between the $4.80 - $5.20 range in 2H2019. Following the
+introduction of market volatility owing to COVID-19 concerns, SATS fell below this range and closed at
+a 5-year-low of $2.58 on 23rd Mar 2020. Ever since, SATS has yet to recover to its previous high and its
+share price continue to be troubled by COVID-19 developments. We believe that these worries are
+unwarranted, and SATS is a value play as air travel is overdue for recovery.
+Capitalising on recovery potential of travel-related stocks with capped downside: From our
+analysis of the largest market-cap stocks on SGX [Figure 4.1], the three travel-related stocks (SATS,
+Singapore Airlines and Genting Singapore) rank in the bottom 6 in terms of COVID-19 share price
+recovery. As the other sectors have mostly recovered while travel has not, this suggests the market’s
+severe pessimistic outlook around travel-related stocks. On the contrary, we believe that Omicron has
+allowed air travel to achieve an inflection point due to the mounting scientific evidence regarding the
+ineffectiveness of travel restrictions. This is aligned with IATA’s call for governments to accelerate
+Source: Sapphire Capital Analysis
+relaxation of travel restrictions. The recent announcements by Sweden, Denmark, Norway, and France
+to remove entirely or scale back restrictions serves as further evidence. In Singapore, the renewed
+Figure 4.2: Peers revenue in FY2021 and LTM
+contract to host the Formula 1 Grand Prix also indicates Singapore’s willingness to move forward post-
+1H FY2022 as % of pre-pandemic revenue
+pandemic. Thus, it is timely to enter SATS now against the backdrop of an emerging global travel
+recovery, with a runway before the sentiments for air travel reverses and are fully priced in.
+Additionally, travel-related stocks also have lower downside relatively to the other sectors as a result
+of the subdued recovery.
+SATS is well-positioned to weather the COVID-19 storm: As we arrive at the 2-year mark of COVID-
+19, SATS’ performance over the course of the pandemic outshined its peers, evidenced by its ability to
+retain 50.0% of pre-pandemic revenue in FY2021 [Figure 4.2]. However, SATS valuation recovery
+remains comparable to its peers [Figure 4.3], suggesting that SATS is unfairly penalised by COVID-19
+troubles despite stronger performance than peers. Moreover, SATS financial position provides us with
+high degree of confidence in its ability to tackle COVID-19, especially given the positive cashflow before
+any discretionary activities [Figure 4.4]. Even without the government reliefs of $210m in FY2021 and
+$86m in 1H FY2022, SATS has sufficient cash reserves to avoid being highly levered. This is crucial, as
+government reliefs are expected to reduce over the next two quarters and to be minimal in FY2023.
+Source: Various companies annual report
+Additionally, there is no imminent debt maturity until 2025 for the unsecured notes issued by the
+company to strengthen liquidity position in 2020 and 2021 for $200m and $100m respectively.
+Figure 4.3: Stock chart for aviation-related
+companies from Jan 2020 – Feb 2022, rebased
+Worries over the latest Omicron developments are overblown: Initial news of the Omicron variant
+to 100
+was first reported on 25th Nov 2021, rattling global investors fearing for the possible impending
+economic implications. SATS was not spared as its stock price fell 6.6% from $4.07 on the close of 25th
+Nov 2021 to $3.80 on 31st Nov 2021. The current understanding is that the Omicron variant is more
+transmissible but less virulent than the previous mutations. The WHO has released advisories, warning
+against the blanket travel bans imposed by countries over Omicron as these bans are proven to be
+ineffective in preventing the international spread of the virus. As such, the knee-jerk reaction by
+governments to impose additional restrictions is expected to be overturned in the short term, much
+earlier than previous mutation, because countries are now cognisant of the inability of travel
+restrictions to control the spread of the virus. In turn, this creates a unique timing opportunity to enter
+at a discounted price due to the overblown Omicron news, with additional catalysts when countries
+inevitably lift their travel restrictions one after another.
+Source: Yahoo! Finance
+4
+--- PAGE 6 ---
+Figure 4.4: Breakdown of SATS cash balance Thesis 2: Unprecedented pandemic has made SATS better than before
+Like a black swan event, the evolving and unprecedented nature of COVID-19 has given SATS a window
+of opportunity to reshape and reinvent its business operations. With a significant proportion of its
+revenues coming from the aviation and travel industries which were severely implicated by COVID-19,
+SATS is compelled to look for growth in new areas - we believe that this pivots SATS to a new strategic
+direction that has made the company better than before.
+Non-aviation and non-travel revenues are bright spots with momentum expected to accelerate:
+SATS early investments made before the pandemic has now been established as the bedrock of SATS
+diversification into non-travel related revenue streams, compensating heavily for the fall in travel-
+related services. For example, SATS built their first kitchen for non-travel related services in Kunshan,
+China back in 2017. The kitchen exceeded expectations, turning profitable just two years into operations
+During the pandemic, it enjoyed continued revenue growth and is now cash flow positive. Even after
+Source: SATS Annual Report COVID-19 struck, SATS adapted to the looming travel restrictions by continuing to expand its non-travel
+segment. SATS’ early in-roads into non-travel related services has expanded over the years growing at
+Figure 4.5: SATS non-travel revenue CAGR of 22% from FY2018 to FY2021, and continues growing with each passing quarter [Figure 4.5].
+Moving forward, momentum for non-travel is expected to accelerate with management providing
+guidance for non-travel related revenue to contribute 30-35% of the $3bn revenue target in FY2025, up
+96.9 100.6 103.4 125.3 127.6 137.9 considerably from 14% in FY2019 and implying a CAGR of 20% for the segment between FY2020-2025.
+New CEO spearheading non-aviation business efforts: The announcement of SATS new CEO, Mr
+Q1 Q2 Q3 Q4 Q1 Q2 Kerry Mok, suggests the company’s intention to grow the non-aviation business further as Mr Mok has
+FY21 FY21 FY21 FY21 FY22 FY22
+deep experience in supply chain with previous stints as the CEO of YCH and led the food solutions team
+in SATS since 2018. This appointment provides confidence for shareholders as Mr Mok was responsible
+Non-travel Travel
+for accelerating the non-aviation business in SATS, pushing an end-to-end supply chain strategy for the
+Source: Sapphire Capital Analysis company by acquiring the remaining 49% of Country Foods when the company was considering selling
+it back in 2019. As such, we believe that the new CEO has the expertise and vision needed to move SATS
+Figure 4.6: SATS’ share of revenue from towards a diversified services provider resilient to sector pressures, and the current price of SATS is not
+associates and JVs in 1H FY2022 reflective of this growth potential.
+Well diversified geographically, with overseas businesses poised for strong recovery & growth:
+Although SATS’ operations are mainly based in Singapore, over 30% of their combined revenue comes
+from overseas markets through their associates and Joint Ventures (JVs) as of FY2021. Markets overseas
+have also shown optimistic signs of recovery, with SATS reporting that earnings from their associates
+and JVs have turned positive to $2.1M in 2Q22 from a loss of negative $12.8M in 2Q21. As many of their
+associates are based in the high growth markets of India and China such as Taj SATS, Beijing Airport and
+Evergreen [Figure 4.6], our team is bullish on the company’s focus in these regions.
+Thesis 3: Yielding the fruits of an underappreciated cash war chest
+Source: SATS’ Capital Market Day 2021 Pursuing strategic new ventures: SATS management intends to spend over $1bn on investments over
+the next 3 years, with ~$800m to be used on new projects and M&A - expected to bring in ~$900m from
+Figure 4.7: SATS forecasted revenue gains from new revenue sources [Figure 4.7]. SATS has a sizable cash balance [Figure 4.4] as of 1H FY2022
+(~$686m) and an enviable net cash position when compared to their direct competitor, dnata, allowing
+new investments
+access to cheap capital via internal financing. To support larger acquisitions, SATS can easily take on
+more leverage due to low leverage rates and a low interest rate environment. With such favourable
+conditions, our team is bullish on SATS acquisition strategy - it is likely that investors are taking a wait-
+and-see approach; given the management’s track record of strong investments, any news on a material
+acquisition may cause the stock to re-rate.
+Developing productivity capabilities: SATS’ business operations are labour intensive, with cost of
+labour making up the largest proportion of expenses at ~40%. In the 2021 AGM, SATS management re-
+iterated that capex by the company for transformational projects “would increase efficiency and
+productivity in the future”. SATS has revamped TechnIC@SATS since 2017 with $110 million, co-funded
+by CAAS and EDB to develop new capabilities and increase productivity for SATS business units.
+Initiatives include automating manpower intensive processes (e.g. Smart Wheelchair System, a vision
+Source: SATS Capital Markets Day based automatic wheelchair & Dolly, an automated food trolley) – SATS has managed to harness
+technology to achieve a 310 basis point expansion in operating margin from 2014-2017, and staff costs
+Figure 4.8: % of staff costs over revenue as a percentage of its revenue have been decreasing over the years [Figure 4.8], We believe that further
+technological investments by SATS will improve margin expansion in the long run.
+3000 45.7% 48.6% 49.5% 48.3% 47.8% 45.3% 60.0%
+Sustaining long term innovation: SATS recently set up the SATS Global Innovation Centre in Singapore
+2000 40.0%
+and the UK, focused on bringing innovative and sustainable food products and services to market and
+1000 20.0% help Singapore become a food innovation hub. Collaborations include sharing technical know-how to
+the new central kitchen in Bengaluru, as well as developing new mushroom-based alternative protein
+0 0.0% meals with Monty’s Bakehouse. We believe that new developments from SATS innovation initiatives will
+FY15A FY16A FY17A FY18A FY19A FY20A
+help to preserve and grow their technology edge, ultimately differentiating their products from
+competitors to bringing in more revenue in the future.
+Source: SATS’ Annual Report
+.
+5
+snoilliM
+$S
+Revenue
+Staff Costs
+Staff Costs as % of Revenue
+--- PAGE 7 ---
+Figure 4.9: SATS dividend yield between Investment Catalysts
+calendar years 2010 – 2019 Countries lifting restrictions impose during Omicron: Due to the highly transmissible nature of the
+Omicron variant, many countries imposed additional restrictions to curb the spread of the virus.
+Nevertheless, infected cases and hospitalisations appears to be decoupled as number of severe cases
+and hospitalisations have not increased significantly despite the number of infected cases soaring.
+According to the latest advisory by the WHO in January, countries should lift or ease international traffic
+bans as these restrictions are limited in controlling the internal spread of Omicron. As such, we believe
+that countries will gradually lift travel restrictions, providing strong tailwinds for air travel recovery.
+Emergence of better COVID-19 treatments: COVID-19 treatments are constantly being developed and
+refined to improve accessibility, especially to developing nations. The recent Novavax vaccine, which
+has been given emergency authorization in Indonesia uses a different technology than those currently
+being used. The two-dose vaccine does not require the extremely cold storage that the other vaccines
+Source: SATS Annual Reports
+require. Likewise, the antiviral pills by Pfizer (Paxlovid) and Merck (Molnupiravir) do not require cold
+chain for delivery and can even be self-administered by patients. Therefore, both the new vaccine and
+Figure 4.10: Forecasted dividends per share for
+antiviral pills play an important role in boosting treatment accessibility and supplies to countries that
+projected years FY2022 – FY2026
+do not have extensive cold-chain supply chain capabilities. With better treatment accessibility, this
+would accelerate the push to pre-pandemic normalcy and allow an expedited air travel recovery.
+Reinstating dividends: Prior to COVID-19, SATS has consistently rewarded their shareholders, paying
+dividends every year since 2000. Dividends grew from $0.055/share to $0.19/share in 2019. Based on
+the gross dividends received per annum from 2015-2019, shareholders received an average yield of
+4.14% each year [Figure 4.9]. However, management has since halted dividend payments for FY2020
+and FY2021 over COVID-19 concerns but has continued to express their willingness to reinstate
+dividends as soon as SATS attains profitability without government reliefs. For reference, SATS
+recognised $86m of reliefs in 1HFY2022 and the amount will be lowered for the next 2 quarters and
+Source: Sapphire Capital Analysis minimal from 1QFY2023 onwards. Based on our analysis, we expect SATS to achieve profitability
+without government reliefs as soon as late FY2022, with projected dividends of $0.07/share in FY2022
+Figure 5.1: EPS Forecast [Figure 4.10], adding a strong buy momentum from dividend-seeking investors.
+5. Financial Analysis
+Strong earnings will lead to quality shareholder returns
+We expect SATS to deliver a robust EPS growth of 7% CAGR from FY2020 (pre-pandemic) to FY2026,
+stemming from strong top-line growth and expected margins expansion [Figure 5.1]. This would
+translate to capital gains alongside higher dividends paid, even with decreasing pay-out ratio factored
+into our model as SATS allocate more internal funds to finance its strong pipeline of expansion plans.
+Source: Sapphire Capital Analysis
+Strong top-line growth to be realized: We employed a bottom-up approach to forecast both gateway
+Figure 5.2: Revenue Bottom-up Approach services and food solutions business segments separately [Figure 5.2]. Considering IATA’s travel
+forecast, and sense checked against McKinsey’s industry forecast, we conservatively estimated revenue
+to reach pre-pandemic levels by FY2024 in our base case. Our forecast of $2.30B by FY2025 indicates a
+24.2% CAGR. Yet, it is conservative compared to street consensus of $2.85B and management targets of
+$3B. To ensure accuracy in our forecast, we conducted statistical analysis, which revealed that the
+revenue drivers chosen (i.e., gross meals produced, and flights handled) have strong correlation with
+revenue historically, as evidenced by a R-Squared reading close to 1.
+Source: Sapphire Capital
+Margins Expansion will be realised…: We expect margins to steadily increase from FY2022 to FY2026
+Figure 5.3: Margins Forecast
+[Figure 5.3], resulting in higher net profits and thus value for investors. Margin expansion will primarily
+stem from SATS’ robust technological investments, which enhances productivity and reduces staff cost.
+…Primarily via staff cost: Staff cost have always and will continue to remain the bulk of SATS’ cost
+structure (>40%). Thus, a large focus of SATS’ value creation strategy has always revolved around
+reducing staff cost by enhancing productivity via technology. From FY17 to FY20, SATS saw a 4.24pp
+decrease in staff cost as a % revenue. Given SATS’ commitment to spend heavily on capex for technology,
+we conservatively forecasted staff cost as a % revenue to decrease by another 2.06pp by FY2026.
+High return cash machine protected by widening moat
+Source: Sapphire Capital Robust cash generating abilities…: SATS core businesses have strong fundamentals and cash
+generating abilities – pre COVID-19, their key metrics have been rising and gross margins are
+Figure 5.4: Operating Cash Margin consistently over 30%. Even when COVID-19 hit, the group has managed to maintain a positive cash
+(OCF/Revenue) flow although net income was negative in FY2021. Moreover, SATS exemplified a much higher Operating
+Cash Margin (OCF/Revenue) of 12% compared to its biggest competitor in Singapore, dnata [Figure 5.4].
+…Leads to high returns: Consequently, SATS has managed to maintain a strong FCFF as well as Return
+on Invested Capital (ROIC), where its ROIC of 3.09% in FY2021 is higher than the peer average of 2.61%
+according to Bloomberg. In addition, strong barriers to entry benefit SATS, as deep industry knowledge
+and high capex are required to succeed [Appendix D]. With high visibility on revenues due to their
+contracts with key partner SIA, these factors fare well for SATS, as they continue to widen their
+economic moat and resources to focus on new ventures and operational improvements.
+Source: Sapphire Capital Analysis
+.
+6
+--- PAGE 8 ---
+Figure 5.5: SATS Historical D/E ratio Cash is an enabler of growth: Coupled with its strong cash balance, SATS is in a unique position that
+0.39 0.44 0.34 enables it to exploit internal financing as a cheap form of capital to pursue aggressive expansion
+strategies. Given SATS’ consistent ability to capture industry and economic tailwinds, we expect strong
+0.07 0.07 0.06
+cash generation capacity to continue moving forward.
+FY2017 FY2018 FY2019 FY2020 FY2021* 1H FY2022*
+High debt capacity to pursue further growth opportunities
+Source: SATS Annual Report
+Underleveraged Position: SATS has traditionally been largely relying on equity capital markets for
+financing. Hence, it has a relatively low long-term debt to equity ratio of 0.34, which translates to an
+Figure 5.6: Liquidity Analysis
+underleveraged capital structure that has a large capacity to readily take on debt [Figure 5.5].
+1.56x 1.83x 1.71x 2.11x 2.43x 1.83x 2.34x 2.59x
+0.98x Strong credit profile to persist: SATS has been rated “Top” by S&P Capital IQ’s Relative Credit Health
+Score [Appendix E] through a robust comparison of historical financial ratios against peers. Our forecast
+Cash Ratio Quick Ratio Current Ratio reveals that strong financials to persist, as seen from its strengthening liquidity ratios [Figure 5.6]. We
+FY20A FY21A FY22E expect SATS’ z-score to swiftly recover back to pre-pandemic figures by FY2023, which leaves it at a
+“safe” zone. Moreover, SATS is backed by the strong credit profile of its ultimate parent company,
+Source: Sapphire Capital Analysis
+Temasek Holdings. All in all, this enable SATS to obtain cheaper debt to fund its expansion plans.
+Figure 5.7: DuPont Analysis
+Favourable for SATS to raise debt: Raising debt can be a favourable option for SATS, especially with
+its underleveraged position and strong credit profile. Apart from debt being cheaper than equity as
+explained by the pecking order theory, interest rates are at a current low, debt evokes an interest tax
+shield (as dividends are non-tax deductible) and ultimately lowers the WACC of SATS which would in
+turn enhance its valuations. Inclusion of debt also enhance agency benefit of debt, such as by reducing
+management entrenchment. Moreover, raising debt does not dilute shareholders unlike equity.
+DuPont Analysis
+Crash of ROE in FY2021: Return on Equity (ROE) has crashed from pre-pandemic average of c.15.7%
+to -5.1% in FY2021 [Figure 5.7]. This is primarily driven by a sharp decline in sales, resulting in a
+Source: Sapphire Capital Analysis negative net margin and a more than 50% decrease in Returns on Assets (ROA). Financial leverage,
+however, only increased slightly from pre-pandemic average of 1.44x to 2.00x as SATS did not need to
+Figure 6.1: Valuation Football Field take on significant debt to weather through the storm especially given its strong cash position.
+Recovery of ROE by FY2024: Going forward, ROE is expected to return to pre-pandemic average by
+FY24. This stems from a gradual recovery of net margins from -8.14% in FY2021 to 13.1% in FY2024,
+which is just slightly below pre-pandemic average of 14.6%. This is coupled with an increasing ROA,
+expected to recover back to pre-pandemic levels of c.0.73x by FY2024. Financial leverage remains
+relatively constant at c.18x throughout the forecasted period.
+Capital Expenditure to support growth plans
+Capital expenditure have been largely pegged to revenue growth, Historically, capex has not fluctuated
+too much, hovering in around 4% as a % revenue. Yet, with its announced growth intentions, both
+Source: Sapphire Capital Analysis maintenance and growth capex will increase both in absolute numbers and in proportion. This stems
+from heavy investments to capture growth opportunities in the next 5 years. Thus, we have forecasted
+Figure 6.2: Cost of Equity Computation capex to rise from 4.79% in FY2019 to 12.34% as a % revenue by FY2026.
+Cost of Equity Calculations
+Risk Free Rate, Rf 1.60%
+Market Risk Premium 4.38% 6. Valuation
+Levered Beta, β 1.25
+Weighted Average Country Risk Premium 0.07%
+Valuation Overview – Choice of methodologies
+Size Premium 0.78%
+Cost of Equity 7.93% We arrive at a target price of SGD$4.97 through income approach (equal blend of DCF using Gordon
+Source: Sapphire Capital Analysis growth and exit multiple method) as our primary valuation methodology. We chose the income
+approach as it is able to capture the unique position that SATS is in, including its impending recover,
+Figure 6.3: Cost of Debt Computation multiple growth levers and thus the future free cash flow to firm that it generates.
+Cost of debt calculation
+Average synthetic credit rating Ba2
+Enterprise Risk Management (ERM) adjustment Strong, +2 We have further employed the market approach (sum of the parts of comparable companies in the 2
+Adjusted synthetic credit rating Ba1
+key business segments using Forward EV/Revenue+1 multiple) as well as broker estimates as sanity
+Default spread 2.00%
+Add: risk-free rate 1.60% check against our target output. We have chosen to place less reliance on precedent transactions
+Cost of debt 3.60%
+analysis due to inclusion of control premium that inflates the valuation output. Our Football Field
+Source: Sapphire Capital Analysis
+[Figure 6.1] summarises the various valuation methodologies.
+Figure 6.4: Sensitivity Analysis
+Intrinsic Valuation – Discounted Cash Flow Analysis
+Implied Enterprise Value (Gordon Growth Method)
+Terminal Growth Rate Our DCF uses the Free Cash Flow to Firm (FCFF) methodology to arrive at the intrinsic value of SATS.
+$ 4.67 1.0% 1.5% 2.0% 2.5% 3.0%
+5.66% 4.53 5.17 5.98 7.04 8.51
+WACC 6.16% 4.09 4.60 5.25 6.07 7.14
+6.66% 3.72 4.15 4.67 5.32 6.15 Cost of Equity: We derived the cost of equity based on the Capital Asset Pricing Model (Ke = β(Rm - Rf)
+7.16% 3.41 3.77 4.21 4.74 5.40
+7.66% 3 .14 3.46 3.83 4.27 4.81 + Rf + CRP + Size Premium). Risk free rate of 1.60% was derived by using Singapore 10 Year Treasury
+Implied Enterprise Value (Exit Multiple)
+Exit Multiple Yield as of valuation date. Professor Damodaran’s Equity Risk Premium was used as a proxy to derive a
+5 .27 9.3x 10.3x 11.3x 12.3x 13.3x
+WACC 5 6 . . 6 1 6 6 % % 4 4 . . 6 5 4 5 5 4 . . 0 9 6 6 5 5 . . 4 3 7 7 5 5 . . 8 7 9 8 6 6 . . 3 1 1 9 4.72% market risk premium. We chose to rely on regression beta (5 year monthly against STI total
+6.66% 4.47 4.87 5.27 5.67 6.07
+7.16% 4.38 4.78 5.17 5.56 5.95 return) to arrive at a beta of 1.25. The bottom-up approach [Appendix G] was used as sanity check given
+7.66% 4.30 4.69 5.07 5.46 5.84
+that there is a limitation of close comparables offering both gateway services and food solutions like
+Source: Sapphire Capital Analysis
+SATS. Weighted average country risk premium of 0.07 was derived from Professor Damodaran’s
+Research and Size Premium of 0.78% is calculated based on size premia in Kroll’s CRSP Deciles Size
+Study, using the Absolute Method by decile category. We arrive at cost of equity of 7.93% [Figure 6.2].
+7
+--- PAGE 9 ---
+Figure 6.5: Valuation Bridge Cost of Debt: By analysing SATS’ financial health, accounting for enterprise risk management and in
+conjunction with guidelines from Moody’s, we were able to derive an implied synthetic credit rating
+of Ba1 for SATS. Cost of Debt of 3.60% [Figure 6.3] was then calculated by adding a default spread
+from Professor Damodaran’s research to Singapore’s Risk-Free Rate. We also conducted a sanity check
+against this figure to be in line with the YTM of existing issued bonds (2.60%-2.88%).
+Source: Sapphire Capital Analysis
+Weighted Average Cost of Capital: A WACC of 6.66% was calculated by using Singapore’s headline
+Figure 6.6: Monte Carlo Simulation corporate tax rate of 17%, with SATS maintaining its capital structure of 0.35 long-term D/E ratio.
+Terminal Growth Rate and Exit Multiple: We derived Singapore’s long-term growth rate to be 2.0%
+through EIU’s 2021-2030 real GDP forecast. This is further validated by other sources such as IMF and
+FitchConnect. Moreover, Singapore’s 30-year sovereign bond yield, which is often used as a proxy for
+terminal growth rate also stands closely at 2.10%. We have also used an exit multiple of 11.3x
+Forward EVEBITDA+2, which is in line with what comparable companies were trading at.
+Sensitivity Analysis: To simulate the sensitivity of our buy recommendation on extreme scenarios, we
+Source: Sapphire Capital Analysis
+performed sensitivity analysis of WACC versus Terminal Growth Rate and Exit Multiple, which
+reinforced our buy recommendation, since 92% of the scenario warranted a buy [Figure 6.4].
+Figure 6.7: Sum-of-the-Parts Relative Valuation
+Low Medium High
+Total Enterprise Value 3,947.9 6,891.8 7,926.2 Scenario Analysis: As future scenarios are always uncertain, we also considered 2 additional
+Less: Total Debt -824.6 -824.6 -824.6 projections for SATS [Figure 6.5]. Varying our assumptions for (i) COVID-19 recovery, (ii) success in
+Less: NCI -152.5 -152.5 -152.5
+Add: Cash & Equivalents 879.8 879.8 879.8 capturing industry headwinds, (iii) ability to expand margins through scale and (iv) enhancing
+Equity Value 3,850.7 6,794.7 7,829.0 productivity with technology, we reach a target price of $3.39 (11.2% downside) in the bear case and
+# of shares 1,120.0 1,120.0 1,120.0
+Implied Share Price (SGD) 3.44 6.07 6.99 $7.12 (84.9% upside) in the bull case. However, given the stage of the pandemic, significant progress
+Source: Sapphire Capital Analysis made in vaccination, SATS’ strong track record of M&A and technology investments, we believe that the
+bear case is very unlikely to materialize.
+Figure 6.8: Food Solutions and Gateway Services
+Trading Comparables Monte Carlo Simulation: Given that the current analysis and scenario analysis might not fully reflect
+all probable scenarios, we further tested the spread of our valuation by varying (i) Revenue growth (ii)
+EBITDA margin (iii) WACC using Monte Carlo simulation of 10,000 trials. After running the simulation,
+we observed a 93.8% probability of obtaining at least SGD$4.00 [Figure 6.6].
+Output: Our final valuation output of SGD$4.97 is derived by using an equal weight of both DCF obtained
+using the Gordon Growth Model and Exit Multiple Method to ensure reliance on varying methods of
+obtaining terminal value.
+Relative Valuation – Comparable Companies Analysis via Sum-of-the-parts
+Given SATS’ multi-divisional structure and difficulty to find suitable comparables with both business
+segments, we chose to break down SATS’ business units and value them separately using comparable
+company analysis approach. The full list of comparables used can be found in Appendix H. We derived
+a valuation range of between SGD$3.44, SGD$6.07 and SGD$6.99 [Figure 6.7].
+Screening Process: We first screened for comparable companies using S&P Capital IQ with the
+following criteria: (1) Company Type: Public Companies (2) Company Status: Operating and Operating
+Subs (3) Industry Classifications: Airport Services/Restaurants. Next, we conducted a filtering process
+by looking through each companies’ annual report while keeping in mind (1) Similarity in revenue,
+business model, and industries served (2) Market Capitalization (3) Geographical segments and (4)
+Source: Sapphire Capital Analysis Whether brokers such as OCBC, CGS-CIMB, DBS also used the company as trading comparable. Overall,
+this resulted in 13 trading comparables (6 for Food Solutions and 7 for Gateway Services) [Figure 6.8].
+Figure 6.9: Comparable Transactions
+Selection of Multiples: We relied on Forward EV/Revenue+1 multiple due to difficulty in splitting
+expenses across the 2 business segments and hence unsuitability of using a bottom-line denominator
+(e.g., EPS, NI, EBITDA). In fact, bottom line denominators like NI are likely to be negative for many
+comparables due to slow recovery. Since sales is less subjective to accounting distortion compared to
+earnings, we believe that it is a more appropriate denominator. We have also decided against P/B as
+book value may be distorted due to differences in accounting treatment across different companies.
+Moreover, companies in this sector tend to have larger fixed assets as compared to liquid assets, which
+often do not reflect market value. We used forward multiples to reflect the forward nature of valuation.
+Source: Sapphire Capital Analysis
+Relative Valuation – Precedent Transactions Analysis
+We used S&P Capital IQ to screen for M&A transactions in the Airport Services space within the Asia
+Figure 6.10: Precedent Transaction Analysis
+Pacific region (as much as possible). Our screening output can be seen in Figure 6.9. Thereafter, using
+Revenue EV / LTM Revenue Enterprise Value
+Low Medium High Low Medium High EV/LTM Revenue multiples, we derive a valuation of SGD$4.7, SGD$5.1 and SGD$12.2 [Figure 6.10].
+1,941.2 2.8x 3.0x 7.1x 5,367.5 5,862.5 13,748.7
+Enterprise Value 5,367.5 5,862.5 13,748.7 Due to the inclusion of control premiums and premium from synergies paid by the acquiror, the implied
+Less: Total Debt -824.6 -824.6 -824.6
+L N e C s I s: -152.5 -152.5 -152.5 valuation is inflated and thus, we have chosen to place less reliance on this valuation methodology.
+Add: Cash & Equivalents 879.8 879.8 879.8
+Equity Value 5,270.3 5,765.3 13,651.5
+# of shares 1,120.0 1,120.0 1,120.0 Broker Consensus as further Sanity Check
+Implied Share Price (SGD) 4.7 5.1 12.2 Finally, we have also relied on broker estimates [Appendix I] as sanity check to further validate our
+Source: Sapphire Capital Analysis
+valuation. Most recent target prices by CGS-CIMB, Credit Suisse, DBS, DNB Markets, UOB, Phillip
+Securities and Nomura lies between SGD$3.21 to SGD$5.20, which is in line with our target price.
+.
+8
+--- PAGE 10 ---
+Figure 7.1: Investment Risk Matrix 7. Investment Risks
+Overall, investment risks are low [Figure 7.1], as further exemplified by our liquidation value analysis
+[Appendix J]. Even in the worst possible case scenario of liquidation, SATS’ strong balance sheet and
+underleveraged position enables a mere 75.47% - 82.84% downside for equity holders. Our full analysis
+of risks that SATS may face can be found in Appendix K.
+Market Risk
+M1 | Slower than expected recovery in aviation traffic – While Singapore has approved VTL for some
+Category I and II countries, Singapore may remain hesitant to expand the VTL list until the global
+pandemic situation improves substantially. For instance, amidst recent mounting concerns about the
+spread of Omicron, Singapore suspended the sale of new VTL flight tickets for travel into the island state
+– another pullback from the reopening of its borders.
+M1 | Mitigation: Singapore’s edge of a highly vaccinated population has provided much flexibility in
+Source: Sapphire Capital Analysis having relatively open travel while maintaining conservative measures domestically. This has placed it
+at the forefront of resuming cross-border travel compared to other countries. As such, a slower than
+Figure 7.2: MoM Inflation Rates in SATS- expected recovery will only affect SATS in the short term, and recovery is inevitable for this sector in
+Operating Countries the long run. Assuming slower than expected recovery occurs, we expect share price to change by $1.15.
+M2 | Emergence of a new COVID variant of concern (VOC) – During the pandemic, five out of
+thousands of variants have been identified as VOC by the World Health Organisation – Alpha, Beta,
+Gamma, Delta, and Omicron with the latter being the most contagious by far. As witnessed, mutations
+can appear randomly and spontaneously, and emergence of a deadly VOC could set back the progress of
+reopening economies.
+M2 | Mitigation: WHO has recently confirmed their recommendation for countries to lift international
+traffic restrictions as the restrictions has shown extremely limited impact on controlling the spread of
+Omicron. Likewise, we believe the same approach to be expected for all future VOC. Moreover, SATS has
+continuously developed their non travel segments which have been a safe source of income for the
+Source: Trading Economics company over the past 2 years and can continue to do so if travel recovery is prolonged.
+M3 | Effects of inflation on consumption and raw material – With the flood of fiscal stimulus into the
+global economy over the last 2 years, inflationary pressures pose a challenge to SATS [Figure 7.2], as
+labour and raw material prices increase, placing downward pressures on margins.
+M3 | Mitigation: On the gateway services front, consumption is expected to have minimal impact with
+pent-up travel demand. For food solutions, compared to its peers, we believe that SATS can best control
+costs due to its integrated value chain from farm to fork, allowing SATS to tap on diverse supply chains
+to strengthen access to raw materials. This is supported by SATS growing efficiency and scale effects by
+penetrating into new geographies, mitigating the impact of cost increase.
+M4 | Competition – Locally, SATS faces pricing pressure and competition from dnata, which offers
+similar product offering and services. As such, while SATS has a dominant market share in the gateway
+services and inflight catering industries, the type of products and services remain roughly the same with
+its competitors, suggesting that there is a risk that competitors may eventually edge out SATS’ product
+line-up and market share, cutting into profits.
+M4 | Mitigation: SATS strong customer relationships and continued investments in developing
+technology will allow SATS to maintain their competitive advantage.
+Business Operations Risks
+B1 | Labour shortage – For a manpower reliant business model, COVID-19 mobility restrictions have
+had huge impact on its productivity and operations. Despite expected opening of economies and air
+travel, strict mobility restrictions may still be enforced. This would inevitably affect SATS’ ability to
+provide high quality services to its consumers.
+B1 | Mitigation: SATS has been actively investing in technological innovations and strategic automation
+initiatives that are either in operations or are gradually rolling out and it is anticipated that SATS will
+benefit from the scaled effects of these investments in the foreseeable future.
+B2 | Acquisition Risk – With $800m of capital earmarked for acquisitions and investments, SATS is
+expected to be involved in multiple transactions over the next few years. These transactions could
+possibly bring about common M&A issues such as overpaying for target, synergies failing to materialise
+or integration issues, both operationally and culturally, if not executed properly.
+B2 | Mitigation: The acquisition risks can be mitigated by conducting proper due diligence process by
+the company. With SATS success and experiences from their previous transactions, we are confident in
+the management team’s ability in achieving M&A success.
+.
+9
+--- PAGE 11 ---
+Figure 8.1: SATS’ Bloomberg ESG score 8. Environment, Social & Governance Responsibility
+SATS consistently delivers better ESG aspects year on year [Figure 8.1] and as compared to peers
+[Appendix L]. This is further exemplified by accolades such as being ranked No. 1 Singapore Public
+Listed Company under the ASEAN Corporate Governance Scorecard. With SATS’ current focus on ESG,
+we can expect continued and consistent ESG enhancements going forward.
+Overall, SATS’ continued strong ESG proposition is likely to positively impact its valuation.
+Studies conducted by NYU reported positive relationships between ESG and financial performance for
+58% of corporate studies [Figure 8.2], supported by 12 other meta-analyses (1272 studies) that found
+positive association between ESG and financial performance. Furthermore, MSCI has also reported
+Source: Bloomberg
+noticeable difference in cost of capital between high and low ESG scoring companies [Figure 8.3].
+Environment
+Figure 8.2: Relationship between ESG and
+Strong pipeline of projects to drive down carbon intensity: SATS have an ambitious target of 50%
+Financial Performance
+carbon reduction by 2030. To achieve this, several environmental initiatives were identified across
+meals, flights, and cargo [Appendix M]. SATS have already managed to electrify 31% of their Ground
+Support Equipment with plans to reach 100% by continuously rolling out electric skyloaders, forklifts
+and tractors across its operations. SATS has also been engaging in solar expansion, having installed
+hybrid solar thermal panels on the rooftop of SICC1 – being the first in Singapore to do so.
+Sustainability at the core of its operations: SATS has been actively engaging its customers and
+suppliers to find ways to reduce food and packaging waste. In partnership with Singapore Airlines, SATS
+has developed environmentally friendly food packaging made from natural materials that its
+biodigesters can break down to reduce waste by up to 60%. SATS is also utilising technology to reduce
+Source: New York University
+food waste, with an automated food waste tracking system that uses AI-enabled machines to capture
+volumes of different waste streams. In the long-run, SATS hope to halve food wastage in all operations
+from 2021 baseline by 2028, and to introduce 100% sustainable food packaging by 2030.
+Figure 8.3: ESG and Cost of Capital Relationship
+Social
+Commitment to nurture the future: SATS is one of the few companies with a training arm, SATS
+Academy, which aims to upskill individuals to embrace the new economy. In 2021 alone, SATS Academy
+trained >11,000 employees and achieved 3.8 million learning hours across the group. LinkedIn Learning
+commended SATS for achieving higher user and completion rates against global benchmarks.
+Health and safety of utmost priority: Being in an operations driven sector where heavy machineries
+Source: MSCI are used, safety is often compromised in many companies. SATS exemplifies world class health and
+safety protocols as exemplified by their excellent management of the emergence of COVID-19. The
+Company was amongst the first to implement stringent health & safety protocols and measures, issue
+Figure 8.4: Board of Director Diversity personal protective equipment to all frontline employees, encourage COVID-19 vaccinations, adopt
+routine testing for employees working in higher-risk settings and enabling flexible work arrangements.
+Governance
+Board of Directors: Firstly, given the separation of the CEO and Chairman role, there is a clear division
+of responsibilities between leadership of the Board and Management - no individual has unfettered
+powers of decision-making. This is also in line with the Singapore Code of Corporate Governance (SCCG)
+Principle 3. Secondly, 11 out of 12 Directors on the Board are independent non-executive directors.
+This is way above SGX’s requirement of having 2 independent directors and the SCCG’s requirement of
+having at least one-third independent directors in the board. This translates to exercising of the
+director’s independent business judgement in the best interest of the company. Thirdly, the board has
+a high degree of diversity in terms of age, gender, ethnicity, and background expertise [Figure 8.4]. As
+suggested in SCCG Provision 2.4, diversity brings perspective, help avoid groupthink and foster
+Source: SATS Annual Report
+constructive debate that would benefit the company. Fourthly, the board is highly competent with a
+good mix of general and specialist skills, knowledge, and experience [Figure 8.5]. For example, Mr Yap
+Kim Wah has in-depth knowledge of the airport services industry while Mrs Deborah Ong has a wealth
+Figure 8.5: Board of Director Expertise
+of experience in public accounting. However, we note that there are some areas of improvement such
+as having slightly too many directors. The Singapore Governance and Transparency Index and ASEAN
+Corporate Governance scorecard recommends 6-11 directors and the average SGX-listed company have
+an average of just under 7 directors. Nevertheless, on balance, our analysis points that SATS does have
+an effective board which reinforces its strong governance.
+Executive Management: Consists of a competent and synergistic team, with specialized skills and in-
+depth industry experience, with some of them being employed by SATS for >40 years.
+Source: SATS Annual Report Shareholders: The company’s free float accounts for 56.6% of outstanding shares, meaning that SATS
+enjoys a diversified base of shareholders, which ensures diversity and reduces the possibility of price-
+attacks from sudden selloffs. Nevertheless, Temasek stands out as SATS’ only major shareholder
+(39.9%) – which heavily benefits SATS as it stands to gain brand premium from being backed by the
+state-owned investment management company, as well as potential synergies from Temasek’s’ other
+portfolio companies. For example, SATS have been closely working with Sembcorp Industries (major
+shareholder being Temasek) on expanding its rooftop solar panels.
+.
+10
+--- PAGE 12 ---
+Appendix A: Ready-to-eat Meals – Rising preference in Asia
+Source: McKinsey & Company
+.
+Appendix B: Airline historical and forecasted statistics
+WORLDWIDE AIRLINE INDUSTRY 2019 2020 2021E 2022F
+SPEND ON AIR TRANSPORT*, $BILLION 876 384 487 658
+% CHANGE OVER YEAR 3.6% -56.1% 26.5% 35.2%
+% GLOBAL GDP 1.0% 0.4% 0.5% 0.6%
+RETURN FARE, $/PAX. (2018) 310 242 214 228
+COMPARED TO 1998 -62% -70% -74% -72%
+FREIGHT RATE, $/KG (2018) 1.79 2.71 3.00 2.67
+COMPARED TO 1998 -65% -47% -41% -48%
+Passenger departures, million 4,543 1,807 2,277 3,432
+% Change over year 3.8% -60.2% 26.0% 50.7%
+RPKs, billion 8688 2965 3498 5283
+% Change over year 4.1% -65.9% 18.0% 51.0%
+CTKs, billion 254 232 274 288
+% Change over year -3.2% -8.7% 18.2% 4.9%
+World GDP growth, % 2.4% -3.6% 5.8% 4.1%
+World trade growth, % 0.3% -5.1% 9.5% 5.6%
+Source: International Air Transport Association (IATA)
+.
+11
+--- PAGE 13 ---
+Appendix C: Porters’ Five Forces Analysis for SATS
+Gateway Services Food Solutions
+Bargaining Low to Moderate - 3
+Power of - The bargaining power of buyers for aviation gateway services is low. There are - The bargaining power of buyers for aviation food is low to moderate. While there are
+Buyers only two players for customers to choose from; and SATS holds the dominant a few key players and many regional players for airlines to choose from, SATS still
+market share with the ability to be a price setter. maintains a considerable market position within the aviation food catering landscape.
+- At the same time, there are many customers (airlines) in the industry and hence Moreover, major food caterers with years of experience are preferred over smaller
+there is low buyer concentration. regional players because of the reputation in the quality of their services that aircraft
+- Despite its competitor being able to offer a good substitute to SATS with little passengers seek for.
+product differentiation, the nature of the operations at Singapore’s Changi Airport - On the other hand, for the non-aviation food solutions business, SATS operates in the
+results in airlines’ stickiness to SATS. Moreover, there is a high switching costs institutional catering segment. SATS has been able to leverage on its in-flight catering
+associated with changing the service provider, with each contract lasting for a experience in supplying large volumes of meals to grow this segment. With its proven
+couple of years. Airlines would be reluctant to switch service provider as it would track record, SATS is in a well-placed position to compete with other institutional
+entail the new ground handling staff having to learn the airline’s operating caterers in the market. Thus, we assert that the bargaining power of customers is
+procedures. moderate.
+- For cruise gateway services, however, SATS is still in its infancy of building up its
+brand name in this business segment and the bargaining power of customers is
+high as they are free to choose to call at any port with a suitable cruise terminal.
+Bargaining Moderate - 4
+Power of - Ground handling and cargo handling service providers, like SATS, have to liaise - We believe that the bargaining power of suppliers for SATS’ food solutions business is
+Suppliers with many powerful suppliers, such as but not exhaustive to: (1) manpower (2) moderate.
+IT software providers. - Undeniably, bargaining power of food and raw materials suppliers can be high amidst
+headwinds like supply chain disruptions and rising inflationary pressures. It is thus no
+(1) Manpower: Gateway services is labour intensive; hence, cost of labour forms wonder that SATS faces increasing food costs and labour costs, which makes up the
+a major part of the operating cost. Moreover, most of SATS’ workforce from the largest part of its operating costs.
+aviation industry are unionised and would be able to exert some extent of - However, with its dominant market position, SATS has over the years, mitigated some
+bargaining power. Over the years, however, SATS has made important strategic of its food cost concerns through upward integration of the business by going into
+investments to pivot away from a labour-intensive business model by adopting abattoir and hog auction activities. Strategic investments in signing long contracts with
+new technologies to increase operational productivity and cut costs in the long suppliers have also benefitted SATS in mitigating potential rising costs of raw materials
+haul. Thus, going forward, we believe that the bargaining power of suppliers is going forward. Hence, overall, we believe that the bargaining power of suppliers for
+moderate as we see SATS’ investments in technology bearing fruit, which will help SATS is moderate.
+in mitigating rising cost pressures.
+(2) IT software providers: As mentioned in (1), with the increasing adoption of
+new technologies in its operational activities, SATS require the installation and the
+procurement of new IT systems. Going forward, these systems and equipment will
+also require maintenance repair overhaul which will further eat into SATS’ costs
+should the suppliers increase the prices of its products and services.
+Competitive Moderate - 4
+Rivalry - Within Asia-Pacific, the gateway services industry is oligopolistic across various - Intensity of rivalry in the non-aviation food solutions business is moderate, as there
+geographic market regions where three to five service providers compete each are a few major players and many small players who can compete with SATS on catering
+other on prices. contracts for large scale events. In addition, SATS has established a foothold in the
+- In Singapore, intensity of rivalry in the aviation gateway services space is institutional catering segment with an extensive distribution network of specialised
+moderate to high. While there are only two players in the market, we have vehicles, thus it is able to compete ambitiously for major food contracts.
+witnessed aggressive driving down of prices to compete for market share by both - In the ready-to-eat-meals market, however, SATS is still in its infancy stage a
+parties when airlines contracts were previously up for renewal.
+- On the other hand, intensity of rivalry for cruise gateway services is currently low
+to moderate. Intense rivalry generally comes from outside of Singapore, from
+other ports and cruise terminal operators. At the moment, the Singapore
+government is making aggressive moves in making use of first mover advantage
+to gain a foothold in this area and entice ships to make Singapore the homeport
+before other regional ports get the appropriate facilities in place.
+Threat of Low - 2
+New - Given the existing intense competition between a small group of major players - Indisputably, there is a high barrier of entry for the aviation industry that SATS
+Entrants dominating the ground handling services market across most regions, the threat operates in.
+of new entrants is extremely low. Not only does existing competition deter - For in-flight food catering solutions, it requires specialised equipment, trained staff to
+potential entrants, low profit margins and yields face by existing service providers operate the equipment and significant investment required to set up a catering facility
+inhibit many of these potential competitors to enter the market in the first place in close proximity to the airport.
+as it is simply feasibly unsound and unsustainable in the long run. - Threat of new entrants for the non-aviation food solutions, and more specifically, the
+- Moreover, there is a very high barrier of entry for the gateway services industry institutional catering segment, is low. This is because it also requires substantial
+that SATS operates in. There is a natural barrier to entry as a license is required, investment in facilities, industry experience, and distribution network to deliver the
+in order to provide aviation gateway services at Changi Airport. The license can volume of meals associated with the catering events of great scale.
+only be obtained only if the aviation authority opens a tender. This usually comes - New entrants to the institutional catering segment would find it difficult to expand and
+with stringent requirements. capture a substantial share of the existing oligopolistic market to realise sufficient
+- For example, Swissport, which entered Singapore’s ground-handling market in operating economies of scale. With no track record, it would be highly likely for new
+2005, ceased operations, after just four years, because its local operation is not of entrants to contract large catering contracts.
+sufficient size to ensure its sound profitability. Apparently, at the point of exit,
+Swissport made a total loss of S$50 million in losses, because the company was
+unable to secure the critical mass needed to sustain operations in Singapore.
+Threat of Low - 1
+Substitute - For aviation gateway services, there are effectively only two players in - While there are no substitutes for aviation food solutions, characteristics of the
+Products Singapore’s Changi Airport, which SATS largely generates its revenues from. aviation industry has evolved, reflected by the rise in low-cost carriers (LCC), which
+There are no substitute products for gateway services. does pose a threat to the demand for food solutions. This is because meals are not
+- On the other hand, threat of substitutes for non-aviation gateway services is included in fare prices on LCCs, and their routes are predominantly short haul. This
+low to moderate. This is because while we believe that SATS is converging would thus reduce the demand for meals and other catering options offered by airline
+towards being a monopoly operator in Singapore, it will, however, face caterers like SATS.
+increasing competition from other ports in the region, which will potentially - Additionally, even in the larger food solutions landscape which SATS dabbles in, the
+decrease the volume of traffic passing through Singapore and affecting SATS’ market is large and fragmented with many substitutes which includes a few major
+volume and scale of operations. Other destinations within the region may lack food caterers and other regional players.
+the modern conveniences that Singapore offers, but can appeal to airlines - However, overall, we believe that the threat of substitutes is low to moderate, as
+because of cheaper operational costs, and also to holiday makers looking for an SATS, has arguably established its position in many parts of the food solutions market,
+exotic experience in the region. such as institutional catering and aviation food catering.
+Source: Sapphire Capital Analysis
+.
+12
+--- PAGE 14 ---
+Appendix D: Strong barriers to entry for industry
+Source: Sapphire Capital Analysis
+.
+Appendix E: Credit Health Panel (S&P Capital IQ)
+Operational Financial Panel:
+Above Average
+Overall
+Score: Solvency Panel:
+Top
+TOP
+Liquidity Panel:
+Above Average
+Source: Capital IQ
+Appendix F: Financial Analysis
+Source: Sapphire Capital Analysis
+.
+13
+--- PAGE 15 ---
+Appendix G: WACC Calculation
+SATS' Financial Ratios x Moody's Credit Ratings Metrics
+Ratios Formula CalculationSynthetic credit rating (Moody's) Score Rating Aaa-Aa A Baa Ba B Caa-C
+Interest Coverage EBIT / Interest Expense 1.43 Caa2 18 Interest Coverage 16.00 8.60 5.40 3.70 1.90 0.70
+Leverage Total Liabilities / Equity 83.75%Caa3 19 Leverage 31.6% 41.7% 44.8% 49.8% 68.7% 92.2%
+ROA Net Income / Total Assets 1.8%B3 16 Return on Assets 11.6% 7.5% 5.3% 4.4% 1.7% -2.1%
+Asset Coverage Total Assets / Total Liabilities 2.19 Ba2 12 Cash Flow to Debt 52.4% 32.6% 25.8% 21.6% 12.1% 6.4%
+Profitability Net Income / Revenue 5.1%Ba3 13 Asset Coverage 3.70 2.40 2.30 2.00 1.30 1.00
+Current Ratio (Liquidity) Current Assets / Current Liabilities 2.65 Aaa 1 Profitability 11.8% 9.0% 6.7% 5.0% 2.0% -2.6%
+Current Ratio 0.08 0.05 0.04 0.04 0.04 0.03
+Data obtained from https://www.moodys.com/sites/products/defaultresearch/2005700000436062.pdf
+Average synthetic credit rating B1 14
+Cost of debt calculation Notes x Moody's Credit Ratings Metrics - Interpolated
+Average synthetic credit rating B1 Rating Aaa Aa1 Aa2 Aa3 A1 A2
+Enterprise Risk Management (ERM) adjustment Strong, +2 Alongside strong credit health estimates from CIQInterest Coverage 16.00 14.77 13.53 12.30 11.07 9.83
+Adjusted synthetic credit rating Ba1 Leverage 31.6% 33.3% 35.0% 36.7% 38.3% 40.0%
+Default spread 2.00% Damodaran's Synthetic Ratings Estimating Return on Assets 11.6% 10.9% 10.2% 9.6% 8.9% 8.2%
+Add: risk-free rate 1.60% from "Cost of Equity" sheet Cash Flow to Debt 52.4% 49.1% 45.8% 42.5% 39.2% 35.9%
+Cost of debt 3.60% Asset Coverage 3.70 3.48 3.27 3.05 2.83 2.62
+Profitability 11.8% 11.3% 10.9% 10.4% 9.9% 9.5%
+Current Ratio 0.08 0.07 0.07 0.06 0.06 0.05
+Score 1 2 3 4 5 6
+SATS corproate bonds and loans (sense check) x Damodaran's Synthetic Ratings Estimation
+For all emerging market firms and developed market firms with market cap < $5 billion
+If interest coverage ratio is greater than ≤ to Rating is Spread is
+12.5 100000.0Aaa AAA 0.63%
+9.5 12.5Aa2 AA 0.78%
+7.5 9.5A1 A+ 0.98%
+6 7.5A2 A 1.08%
+4.5 6.0A3 A- 1.22%
+4 4.5Baa2 BBB 1.56%
+4 4.5Ba1 BB+ 2.00%
+3 3.5Ba2 BB 2.40%
+2.5 3.0B1 B+ 3.51%
+2 2.5B2 B 4.21%
+1.5 2.0B3 B- 5.15%
+1.25 1.5Caa CCC 8.20%
+0.8 1.2Ca2 CC 8.64%
+0.5 0.8C2 C 11.34%
+-100000 0.5D2 D 15.12%
+Data obtained from http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ratings.htm
+Source: Sapphire Capital Analysis
+Appendix H: Trading Comps Metrics
+28/1/2022 Latest FY FY-1 FY-2
+Market Enterprise Gross Net Profit EBITDA Gross Net Profit EBITDA Gross Net Profit EBITDA
+Company Name Ticker Capitalisation Value Margins (%)Margins (%)Margins (%) Margins (%)Margins (%)Margins (%) Margins (%) Margins (%) Margins (%)
+Compass Group PLC LSE:CPG 42,036 45,646 3.93% 1.99% 5.72% 3.33% 0.67% 4.59% 24.76% 0.67% 4.59%
+Sodexo S.A. ENXTPA:SW 13,541 17,542 13.90% 0.80% 4.90% 12.83% -1.63% 4.81% 14.57% -1.63% 4.81%
+Aramark NYSE:ARMK 9,381 16,757 13.21% -0.75% 6.14% 11.10% -3.60% 4.23% 10.52% -3.60% 4.23%
+Autogrill S.p.A. BIT:AGL 2,702 5,390 17.55% -21.63% -8.55% 21.21% 3.80% 8.67% 14.88% 3.80% 8.67%
+SSP Group plc LSE:SSPG 2,943 5,045 18.05% -42.83% -27.63% 23.31% -26.17% -14.17% 22.43% -26.17% -14.17%
+Saudi Airlines Catering Company SASE:6004 1,834 1,918 4.26% -36.12% -16.81% 36.46% 21.52% 28.35% 34.20% 21.52% 28.35%
+Elior Group SA ENXTPA:ELIOR 918 2,158 15.12% -2.71% 1.36% 15.20% -12.18% 2.75% 18.95% -12.18% 2.75%
+DO & CO Aktiengesellschaft WBAG:DOC 968 1,331 26.69% -14.01% 8.80% 22.20% -2.66% 4.40% 23.82% -2.66% 4.40%
+ROYAL HOLDINGS Co., Ltd. TSE:8179 735 1,060 67.12% -32.66% -15.53% 69.41% 1.37% 7.96% 69.07% 1.37% 7.96%
+Airports of Thailand Public Compa SET:AOT 27,343 28,778 -54.8% -223.5% -156.6% 55.38% 13.80% 34.12% 71.25% 13.80% 34.12%
+Guangzhou Baiyun International ASHSE :600 004 5,090 5,296 -1.2% -4.8% 19.2% 26.41% 13.03% 36.45% 29.58% 13.03% 36.45%
+Japan Airport Terminal Co., Ltd. TSE:9706 4,019 5,375 71.3% -69.6% -46.8% 54.11% 2.01% 15.13% 51.71% 2.01% 15.13%
+Beijing Capital International Airpor SEHK:69 4 3,079 3,893 -8.1% -56.7% -30.4% 51.26% 22.38% 43.19% 53.51% 22.38% 43.19%
+Shenzhen Airport Co., Ltd. SZSE:000089 2,415 3,109 6.3% 0.9% 13.5% 23.69% 15.60% 30.27% 25.87% 15.60% 30.27%
+Malaysia Airports Holdings BerhadKLSE:AIRPORT 2,273 3,063 55.3% -59.8% -11.0% 74.00% 10.30% 38.18% 72.73% 10.30% 38.18%
+John Menzies plc LSE:MNZS 354 828 79.5% -15.5% 0.4% 86.84% 0.81% 4.94% 86.38% 0.81% 4.94%
+SATS Ltd. SGX:S58 3,188 3,331 30.72% -8.14% 9.15% 32.51% 8.67% 16.44% 32.67% 8.67% 16.44%
+Source: Capital IQ
+14
+--- PAGE 16 ---
+Source: Capital IQ
+.
+15
+/ ecirP
+/ eulaV
+esirpretnE
+1-YF
+YF
+tsetaL
+snoituloS dooF
+2+YF
+1+YF
+MTL
+2+YF
+1+YF
+MTL
+2+YF
+1+YF
+MTL
+2+YF
+1+YF
+MTL
+MTL
+MTL
+MTL
+MTL
+MTL
+ADTIBE
+tiforP
+teN
+ssorG
+ADTIBE
+tiforP
+teN
+ssorG
+esirpretnE
+tekraM
+VB
+VB
+VB
+SPE
+SPE
+SPE
+ADTIBE
+ADTIBE
+ADTIBE
+euneveR
+euneveR
+euneveR
+VB
+SPE
+TIBE
+ADTIBE
+euneveR
+)%(
+snigraM)%(
+snigraM)%(
+snigraM
+snigraM
+snigraM
+snigraM
+eulaV
+noitasilatipaC
+rekciT
+emaN
+ynapmoC
+x9.2
+x1.3
+x5.3
+x5.41
+x5.71
+x2.08
+x1.8
+x2.9
+x5.61
+x7.0
+x7.0
+x8.0
+847,3
+11.1
+436
+800,1
+175,02
+%08.3
+%71.62-
+%02.51
+%41.6
+%08.0
+%09.31
+906,61
+276,21
+WS:APTXNE
+.A.S oxedoS
+x7.2
+x1.3
+x3.3
+x2.61
+x1.52
+.a.n
+x3.01
+x5.21
+x1.22
+x0.1
+x1.1
+x4.1
+237,2
+)63.0(
+191
+247
+690,21
+%53.82
+%12.12
+%71.41-
+%18.61-
+%57.0-
+%82.51
+304,61
+820,9
+KMRA:ESYN
+kramarA
+x0.4
+x4.3
+x9.2
+.a.n
+.a.n
+.a.n
+x3.7
+x1.01
+.a.n
+x3.1
+x8.1
+x1.2
+289
+)86.1(
+)443(
+)96(
+064,2
+%66.2-
+%18.4
+%06.3-
+%97.2
+%36.12-
+%12.31
+971,5
+535,2
+LGA:TIB
+.A.p.S llirgotuA
+x2.9
+x3.7
+x4.7
+x2.12
+.a.n
+.a.n
+x6.5
+x2.9
+.a.n
+x0.2
+x9.4
+x6.4
+914
+)96.0(
+)634(
+)892(
+621,1
+%01.11
+%36.1-
+%02.22
+%09.4
+%38.24-
+%55.71
+722,5
+354,2
+GPSS:ESL
+clp puorG PSS
+x7.7
+x0.8
+x1.8
+x3.52
+x7.172
+.a.n
+x1.51
+x6.03
+x8.153
+x9.3
+x8.5
+x8.6
+122
+)34.0(
+)61(
+5
+082
+%32.4
+%73.1
+%04.0
+%08.8
+%21.63-
+%21.76
+029,1
+638,1
+4006:ESAS
+ynapmoC
+gniretaC
+senilriA iduaS
+x6.3
+x0.4
+x5.5
+x0.22
+x4.57
+x9.97
+x2.8
+x1.11
+x4.61
+x0.1
+x6.1
+x4.2
+191
+80.1
+14
+47
+694
+%69.7
+%76.8
+%13.32
+%96.5
+%10.41-
+%50.81
+012,1
+258
+COD:GABW
+tfahcsllesegneitkA
+OC & OD
+%53.11
+%96.9
+%00.51-
+%78.61-
+%71.8-
+85S
+:XGS
+.dtL STAS
+x0.5
+x8.4
+x1.5
+x8.91
+x4.79
+x1.08
+x1.9
+x8.31
+x7.101
+x7.1
+x6.2
+x0.3
+%61.9
+%65.2
+%22.7
+%29.1
+%90.91-
+%91.42
+naeM
+x2.9
+x0.8
+x1.8
+x3.52
+x7.172
+x2.08
+x1.51
+x6.03
+x8.153
+x9.3
+x8.5
+x8.6
+%53.82
+%12.12
+%13.32
+%08.8
+%08.0
+%21.76
+xaM
+x7.2
+x1.3
+x9.2
+x5.41
+x5.71
+x9.97
+x6.5
+x2.9
+x4.61
+x7.0
+x7.0
+x8.0
+%66.2-
+%71.62-
+%71.41-
+%18.61-
+%38.24-
+%12.31
+niM
+x7.6
+x5.6
+x9.6
+x0.22
+x5.421
+x2.08
+x8.9
+x1.21
+x5.401
+x8.1
+x1.4
+x1.4
+%23.01
+%07.7
+%54.02
+%20.6
+%70.4-
+%39.71
+elitnecreP ht57
+x1.3
+x2.3
+x3.3
+x2.61
+x2.32
+x0.08
+x5.7
+x4.9
+x5.61
+x0.1
+x2.1
+x5.1
+%19.3
+%88.0-
+%06.2-
+%23.3
+%05.23-
+%42.41
+elitnecreP ht52
+x8.3
+x7.3
+x5.4
+x2.12
+x3.05
+x1.08
+x1.8
+x6.01
+x3.91
+x1.1
+x7.1
+x3.2
+%01.6
+%90.3
+%08.7
+%03.5
+%28.71-
+%24.61
+naideM
+x5.4
+x5.4
+x9.4
+x8.91
+x3.05
+.a.n
+x5.8
+x7.01
+x3.91
+x3.1
+x3.2
+x6.2
+%77.6
+%03.3
+%55.8
+%88.4
+%31.81-
+%02.61
+)nim
+& xam .lcxe( naeM secivreS yawetaG
+x0.7
+x7.7
+x8.7
+x1.84
+.a.n
+.a.n
+x1.82
+x7.821
+.a.n
+x1.61
+x4.93
+x7.621
+373,3
+)30.0(
+)505(
+)043(
+712
+%10.2
+%91.34
+%83.55
+%16.651-
+%74.322-
+%77.45-
+235,72
+501,62
+TOA:TES
+detimiL
+ynapmoC
+cilbuP
+dnaliahT fo stropriA
+x4.1
+x4.1
+x5.1
+x6.54
+.a.n
+.a.n
+x5.21
+x4.22
+x3.43
+x1.4
+x2.5
+x7.5
+178,2
+)30.0(
+)021(
+331
+097
+%14.62
+%54.63
+%08.31
+%64.51-
+%43.55
+%38.64-
+045,4
+433,4
+400006:ESHS
+.dtL
+,.oC
+tropriA
+lanoitanretnI
+nuyiaB uohzgnauG
+x9.2
+x9.2
+x8.2
+x8.16
+.a.n
+.a.n
+x4.71
+.a.n
+.a.n
+x6.3
+x5.9
+x3.11
+955,1
+)78.2(
+)634(
+)931(
+405
+%31.51
+%06.51
+%30.31
+%49.0
+%13.6
+%18.95-
+886,5
+313,4
+6079:EST
+.dtL
+,.oC
+lanimreT
+tropriA napaJ
+x9.0
+x9.0
+x9.0
+.a.n
+.a.n
+.a.n
+x8.71
+.a.n
+.a.n
+x7.3
+x6.5
+x9.6
+352,3
+)80.0(
+)193(
+)881(
+035
+%81.83
+%18.0
+%49.4
+%27.65-
+%82.17
+%97.4-
+446,3
+138,2
+496:KHES
+detimiL
+ynapmoC
+tropriA
+lanoitanretnI
+latipaC gnijieB
+x2.1
+x2.1
+x2.1
+x5.13
+x2.27
+x7.541
+x2.61
+x0.92
+x4.14
+x7.4
+x7.5
+x1.6
+458,1
+10.0
+31
+37
+105
+%72.03
+%03.01
+%62.15
+%93.0
+%32.91
+%79.01-
+230,3
+833,2
+980000:ESZS
+.dtL
+,.oC
+tropriA nehznehS
+x4.1
+x4.1
+x3.1
+x7.232
+.a.n
+.a.n
+x8.8
+x7.65
+.a.n
+x5.3
+x3.7
+x2.9
+677,1
+)02.0(
+)022(
+)18(
+133
+%21.43
+%48.68
+%00.47
+%01.8-
+%12.1-
+%74.97
+140,3
+852,2
+TROPRIA:ESLK
+dahreB
+sgnidloH
+stropriA aisyalaM
+x9.21
+.a.n
+.a.n
+x0.7
+x6.11
+.a.n
+x9.3
+x7.4
+x1.11
+x5.0
+x6.0
+x7.0
+)9(
+)95.0(
+64
+37
+711,1
+%83.22
+%11.45
+%96.32
+%85.96-
+%73.03-
+%05.31
+818
+153
+SZNM:ESL
+clp seizneM nhoJ
+%01.9
+%53.01
+%64.2
+%08.2
+%10.01
+85S
+:XGS
+.dtL STAS
+x5.9
+x9.3
+x6.2
+x6.2
+x1.17
+x9.14
+x7.541
+x0.51
+x3.84
+x9.82
+x2.5
+x5.01
+x8.32
+%02.22
+%12.23
+%37.33
+%95.34-
+%07.41-
+%30.21-
+naeM
+x9.21
+x7.7
+x8.7
+x7.232
+x2.27
+x7.541
+x1.82
+x7.821
+x4.14
+x1.61
+x4.93
+x7.621
+%81.83
+%48.68
+%00.47
+%49.0
+%82.17
+%74.97
+xaM
+x9.0
+x9.0
+x9.0
+x0.7
+x6.11
+x7.541
+x9.3
+x7.4
+x1.11
+x5.0
+x6.0
+x7.0
+%10.2
+%18.0
+%49.4
+%16.651-
+%74.322-
+%18.95-
+niM
+x9.4
+x6.2
+x5.2
+x4.85
+x1.75
+x7.541
+x6.71
+x7.65
+x8.73
+x4.4
+x4.8
+x2.01
+%02.23
+%56.84
+%23.35
+%68.3-
+%82.73
+%53.4
+elitnecreP ht57
+x3.1
+x3.1
+x2.1
+x0.53
+x8.62
+x7.541
+x7.01
+x4.22
+x7.22
+x5.3
+x4.5
+x9.5
+%67.81
+%59.21
+%24.31
+%51.36-
+%97.51-
+%08.05-
+elitnecreP ht52
+x4.1
+x4.1
+x4.1
+x9.64
+x9.14
+x7.541
+x2.61
+x0.92
+x3.43
+x7.3
+x7.5
+x9.6
+%14.62
+%54.63
+%96.32
+%64.51-
+%13.6
+%79.01-
+naideM
+x8.2
+x8.1
+x7.1
+x8.64
+.a.n
+.a.n
+x6.41
+x0.63
+x3.43
+x9.3
+x7.6
+x8.7
+%66.52
+%39.13
+%34.13
+%98.92-
+%68.9
+%77.02-
+)nim
+& xam .lcxe( naeM
+x6.2
+x7.2
+x8.2
+x2.43
+x7.411
+.a.n
+x8.61
+x0.72
+x3.73
+x8.2
+x8.3
+x2.4
+072,1
+10.0
+22
+09
+018
+%44.61
+%76.8
+%15.23
+%51.9
+%41.8-
+%27.03
+773,3
+532,3
+85S:XGS
+.dtL STAS
+--- PAGE 17 ---
+Appendix I: Broker Consensus
+Source: Capital IQ, Bloomberg, Refinitiv
+Appendix J: Liquidation Value Analysis
+Asset Type Book ValueApprox Recovery Rate (High)RecoveryApprox Recovery Rate (Low) Recovery
+Cash and Cash Equivalents 879.849 100% 879.849 95%835.8566
+Trade Receivables 291.506 85% 247.7801 70%204.0542
+Inventories 130.054 70% 91.0378 55% 71.5297
+PPE 519.671 40% 207.8684 25%129.9178
+Right of Use Asset 187.716 30% 56.3148 15% 28.1574
+Intangible Assets 410.679 10% 41.0679 5%20.53395
+Investments 578.676 80% 462.9408 65%376.1394
+Gross Liquidation Proceeds 1986.859 1666.189
+Administrative Claims and Liquidation Costs
+Income Tax Payable 36.029 36.029
+Professional Fees 19.86859 16.66189
+Proceeds Available After Wind Down 1930.961 1613.498
+Claims from creditors
+Lease Liabilities 195.3 195.3
+Secured Term Loans 9.2 9.2
+Term Loans 368.9 368.9
+Unsecured Notes 300 300
+Proceeds Available for Equity Holders 1057.561 740.0981
+Shares Outstanding 1120 1120
+Value per share 0.944251 0.660802
+Max Downside Risk -75.47% -82.84%
+Source: Sapphire Capital Analysis
+Appendix K: Further Investment Risks for Consideration
+Business Operations Risks
+B3 | Food supply chain disruptions – The pandemic has placed unprecedented stresses on food supply chains, with disruptions to labour, processing, transport, and logistics. While adequate
+response has been made when food supply chain has been compromised, higher raw materials could arise in the event of continued disruptions. This would in turn compress SATS’ profit
+margins if the company is unable to pass on the costs to customers.
+B4 | Technological risk – Despite the development and adoption of new technological innovations, it still remains to be seen if the investments will yield fruits. If SATS is unable to effectively
+increase its value added per capita, decrease costs, dominate both the food solutions and gateway services markets, and successfully launch into new market segments, investors are exposed to
+the downside.
+Financial Risks
+F1 | Foreign currency risk – While SATS operates principally in Singapore and generates revenue mainly in SGD, SATS also has investments outside of Singapore and it operates in more than
+13 countries, hence it is exposed to the effects of fluctuations in certain FX rates because of its foreign currency dominated operating revenue and expenses. For example, a reasonably possible
+strengthening (weakening) of the Singapore dollar, would increase (decrease) profit or loss by a fair amount. However, the overall impact of FX rate fluctuations on the Group’s operations are
+relatively low as the Group’s sales and purchases are mainly denominated in the respective functional currencies of the Group’s entities.
+F2 | Interest rate risk – SATS’ earnings are affected by changes in interest rates due to the impact that such changes have on its interest income from cash and cash equivalents and its interest
+expense on term loans. SATS’ interest-bearing assets and interest-bearing liabilities are predominantly denominated in SGD, JPY, and USD. Changes in market interest rates for these currencies
+could significantly affect the interest income or finance charges of variable interest financial instruments. Moreover, changes in market interest rates could also affect the carrying value of
+financial instruments with fixed interest rates if these are recognised at their face value.
+Sensitivity Analysis of SATS’ Exposure to Foreign Currency Risk Sensitivity Analysis of SATS’ Exposure to Interest Rate Risk
+*Assuming all other variables remain constant *Assuming all other variables remain constant
+.
+Source: Sapphire Capital Analysis
+16
+--- PAGE 18 ---
+Appendix L: ESG Scores of Peer-Comparables
+ESG Disclosure Environment Disclosure Social Disclosure Governance Disclosure
+Score Score Score Score
+SATS 39.67 30.23 43.86 57.14
+Food
+Compass Group PLC 42.98 32.56 52.63 57.14
+Sodexo SA 36.36 17.83 57.89 57.14
+Aramark 27.69 14.73 33.33 51.79
+Autogrill SpA 56.94 52.08 54.39 67.86
+SSP Group Plc 35.54 23.26 42.11 57.14
+Saudi Airlines Catering 20.25 3.1 31.58 48.21
+Elior Group SA 44.63 35.66 49.12 60.71
+Do & Do AG 30.17 20.16 36.84 46.43
+Royal Holdings 21.07 11.63 17.54 46.43
+Gateway
+Airports of Thailand 44.63 33.33 57.89 57.14
+Guangzhou Baiyun 21.07 9.3 17.54 51.79
+Japan Airport Terminal 17.36 6.98 12.28 46.43
+Beijing Capital
+International 42.15 33.33 52.63 51.79
+Shenzhen Airport 18.18 9.3 17.54 39.29
+Malaysia Airports 50 38.76 63.16 62.5
+John Menzies PLC 33.47 20.16 38.6 58.93
+Source: Bloomberg
+.
+Appendix M: SATS ESG Pipeline Projects
+Source: SATS Annual Report
+Appendix N: SATS Historical Share Price
+Source: Yahoo! Finance Data, Company Website
+17
+--- PAGE 19 ---
+Appendix O: Revenue Drivers Statistical Correlation
+The strong R^2 shows strong statistical correlation with historical revenue figures; as such, we believe that Gross Meals Produced and Passengers Handled are
+strongly justified revenue drivers to be used
+Source: Sapphire Capital Analysis
+Appendix P: Balance Sheet Drivers
+Source: Sapphire Capital Analysis
+Appendix Q: Rationale for Multiples used
+Source: Sapphire Capital Analysis
+Appendix R: Rationale for Valuation Methodology used
+Source: Sapphire Capital Analysis
+18
+--- PAGE 20 ---
+Appendix S: Pro-Forma Financial Statements
+FY FY2017 FY2018 FY2019 FY2020 FY2021 FY2022E FY2023E FY2024E FY2025E FY2026E
+FY ending 31/3/2017 31/3/2018 31/3/2019 31/3/2020 31/3/2021 31/3/2022 31/3/2023 31/3/2024 31/3/2025 31/3/2026
+Units
+All figures are in (millions') unless otherwise stated
+1. Consolidated Income Statement
+Revenue SGD 1 ,729.4 1 ,724.6 1,828.02 1 ,941.2 970.0 1,169.5 1,557.7 2,020.6 2,251.8 2,388.9
+Food Solutions SGD 973.3 946.6 988.2 1,070.5 573.8 692.7 855.0 1,090.1 1,188.2 1,258.7
+Gateway Services SGD 754.6 776.5 837.8 868.8 389.7 469.4 694.3 920.6 1,051.9 1,116.1
+Others SGD 1.4 1.4 2.1 1.9 6.5 7.3 8 .4 9 .8 11.7 14.1
+Cost of Goods Sold SGD (1,182.0) (1,170.0) (1,230.8) (1,310.2) (672.0) (775.1) (1,045.4) (1,338.7) (1,458.1) (1,511.1)
+License Fees SGD (67.5) (84.2) (89.4) (84.6) (19.9) (24.1) ( 39.8) ( 91.1) (101.5) (107.7)
+Raw Materials SGD (257.9) (252.5) (267.4) (346.1) (269.8) (266.8) (261.9) (313.2) (349.1) (370.3)
+Staff Cost SGD (856.7) (833.3) (874.0) (879.4) (382.3) (484.3) (743.7) (934.4) (1,007.5) (1,033.0)
+Gross Profit SGD 547.4 554.5 597.2 631.0 298.0 394.4 512.3 681.9 793.7 877.8
+Depreciation & Amortisation SGD (73.5) (78.5) (84.9) (117.6) (130.4) (112.5) ( 78.9) (104.1) (132.4) (144.6)
+Operating Expenses (243.2) (249.7) (265.3) (287.2) (177.7) (200.2) (247.9) (292.2) (305.4) (302.5)
+Selling, General & Admin Expenses SGD (109.6) (103.5) (113.2) (93.4) (65.3) (76.4) ( 98.6) (117.9) (122.4) (120.3)
+Other Costs SGD (133.7) (146.2) (152.1) (193.8) (112.4) (123.8) (149.3) (174.3) (183.0) (182.2)
+Other non-operating income/(loss) net SGD 9.8 20.7 (1.5) (20.3) (71.7) 2.2 2 .2 2 .2 2 .2 2 .2
+Earnings Before Interest and Taxes SGD 240.5 247.0 245.5 205.9 (81.8) 83.8 187.6 287.6 358.0 432.9
+Net Interest Expenses SGD 3.4 3.4 3.3 (3.7) (15.7) (15.8) ( 13.9) ( 11.9) ( 11.6) ( 11.4)
+Interest Expenses SGD (1.2) (0.8) (0.8) (7.6) (20.5) (18.4) (16.7) (14.8) (14.7) (14.6)
+Interest and Investment Income SGD 4.6 4.2 4.1 3.9 4.8 2.6 2.8 2.9 3.0 3.2
+Taxes and Other Expenses SGD 14.1 11.0 (0.4) (33.8) 18.5 32.3 10.7 ( 10.1) ( 24.6) ( 39.9)
+Provision for Income Tax SGD (48.3) (56.1) (51.5) (38.3) 36.2 (13.9) ( 35.5) ( 56.4) ( 70.9) ( 86.2)
+Share of Results of Associates and JV SGD 65.2 71.2 58.9 11.8 (48.0) 51.8 51.8 51.8 51.8 51.8
+Minority Interest (After Tax) SGD (2.8) (4.1) (7.8) (7.2) 30.4 (5.5) (5.5) (5.5) (5.5) (5.5)
+Net Income SGD 257.9 261.5 248.4 168.4 (78.9) 100.4 184.4 265.6 321.8 381.5
+EPS 0.23 0.23 0.22 0.15 (0.07) 0.09 0.16 0.24 0.29 0.34
+2. Consolidated Statement of Financial Position (Balance Sheet)
+332
+Current Assets SGD 856.5 735.0 710.2 1 ,028.5 1,322.8 1,377.4 1,264.3 1,053.6 1,011.1 954.8
+Cash and Cash Equivalents SGD 505.8 373.3 349.9 549.2 879.8 981.0 862.9 649.4 555.9 466.0
+Trade and Other Receivables SGD 271.2 298.5 300.9 386.0 291.5 293.0 312.4 350.3 390.3 414.1
+Amounts due from associates and joint ventures SGD 6.7 4.6 5.3 2.8 1.2 1.2 1 .2 1 .2 1 .2 1 .2
+Inventories SGD 21.9 22.5 24.3 67.4 130.1 82.0 67.7 32.6 43.5 53.3
+Prepayment and Deposits SGD 17.4 16.2 19.4 23.0 20.1 20.1 20.1 20.1 20.1 20.1
+Assets of Disposal Group Classified as Held for Sale SGD 33.5 19.9 10.5 - - - - - - -
+Non-Current Assets SGD 1 ,422.9 1 ,613.3 1 ,698.2 1 ,982.1 1,769.1 1,590.6 1,672.9 1,788.2 1,834.7 1,884.2
+Right of Use Assets SGD - - - 206.0 187.7 187.7 151.2 133.0 114.8 96.5
+Property, Plant and Equipment SGD 538.7 560.1 579.2 602.3 519.7 364.5 480.9 611.4 667.8 728.0
+Investment in Joint Venture SGD 80.7 244.7 102.4 71.2 57.4 57.4 57.4 57.4 57.4 57.4
+Investment in Associates SGD 590.1 604.1 621.5 617.8 520.8 520.8 520.8 520.8 520.8 520.8
+Long-term Investments SGD 25.3 20.0 20.6 27.7 14.5 14.5 14.5 14.5 14.5 14.5
+Deferred Taxation SGD 11.6 10.7 12.0 13.7 34.3 14.5 21.0 30.2 37.5 44.4
+Intangible Assets SGD 157.9 157.5 350.6 427.4 410.7 410.7 410.7 410.7 410.7 410.7
+Other Non-current Assets SGD 8.2 7.3 4.3 15.0 23.5 20.1 15.9 9 .6 10.7 11.4
+Investment Properties SGD 10.4 8.9 7.6 1.0 0.5 0.5 0 .5 0 .5 0 .5 0 .5
+Total Assets SGD 2 ,279.4 2 ,348.4 2 ,408.4 3 ,010.5 3,091.8 2,968.0 2,937.2 2,841.8 2,845.7 2,839.0
+Current Liabilities SGD 395.1 402.6 389.3 561.3 565.3 526.0 562.1 543.1 575.1 589.4
+Amounts due to associates and joint ventures SGD 4.9 3.5 9.3 10.5 11.4 11.4 11.4 11.4 11.4 11.4
+Trade and Other Payables SGD 316.1 331.6 322.6 372.5 358.5 349.8 385.9 367.2 400.0 414.5
+Term Loan SGD 10.0 9.9 - 112.4 143.3 112.7 112.8 112.4 111.7 111.4
+Finance Leases SGD 0.4 0.3 - - - - - - - -
+Lease Liabilities SGD - - 0.1 19.4 16.0 16.0 16.0 16.0 16.0 16.0
+Income Tax Payable SGD 58.6 57.3 57.3 46.5 36.0 36.0 36.0 36.0 36.0 36.0
+Liabilities of Disposal Groups Classified as Held for Sale SGD 5.1 - - - - - - - - -
+Non-Current Liabilities SGD 280.8 311.7 369.9 831.8 980.2 820.5 752.2 680.9 664.0 646.6
+Notes Payable SGD - - - 200.0 300.0 200.5 200.7 200.0 198.7 198.2
+Term Loan SGD 97.5 96.0 95.4 102.4 234.9 197.6 149.1 97.4 96.7 96.5
+Finance Leases SGD 0.7 0.3 - - - - - - - -
+Lease Liabilities SGD - - 0.1 190.2 179.2 161.0 142.8 124.5 106.3 88.0
+Deferred Taxation SGD 55.5 61.6 87.6 90.7 68.7 68.7 68.7 68.7 68.7 68.7
+Minority Interest SGD 87.7 132.5 167.9 188.0 152.5 152.5 152.5 152.5 152.5 152.5
+Other Payables SGD 39.5 21.3 18.8 60.5 45.0 40.2 38.6 37.8 41.2 42.7
+Shareholders' Equity SGD 1 ,603.5 1 ,634.1 1 ,649.2 1 ,617.5 1,546.3 1,621.5 1,622.8 1,617.8 1,606.6 1,603.0
+Common Stock - Par Value SGD 367.9 367.9 367.9 367.9 367.9 367.9 367.9 367.9 367.9 367.9
+Treasury Stock - Common SGD (30.4) (32.8) (43.0) (26.0) (18.8) (18.8) ( 18.8) ( 18.8) ( 18.8) ( 18.8)
+Revenue Reserve SGD 1 ,362.0 1 ,431.0 1 ,473.1 1 ,426.1 1,349.0 1,408.2 1,417.5 1,414.8 1,403.1 1,398.5
+Statutory Reserves SGD 8.3 9.2 10.9 12.1 13.5 10.8 11.3 11.7 11.9 11.8
+Translation Reserve SGD (111.1) (143.4) (150.7) (147.5) (150.2) (140.6) (146.5) (147.1) (146.4) (146.2)
+Other Reserves SGD (5.9) (12.8) (19.0) (24.6) (24.5) (17.4) ( 19.7) ( 21.0) ( 21.4) ( 20.8)
+Share-based Compensation Reserve SGD 12.6 15.0 10.1 9.5 9.4 11.3 11.1 10.3 10.3 10.5
+Total Liabilities and Shareholders' Equity SGD 2 ,279.4 2 ,348.4 2 ,408.4 3 ,010.5 3,091.8 2,968.0 2,937.2 2,841.8 2,845.7 2,839.0
+Source: Sapphire Capital Analysis
+19
+--- PAGE 21 ---
+Appendix T: Filtering process of trading comparables and precedent transactions
+Source: Sapphire Capital Analysis
+Appendix T: Profile of Trading Comparables
+Source: Sapphire Capital Analysis
+20

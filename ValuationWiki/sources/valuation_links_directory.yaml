@@ -1,0 +1,56 @@
+# Valuation Links Directory & Resource Index
+# Schema Version: 1.0
+# Last Updated: 2026-09-05
+
+google_workspace_models:
+  primary_live_gsheet_model:
+    title: "Universal Institutional Valuation Model (Google Sheets)"
+    url: "https://docs.google.com/spreadsheets/d/1wBFDDikiaw-9R-xu6ZKVLz-So3Ij2XNDnPtf951yF6k/edit#gid=0"
+    spreadsheet_id: "1wBFDDikiaw-9R-xu6ZKVLz-So3Ij2XNDnPtf951yF6k"
+    description: "Live 7-tab cloud valuation model with 1,035 dynamic USER_ENTERED formulas, Damodaran Ginzu converters, Moody's synthetic rating grid, and 10-year FCFF schedule."
+    owner: "Joseph Dermawan"
+
+academic_and_damodaran_resources:
+  damodaran_spring_valuation_course_2026:
+    title: "NYU Stern Aswath Damodaran Valuation Spring Course 2026"
+    url: "https://youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd&si=aVOdouqHgflgd7PY"
+    description: "24-lecture comprehensive institutional valuation course covering financial statement normalization, risk premiums, bottom-up betas, WACC, and relative valuation."
+  damodaran_data_and_default_spreads:
+    title: "Aswath Damodaran NYU Stern Data & Benchmark Repository"
+    url: "https://pages.stern.nyu.edu/~adamodar/"
+    description: "Official repository for global ERPs, country risk premiums, industry unlevered betas, default spreads by synthetic rating, and corporate tax rates."
+  nyu_stern_esg_metastudy:
+    title: "NYU Stern Center for Sustainable Business ESG Metastudy"
+    url: "https://www.stern.nyu.edu/experience-stern/about/departments-centers-initiatives/centers-of-research/center-sustainable-business"
+    description: "Metastudy of 1,272 corporate ESG studies linking disclosure scores to lower cost of capital and alpha outperformance."
+
+repository_and_codebase_resources:
+  github_repository:
+    title: "joseph-dermawan/network_graph"
+    url: "https://github.com/joseph-dermawan/network_graph"
+    description: "GitHub repository for Graph Centrality Momentum quantitative trading strategy and institutional equity valuation models."
+  local_workspace_root:
+    path: "/Users/worldofmadness/Documents/VS Code/Personal Projects/NetworkGraph"
+    description: "Local development root directory for NetworkGraph, POWELL, ECOLAB, and ValuationWiki."
+  local_excel_valuation_model:
+    path: "file:///Users/worldofmadness/Documents/VS%20Code/Personal%20Projects/NetworkGraph/Universal_Institutional_Valuation_Model.xlsx"
+    description: "Standalone 7-tab openpyxl Excel valuation workbook with custom color palette (#FFFFCC inputs, #E2EFDA targets)."
+  dual_engine_architecture_html:
+    path: "file:///Users/worldofmadness/Documents/VS%20Code/Personal%20Projects/NetworkGraph/engine_architecture.html"
+    description: "Interactive HTML dashboard and Mermaid.js system flowchart for Quantitative Strategy and Valuation engines."
+  curriculum_extraction_skill:
+    path: "file:///Users/worldofmadness/Documents/VS%20Code/Personal%20Projects/NetworkGraph/.agents/skills/curriculum-extraction/SKILL.md"
+    description: "Standard operating procedure for extracting, deconstructing, and synthesizing academic lecture slides, courses, and financial curricula into institutional wiki documentation."
+
+
+sec_and_company_filings:
+  powell_industries_sec_cik_0000080420:
+    title: "Powell Industries Inc. (NASDAQ: POWL) SEC EDGAR Filings"
+    url: "https://www.sec.gov/edgar/browse/?CIK=0000080420"
+    cik: "0000080420"
+    description: "Form 10-K and 10-Q SEC filings for Powell Industries pro-forma DCF model and Monte Carlo simulation."
+  ecolab_inc_sec_cik_0000031413:
+    title: "Ecolab Inc. (NYSE: ECL) SEC EDGAR Filings"
+    url: "https://www.sec.gov/edgar/browse/?CIK=0000031413"
+    cik: "0000031413"
+    description: "Form 10-K and 10-Q SEC filings for Ecolab high-tech valuation model and 11-year historical statement analysis."

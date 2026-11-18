@@ -1,0 +1,33 @@
+# [LAYOUT INSTRUCTION: Insert this section in your report's right/main column. Place the corresponding Figures from output_figure/ in the left sidebar next to each paragraph.]
+
+6. Valuation
+
+Valuation Overview – Choice of Methodologies
+We arrive at a target price of $286.00 through an income approach (an equal blend of DCF using Gordon Growth and Exit Multiple methods) as our primary valuation methodology. We chose the income approach as it is uniquely positioned to capture the unprecedented hyper-growth phase Powell is currently entering. By explicitly forecasting the aggressive execution of their record $2.4B backlog and modeling the volume leverage inherent in their factory operations, the DCF accurately captures the future free cash flow to firm (FCFF) that Powell generates. 
+We have further employed the market approach (comparable companies analysis using Forward P/E and EV/EBITDA multiples) as well as broker estimates as a sanity check against our target output. Our Valuation Football Field [Figure 6.1] summarises the various valuation methodologies against Powell's current market price of $218.73.
+
+Intrinsic Valuation – Discounted Cash Flow Analysis
+Our DCF uses the Free Cash Flow to Firm (FCFF) methodology to arrive at the intrinsic value of POWL.
+
+Revenue and Cost Build
+In our Powell Industries build, top-line growth is driven by execution against the record $2.4B backlog and compounding tailwinds across hyperscale AI data centers, electric grid modernization, and LNG infrastructure. Revenue expansion accelerates as facility expansions at Jacintoport increase physical throughput, reinforced by higher-value custom Power Control Rooms (PCRs) maintaining strong pricing power. Specialized electrical technician labor and direct material costs (copper, electrical steel, transformers) track industrial inflation, with cost pressures partially offset by volume procurement scale and contractual price indexation clauses. As fixed overhead and SG&A scale efficiently over an expanding revenue base, strong operating leverage drives structural expansion to hit our 26.0% target margin.
+
+Cost of Capital & WACC Derivation
+We derived Powell’s discount rate using the Capital Asset Pricing Model (Ke = Rf + β(ERP)) for Cost of Equity and evaluated balance sheet debt weightings for WACC [Figure 6.2]. A risk-free rate of 4.70% was derived using the US 10-Year Treasury Yield as of the valuation date, while Professor Damodaran’s US Equity Risk Premium benchmark was used to set a 5.50% ERP. We relied on a 5-year monthly regression beta against the S&P 500 (via Yahoo Finance) to set an equity beta of 1.15. As a strict sanity check, we unlevered the betas of 5 comparable peers (HUBB, ETN, VRT, FIX, EME), yielding a peer unlevered beta average of 0.98; re-levering to Powell's zero-debt structure confirms that 1.15 accurately reflects Powell’s operating leverage. Based on SEC Form 10-Q filings, Powell carries $633.56M in cash against just $2.52M in lease obligations, resulting in a 99.97% Equity / 0.03% Debt capital structure and an effective 0.00% Cost of Debt. Consequently, Powell’s WACC equals its Cost of Equity at 11.02%. We note that this unlevered capital structure presents a significant upside catalyst; a future leveraged recapitalisation (issuing 20% debt to fund share buybacks) would lower WACC to 9.79% and unlock +$35.00+ per share of hidden value [Figure 6.9].
+
+Terminal Growth Rate and Exit Multiple
+We derived a long-term terminal growth rate of 3.5%, aligning conservatively with long-term US GDP growth and inflation expectations. However, given POWL’s strategic transition into a pure-play AI infrastructure provider, we utilized an exit multiple of 18.0x Forward EV/EBITDA. This reflects a blended re-rating, bridging the gap between legacy electrical industrials trading at ~12x-16x (Hubbell, Eaton) and pure-play AI data center peers trading at ~25x (Vertiv). We arrive at a DCF Perpetual Growth target of $261.82 and an Exit Multiple target of $310.53, yielding a blended target price of $286.18 (rounded to $286.00).
+
+Sensitivity Analysis & Scenario Analysis
+To simulate the sensitivity of our buy recommendation on extreme scenarios, we performed sensitivity analysis of WACC versus Terminal Growth Rate and Exit Multiple [Figure 6.4]. As future scenarios are always uncertain, we considered varying our assumptions for (i) AI hyperscaler CapEx sustainability, (ii) success in mitigating supply chain headwinds, and (iii) ability to expand margins through scale (from 19.67% to 26.00%). The valuation bridge illustrates how operational execution builds from $218.73 to our $286.18 intrinsic value [Figure 6.5].
+
+Monte Carlo Simulation
+Given that the current analysis might not fully reflect all probable scenarios, we further tested the spread of our valuation by varying (i) Revenue growth, (ii) Operating margin, and (iii) WACC using a Monte Carlo simulation of 10,000 trials. After running the simulation, we observed an 86.78% probability of outperforming the current stock price, with a mean intrinsic value of $264.42, a 10th percentile floor of $213.64, and a 90th percentile upside pushing the valuation to $320.12 [Figure 6.6], validating a strong margin of safety over the $218.73 current price.
+
+Relative Valuation – Comparable Companies Analysis
+To complement our intrinsic valuation, we valued Powell against a selected peer group of publicly traded electrical equipment manufacturers with power management and data center exposure.
+
+Peer Group Selection & Multiples: From our sector analysis, we identified 5 primary trading comparables: Hubbell Inc., Eaton Corp, Vertiv Holdings, Comfort Systems USA, and EMCOR Group [Figure 6.7]. We selected Forward EV/EBITDA and Forward P/E multiples as the most appropriate metrics given the capital-intensive nature of electrical manufacturing and the forward-looking nature of Powell's backlog throughput. Applying the peer median Forward EV/EBITDA multiple of 19.2x ($179.54) and Forward P/E multiple of 26.8x ($171.31) to Powell's Forward Year 1 projected EBITDA ($308.9M) and Net Income ($233.6M) yields a blended relative valuation of $175.42, signaling that POWL remains heavily undervalued relative to its forward growth trajectory.
+
+Broker Consensus as further Sanity Check
+Finally, we relied on Wall Street analyst research as an external sanity check to validate our target output [Figure 6.8]. Recent aggressive target upgrades, such as Cantor Fitzgerald's initiation, place Wall Street targets between $235.00 (Low) to $333.00 (High), with a median of $276.00, which strongly corroborates our $286.00 blended target price.
