@@ -2,9 +2,9 @@
   "ticker": "AMZN",
   "company_name": "Amazon.com, Inc.",
   "currency": "USD",
-  "spot_price_usd": 246.67,
+  "spot_price_usd": 251.52,
   "shares_outstanding_m": 10786.31,
-  "market_cap_m": 2660660.0,
+  "market_cap_m": 2712970.0,
   "wacc_schedule": {
     "base_wacc": 0.0927,
     "terminal_wacc": 0.09,
@@ -81,8 +81,8 @@
   "liquidation_floor_usd": 0.0,
   "final_triangulation": {
     "target_price_usd": 203.46,
-    "upside_percent": -17.52,
-    "rating": "UNDERWEIGHT / SELL (-17.5%)",
-    "updated_at": "2026-09-30T16:08:00.497782"
+    "upside_percent": -19.11,
+    "rating": "UNDERWEIGHT / SELL (-19.1%)",
+    "updated_at": "2026-10-04T14:05:38.484361"
   }
 }

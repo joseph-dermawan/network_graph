@@ -55,10 +55,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 8.6
-    published_rating: UNDERWEIGHT / SELL (-42.5%)
+    published_rating: UNDERWEIGHT / SELL (-41.8%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-30T15:48:25.968874'
-    last_spot_price: 14.968
+    last_published_at: '2026-10-04T14:05:39.922424'
+    last_spot_price: 14.772
   NVDA:
     company_name: NVIDIA Corporation
     market: US_EQUITIES
@@ -67,10 +67,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 125.93
-    published_rating: UNDERWEIGHT / SELL (-44.6%)
+    published_rating: UNDERWEIGHT / SELL (-46.2%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-30T15:48:22.864285'
-    last_spot_price: 227.21
+    last_published_at: '2026-10-04T14:05:37.446970'
+    last_spot_price: 233.95
   GOOGL:
     company_name: Alphabet Inc.
     market: US_EQUITIES
@@ -79,10 +79,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: PUBLISHED
     last_intrinsic_value: 252.8
-    published_rating: UNDERWEIGHT / SELL (-25.9%)
+    published_rating: UNDERWEIGHT / SELL (-26.4%)
     last_published_version: v1.0
-    last_published_at: '2026-09-30T15:48:23.910422'
-    last_spot_price: 340.92
+    last_published_at: '2026-10-04T14:05:38.297794'
+    last_spot_price: 343.5
   MSFT:
     company_name: Microsoft Corporation
     market: US_EQUITIES
@@ -91,10 +91,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 447.71
-    published_rating: TRIM / TAKE PROFITS (-12.0%)
+    published_rating: TRIM / TAKE PROFITS (-13.5%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-30T15:48:23.273797'
-    last_spot_price: 508.96
+    last_published_at: '2026-10-04T14:05:37.793651'
+    last_spot_price: 517.53
   AAPL:
     company_name: Apple Inc.
     market: US_EQUITIES
@@ -103,10 +103,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 176.57
-    published_rating: UNDERWEIGHT / SELL (-46.4%)
+    published_rating: UNDERWEIGHT / SELL (-47.1%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-30T15:48:23.632858'
-    last_spot_price: 329.4
+    last_published_at: '2026-10-04T14:05:38.011659'
+    last_spot_price: 333.69
   AMD:
     company_name: Advanced Micro Devices, Inc.
     market: US_EQUITIES
@@ -115,10 +115,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: PUBLISHED
     last_intrinsic_value: 201.44
-    published_rating: UNDERWEIGHT / SELL (-66.8%)
+    published_rating: UNDERWEIGHT / SELL (-68.2%)
     last_published_version: v1.0
-    last_published_at: '2026-09-30T15:48:25.415925'
-    last_spot_price: 607.57
+    last_published_at: '2026-10-04T14:05:39.460293'
+    last_spot_price: 633.91
   AMZN:
     company_name: Amazon.com, Inc.
     market: US_EQUITIES
@@ -127,10 +127,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 203.46
-    published_rating: UNDERWEIGHT / SELL (-17.5%)
+    published_rating: UNDERWEIGHT / SELL (-19.1%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-30T15:48:24.171430'
-    last_spot_price: 246.67
+    last_published_at: '2026-10-04T14:05:38.484586'
+    last_spot_price: 251.52
   META:
     company_name: Meta Platforms, Inc.
     market: US_EQUITIES
@@ -139,10 +139,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 736.95
-    published_rating: NEUTRAL / HOLD (-0.2%)
+    published_rating: NEUTRAL / HOLD (+1.2%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-30T15:48:24.447297'
-    last_spot_price: 738.79
+    last_published_at: '2026-10-04T14:05:38.690356'
+    last_spot_price: 728.08
   ORCL:
     company_name: Oracle Corporation
     market: US_EQUITIES
@@ -151,10 +151,10 @@ COMPANIES:
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
     last_intrinsic_value: 113.44
-    published_rating: UNDERWEIGHT / SELL (-17.7%)
+    published_rating: UNDERWEIGHT / SELL (-20.3%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-30T15:48:25.674315'
-    last_spot_price: 137.79
+    last_published_at: '2026-10-04T14:05:39.654265'
+    last_spot_price: 142.3
   TSM:
     company_name: Taiwan Semiconductor Manufactur
     market: US_EQUITIES
@@ -164,10 +164,10 @@ COMPANIES:
     drive_folder_id: ''
     current_status: VALUATION_COMPLETED
     last_published_version: v1.0-agy
-    last_published_at: '2026-09-30T15:48:25.150578'
-    last_intrinsic_value: 406.68
-    published_rating: TRIM / TAKE PROFITS (-11.0%)
-    last_spot_price: 456.94
+    last_published_at: '2026-10-04T14:05:39.196921'
+    last_intrinsic_value: 406.04
+    published_rating: TRIM / TAKE PROFITS (-14.1%)
+    last_spot_price: 472.78
   AVGO:
     company_name: Broadcom Inc.
     market: US_EQUITIES
@@ -179,8 +179,8 @@ COMPANIES:
     last_intrinsic_value: 247.7
     published_rating: UNDERWEIGHT / SELL (-30.2%)
     last_published_version: draft_v1.0
-    last_published_at: '2026-09-30T15:48:24.834883'
-    last_spot_price: 355.1
+    last_published_at: '2026-10-04T14:05:38.995189'
+    last_spot_price: 355.14
   PLTR:
     company_name: Palantir Technologies Inc.
     market: US_EQUITIES
@@ -190,7 +190,33 @@ COMPANIES:
     drive_folder_id: ''
     current_status: VALUATION_COMPLETED
     last_published_version: v1.0-agy
-    last_published_at: '2026-09-30T15:48:26.316125'
+    last_published_at: '2026-10-04T14:05:40.114520'
     last_intrinsic_value: 16.78
-    published_rating: UNDERWEIGHT / SELL (-91.0%)
-    last_spot_price: 186.97
+    published_rating: UNDERWEIGHT / SELL (-91.1%)
+    last_spot_price: 188.75
+  ANT:
+    company_name: Anthropic, PBC
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: '19d46r9Ks8q16Hia7NbIGdKgP3fNA3RbAetmXtHcMpuQ'
+    gsheet_url: 'https://docs.google.com/spreadsheets/d/19d46r9Ks8q16Hia7NbIGdKgP3fNA3RbAetmXtHcMpuQ/edit?gid=0#gid=0'
+    drive_folder_id: ''
+    current_status: VALUATION_COMPLETED_AMENDMENT_3_UPDATED
+    last_published_version: v3.0-amendment-3-s1a
+    last_published_at: '2026-11-18T18:00:00.000000'
+    last_intrinsic_value: 83.69
+    published_rating: ACCUMULATE AT IPO (11.6% DISCOUNT AT $74 MIDPOINT)
+    last_spot_price: 74.00
+  ANTH:
+    company_name: Anthropic, PBC (Legacy Pre-IPO Ticker Alias)
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: '19d46r9Ks8q16Hia7NbIGdKgP3fNA3RbAetmXtHcMpuQ'
+    gsheet_url: 'https://docs.google.com/spreadsheets/d/19d46r9Ks8q16Hia7NbIGdKgP3fNA3RbAetmXtHcMpuQ/edit?gid=0#gid=0'
+    drive_folder_id: ''
+    current_status: ALIAS_REDIRECT_TO_ANT
+    last_published_version: v3.0-amendment-3-s1a
+    last_published_at: '2026-11-18T18:00:00.000000'
+    last_intrinsic_value: 83.69
+    published_rating: ACCUMULATE AT IPO (11.6% DISCOUNT AT $74 MIDPOINT)
+    last_spot_price: 74.00

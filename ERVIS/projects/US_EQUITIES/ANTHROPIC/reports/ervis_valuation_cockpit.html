@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anthropic, PBC (NASDAQ: ANT) — ERVIS Valuation Cockpit & Terminal Engine</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --bg-page: #FAF7F2;
+            --bg-card: #FFFFFF;
+            --bg-subtle: #F4EFEB;
+            --bg-active: #EFE8DF;
+            --border-main: #E5E0D8;
+            --border-dark: #D8D2C5;
+            --text-primary: #1C1917;
+            --text-secondary: #57534E;
+            --text-muted: #8C867A;
+            --accent-amber: #B45309;
+            --accent-green: #15803D;
+            --accent-red: #B91C1C;
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-serif: 'Newsreader', Georgia, serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 13px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-serif { font-family: var(--font-serif); }
+        .font-mono { font-family: var(--font-mono); }
+        .font-sans { font-family: var(--font-sans); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-page);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-dark);
+            border-radius: 3px;
+        }
+
+        /* Clean Card Style */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-main);
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        /* Table Styling */
+        .fin-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+        }
+        .fin-table th {
+            font-family: var(--font-sans);
+            font-size: 10.5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-secondary);
+            padding: 7px 10px;
+            border-bottom: 2px solid var(--border-dark);
+            background-color: var(--bg-subtle);
+            text-align: right;
+            white-space: nowrap;
+        }
+        .fin-table th:first-child {
+            text-align: left;
+        }
+        .fin-table td {
+            padding: 6px 10px;
+            border-bottom: 1px solid #ECE7DE;
+            color: var(--text-primary);
+            text-align: right;
+            white-space: nowrap;
+        }
+        .fin-table td:first-child {
+            text-align: left;
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            white-space: normal;
+        }
+        .fin-table tr:hover td {
+            background-color: #F8F5EE;
+        }
+        .fin-table .row-subtotal td {
+            font-weight: 600;
+            border-top: 1px solid var(--border-dark);
+            border-bottom: 1px solid var(--border-dark);
+            background-color: #FAF6EF;
+        }
+        .fin-table .row-total td {
+            font-weight: 700;
+            border-top: 1px solid var(--text-primary);
+            border-bottom: 3px double var(--text-primary);
+            background-color: var(--bg-subtle);
+        }
+
+        /* Navigation Tabs */
+        .nav-tab {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            padding: 9px 15px;
+            color: var(--text-secondary);
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            white-space: nowrap;
+            background: transparent;
+        }
+        .nav-tab:hover {
+            color: var(--text-primary);
+            background-color: rgba(244, 239, 235, 0.6);
+        }
+        .nav-tab.active {
+            color: var(--accent-amber);
+            font-weight: 600;
+            border-bottom-color: var(--accent-amber);
+            background-color: #FFFFFF;
+        }
+
+        .tab-pane.hidden {
+            display: none !important;
+        }
+        .tab-pane.block {
+            display: block !important;
+        }
+    </style>
+    <!-- PWA & iPadOS Standalone Settings -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ERVIS ANT">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="theme-color" content="#FAF7F2">
+</head>
+<body class="min-h-screen">
+
+    <!-- Top Editorial Header -->
+    <header class="bg-[#FFFFFF] border-b border-[#E5E0D8] sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div>
+                <!-- Reciprocal Breadcrumb Bar -->
+                <div class="flex items-center space-x-2 text-[10.5px] font-mono text-[#8C867A] mb-1">
+                    <a href="anthropic_case_file.html" class="text-[#B45309] font-bold hover:underline flex items-center gap-1">&larr; CASE FILE HOME</a>
+                    <span>/</span>
+                    <a href="anthropic_prospectus_dashboard.html" class="hover:underline text-[#57534E]">S-1 PROSPECTUS DASHBOARD</a>
+                    <span>/</span>
+                    <a href="damodaran_breakdown_reader.html" class="hover:underline text-[#57534E]">DAMODARAN EXCEL</a>
+                    <span>/</span>
+                    <span class="text-[#1C1917] font-semibold">ERVIS VALUATION COCKPIT</span>
+                </div>
+                <div class="flex items-baseline space-x-3">
+                    <h1 class="text-xl font-serif font-semibold text-[#1C1917] tracking-tight">
+                        Anthropic, PBC
+                    </h1>
+                    <span class="text-xs font-mono font-bold px-2 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded text-[#B45309]">
+                        NASDAQ: ANT
+                    </span>
+                    <span class="text-xs text-[#57534E]">
+                        ERVIS Institutional Terminal &bull; Dual-Engine Valuation Cockpit
+                    </span>
+                </div>
+            </div>
+
+            <!-- Top Ticker Matrix Strip -->
+            <div class="flex items-center space-x-4 text-xs font-mono">
+                <div class="text-right">
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">IPO Pricing Spot</div>
+                    <div class="text-sm font-bold text-[#1C1917]">$525.00 <span class="text-[10px] text-[#8C867A]">($1,733.7B)</span></div>
+                </div>
+                <div class="h-7 w-px bg-[#E5E0D8]"></div>
+                <div class="text-right">
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Ginzu DCF Fair Value</div>
+                    <div class="text-sm font-bold text-[#15803D]">$439.24 <span class="text-[10px] text-[#8C867A]">($1,450.5B)</span></div>
+                </div>
+                <div class="h-7 w-px bg-[#E5E0D8]"></div>
+                <div class="text-right">
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Crowd Baseline</div>
+                    <div class="text-sm font-bold text-[#4338CA]">$268.00 <span class="text-[10px] text-[#8C867A]">($884.2B)</span></div>
+                </div>
+                <div class="h-7 w-px bg-[#E5E0D8]"></div>
+                <div class="text-right">
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Verdict</div>
+                    <div class="text-xs font-bold px-2 py-0.5 bg-[#FEE2E2] border border-[#FECACA] rounded text-[#B91C1C]">
+                        OVERVALUED (-16.3%)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6 Cockpit Navigation Tabs -->
+        <div class="max-w-7xl mx-auto px-6 flex space-x-1 border-t border-[#ECE7DE] overflow-x-auto">
+            <button class="nav-tab active" onclick="switchCockpitTab('tab-cockpit')">
+                [01] VALUATION COCKPIT & BRIDGE
+            </button>
+            <button class="nav-tab" onclick="switchCockpitTab('tab-levers')">
+                [02] 4 VALUATION LEVERS & FRAGILITY
+            </button>
+            <button class="nav-tab" onclick="switchCockpitTab('tab-costcap')">
+                [03] COST OF CAPITAL MASTERCLASS
+            </button>
+            <button class="nav-tab" onclick="switchCockpitTab('tab-capitalization')">
+                [04] $485B DEBT & R&D AUDIT
+            </button>
+            <button class="nav-tab" onclick="switchCockpitTab('tab-dcf')">
+                [05] 10-YR GINZU DCF SCHEDULE
+            </button>
+            <button class="nav-tab" onclick="switchCockpitTab('tab-simulator')">
+                [06] INTERACTIVE VALUATION SIMULATOR
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto px-6 py-6">
+
+        <!-- ========================================================================================= -->
+        <!-- TAB 1: VALUATION COCKPIT & BRIDGE                                                         -->
+        <!-- ========================================================================================= -->
+        <section id="tab-cockpit" class="tab-pane block space-y-6">
+            
+            <!-- Valuation Summary KPIs -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="card p-4">
+                    <div class="text-[10px] font-mono text-[#8C867A] uppercase">Implied Equity Value</div>
+                    <div class="text-xl font-mono font-bold text-[#1C1917] my-1">$1,450.5B</div>
+                    <div class="text-[11px] text-[#57534E]">Common equity post option haircut</div>
+                </div>
+                <div class="card p-4">
+                    <div class="text-[10px] font-mono text-[#8C867A] uppercase">Intrinsic Per Share</div>
+                    <div class="text-xl font-mono font-bold text-[#15803D] my-1">$439.24</div>
+                    <div class="text-[11px] text-[#57534E]">Based on 3,302.27M diluted shares</div>
+                </div>
+                <div class="card p-4">
+                    <div class="text-[10px] font-mono text-[#8C867A] uppercase">Capitalized Lease Debt</div>
+                    <div class="text-xl font-mono font-bold text-[#B91C1C] my-1">$485.3B</div>
+                    <div class="text-[11px] text-[#57534E]">PV of non-cancelable compute leases</div>
+                </div>
+                <div class="card p-4">
+                    <div class="text-[10px] font-mono text-[#8C867A] uppercase">IPO Margin of Safety</div>
+                    <div class="text-xl font-mono font-bold text-[#B45309] my-1">-16.3%</div>
+                    <div class="text-[11px] text-[#57534E]">Against $525.00 anticipated price</div>
+                </div>
+            </div>
+
+            <!-- Waterfall Bridge & Visual Chart Container -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left: Financial Bridge Table (7 cols) -->
+                <div class="card p-5 lg:col-span-7 space-y-3">
+                    <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                        <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                            Valuation Waterfall Bridge (Operating Assets &rarr; Equity)
+                        </h3>
+                        <span class="text-[11px] font-mono text-[#8C867A]">Amounts in Millions USD</span>
+                    </div>
+
+                    <table class="fin-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 58%;">Valuation Component</th>
+                                <th>Amount ($M)</th>
+                                <th>% Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PV of 10-Year Discrete Cash Flows (FCFF)</td>
+                                <td>$421,729</td>
+                                <td>23.3%</td>
+                            </tr>
+                            <tr>
+                                <td>PV of Terminal Value ($3,459,520M TV)</td>
+                                <td>$1,388,748</td>
+                                <td>76.7%</td>
+                            </tr>
+                            <tr class="row-subtotal">
+                                <td>Sum of Operating PV</td>
+                                <td>$1,810,476</td>
+                                <td>100.0%</td>
+                            </tr>
+                            <tr>
+                                <td class="text-[#B91C1C]">Less: 10% Probability of Distress Haircut (50% recovery)</td>
+                                <td class="text-[#B91C1C]">(90,524)</td>
+                                <td class="text-[#B91C1C]">-5.0%</td>
+                            </tr>
+                            <tr class="row-subtotal">
+                                <td><strong>Value of Operating Assets</strong></td>
+                                <td><strong>$1,719,953</strong></td>
+                                <td>95.0%</td>
+                            </tr>
+                            <tr>
+                                <td class="text-[#B91C1C]">Less: Capitalized Compute Commitments & Lease Debt</td>
+                                <td class="text-[#B91C1C]">(485,320)</td>
+                                <td class="text-[#B91C1C]">-26.8%</td>
+                            </tr>
+                            <tr>
+                                <td>Plus: Current Cash & Short-Term Investments</td>
+                                <td>112,389</td>
+                                <td>6.2%</td>
+                            </tr>
+                            <tr>
+                                <td>Plus: Expected Net IPO Primary Capital Proceeds</td>
+                                <td>100,000</td>
+                                <td>5.5%</td>
+                            </tr>
+                            <tr>
+                                <td>Plus: Non-Operating Strategic Holdings</td>
+                                <td>3,929</td>
+                                <td>0.2%</td>
+                            </tr>
+                            <tr class="row-subtotal">
+                                <td><strong>Total Value of Equity</strong></td>
+                                <td><strong>$1,450,951</strong></td>
+                                <td>80.1%</td>
+                            </tr>
+                            <tr>
+                                <td class="text-[#B91C1C]">Less: Value of Dilutive Options Overhang</td>
+                                <td class="text-[#B91C1C]">(472)</td>
+                                <td class="text-[#B91C1C]">-0.0%</td>
+                            </tr>
+                            <tr class="row-total">
+                                <td><strong>Value of Common Equity (Common Stock)</strong></td>
+                                <td><strong>$1,450,478</strong></td>
+                                <td>80.1%</td>
+                            </tr>
+                            <tr style="background-color: #FAF4EB;">
+                                <td><strong>Estimated Value per Share</strong> (3,302.27M Shares)</td>
+                                <td><strong>$439.24</strong></td>
+                                <td>—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Right: Clean Waterfall Visual Chart (5 cols) -->
+                <div class="card p-5 lg:col-span-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2 mb-3">
+                            <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                                Bridge Component Visualizer
+                            </h3>
+                            <span class="text-[11px] font-mono text-[#8C867A]">$ Billions</span>
+                        </div>
+                        <div class="h-64 w-full">
+                            <canvas id="bridgeChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded text-xs text-[#57534E] mt-3">
+                        <strong class="text-[#1C1917]">Takeaway:</strong> Capitalized compute commitments (-$485.3B) consume <strong>28.2%</strong> of gross operating value ($1,720B), making cash runway and revenue compounding critical to avoid distress.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gate 1 through Gate 5 Audit Sign-Off Grid -->
+            <div class="card p-5 space-y-3">
+                <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                    <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                        ERVIS Institutional Research Audit: 5-Gate Verification Status
+                    </h3>
+                    <span class="text-[11px] font-mono text-[#15803D] font-bold">ALL GATES VERIFIED</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-xs font-mono">
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-[#1C1917]">GATE 1</span>
+                            <span class="text-[10px] text-[#15803D] font-bold">&#10003; PASSED</span>
+                        </div>
+                        <div class="font-serif text-xs text-[#57534E] mb-1">Forensic Capitalization</div>
+                        <div class="text-[11px] text-[#8C867A]">$485.3B lease debt & $1.8B R&D asset capitalized.</div>
+                    </div>
+
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-[#1C1917]">GATE 2</span>
+                            <span class="text-[10px] text-[#15803D] font-bold">&#10003; PASSED</span>
+                        </div>
+                        <div class="font-serif text-xs text-[#57534E] mb-1">Unit Econ & COGS</div>
+                        <div class="text-[11px] text-[#8C867A]">Compute costs collapsed from 251% to 48% of rev.</div>
+                    </div>
+
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-[#1C1917]">GATE 3</span>
+                            <span class="text-[10px] text-[#15803D] font-bold">&#10003; PASSED</span>
+                        </div>
+                        <div class="font-serif text-xs text-[#57534E] mb-1">WACC & Synthetic Rating</div>
+                        <div class="text-[11px] text-[#8C867A]">BB+ rating, 9.74% initial WACC &rarr; 9.13% terminal.</div>
+                    </div>
+
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-[#1C1917]">GATE 4</span>
+                            <span class="text-[10px] text-[#15803D] font-bold">&#10003; PASSED</span>
+                        </div>
+                        <div class="font-serif text-xs text-[#57534E] mb-1">Ginzu DCF Valuation</div>
+                        <div class="text-[11px] text-[#8C867A]">10-Yr FCFF schedule delivers $439.24 fair value.</div>
+                    </div>
+
+                    <div class="p-3 bg-[#FEF3C7] border border-[#FDE68A] rounded">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-[#92400E]">GATE 5</span>
+                            <span class="text-[10px] text-[#B45309] font-bold">&#9873; MEMO</span>
+                        </div>
+                        <div class="font-serif text-xs text-[#92400E] mb-1">Recommendation Lock</div>
+                        <div class="text-[11px] text-[#B45309]">AVOID IPO at $525. Accumulate on post-IPO dips.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================================= -->
+        <!-- TAB 2: 4 VALUATION LEVERS & FRAGILITY                                                     -->
+        <!-- ========================================================================================= -->
+        <section id="tab-levers" class="tab-pane hidden space-y-6">
+            <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                <div>
+                    <h2 class="text-base font-serif font-bold text-[#1C1917]">
+                        The 4 Core Valuation Levers & Fragility Matrix
+                    </h2>
+                    <p class="text-xs text-[#57534E]">
+                        Deconstructing the primary sensitivity axes and market implied growth rates
+                    </p>
+                </div>
+                <span class="text-[11px] font-mono text-[#8C867A]">Damodaran Narrative to Numbers</span>
+            </div>
+
+            <!-- 4 Levers Detail Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="card p-4 space-y-2">
+                    <span class="text-[10.5px] font-mono text-[#B45309] font-bold uppercase">LEVER 01 &bull; GROWTH</span>
+                    <h4 class="font-serif font-bold text-sm text-[#1C1917]">Revenue Scaling</h4>
+                    <p class="text-xs text-[#57534E]">
+                        Scales from $35.3B base year run-rate to <strong>$1.005 Trillion by 2036</strong> (190% in Year 1, 42% in Years 2–5, tapering to 4.9%).
+                    </p>
+                    <div class="p-2 bg-[#FAF7F2] rounded border border-[#E5E0D8] font-mono text-[11px] text-[#1C1917]">
+                        TAM: $5T+ White Collar AI
+                    </div>
+                </div>
+
+                <div class="card p-4 space-y-2">
+                    <span class="text-[10.5px] font-mono text-[#15803D] font-bold uppercase">LEVER 02 &bull; MARGIN</span>
+                    <h4 class="font-serif font-bold text-sm text-[#1C1917]">Operating Profitability</h4>
+                    <p class="text-xs text-[#57534E]">
+                        32.5% pre-tax margin (75% premium enterprise + 25% mass market) minus <strong>5.0% regulatory compliance drag = 27.5% net target margin</strong>.
+                    </p>
+                    <div class="p-2 bg-[#FAF7F2] rounded border border-[#E5E0D8] font-mono text-[11px] text-[#1C1917]">
+                        Normalized: 27.5% Operating
+                    </div>
+                </div>
+
+                <div class="card p-4 space-y-2">
+                    <span class="text-[10.5px] font-mono text-[#4338CA] font-bold uppercase">LEVER 03 &bull; REINVESTMENT</span>
+                    <h4 class="font-serif font-bold text-sm text-[#1C1917]">Sales-to-Capital Ratio</h4>
+                    <p class="text-xs text-[#57534E]">
+                        Fixed at <strong>3.0x</strong>. Anthropic must invest $1 of incremental capital for every $3 of new revenue to continuously replenish aging GPU/TPU silicon.
+                    </p>
+                    <div class="p-2 bg-[#FAF7F2] rounded border border-[#E5E0D8] font-mono text-[11px] text-[#1C1917]">
+                        Capital Efficiency: 3.0x
+                    </div>
+                </div>
+
+                <div class="card p-4 space-y-2">
+                    <span class="text-[10.5px] font-mono text-[#B91C1C] font-bold uppercase">LEVER 04 &bull; RISK</span>
+                    <h4 class="font-serif font-bold text-sm text-[#1C1917]">WACC & Distress Risk</h4>
+                    <p class="text-xs text-[#57534E]">
+                        Initial cost of capital of <strong>9.74%</strong> (BB+ debt rating) tapering to 9.13%. <strong>10% probability of failure</strong> with 50% distress salvage.
+                    </p>
+                    <div class="p-2 bg-[#FAF7F2] rounded border border-[#E5E0D8] font-mono text-[11px] text-[#1C1917]">
+                        WACC: 9.74% &rarr; 9.13%
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sensitivity Heatmap & Reverse DCF -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <!-- Sensitivity Matrix (7 cols) -->
+                <div class="card p-5 md:col-span-7 space-y-3">
+                    <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                        <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                            Valuation Sensitivity Matrix: Margin vs. Revenue Scaling ($/share)
+                        </h3>
+                        <span class="text-[11px] font-mono text-[#8C867A]">Base Target: $439.24</span>
+                    </div>
+
+                    <table class="fin-table">
+                        <thead>
+                            <tr>
+                                <th>Target Operating Margin</th>
+                                <th>$600B Revenue</th>
+                                <th>$1,005B Revenue (Base)</th>
+                                <th>$1,400B Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>20.0% Margin</strong></td>
+                                <td>$168.40</td>
+                                <td>$289.15</td>
+                                <td>$402.80</td>
+                            </tr>
+                            <tr style="background-color: #FAF4EB;">
+                                <td><strong>27.5% Margin (Damodaran Base)</strong></td>
+                                <td>$255.80</td>
+                                <td class="font-bold text-[#15803D] bg-[#DCFCE7] border border-[#BBF7D0]">$439.24</td>
+                                <td>$612.30</td>
+                            </tr>
+                            <tr>
+                                <td><strong>35.0% Margin (Pure SaaS Bull)</strong></td>
+                                <td>$342.90</td>
+                                <td>$588.70</td>
+                                <td class="font-bold text-[#B45309]">$821.50</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-[11px] text-[#8C867A] italic">
+                        Highlighted center cell represents Damodaran's baseline ($439.24). To justify the $525 IPO price, margins must exceed 31% at $1T revenue.
+                    </div>
+                </div>
+
+                <!-- Reverse DCF Analysis (5 cols) -->
+                <div class="card p-5 md:col-span-5 space-y-3 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2 mb-2">
+                            <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                                Reverse DCF: Market Implied Expectations
+                            </h3>
+                            <span class="text-[11px] font-mono text-[#B91C1C]">IPO: $525.00</span>
+                        </div>
+                        <p class="text-xs text-[#57534E] leading-relaxed mb-3">
+                            Backing out what operational performance the market is paying for at the <strong>$525.00 / share ($1.73 Trillion)</strong> IPO price:
+                        </p>
+                        <div class="space-y-2 text-xs font-mono">
+                            <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between">
+                                <span class="text-[#57534E]">Implied 10-Yr Revenue:</span>
+                                <span class="font-bold text-[#1C1917]">$1.28 Trillion (vs $1.005T)</span>
+                            </div>
+                            <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between">
+                                <span class="text-[#57534E]">Implied Y2-Y5 CAGR:</span>
+                                <span class="font-bold text-[#1C1917]">48.8% (vs 42.0% baseline)</span>
+                            </div>
+                            <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between">
+                                <span class="text-[#57534E]">Implied Operating Margin:</span>
+                                <span class="font-bold text-[#1C1917]">32.2% (zero regulatory tax)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2.5 bg-[#FEF2F2] border border-[#FECACA] rounded text-xs text-[#991B1B]">
+                        <strong>Conclusion:</strong> The IPO price leaves zero margin of safety, pricing in near-flawless execution with no regulatory friction.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================================= -->
+        <!-- TAB 3: COST OF CAPITAL MASTERCLASS                                                        -->
+        <!-- ========================================================================================= -->
+        <section id="tab-costcap" class="tab-pane hidden space-y-6">
+            <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                <div>
+                    <h2 class="text-base font-serif font-bold text-[#1C1917]">
+                        Cost of Capital (WACC) & Synthetic Credit Synthesis
+                    </h2>
+                    <p class="text-xs text-[#57534E]">
+                        Decomposing Hamada bottom-up beta, geographic ERP, and Moody's synthetic credit rating
+                    </p>
+                </div>
+                <span class="text-[11px] font-mono text-[#8C867A]">Initial WACC: 9.74% &bull; Terminal: 9.13%</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- WACC Schedule Table -->
+                <div class="card p-5 space-y-3">
+                    <h3 class="text-sm font-serif font-bold text-[#1C1917] border-b border-[#E5E0D8] pb-2">
+                        WACC Component Schedule
+                    </h3>
+                    <table class="fin-table">
+                        <tbody>
+                            <tr>
+                                <td>Risk-Free Rate ($R_f$)</td>
+                                <td>4.40%</td>
+                            </tr>
+                            <tr>
+                                <td>Equity Risk Premium (ERP)</td>
+                                <td>4.60%</td>
+                            </tr>
+                            <tr>
+                                <td>Unlevered Beta ($eta_U$)</td>
+                                <td>1.15</td>
+                            </tr>
+                            <tr>
+                                <td>Debt / Equity Ratio ($D/E$)</td>
+                                <td>25.1%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Levered Beta ($eta_L$)</strong></td>
+                                <td><strong>1.25</strong></td>
+                            </tr>
+                            <tr class="row-subtotal">
+                                <td>Cost of Equity ($K_e$)</td>
+                                <td>10.15%</td>
+                            </tr>
+                            <tr>
+                                <td>Pre-Tax Cost of Debt ($K_d$)</td>
+                                <td>6.25%</td>
+                            </tr>
+                            <tr>
+                                <td>Effective Tax Rate</td>
+                                <td>0.0% &rarr; 25.0%</td>
+                            </tr>
+                            <tr class="row-total">
+                                <td><strong>Initial WACC (Years 1–5)</strong></td>
+                                <td><strong>9.74%</strong></td>
+                            </tr>
+                            <tr style="background-color: #FAF4EB;">
+                                <td><strong>Terminal WACC (Year 10+)</strong></td>
+                                <td><strong>9.13%</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Moody's Synthetic Rating Grid -->
+                <div class="card p-5 space-y-3">
+                    <h3 class="text-sm font-serif font-bold text-[#1C1917] border-b border-[#E5E0D8] pb-2">
+                        Synthetic Credit Rating Derivation
+                    </h3>
+                    <p class="text-xs text-[#57534E]">
+                        Anthropic's massive contractual compute commitments result in interest coverage metrics typical of speculative high-yield issuers:
+                    </p>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between">
+                            <span class="text-[#57534E]">Synthetic Rating:</span>
+                            <span class="font-bold text-[#B45309]">BB+ (Speculative)</span>
+                        </div>
+                        <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between">
+                            <span class="text-[#57534E]">Default Spread:</span>
+                            <span class="font-bold text-[#1C1917]">+1.75% (175 bps)</span>
+                        </div>
+                        <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between">
+                            <span class="text-[#57534E]">Cost of Debt ($R_f + 	ext{Spread}$):</span>
+                            <span class="font-bold text-[#1C1917]">6.25% ($K_d$)</span>
+                        </div>
+                        <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between">
+                            <span class="text-[#57534E]">Distress Probability:</span>
+                            <span class="font-bold text-[#B91C1C]">10.0% (50% recovery)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Qualitative Risk Context -->
+                <div class="card p-5 space-y-3 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-sm font-serif font-bold text-[#1C1917] border-b border-[#E5E0D8] pb-2">
+                            Damodaran's Risk Perspective
+                        </h3>
+                        <p class="text-xs text-[#57534E] leading-relaxed mt-2">
+                            <em>"My advice is that you should not spend too much time finessing the cost of capital, since of the many assumptions that drive this valuation, it is among the least critical. For Anthropic, carrying the risk of large tech companies with the added burden of compute commitments gives 9.74%, compared to the US median of 9.16%."</em>
+                        </p>
+                    </div>
+                    <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded text-xs text-[#57534E]">
+                        <strong>Sensitivity Check:</strong> Shifting WACC by &plusmn;50 bps moves equity value by approximately &plusmn;7.5% ($33/share), far smaller than margin or growth swings.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================================= -->
+        <!-- TAB 4: $485B DEBT & R&D AUDIT                                                             -->
+        <!-- ========================================================================================= -->
+        <section id="tab-capitalization" class="tab-pane hidden space-y-6">
+            <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                <div>
+                    <h2 class="text-base font-serif font-bold text-[#1C1917]">
+                        Forensic Capitalization: $485.3B Debt & R&D Asset Normalization
+                    </h2>
+                    <p class="text-xs text-[#57534E]">
+                        Converting operating lease commitments into synthetic debt and capitalizing research expenses
+                    </p>
+                </div>
+                <span class="text-[11px] font-mono text-[#B91C1C] font-bold">Gate 1 Forensic Audit</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Compute Lease Commitments Schedule -->
+                <div class="card p-5 space-y-3">
+                    <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                        <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                            Compute & Infrastructure Commitments Schedule (PV of Debt)
+                        </h3>
+                        <span class="text-[11px] font-mono text-[#8C867A]">$ Millions</span>
+                    </div>
+
+                    <table class="fin-table">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Commitment ($M)</th>
+                                <th>Discount Factor (6.25%)</th>
+                                <th>Present Value ($M)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Year 1</td>
+                                <td>$76,968</td>
+                                <td>0.941</td>
+                                <td>$72,418</td>
+                            </tr>
+                            <tr>
+                                <td>Year 2</td>
+                                <td>$98,128</td>
+                                <td>0.885</td>
+                                <td>$86,869</td>
+                            </tr>
+                            <tr>
+                                <td>Year 3</td>
+                                <td>$60,832</td>
+                                <td>0.833</td>
+                                <td>$50,669</td>
+                            </tr>
+                            <tr>
+                                <td>Year 4</td>
+                                <td>$58,304</td>
+                                <td>0.784</td>
+                                <td>$45,693</td>
+                            </tr>
+                            <tr>
+                                <td>Year 5</td>
+                                <td>$50,000</td>
+                                <td>0.738</td>
+                                <td>$36,869</td>
+                            </tr>
+                            <tr>
+                                <td>Year 6 & Beyond</td>
+                                <td>$124,000</td>
+                                <td>0.673</td>
+                                <td>$83,486</td>
+                            </tr>
+                            <tr class="row-subtotal">
+                                <td><strong>PV of Lease Commitments</strong></td>
+                                <td><strong>$468,232</strong></td>
+                                <td>—</td>
+                                <td><strong>$375,904</strong></td>
+                            </tr>
+                            <tr class="row-total">
+                                <td><strong>Total Debt & Guarantee PV</strong></td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td><strong>$485,320</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-[11px] text-[#57534E]">
+                        Under GAAP, non-cancelable compute contracts appear only in footnotes. Damodaran capitalizes them as <strong>$485.3B in senior debt</strong>.
+                    </div>
+                </div>
+
+                <!-- R&D Capitalization Converter -->
+                <div class="card p-5 space-y-3 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                            <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                                R&D Capitalization & Research Asset Converter
+                            </h3>
+                            <span class="text-[11px] font-mono text-[#8C867A]">3-Year Amortization</span>
+                        </div>
+                        <p class="text-xs text-[#57534E] leading-relaxed my-2">
+                            Under standard accounting, frontier model R&D is expensed immediately. We capitalize research expenditures over 3 years straight-line:
+                        </p>
+                        <table class="fin-table">
+                            <thead>
+                                <tr>
+                                    <th>Historical Year</th>
+                                    <th>R&D Spend ($M)</th>
+                                    <th>Unamortized %</th>
+                                    <th>Research Asset ($M)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Current Year (2026E)</td>
+                                    <td>$3,152</td>
+                                    <td>100.0%</td>
+                                    <td>$3,152</td>
+                                </tr>
+                                <tr>
+                                    <td>Year -1 (2025)</td>
+                                    <td>$1,839</td>
+                                    <td>66.7%</td>
+                                    <td>$1,226</td>
+                                </tr>
+                                <tr>
+                                    <td>Year -2 (2024)</td>
+                                    <td>$454</td>
+                                    <td>33.3%</td>
+                                    <td>$151</td>
+                                </tr>
+                                <tr class="row-total">
+                                    <td><strong>Total Research Asset</strong></td>
+                                    <td>—</td>
+                                    <td>—</td>
+                                    <td><strong>$4,529</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded text-xs text-[#57534E]">
+                        <strong>FCFF Invariance:</strong> While capitalized R&D increases adjusted operating income (adding back R&D), it increases adjusted CapEx by the exact same amount. Net Free Cash Flow to Firm (FCFF) remains identical.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================================= -->
+        <!-- TAB 5: 10-YR GINZU DCF SCHEDULE                                                           -->
+        <!-- ========================================================================================= -->
+        <section id="tab-dcf" class="tab-pane hidden space-y-6">
+            <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                <div>
+                    <h2 class="text-base font-serif font-bold text-[#1C1917]">
+                        10-Year Pro-Forma Ginzu DCF Model Schedule
+                    </h2>
+                    <p class="text-xs text-[#57534E]">
+                        Audited pro-forma financial statement line items, reinvestment schedule, and FCFF derivation (Amounts in Millions USD)
+                    </p>
+                </div>
+                <span class="text-[11px] font-mono text-[#8C867A]">Ginzu Engine 2026–2036</span>
+            </div>
+
+            <!-- DCF Trajectory Chart -->
+            <div class="card p-4 space-y-2">
+                <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-2">
+                    <span class="text-xs font-mono font-bold text-[#1C1917] uppercase tracking-wide">
+                        10-Year Trajectory: Revenue Scaling vs. Free Cash Flow to Firm (FCFF)
+                    </span>
+                    <span class="text-[10px] font-mono text-[#8C867A]">$ Millions</span>
+                </div>
+                <div class="h-64 w-full">
+                    <canvas id="dcfChart"></canvas>
+                </div>
+            </div>
+
+            <!-- DCF Master Table -->
+            <div class="card p-5 overflow-x-auto">
+                <table class="fin-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Revenue ($M)</th>
+                            <th>Growth</th>
+                            <th>EBIT Margin</th>
+                            <th>Operating EBIT</th>
+                            <th>Reinvestment</th>
+                            <th>FCFF ($M)</th>
+                            <th>WACC</th>
+                            <th>PV(FCFF)</th>
+                            <th>ROIC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Base Year</td>
+                            <td>$35,286</td>
+                            <td>—</td>
+                            <td class="text-[#B91C1C]">-131.3%</td>
+                            <td class="text-[#B91C1C]">$(46,314)</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td class="text-[#B91C1C]">-8.5%</td>
+                        </tr>
+                        <tr>
+                            <td>Year 1</td>
+                            <td>$102,329</td>
+                            <td class="text-[#15803D]">+190.0%</td>
+                            <td>5.0%</td>
+                            <td>$5,116</td>
+                            <td>$14,326</td>
+                            <td class="text-[#B91C1C]">$(9,210)</td>
+                            <td>9.74%</td>
+                            <td class="text-[#B91C1C]">$(8,392)</td>
+                            <td>0.9%</td>
+                        </tr>
+                        <tr>
+                            <td>Year 2</td>
+                            <td>$145,308</td>
+                            <td class="text-[#15803D]">+42.0%</td>
+                            <td>14.0%</td>
+                            <td>$20,343</td>
+                            <td>$20,343</td>
+                            <td>$0</td>
+                            <td>9.74%</td>
+                            <td>$0</td>
+                            <td>3.6%</td>
+                        </tr>
+                        <tr>
+                            <td>Year 3</td>
+                            <td>$206,337</td>
+                            <td class="text-[#15803D]">+42.0%</td>
+                            <td>18.5%</td>
+                            <td>$38,172</td>
+                            <td>$28,887</td>
+                            <td>$9,285</td>
+                            <td>9.74%</td>
+                            <td>$7,026</td>
+                            <td>6.6%</td>
+                        </tr>
+                        <tr>
+                            <td>Year 4</td>
+                            <td>$292,999</td>
+                            <td class="text-[#15803D]">+42.0%</td>
+                            <td>23.0%</td>
+                            <td>$67,390</td>
+                            <td>$41,020</td>
+                            <td>$26,370</td>
+                            <td>9.74%</td>
+                            <td>$18,182</td>
+                            <td>11.0%</td>
+                        </tr>
+                        <tr style="background-color: #FAF4EB;">
+                            <td>Year 5</td>
+                            <td>$416,058</td>
+                            <td class="text-[#15803D]">+42.0%</td>
+                            <td>27.5%</td>
+                            <td>$114,416</td>
+                            <td>$47,958</td>
+                            <td>$66,458</td>
+                            <td>9.74%</td>
+                            <td>$41,757</td>
+                            <td>17.6%</td>
+                        </tr>
+                        <tr>
+                            <td>Year 6</td>
+                            <td>$559,931</td>
+                            <td>+34.6%</td>
+                            <td>27.5%</td>
+                            <td>$153,981</td>
+                            <td>$50,692</td>
+                            <td>$95,590</td>
+                            <td>9.62%</td>
+                            <td>$54,790</td>
+                            <td>20.9%</td>
+                        </tr>
+                        <tr>
+                            <td>Year 7</td>
+                            <td>$712,008</td>
+                            <td>+27.2%</td>
+                            <td>27.5%</td>
+                            <td>$195,802</td>
+                            <td>$46,850</td>
+                            <td>$129,372</td>
+                            <td>9.50%</td>
+                            <td>$67,723</td>
+                            <td>23.5%</td>
+                        </tr>
+                        <tr>
+                            <td>Year 8</td>
+                            <td>$852,558</td>
+                            <td>+19.7%</td>
+                            <td>27.5%</td>
+                            <td>$234,453</td>
+                            <td>$35,012</td>
+                            <td>$164,274</td>
+                            <td>9.37%</td>
+                            <td>$78,623</td>
+                            <td>25.0%</td>
+                        </tr>
+                        <tr>
+                            <td>Year 9</td>
+                            <td>$957,594</td>
+                            <td>+12.3%</td>
+                            <td>27.5%</td>
+                            <td>$263,338</td>
+                            <td>$15,641</td>
+                            <td>$195,030</td>
+                            <td>9.25%</td>
+                            <td>$85,438</td>
+                            <td>25.3%</td>
+                        </tr>
+                        <tr class="row-total">
+                            <td>Year 10</td>
+                            <td>$1,004,516</td>
+                            <td>+4.9%</td>
+                            <td>27.5%</td>
+                            <td>$276,242</td>
+                            <td>$16,407</td>
+                            <td>$190,774</td>
+                            <td>9.13%</td>
+                            <td>$76,582</td>
+                            <td>24.4%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ========================================================================================= -->
+        <!-- TAB 6: INTERACTIVE VALUATION SIMULATOR                                                    -->
+        <!-- ========================================================================================= -->
+        <section id="tab-simulator" class="tab-pane hidden space-y-6">
+            <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                <div>
+                    <h2 class="text-base font-serif font-bold text-[#1C1917]">
+                        Interactive DCF Valuation Simulator
+                    </h2>
+                    <p class="text-xs text-[#57534E]">
+                        Adjust key valuation levers in real-time to compute the implied fair value per share
+                    </p>
+                </div>
+                <button onclick="resetSimulator()" class="text-xs font-mono px-2 py-1 bg-[#FAF7F2] border border-[#D8D2C5] rounded hover:bg-[#EFE8DF] text-[#1C1917]">
+                    Reset to Base Case
+                </button>
+            </div>
+
+            <!-- Dynamic Output Hero Strip -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="card p-4 border-l-4 border-l-[#15803D]">
+                    <div class="text-[10px] font-mono text-[#8C867A] uppercase">Simulated Fair Value / Share</div>
+                    <div id="sim-value-share" class="text-2xl font-mono font-bold text-[#15803D] my-1">$439.24</div>
+                    <div id="sim-status" class="text-xs font-mono text-[#B91C1C]">Overvalued vs $525.00 (-16.3%)</div>
+                </div>
+
+                <div class="card p-4">
+                    <div class="text-[10px] font-mono text-[#8C867A] uppercase">Simulated Equity Value</div>
+                    <div id="sim-equity-val" class="text-2xl font-mono font-bold text-[#1C1917] my-1">$1,450.5B</div>
+                    <div class="text-xs text-[#57534E]">Common equity post-dilution</div>
+                </div>
+
+                <div class="card p-4">
+                    <div class="text-[10px] font-mono text-[#8C867A] uppercase">Simulated Operating Assets</div>
+                    <div id="sim-operating-val" class="text-2xl font-mono font-bold text-[#1C1917] my-1">$1,720.0B</div>
+                    <div class="text-xs text-[#57534E]">Enterprise operating assets</div>
+                </div>
+
+                <div class="card p-4">
+                    <div class="text-[10px] font-mono text-[#8C867A] uppercase">Market Price / Value Ratio</div>
+                    <div id="sim-price-ratio" class="text-2xl font-mono font-bold text-[#B45309] my-1">119.5%</div>
+                    <div class="text-xs text-[#57534E]">Ratio of $525 price to DCF value</div>
+                </div>
+            </div>
+
+            <!-- Controls & Levers -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Sliders Container -->
+                <div class="card p-5 space-y-4">
+                    <h3 class="text-sm font-serif font-bold text-[#1C1917] border-b border-[#E5E0D8] pb-2">
+                        Valuation Lever Controls
+                    </h3>
+
+                    <!-- Slider 1: Target Revenue -->
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-mono">
+                            <label>Year 10 Target Revenue ($B):</label>
+                            <span id="label-rev" class="font-bold text-[#B45309]">$1,005B</span>
+                        </div>
+                        <input id="slider-rev" type="range" min="200" max="1500" step="25" value="1005" oninput="runSimulation()" class="w-full accent-[#B45309]">
+                        <div class="flex justify-between text-[10px] font-mono text-[#8C867A]">
+                            <span>$200B (Bear)</span>
+                            <span>$1,005B (Base)</span>
+                            <span>$1,500B (Bull)</span>
+                        </div>
+                    </div>
+
+                    <!-- Slider 2: Operating Margin -->
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-mono">
+                            <label>Target Operating Margin (%):</label>
+                            <span id="label-margin" class="font-bold text-[#15803D]">27.5%</span>
+                        </div>
+                        <input id="slider-margin" type="range" min="10" max="40" step="0.5" value="27.5" oninput="runSimulation()" class="w-full accent-[#15803D]">
+                        <div class="flex justify-between text-[10px] font-mono text-[#8C867A]">
+                            <span>10.0% (Commodity)</span>
+                            <span>27.5% (Reg. Adjusted)</span>
+                            <span>40.0% (Software Bull)</span>
+                        </div>
+                    </div>
+
+                    <!-- Slider 3: Sales to Capital -->
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-mono">
+                            <label>Sales to Capital Ratio (Reinvestment):</label>
+                            <span id="label-salescap" class="font-bold text-[#4338CA]">3.0x</span>
+                        </div>
+                        <input id="slider-salescap" type="range" min="1.0" max="4.5" step="0.1" value="3.0" oninput="runSimulation()" class="w-full accent-[#4338CA]">
+                        <div class="flex justify-between text-[10px] font-mono text-[#8C867A]">
+                            <span>1.0x (Capital Intensive)</span>
+                            <span>3.0x (Tech Baseline)</span>
+                            <span>4.5x (Deflationary Chips)</span>
+                        </div>
+                    </div>
+
+                    <!-- Slider 4: WACC -->
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-mono">
+                            <label>Initial Cost of Capital (%):</label>
+                            <span id="label-wacc" class="font-bold text-[#1C1917]">9.74%</span>
+                        </div>
+                        <input id="slider-wacc" type="range" min="7.5" max="12.0" step="0.1" value="9.74" oninput="runSimulation()" class="w-full accent-[#1C1917]">
+                        <div class="flex justify-between text-[10px] font-mono text-[#8C867A]">
+                            <span>7.79% (Low Risk)</span>
+                            <span>9.74% (Base)</span>
+                            <span>11.5% (Distressed)</span>
+                        </div>
+                    </div>
+
+                    <!-- Slider 5: Failure Prob -->
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-mono">
+                            <label>Distress / Failure Probability (%):</label>
+                            <span id="label-fail" class="font-bold text-[#B91C1C]">10.0%</span>
+                        </div>
+                        <input id="slider-fail" type="range" min="0" max="30" step="1" value="10" oninput="runSimulation()" class="w-full accent-[#B91C1C]">
+                        <div class="flex justify-between text-[10px] font-mono text-[#8C867A]">
+                            <span>0% (Fortress)</span>
+                            <span>10% (Base)</span>
+                            <span>30% (Severe Risk)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3P Scenario Benchmarks -->
+                <div class="card p-5 space-y-3 flex flex-col justify-between">
+                    <h3 class="text-sm font-serif font-bold text-[#1C1917] border-b border-[#E5E0D8] pb-2">
+                        Damodaran 3P Scenario Benchmarks
+                    </h3>
+
+                    <div class="p-3 bg-[#FEF2F2] border border-[#FECACA] rounded text-xs space-y-1">
+                        <div class="flex justify-between font-mono font-bold text-[#991B1B]">
+                            <span>WORST-CASE SCENARIO</span>
+                            <span>-$373B Value</span>
+                        </div>
+                        <p class="text-[11.5px] text-[#57534E]">
+                            $200B target rev, 10% commodity margin, 1.0x Sales/Cap, 9.88% WACC. Equity is wiped out under $485B fixed commitments.
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-[#FAF7F2] border border-[#B45309] rounded text-xs space-y-1">
+                        <div class="flex justify-between font-mono font-bold text-[#B45309]">
+                            <span>BASE-CASE (DAMODARAN)</span>
+                            <span>$439.24 / share</span>
+                        </div>
+                        <p class="text-[11.5px] text-[#57534E]">
+                            $1,005B target rev, 27.5% net margin, 3.0x Sales/Cap, 9.74% WACC, 10% failure. Equity worth $1,450.5B.
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-[#DCFCE7] border border-[#BBF7D0] rounded text-xs space-y-1">
+                        <div class="flex justify-between font-mono font-bold text-[#15803D]">
+                            <span>BEST-CASE SCENARIO</span>
+                            <span>$1,223.40 / share</span>
+                        </div>
+                        <p class="text-[11.5px] text-[#57534E]">
+                            $1,500B target rev, 40% enterprise SaaS margin, 4.0x Sales/Cap, 7.79% WACC. Equity reaches $4.04 Trillion.
+                        </p>
+                    </div>
+
+                    <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded text-xs text-[#57534E]">
+                        <strong>Simulated Implication:</strong> At the rumored $525.00 IPO price, the market implies an execution percentile above the 75th decile of all possible scenarios.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-[#E5E0D8] bg-[#FFFFFF] py-6 text-center text-xs text-[#8C867A] font-mono">
+        Anthropic, PBC (NASDAQ: ANT) &bull; ERVIS Institutional Valuation Cockpit &bull; Default Beige Standard
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Tab switching logic
+        window.switchCockpitTab = function(tabId) {
+            document.querySelectorAll('.tab-pane').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+                el.style.display = 'none';
+            });
+            const target = document.getElementById(tabId);
+            if (target) {
+                target.classList.remove('hidden');
+                target.classList.add('block');
+                target.style.display = 'block';
+            }
+
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            const activeBtn = Array.from(document.querySelectorAll('.nav-tab')).find(b => {
+                const attr = b.getAttribute('onclick') || '';
+                return attr.includes(tabId);
+            });
+            if (activeBtn) activeBtn.classList.add('active');
+
+            // Trigger charts
+            if (tabId === 'tab-cockpit') setTimeout(initBridgeChart, 50);
+            if (tabId === 'tab-dcf') setTimeout(initDcfChart, 50);
+        };
+
+        // Bridge Chart
+        let bridgeChartInst = null;
+        function initBridgeChart() {
+            const ctx = document.getElementById('bridgeChart');
+            if (!ctx) return;
+            if (bridgeChartInst) { bridgeChartInst.resize(); return; }
+
+            bridgeChartInst = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['PV 10-Yr CF', 'Terminal Val', 'Distress Haircut', 'Lease Debt', 'Cash & IPO', 'Common Equity'],
+                    datasets: [{
+                        data: [421.7, 1388.7, -90.5, -485.3, 212.4, 1450.5],
+                        backgroundColor: [
+                            '#1C1917',
+                            '#57534E',
+                            '#B91C1C',
+                            '#B45309',
+                            '#15803D',
+                            '#B45309'
+                        ],
+                        borderRadius: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#FFFFFF',
+                            titleColor: '#1C1917',
+                            bodyColor: '#57534E',
+                            borderColor: '#D8D2C5',
+                            borderWidth: 1,
+                            titleFont: { family: "'Newsreader', Georgia, serif", size: 12, weight: 'bold' },
+                            bodyFont: { family: "'JetBrains Mono', monospace", size: 11 },
+                            callbacks: {
+                                label: ctx => ` $${ctx.parsed.y.toLocaleString()} Billion`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: "'JetBrains Mono', monospace", size: 10 }, color: '#57534E' }
+                        },
+                        y: {
+                            grid: { color: '#ECE7DE' },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 10 },
+                                color: '#57534E',
+                                callback: val => '$' + val + 'B'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // DCF Trajectory Chart
+        let dcfChartInst = null;
+        function initDcfChart() {
+            const ctx = document.getElementById('dcfChart');
+            if (!ctx) return;
+            if (dcfChartInst) { dcfChartInst.resize(); return; }
+
+            dcfChartInst = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Base', 'Y1', 'Y2', 'Y3', 'Y4', 'Y5', 'Y6', 'Y7', 'Y8', 'Y9', 'Y10'],
+                    datasets: [
+                        {
+                            type: 'bar',
+                            label: 'Revenue ($B)',
+                            data: [35.3, 102.3, 145.3, 206.3, 293.0, 416.1, 559.9, 712.0, 852.6, 957.6, 1004.5],
+                            backgroundColor: '#D8D2C5',
+                            borderRadius: 3,
+                            yAxisID: 'y',
+                            order: 2
+                        },
+                        {
+                            type: 'line',
+                            label: 'Free Cash Flow FCFF ($B)',
+                            data: [-9.2, -9.2, 0.0, 9.3, 26.4, 66.5, 95.6, 129.4, 164.3, 195.0, 190.8],
+                            borderColor: '#15803D',
+                            backgroundColor: '#15803D',
+                            borderWidth: 2.2,
+                            pointRadius: 3.5,
+                            pointBackgroundColor: '#FFFFFF',
+                            pointBorderColor: '#15803D',
+                            tension: 0.2,
+                            yAxisID: 'y',
+                            order: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            align: 'end',
+                            labels: {
+                                font: { family: "'JetBrains Mono', monospace", size: 10.5 },
+                                boxWidth: 12,
+                                usePointStyle: true,
+                                color: '#57534E'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#FFFFFF',
+                            titleColor: '#1C1917',
+                            bodyColor: '#57534E',
+                            borderColor: '#D8D2C5',
+                            borderWidth: 1,
+                            titleFont: { family: "'Newsreader', Georgia, serif", size: 12, weight: 'bold' },
+                            bodyFont: { family: "'JetBrains Mono', monospace", size: 11 },
+                            callbacks: {
+                                label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString()}B`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: "'JetBrains Mono', monospace", size: 10 }, color: '#57534E' }
+                        },
+                        y: {
+                            grid: { color: '#ECE7DE' },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 10 },
+                                color: '#57534E',
+                                callback: val => '$' + val + 'B'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Interactive Valuation Simulator Engine
+        function runSimulation() {
+            const rev10 = parseFloat(document.getElementById('slider-rev').value);
+            const margin = parseFloat(document.getElementById('slider-margin').value) / 100.0;
+            const salesCap = parseFloat(document.getElementById('slider-salescap').value);
+            const wacc = parseFloat(document.getElementById('slider-wacc').value) / 100.0;
+            const failProb = parseFloat(document.getElementById('slider-fail').value) / 100.0;
+
+            // Update Labels
+            document.getElementById('label-rev').innerText = '$' + rev10.toLocaleString() + 'B';
+            document.getElementById('label-margin').innerText = (margin * 100).toFixed(1) + '%';
+            document.getElementById('label-salescap').innerText = salesCap.toFixed(1) + 'x';
+            document.getElementById('label-wacc').innerText = (wacc * 100).toFixed(2) + '%';
+            document.getElementById('label-fail').innerText = (failProb * 100).toFixed(0) + '%';
+
+            // Simplified DCF scaling approximation
+            // Base: Rev 1005B, Margin 27.5%, WACC 9.74%, SalesCap 3.0, Fail 10% -> Operating Assets = 1720B, Equity = 1450.5B
+            const revScale = rev10 / 1004.5;
+            const marginScale = margin / 0.275;
+            const waccAdj = Math.pow(0.0974 / wacc, 4.5);
+            const salesCapAdj = 1.0 + (salesCap - 3.0) * 0.08;
+
+            const baseGrossOp = 1810.5;
+            const simGrossOp = baseGrossOp * revScale * marginScale * waccAdj * salesCapAdj;
+            const simOpAssets = simGrossOp * (1.0 - (failProb * 0.5));
+            
+            // Deduct Debt ($485.3B), Add Cash ($112.4B), Add IPO ($100B), Non-op ($3.9B)
+            const netDebtAdj = -485.3 + 112.4 + 100.0 + 3.9;
+            const simEquity = Math.max(0, simOpAssets + netDebtAdj);
+            const shares = 3302.27; // Millions
+            const simSharePrice = (simEquity * 1000.0) / shares;
+            const spotPrice = 74.0;
+            const priceRatio = (spotPrice / Math.max(1, simSharePrice)) * 100.0;
+
+            // Update DOM
+            document.getElementById('sim-operating-val').innerText = '$' + simOpAssets.toFixed(1) + 'B';
+            document.getElementById('sim-equity-val').innerText = '$' + simEquity.toFixed(1) + 'B';
+            document.getElementById('sim-value-share').innerText = '$' + simSharePrice.toFixed(2);
+            document.getElementById('sim-price-ratio').innerText = priceRatio.toFixed(1) + '%';
+
+            const statusEl = document.getElementById('sim-status');
+            const diffPct = ((simSharePrice - spotPrice) / spotPrice) * 100.0;
+            if (diffPct >= 0) {
+                statusEl.innerText = `Undervalued vs $525.00 (+${diffPct.toFixed(1)}%)`;
+                statusEl.className = 'text-xs font-mono text-[#15803D]';
+            } else {
+                statusEl.innerText = `Overvalued vs $525.00 (${diffPct.toFixed(1)}%)`;
+                statusEl.className = 'text-xs font-mono text-[#B91C1C]';
+            }
+        }
+
+        function resetSimulator() {
+            document.getElementById('slider-rev').value = 1005;
+            document.getElementById('slider-margin').value = 27.5;
+            document.getElementById('slider-salescap').value = 3.0;
+            document.getElementById('slider-wacc').value = 9.74;
+            document.getElementById('slider-fail').value = 10;
+            runSimulation();
+        }
+
+        // Init on DOM ready
+        window.addEventListener('DOMContentLoaded', () => {
+            initBridgeChart();
+        });
+    </script>
+</body>
+</html>

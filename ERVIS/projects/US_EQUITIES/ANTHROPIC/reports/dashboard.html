@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERVIS :: Anthropic, PBC (NASDAQ: ANT) Damodaran Valuation Deep Dive & Macro Ingestion</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Newsreader', 'Georgia', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #09090b;
+            color: #d4d4d8;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .tab-btn.active {
+            border-bottom-color: #f59e0b;
+            color: #fbbf24;
+            background-color: rgba(24, 24, 27, 0.8);
+            font-weight: 700;
+        }
+        .custom-scroll::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 3px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+        .glass-panel {
+            background-color: #0f0f11;
+            border: 1px solid #27272a;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-xs antialiased selection:bg-amber-950 selection:text-amber-200">
+
+    <!-- Top Command Header -->
+    <header class="border-b border-neutral-800 bg-[#0c0d0e] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="flex items-center space-x-3 flex-wrap">
+                <span class="px-2 py-0.5 border border-amber-500/40 bg-amber-950/20 text-amber-400 font-mono text-[11px] font-bold tracking-wider">
+                    ERVIS TERMINAL v2.5
+                </span>
+                <span class="text-neutral-500 font-mono text-xs">/</span>
+                <h1 class="text-sm font-serif font-semibold text-neutral-100 tracking-wide">
+                    Anthropic, PBC (NASDAQ: ANT) :: Damodaran Valuation Deep Dive
+                </h1>
+                <span class="px-2 py-0.5 border border-purple-800/60 bg-purple-950/30 text-purple-300 font-mono text-[10px] font-bold">
+                    [SUBSTACK DEEP DIVE]
+                </span>
+                <span class="px-2 py-0.5 border border-cyan-800/60 bg-cyan-950/30 text-cyan-300 font-mono text-[10px] font-bold">
+                    [Q3 2026 LEAK ADJUSTED]
+                </span>
+                <span class="px-2 py-0.5 border border-amber-800/60 bg-amber-950/30 text-amber-300 font-mono text-[10px] font-bold">
+                    [GATE 5 SIGN-OFF]
+                </span>
+            </div>
+            
+            <div class="flex items-center space-x-4 text-xs font-mono flex-wrap">
+                <span class="text-neutral-400">IPO SPOT: <strong class="text-neutral-100 font-bold">$74.00</strong> ($1253.3B)</span>
+                <span class="text-neutral-600">|</span>
+                <span class="text-neutral-400">DCF VALUE: <strong class="text-emerald-400 font-bold">$83.69</strong> ($1415.5B)</span>
+                <span class="text-neutral-600">|</span>
+                <span class="text-neutral-400">PRIOR: <strong class="text-neutral-300 font-bold">$445.05</strong></span>
+                <span class="text-neutral-600">|</span>
+                <span class="text-neutral-400">CROWD: <strong class="text-cyan-400 font-bold">$268.00</strong> ($884.2B)</span>
+                <span class="text-neutral-600">|</span>
+                <span class="px-2 py-0.5 border border-rose-800 bg-rose-950/40 text-rose-400 font-bold">
+                    AVOID IPO (-16.3%)
+                </span>
+            </div>
+        </div>
+
+        <!-- Terminal Command Navigation Bar (8 Tabs) -->
+        <div class="max-w-7xl mx-auto px-6 border-t border-neutral-800 flex space-x-1 overflow-x-auto text-xs font-mono custom-scroll">
+            <button id="btn-tab-cockpit" onclick="switchTab('tab-cockpit')" class="tab-btn active px-3.5 py-2 border-b-2 border-amber-500 text-amber-400 bg-neutral-900/60 transition-colors whitespace-nowrap">
+                [01] VALUATION COCKPIT & BRIDGE
+            </button>
+            <button id="btn-tab-levers" onclick="switchTab('tab-levers')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [02] 4 VALUATION LEVERS & FRAGILITY
+            </button>
+            <button id="btn-tab-costcap" onclick="switchTab('tab-costcap')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [03] COST OF CAPITAL MASTERCLASS
+            </button>
+            <button id="btn-tab-capitalization" onclick="switchTab('tab-capitalization')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [04] $485B DEBT & R&D AUDIT
+            </button>
+            <button id="btn-tab-dcf" onclick="switchTab('tab-dcf')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [05] 10-YR GINZU DCF SCHEDULE
+            </button>
+            <button id="btn-tab-macro" onclick="switchTab('tab-macro')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [06] DAMODARAN MACRO DATASETS
+            </button>
+            <button id="btn-tab-prospectus" onclick="switchTab('tab-prospectus')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [07] S-1 PROSPECTUS & QUAD-CLASS
+            </button>
+            <button id="btn-tab-simulator" onclick="switchTab('tab-simulator')" class="tab-btn px-3.5 py-2 border-b-2 border-transparent text-neutral-400 hover:text-neutral-200 transition-colors whitespace-nowrap">
+                [08] CROWD BENCHMARK & SIMULATOR
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="max-w-7xl mx-auto px-6 py-6 space-y-6">
+
+        <!-- ============================================================== -->
+        <!-- TAB 1: EXECUTIVE VALUATION COCKPIT & BRIDGE                    -->
+        <!-- ============================================================== -->
+        <div id="tab-cockpit" class="tab-content space-y-6">
+            
+            <div class="p-3.5 bg-amber-950/20 border border-amber-900/60 text-amber-300 flex items-center justify-between text-xs">
+                <span>[VALUATION VERDICT :: Q3 2026 UPDATE] Following the leak of Anthropic's Q3 2026 financials, Aswath Damodaran updated his valuation model. Base annualized revenues rose to $35.29B (from $19.71B), Year 1 growth was moderated to 190% (to reach ~$102.3B), and Yr 2-5 CAGR was dialed to 42%. Resulting Intrinsic Value: <strong>$439.24 / share ($1,450.95B common equity)</strong> vs prior $445.05 / share. At the rumored $525.00 IPO price ($1,733.7B), Anthropic is priced at a 19.5% premium (-16.3% downside). Tactical rating: <strong>AVOID IPO / ACCUMULATE BELOW $439</strong>.</span>
+                <span class="font-bold uppercase tracking-wider text-[10px] border border-amber-800 px-2 py-0.5 whitespace-nowrap ml-4">Tactical Stance</span>
+            </div>
+
+            <!-- Top Metric Cockpit Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+                <div class="p-4 glass-panel rounded-sm">
+                    <div class="text-[10px] uppercase text-neutral-500 font-semibold">IPO Offering Price</div>
+                    <div class="text-xl font-bold text-neutral-100 mt-1 font-mono">$74.00</div>
+                    <div class="text-[11px] text-amber-400 mt-0.5">Cap: $1253.3B</div>
+                </div>
+                <div class="p-4 glass-panel rounded-sm">
+                    <div class="text-[10px] uppercase text-neutral-500 font-semibold">Damodaran Fair Value</div>
+                    <div class="text-xl font-bold text-emerald-400 mt-1 font-mono">$83.69</div>
+                    <div class="text-[11px] text-emerald-500/80 mt-0.5">Equity: $1415.5B</div>
+                </div>
+                <div class="p-4 glass-panel rounded-sm">
+                    <div class="text-[10px] uppercase text-neutral-500 font-semibold">Offering Mispricing</div>
+                    <div class="text-xl font-bold text-rose-400 mt-1 font-mono">+19.53%</div>
+                    <div class="text-[11px] text-rose-400/80 mt-0.5">-16.33% Downside</div>
+                </div>
+                <div class="p-4 glass-panel rounded-sm">
+                    <div class="text-[10px] uppercase text-neutral-500 font-semibold">Crowd Median Value</div>
+                    <div class="text-xl font-bold text-cyan-400 mt-1 font-mono">$268.00</div>
+                    <div class="text-[11px] text-cyan-500/80 mt-0.5">Equity: $884.2B</div>
+                </div>
+                <div class="p-4 glass-panel rounded-sm">
+                    <div class="text-[10px] uppercase text-neutral-500 font-semibold">Total Adjusted Debt</div>
+                    <div class="text-xl font-bold text-rose-400 mt-1 font-mono">$485.3B</div>
+                    <div class="text-[11px] text-neutral-400 mt-0.5">$376.0B Compute PV</div>
+                </div>
+                <div class="p-4 glass-panel rounded-sm">
+                    <div class="text-[10px] uppercase text-neutral-500 font-semibold">Cash + Net IPO Raise</div>
+                    <div class="text-xl font-bold text-emerald-400 mt-1 font-mono">$177.4B</div>
+                    <div class="text-[11px] text-neutral-400 mt-0.5">$112.4B Cash + $100B IPO</div>
+                </div>
+            </div>
+
+            <!-- Full Master Valuation Bridge Table -->
+            <div class="glass-panel p-6 space-y-4">
+                <div class="border-b border-neutral-800 pb-3 flex items-center justify-between flex-wrap gap-2">
+                    <div>
+                        <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                            Master Enterprise Value to Common Stock Equity Bridge
+                        </h3>
+                        <p class="text-xs font-mono text-neutral-400 mt-1">Reconciliation from AnthropicIPO_updated.xlsx (Post-Q3 Leaked Financials) | All Figures Formatted</p>
+                    </div>
+                    <span class="px-2.5 py-1 bg-[#141416] border border-neutral-800 text-amber-400 font-bold font-mono text-xs">
+                        TARGET VALUE: $83.69 / SHARE
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto border border-neutral-800 custom-scroll">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-[#0c0d0e] text-neutral-400 uppercase border-b border-neutral-800">
+                            <tr>
+                                <th class="p-3">Valuation Step</th>
+                                <th class="p-3">Model Cell</th>
+                                <th class="p-3 text-right">Amount ($ Millions)</th>
+                                <th class="p-3 text-right">Equivalent ($ Billions)</th>
+                                <th class="p-3 text-right">% of Assets</th>
+                                <th class="p-3">Institutional Rationale</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">PV of Discrete Cash Flows (Yr 1–10)</td>
+                                <td class="p-3 text-neutral-500">Valuation!B20</td>
+                                <td class="p-3 text-right font-bold text-white">$421,728.8 M</td>
+                                <td class="p-3 text-right font-bold text-white">$421.73 B</td>
+                                <td class="p-3 text-right text-neutral-400">24.5%</td>
+                                <td class="p-3 text-neutral-400">Sum of 10-year discrete free cash flows discounted at transition WACC (9.74% &rarr; 9.13%)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-100 font-semibold">PV of Terminal Value (Yr 10)</td>
+                                <td class="p-3 text-neutral-500">Valuation!B19</td>
+                                <td class="p-3 text-right font-bold text-white">$1,388,747.6 M</td>
+                                <td class="p-3 text-right font-bold text-white">$1,388.75 B</td>
+                                <td class="p-3 text-right text-neutral-400">80.7%</td>
+                                <td class="p-3 text-neutral-400">Terminal CF $146.3B / (Terminal WACC 9.13% - g 4.90%) discounted by factor 0.4014</td>
+                            </tr>
+                            <tr class="bg-neutral-900/40 font-bold">
+                                <td class="p-3 font-serif text-amber-400">Sum of Present Values (Going Concern EV)</td>
+                                <td class="p-3 text-neutral-500">Valuation!B21</td>
+                                <td class="p-3 text-right text-amber-400">$1,810,476.4 M</td>
+                                <td class="p-3 text-right text-amber-400">$1,810.48 B</td>
+                                <td class="p-3 text-right text-neutral-400">105.3%</td>
+                                <td class="p-3 text-neutral-400">Unadjusted present value assuming Anthropic operates in perpetuity without distress</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-rose-400 font-semibold">Less: Failure Risk Haircut (10% Prob)</td>
+                                <td class="p-3 text-neutral-500">Valuation!B22:B23</td>
+                                <td class="p-3 text-right text-rose-400">-$90,523.8 M</td>
+                                <td class="p-3 text-right text-rose-400">-$90.52 B</td>
+                                <td class="p-3 text-right text-neutral-400">-5.3%</td>
+                                <td class="p-3 text-neutral-400">10% cumulative default probability with 50% distress liquidation proceeds ($905.2B)</td>
+                            </tr>
+                            <tr class="bg-[#141416] font-bold">
+                                <td class="p-3 font-serif text-emerald-400">Value of Operating Assets</td>
+                                <td class="p-3 text-neutral-500">Valuation!B24</td>
+                                <td class="p-3 text-right text-emerald-400">$1,719,952.6 M</td>
+                                <td class="p-3 text-right text-emerald-400">$1,719.95 B</td>
+                                <td class="p-3 text-right text-neutral-400">100.0%</td>
+                                <td class="p-3 text-neutral-400">Distress-adjusted core operating enterprise value of Anthropic's business</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-rose-400 font-semibold">Less: Total Adjusted Debt (incl Compute PV)</td>
+                                <td class="p-3 text-neutral-500">Valuation!B25</td>
+                                <td class="p-3 text-right text-rose-400">-$485,319.8 M</td>
+                                <td class="p-3 text-right text-rose-400">-$485.32 B</td>
+                                <td class="p-3 text-right text-neutral-400">-28.2%</td>
+                                <td class="p-3 text-neutral-400">$376.0B PV of compute & lease commitments + $109.3B reported debt</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-emerald-400 font-semibold">Plus: Existing Cash & Cross Holdings</td>
+                                <td class="p-3 text-neutral-500">Valuation!B27</td>
+                                <td class="p-3 text-right text-emerald-400">+$112,389.0 M</td>
+                                <td class="p-3 text-right text-emerald-400">+$112.39 B</td>
+                                <td class="p-3 text-right text-neutral-400">+6.5%</td>
+                                <td class="p-3 text-neutral-400">Liquid reserves on balance sheet providing multi-year compute commitment buffer</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-emerald-400 font-semibold">Plus: Expected Net IPO Proceeds</td>
+                                <td class="p-3 text-neutral-500">Valuation!B28</td>
+                                <td class="p-3 text-right text-emerald-400">+$65,000.0 M</td>
+                                <td class="p-3 text-right text-emerald-400">+$65.00 B</td>
+                                <td class="p-3 text-right text-neutral-400">+5.8%</td>
+                                <td class="p-3 text-neutral-400">Primary cash infusion anticipated from the public offering</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-emerald-400 font-semibold">Plus: Non-Operating Assets</td>
+                                <td class="p-3 text-neutral-500">Valuation!B29</td>
+                                <td class="p-3 text-right text-emerald-400">+$3,929.0 M</td>
+                                <td class="p-3 text-right text-emerald-400">+$3.93 B</td>
+                                <td class="p-3 text-right text-neutral-400">+0.2%</td>
+                                <td class="p-3 text-neutral-400">Strategic equity investments and non-core tech holdings</td>
+                            </tr>
+                            <tr class="bg-neutral-900/60 font-bold">
+                                <td class="p-3 font-serif text-neutral-100">Total Value of Equity</td>
+                                <td class="p-3 text-neutral-500">Valuation!B30</td>
+                                <td class="p-3 text-right text-neutral-100">$1,415,950.8 M</td>
+                                <td class="p-3 text-right text-neutral-100">$1,415.95 B</td>
+                                <td class="p-3 text-right text-neutral-400">84.4%</td>
+                                <td class="p-3 text-neutral-400">Aggregate equity capitalization across all share classes and equity claims</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-rose-400 font-semibold">Less: Value of Employee Options Overhang</td>
+                                <td class="p-3 text-neutral-500">Valuation!B31</td>
+                                <td class="p-3 text-right text-rose-400">-$472.3 M</td>
+                                <td class="p-3 text-right text-rose-400">-$0.472 B</td>
+                                <td class="p-3 text-right text-neutral-400">-0.03%</td>
+                                <td class="p-3 text-neutral-400">Black-Scholes option value of granted options deducted to prevent dilution double-counting</td>
+                            </tr>
+                            <tr class="bg-amber-950/30 border-t-2 border-amber-500 font-bold text-amber-300">
+                                <td class="p-3 font-serif text-base">Value of Equity in Common Stock</td>
+                                <td class="p-3 text-neutral-500">Valuation!B32</td>
+                                <td class="p-3 text-right text-base">$1,415,478.5 M</td>
+                                <td class="p-3 text-right text-base">$1,415.48 B</td>
+                                <td class="p-3 text-right text-neutral-400">84.3%</td>
+                                <td class="p-3 text-neutral-400">Residual value accruing directly to public common shareholders</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-serif text-neutral-300">Diluted Shares Outstanding</td>
+                                <td class="p-3 text-neutral-500">Valuation!B33</td>
+                                <td class="p-3 text-right" colspan="2">16,936.820 Million Shares</td>
+                                <td class="p-3 text-right text-neutral-500">-</td>
+                                <td class="p-3 text-neutral-400">Common shares plus vested RSUs on balance sheet</td>
+                            </tr>
+                            <tr class="bg-emerald-950/40 border-t border-emerald-500 text-emerald-400 font-bold text-sm">
+                                <td class="p-3 font-serif text-base">Intrinsic Fair Value Per Share</td>
+                                <td class="p-3 text-neutral-500">Valuation!B34</td>
+                                <td class="p-3 text-right text-lg" colspan="2">$83.69 / SHARE</td>
+                                <td class="p-3 text-right text-neutral-400">-</td>
+                                <td class="p-3 text-neutral-400">Damodaran Ginzu DCF Target Price | Current Spot: $74.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Waterfall Visual Chart -->
+            <div class="glass-panel p-6 space-y-4">
+                <h3 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                    Enterprise Value to Equity Waterfall Chart ($ Billions)
+                </h3>
+                <div class="h-80">
+                    <canvas id="waterfallChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TAB 2: 4 VALUATION LEVERS & FRAGILITY                          -->
+        <!-- ============================================================== -->
+        <div id="tab-levers" class="tab-content hidden space-y-6">
+            <div class="p-3.5 bg-neutral-900 border border-neutral-800 text-neutral-300 text-xs">
+                <span>[DAMODARAN SELF-CRITIQUE :: ORDER OF FRAGILITY] In his new Substack piece, Damodaran plays devil's advocate with his own model, explicitly ranking his valuation drivers in order of <strong>magnitude and fragility</strong>. Below is the institutional dissection of each lever.</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Lever 1 -->
+                <div class="p-5 glass-panel border-l-4 border-rose-500 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-0.5 bg-rose-950/60 text-rose-300 border border-rose-800 text-[10px] font-bold">LEVER 1 :: RANK #1 FRAGILITY</span>
+                        <span class="text-rose-400 font-bold font-mono">2036 REV: $1,004.5B</span>
+                    </div>
+                    <h4 class="text-base font-serif font-bold text-neutral-100">Target Revenues ($1.005 Trillion in 10 Years)</h4>
+                    <p class="text-xs text-neutral-400 leading-relaxed">
+                        Damodaran picks this as the single most exposed driver. Delivering $1.005T puts Anthropic in the league of Amazon and Walmart. It requires: (1) AI agent adoption exploding into an enterprise staple, (2) Claude capturing a dominant share in the premium AI tier, and (3) monetization models transitioning from token pricing to value-based agency subscription.
+                    </p>
+                    <div class="p-2.5 bg-[#141416] border border-neutral-800 text-xs text-rose-300 font-mono">
+                        Fragility Risk: If 2036 revenues miss and land at $500B instead of $1.0T, operating margins compress, compute sits idle, and default risk increases non-linearly.
+                    </div>
+                </div>
+
+                <!-- Lever 2 -->
+                <div class="p-5 glass-panel border-l-4 border-amber-500 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-0.5 bg-amber-950/60 text-amber-300 border border-amber-800 text-[10px] font-bold">LEVER 2 :: RANK #2 FRAGILITY</span>
+                        <span class="text-amber-400 font-bold font-mono">FOUNDER ECHO CHAMBER</span>
+                    </div>
+                    <h4 class="text-base font-serif font-bold text-neutral-100">Governance & Public Benefit Corp (PBC) Structure</h4>
+                    <p class="text-xs text-neutral-400 leading-relaxed">
+                        Anthropic's quad-class voting structure permanently insulates founders and the Long-Term Benefit Trust from shareholder oversight. Damodaran warns that while founders are visionary, AI business models will experience violent competitive and technological shocks requiring agile operational pivots that insular tech echo chambers historically reject.
+                    </p>
+                    <div class="p-2.5 bg-[#141416] border border-neutral-800 text-xs text-amber-300 font-mono">
+                        Governance Discount: Outside public equity has zero influence over capital allocation or potential board-level strategic restructuring.
+                    </div>
+                </div>
+
+                <!-- Lever 3 -->
+                <div class="p-5 glass-panel border-l-4 border-cyan-500 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-0.5 bg-cyan-950/60 text-cyan-300 border border-cyan-800 text-[10px] font-bold">LEVER 3 :: RANK #3 FRAGILITY</span>
+                        <span class="text-cyan-400 font-bold font-mono">TARGET MARGIN: 27.5%</span>
+                    </div>
+                    <h4 class="text-base font-serif font-bold text-neutral-100">Profitability: Customer Stickiness vs Commoditization</h4>
+                    <p class="text-xs text-neutral-400 leading-relaxed">
+                        Critics contend LLMs will be commoditized into zero-margin utilities. Damodaran pushes back: enterprise software moats do not come from patents or brands, but from <strong>stickiness</strong>. If Claude agents become deeply intertwined with proprietary corporate workflows, switching costs rise. Target pre-tax margin: 32.5%, hair-cut to 27.5% for regulatory compliance.
+                    </p>
+                    <div class="p-2.5 bg-[#141416] border border-neutral-800 text-xs text-cyan-300 font-mono">
+                        Margin Sensitivity: Every 5.0% change in long-term operating margin swings equity fair value by ~$240 Billion (~$72/share).
+                    </div>
+                </div>
+
+                <!-- Lever 4 -->
+                <div class="p-5 glass-panel border-l-4 border-emerald-500 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-0.5 bg-emerald-950/60 text-emerald-300 border border-emerald-800 text-[10px] font-bold">LEVER 4 :: RANK #4 FRAGILITY</span>
+                        <span class="text-emerald-400 font-bold font-mono">SALES/CAPITAL: 3.0</span>
+                    </div>
+                    <h4 class="text-base font-serif font-bold text-neutral-100">Compute Reinvestment & Data Center Economics</h4>
+                    <p class="text-xs text-neutral-400 leading-relaxed">
+                        To generate $1.005T in revenues, Anthropic must maintain and expand compute access. Damodaran uses a Sales-to-Capital ratio of 3.0, generating $450B in cumulative contractual commitments ($376B PV). This requires chip efficiency to outpace power and grid interconnection bottlenecks.
+                    </p>
+                    <div class="p-2.5 bg-[#141416] border border-neutral-800 text-xs text-emerald-300 font-mono">
+                        Reinvestment Reality: If compute costs remain high (Sales/Capital drops to 1.5), invested capital doubles to $1.2T, crushing ROIC and cash conversion.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TAB 3: COST OF CAPITAL MASTERCLASS                             -->
+        <!-- ============================================================== -->
+        <div id="tab-costcap" class="tab-content hidden space-y-6">
+            <div class="p-4 bg-purple-950/20 border border-purple-900/60 text-purple-300 space-y-2 text-xs">
+                <div class="font-bold text-sm text-purple-200 uppercase tracking-wide">
+                    The Cost of Capital: The Swiss Army Knife of Corporate Finance
+                </div>
+                <p>
+                    In response to analysts claiming that Anthropic's 9.74% WACC is "far too low" and demanding 15% to 25% discount rates, Damodaran systematically tears down market delusions using four institutional anchors. The cost of capital is not an arbitrary receptacle for investor fear; it is an <strong>opportunity cost</strong> bounded by empirical market pricing.
+                </p>
+            </div>
+
+            <!-- 4 Reality Checks Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="p-4 glass-panel space-y-2">
+                    <span class="text-amber-400 font-mono text-[10px] font-bold">[CHECK 1: HISTORY 1928–2025]</span>
+                    <h5 class="text-sm font-serif font-bold text-neutral-100">Historical Returns Limit</h5>
+                    <p class="text-xs text-neutral-400 leading-relaxed">
+                        Over 98 years of US equity history, the S&P 500 arithmetic mean return is 11.85% and geometric mean is 10.02% (2001–2025 is just 8.74%). The equity risk premium over 10-year treasuries is 5.48%. Given a 4.94% risk-free rate, average US equity cost of capital cannot exceed 10.4–10.65%.
+                    </p>
+                </div>
+                <div class="p-4 glass-panel space-y-2">
+                    <span class="text-cyan-400 font-mono text-[10px] font-bold">[CHECK 2: MARKET-IMPLIED]</span>
+                    <h5 class="text-sm font-serif font-bold text-neutral-100">8.99% S&P 500 Expected Return</h5>
+                    <p class="text-xs text-neutral-400 leading-relaxed">
+                        Backing expected cash flows out of current market prices yields an expected US equity return of exactly 8.99% as of October 2026. The implied expected return for US equities has <strong>not exceeded 10% since 1994</strong>. Demanding 15% is economically delusional.
+                    </p>
+                </div>
+                <div class="p-4 glass-panel space-y-2">
+                    <span class="text-rose-400 font-mono text-[10px] font-bold">[CHECK 3: PRICING MULTIPLES]</span>
+                    <h5 class="text-sm font-serif font-bold text-neutral-100">The 7.5x P/E Absurdity</h5>
+                    <p class="text-xs text-neutral-400 leading-relaxed">
+                        If the cost of equity were truly 15%, given 5% nominal US GDP growth and 20% ROE, the aggregate market P/E ratio would be <strong>7.5x</strong>. Forward S&P 500 P/E is ~20x. Claiming 15% WACC while buying equities at 20x P/E is mathematically inconsistent.
+                    </p>
+                </div>
+                <div class="p-4 glass-panel space-y-2">
+                    <span class="text-emerald-400 font-mono text-[10px] font-bold">[CHECK 4: CROSS-SECTION]</span>
+                    <h5 class="text-sm font-serif font-bold text-neutral-100">90th Percentile Tech WACC</h5>
+                    <p class="text-xs text-neutral-400 leading-relaxed">
+                        In Damodaran's start-of-year global survey, 80% of all US technology companies have WACC between 9.02% and 12.27%. At 9.74%, Anthropic sits near the 90th percentile of all US firms. Furthermore, its cost of capital transitions to 9.13% as it matures.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Deep Dive on Decoupling Failure Risk from WACC -->
+            <div class="glass-panel p-6 space-y-4">
+                <h4 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-purple-500 pl-2">
+                    Why Default Risk Must NOT Be Jammed into Going-Concern WACC
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="p-3 bg-[#141416] border border-neutral-800 space-y-2">
+                        <span class="text-neutral-400 font-bold uppercase text-[10px]">Staggered Commitments</span>
+                        <p class="text-neutral-300">
+                            Unlike debt maturities where a bullet principal repayment comes due, Anthropic's compute liabilities are contractual operating commitments: $77.0B in Year 1 and $98.1B in Year 2.
+                        </p>
+                    </div>
+                    <div class="p-3 bg-[#141416] border border-neutral-800 space-y-2">
+                        <span class="text-emerald-400 font-bold uppercase text-[10px]">$212.4B Liquid Firepower</span>
+                        <p class="text-neutral-300">
+                            Anthropic holds $112.4B in cash reserves, which expands to over $212.4B following the $100B net IPO raise. It has zero near-term bankruptcy risk over years 1 to 3.
+                        </p>
+                    </div>
+                    <div class="p-3 bg-[#141416] border border-neutral-800 space-y-2">
+                        <span class="text-amber-400 font-bold uppercase text-[10px]">Explicit Failure Rate (10%)</span>
+                        <p class="text-neutral-300">
+                            Damodaran handles distress through an explicit failure probability of 10% with 50% distress liquidation salvage ($905.2B), taking $90.5B off operating value cleanly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VC and PE Fictional Returns Debunking -->
+            <div class="glass-panel p-6 space-y-4">
+                <h4 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-amber-500 pl-2">
+                    Professional Investors: Debunking VC & Private Equity 25%-50% Hurdle Rates
+                </h4>
+                <p class="text-xs text-neutral-400 leading-relaxed">
+                    Venture capitalists routinely demand 30% to 50% target hurdle rates as promotional props. However, long-term <strong>Cambridge Associates</strong> benchmark data reveals that actual realized returns delivered by VC and PE funds lag public index funds over 10 to 20 year horizons (averaging 10% to 12%). Setting artificially elevated hurdle rates forces managers to invent aggressively skewed cash flows, leading to systemic capital misallocation.
+                </p>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TAB 4: $485B DEBT CAPITALIZATION & R&D AUDIT                    -->
+        <!-- ============================================================== -->
+        <div id="tab-capitalization" class="tab-content hidden space-y-6">
+            <div class="p-3.5 bg-neutral-900 border border-neutral-800 text-neutral-300 text-xs">
+                <span>[FORENSIC ACCOUNTING AUDIT] Total adjusted debt stands at <strong>$485.32 Billion</strong>. This includes $376.00 Billion in synthetic debt created by capitalizing compute commitments and operating leases, alongside $109.32 Billion of reported book debt.</span>
+            </div>
+
+            <!-- Operating Lease & Compute Commitment Table -->
+            <div class="glass-panel p-6 space-y-4">
+                <div class="border-b border-neutral-800 pb-3 flex items-center justify-between">
+                    <div>
+                        <h4 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-rose-500 pl-2">
+                            Compute Commitments & Operating Lease Capitalization Schedule
+                        </h4>
+                        <p class="text-xs text-neutral-400 mt-1">Discounted at Pre-Tax Cost of Debt = 6.2828% (BB+ Credit Rating)</p>
+                    </div>
+                    <span class="text-rose-400 font-bold font-mono text-xs">
+                        TOTAL SYNTHETIC DEBT: $376.00B
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto border border-neutral-800 custom-scroll">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-[#0c0d0e] text-neutral-400 uppercase border-b border-neutral-800">
+                            <tr>
+                                <th class="p-3">Commitment Period</th>
+                                <th class="p-3 text-right">Nominal Commitment ($M)</th>
+                                <th class="p-3 text-right">Discount Factor</th>
+                                <th class="p-3 text-right">Present Value ($M)</th>
+                                <th class="p-3 text-right">Equivalent ($B)</th>
+                                <th class="p-3">Counterparty / Hardware Nature</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <tr>
+        <td class="p-3 font-semibold text-white">Year 1</td>
+        <td class="p-3 text-right text-rose-400 font-bold">$76,968.0 M</td>
+        <td class="p-3 text-right text-neutral-400">0.9409</td>
+        <td class="p-3 text-right text-white font-bold">$72,418.1 M</td>
+        <td class="p-3 text-right text-white font-bold">$72.42 B</td>
+        <td class="p-3 text-neutral-400">Hyperscaler Cloud Compute & Cluster Reservation</td>
+    </tr><tr>
+        <td class="p-3 font-semibold text-white">Year 2</td>
+        <td class="p-3 text-right text-rose-400 font-bold">$98,128.0 M</td>
+        <td class="p-3 text-right text-neutral-400">0.8853</td>
+        <td class="p-3 text-right text-white font-bold">$86,869.4 M</td>
+        <td class="p-3 text-right text-white font-bold">$86.87 B</td>
+        <td class="p-3 text-neutral-400">Hyperscaler Cloud Compute & Cluster Reservation</td>
+    </tr><tr>
+        <td class="p-3 font-semibold text-white">Year 3</td>
+        <td class="p-3 text-right text-rose-400 font-bold">$60,832.0 M</td>
+        <td class="p-3 text-right text-neutral-400">0.8329</td>
+        <td class="p-3 text-right text-white font-bold">$50,669.1 M</td>
+        <td class="p-3 text-right text-white font-bold">$50.67 B</td>
+        <td class="p-3 text-neutral-400">Hyperscaler Cloud Compute & Cluster Reservation</td>
+    </tr><tr>
+        <td class="p-3 font-semibold text-white">Year 4</td>
+        <td class="p-3 text-right text-rose-400 font-bold">$58,304.0 M</td>
+        <td class="p-3 text-right text-neutral-400">0.7837</td>
+        <td class="p-3 text-right text-white font-bold">$45,692.7 M</td>
+        <td class="p-3 text-right text-white font-bold">$45.69 B</td>
+        <td class="p-3 text-neutral-400">Hyperscaler Cloud Compute & Cluster Reservation</td>
+    </tr><tr>
+        <td class="p-3 font-semibold text-white">Year 5</td>
+        <td class="p-3 text-right text-rose-400 font-bold">$50,000.0 M</td>
+        <td class="p-3 text-right text-neutral-400">0.7374</td>
+        <td class="p-3 text-right text-white font-bold">$36,868.5 M</td>
+        <td class="p-3 text-right text-white font-bold">$36.87 B</td>
+        <td class="p-3 text-neutral-400">Hyperscaler Cloud Compute & Cluster Reservation</td>
+    </tr><tr>
+        <td class="p-3 font-semibold text-white">Year 6 and beyond</td>
+        <td class="p-3 text-right text-rose-400 font-bold">$124,000.0 M</td>
+        <td class="p-3 text-right text-neutral-400">0.6733</td>
+        <td class="p-3 text-right text-white font-bold">$83,486.0 M</td>
+        <td class="p-3 text-right text-white font-bold">$83.49 B</td>
+        <td class="p-3 text-neutral-400">Hyperscaler Cloud Compute & Cluster Reservation</td>
+    </tr>
+                            <tr class="bg-neutral-900/60 font-bold text-rose-400">
+                                <td class="p-3">Total Capitalized Synthetic Debt</td>
+                                <td class="p-3 text-right">$468,232.0 M</td>
+                                <td class="p-3 text-right">-</td>
+                                <td class="p-3 text-right">$376,003.8 M</td>
+                                <td class="p-3 text-right">$376.00 B</td>
+                                <td class="p-3 text-neutral-300">Added directly to Balance Sheet Debt in Valuation Bridge</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- R&D Capitalization Table -->
+            <div class="glass-panel p-6 space-y-4">
+                <div class="border-b border-neutral-800 pb-3 flex items-center justify-between">
+                    <div>
+                        <h4 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-emerald-500 pl-2">
+                            Research & Development Capitalization (3-Year Amortization)
+                        </h4>
+                        <p class="text-xs text-neutral-400 mt-1">Converting R&D expenses into intangible capital assets</p>
+                    </div>
+                    <span class="text-emerald-400 font-bold font-mono text-xs">
+                        RESEARCH ASSET: $26.53B | EBIT BOOST: +$11.44B
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto border border-neutral-800 custom-scroll">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-[#0c0d0e] text-neutral-400 uppercase border-b border-neutral-800">
+                            <tr>
+                                <th class="p-3">Filing Year</th>
+                                <th class="p-3 text-right">R&D Expense ($M)</th>
+                                <th class="p-3 text-right">Unamortized %</th>
+                                <th class="p-3 text-right">Unamortized Asset ($M)</th>
+                                <th class="p-3 text-right">Amortization This Year ($M)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <tr>
+        <td class="p-3 font-semibold text-white">Current</td>
+        <td class="p-3 text-right text-emerald-400 font-bold">$16,979.0 M</td>
+        <td class="p-3 text-right text-neutral-400">100.0%</td>
+        <td class="p-3 text-right text-white font-bold">$16,979.0 M</td>
+        <td class="p-3 text-right text-amber-400 font-bold">-</td>
+    </tr><tr>
+        <td class="p-3 font-semibold text-white">-1</td>
+        <td class="p-3 text-right text-emerald-400 font-bold">$12,645.0 M</td>
+        <td class="p-3 text-right text-neutral-400">66.7%</td>
+        <td class="p-3 text-right text-white font-bold">$8,430.0 M</td>
+        <td class="p-3 text-right text-amber-400 font-bold">$4,215.0 M</td>
+    </tr><tr>
+        <td class="p-3 font-semibold text-white">-2</td>
+        <td class="p-3 text-right text-emerald-400 font-bold">$3,366.0 M</td>
+        <td class="p-3 text-right text-neutral-400">33.3%</td>
+        <td class="p-3 text-right text-white font-bold">$1,122.0 M</td>
+        <td class="p-3 text-right text-amber-400 font-bold">$1,122.0 M</td>
+    </tr><tr>
+        <td class="p-3 font-semibold text-white">-3</td>
+        <td class="p-3 text-right text-emerald-400 font-bold">$592.0 M</td>
+        <td class="p-3 text-right text-neutral-400">0.0%</td>
+        <td class="p-3 text-right text-white font-bold">$0.0 M</td>
+        <td class="p-3 text-right text-amber-400 font-bold">$197.3 M</td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TAB 5: 10-YR GINZU DCF SCHEDULE                               -->
+        <!-- ============================================================== -->
+        <div id="tab-dcf" class="tab-content hidden space-y-6">
+            <div class="p-3.5 bg-neutral-900 border border-neutral-800 text-neutral-300 text-xs">
+                <span>[GINZU DCF SCHEDULE] 10-year projection modeled from <strong>AnthropicIPO_updated.xlsx</strong>. Base annualized revenue: $35.29B, reaching $1.005 Trillion in Year 10. Operating margin expands from -131.3% to 27.5% net of regulatory haircut. Reinvestment anchored at Sales/Capital = 3.0.</span>
+            </div>
+
+            <!-- DCF Master Grid -->
+            <div class="glass-panel p-6 space-y-4">
+                <div class="border-b border-neutral-800 pb-3 flex items-center justify-between">
+                    <div>
+                        <h4 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-emerald-500 pl-2">
+                            Anthropic 10-Year Discrete DCF Line-Item Projections
+                        </h4>
+                        <p class="text-xs text-neutral-400 mt-1">All amounts in US $ Millions unless specified</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto border border-neutral-800 custom-scroll">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-[#0c0d0e] text-neutral-400 uppercase border-b border-neutral-800">
+                            <tr>
+                                <th class="p-2.5 sticky left-0 bg-[#0c0d0e] z-10">Metric Line Item</th>
+                                <th class="p-2.5 text-right whitespace-nowrap">Base Year</th><th class="p-2.5 text-right whitespace-nowrap">Year 1</th><th class="p-2.5 text-right whitespace-nowrap">Year 2</th><th class="p-2.5 text-right whitespace-nowrap">Year 3</th><th class="p-2.5 text-right whitespace-nowrap">Year 4</th><th class="p-2.5 text-right whitespace-nowrap">Year 5</th><th class="p-2.5 text-right whitespace-nowrap">Year 6</th><th class="p-2.5 text-right whitespace-nowrap">Year 7</th><th class="p-2.5 text-right whitespace-nowrap">Year 8</th><th class="p-2.5 text-right whitespace-nowrap">Year 9</th><th class="p-2.5 text-right whitespace-nowrap">Year 10</th>
+                                <th class="p-2.5 text-right bg-emerald-950/40 text-emerald-400">Terminal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <tr>
+                                <td class="p-2.5 font-semibold text-white sticky left-0 bg-[#0f0f11]">Revenue Growth Rate</td>
+                                <td class="p-2.5 text-right font-mono text-neutral-500">-</td><td class="p-2.5 text-right font-mono text-cyan-400">190.0%</td><td class="p-2.5 text-right font-mono text-cyan-400">42.0%</td><td class="p-2.5 text-right font-mono text-cyan-400">42.0%</td><td class="p-2.5 text-right font-mono text-cyan-400">42.0%</td><td class="p-2.5 text-right font-mono text-cyan-400">42.0%</td><td class="p-2.5 text-right font-mono text-cyan-400">34.6%</td><td class="p-2.5 text-right font-mono text-cyan-400">27.2%</td><td class="p-2.5 text-right font-mono text-cyan-400">19.7%</td><td class="p-2.5 text-right font-mono text-cyan-400">12.3%</td><td class="p-2.5 text-right font-mono text-cyan-400">4.9%</td>
+                                <td class="p-2.5 text-right font-mono bg-emerald-950/20 text-emerald-400">4.9%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-semibold text-white sticky left-0 bg-[#0f0f11]">Revenues ($M)</td>
+                                <td class="p-2.5 text-right font-mono font-bold text-white">$35,286</td><td class="p-2.5 text-right font-mono font-bold text-white">$102,329</td><td class="p-2.5 text-right font-mono font-bold text-white">$145,308</td><td class="p-2.5 text-right font-mono font-bold text-white">$206,337</td><td class="p-2.5 text-right font-mono font-bold text-white">$292,998</td><td class="p-2.5 text-right font-mono font-bold text-white">$416,058</td><td class="p-2.5 text-right font-mono font-bold text-white">$559,931</td><td class="p-2.5 text-right font-mono font-bold text-white">$712,008</td><td class="p-2.5 text-right font-mono font-bold text-white">$852,558</td><td class="p-2.5 text-right font-mono font-bold text-white">$957,594</td><td class="p-2.5 text-right font-mono font-bold text-white">$1,004,516</td>
+                                <td class="p-2.5 text-right font-mono font-bold bg-emerald-950/20 text-emerald-400">$1,053,737</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-semibold text-white sticky left-0 bg-[#0f0f11]">EBIT Operating Margin</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">-131.2%</td><td class="p-2.5 text-right font-mono text-emerald-400">5.0%</td><td class="p-2.5 text-right font-mono text-emerald-400">14.0%</td><td class="p-2.5 text-right font-mono text-emerald-400">18.5%</td><td class="p-2.5 text-right font-mono text-emerald-400">23.0%</td><td class="p-2.5 text-right font-mono text-emerald-400">27.5%</td><td class="p-2.5 text-right font-mono text-emerald-400">27.5%</td><td class="p-2.5 text-right font-mono text-emerald-400">27.5%</td><td class="p-2.5 text-right font-mono text-emerald-400">27.5%</td><td class="p-2.5 text-right font-mono text-emerald-400">27.5%</td><td class="p-2.5 text-right font-mono text-emerald-400">27.5%</td>
+                                <td class="p-2.5 text-right font-mono bg-emerald-950/20 text-emerald-400">27.5%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-semibold text-white sticky left-0 bg-[#0f0f11]">EBIT (Operating Income)</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400 font-bold">$-46,314</td><td class="p-2.5 text-right font-mono text-white font-bold">$5,116</td><td class="p-2.5 text-right font-mono text-white font-bold">$20,343</td><td class="p-2.5 text-right font-mono text-white font-bold">$38,172</td><td class="p-2.5 text-right font-mono text-white font-bold">$67,390</td><td class="p-2.5 text-right font-mono text-white font-bold">$114,416</td><td class="p-2.5 text-right font-mono text-white font-bold">$153,981</td><td class="p-2.5 text-right font-mono text-white font-bold">$195,802</td><td class="p-2.5 text-right font-mono text-white font-bold">$234,454</td><td class="p-2.5 text-right font-mono text-white font-bold">$263,338</td><td class="p-2.5 text-right font-mono text-white font-bold">$276,242</td>
+                                <td class="p-2.5 text-right font-mono font-bold bg-emerald-950/20 text-emerald-400">$195,117</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-semibold text-white sticky left-0 bg-[#0f0f11]">Effective Tax Rate</td>
+                                <td class="p-2.5 text-right font-mono text-neutral-400">0.0%</td><td class="p-2.5 text-right font-mono text-neutral-400">0.0%</td><td class="p-2.5 text-right font-mono text-neutral-400">0.0%</td><td class="p-2.5 text-right font-mono text-neutral-400">0.0%</td><td class="p-2.5 text-right font-mono text-neutral-400">0.0%</td><td class="p-2.5 text-right font-mono text-neutral-400">0.0%</td><td class="p-2.5 text-right font-mono text-neutral-400">5.0%</td><td class="p-2.5 text-right font-mono text-neutral-400">10.0%</td><td class="p-2.5 text-right font-mono text-neutral-400">15.0%</td><td class="p-2.5 text-right font-mono text-neutral-400">20.0%</td><td class="p-2.5 text-right font-mono text-neutral-400">25.0%</td>
+                                <td class="p-2.5 text-right font-mono bg-emerald-950/20 text-neutral-300">25.0%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-semibold text-white sticky left-0 bg-[#0f0f11]">EBIT * (1 - Tax)</td>
+                                <td class="p-2.5 text-right font-mono font-bold text-neutral-200">$-46,314</td><td class="p-2.5 text-right font-mono font-bold text-neutral-200">$5,116</td><td class="p-2.5 text-right font-mono font-bold text-neutral-200">$20,343</td><td class="p-2.5 text-right font-mono font-bold text-neutral-200">$38,172</td><td class="p-2.5 text-right font-mono font-bold text-neutral-200">$67,390</td><td class="p-2.5 text-right font-mono font-bold text-neutral-200">$114,416</td><td class="p-2.5 text-right font-mono font-bold text-neutral-200">$146,282</td><td class="p-2.5 text-right font-mono font-bold text-neutral-200">$176,222</td><td class="p-2.5 text-right font-mono font-bold text-neutral-200">$199,286</td><td class="p-2.5 text-right font-mono font-bold text-neutral-200">$210,671</td><td class="p-2.5 text-right font-mono font-bold text-neutral-200">$207,181</td>
+                                <td class="p-2.5 text-right font-mono font-bold bg-emerald-950/20 text-emerald-400">$182,922</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-semibold text-white sticky left-0 bg-[#0f0f11]">Reinvestment (Sales/Cap=3.0)</td>
+                                <td class="p-2.5 text-right font-mono text-neutral-500">-</td><td class="p-2.5 text-right font-mono text-amber-400">$14,326</td><td class="p-2.5 text-right font-mono text-amber-400">$20,343</td><td class="p-2.5 text-right font-mono text-amber-400">$28,887</td><td class="p-2.5 text-right font-mono text-amber-400">$41,020</td><td class="p-2.5 text-right font-mono text-amber-400">$47,958</td><td class="p-2.5 text-right font-mono text-amber-400">$50,692</td><td class="p-2.5 text-right font-mono text-amber-400">$46,850</td><td class="p-2.5 text-right font-mono text-amber-400">$35,012</td><td class="p-2.5 text-right font-mono text-amber-400">$15,641</td><td class="p-2.5 text-right font-mono text-amber-400">$16,407</td>
+                                <td class="p-2.5 text-right font-mono bg-emerald-950/20 text-amber-400">$36,809</td>
+                            </tr>
+                            <tr class="bg-neutral-900/60 font-bold">
+                                <td class="p-2.5 text-emerald-400 sticky left-0 bg-neutral-900">Free Cash Flow to Firm (FCFF)</td>
+                                <td class="p-2.5 text-right font-mono text-neutral-500">-</td><td class="p-2.5 text-right font-mono text-rose-400 font-bold">$-9,210</td><td class="p-2.5 text-right font-mono text-emerald-400 font-bold">$0</td><td class="p-2.5 text-right font-mono text-emerald-400 font-bold">$9,285</td><td class="p-2.5 text-right font-mono text-emerald-400 font-bold">$26,370</td><td class="p-2.5 text-right font-mono text-emerald-400 font-bold">$66,458</td><td class="p-2.5 text-right font-mono text-emerald-400 font-bold">$95,590</td><td class="p-2.5 text-right font-mono text-emerald-400 font-bold">$129,372</td><td class="p-2.5 text-right font-mono text-emerald-400 font-bold">$164,274</td><td class="p-2.5 text-right font-mono text-emerald-400 font-bold">$195,030</td><td class="p-2.5 text-right font-mono text-emerald-400 font-bold">$190,774</td>
+                                <td class="p-2.5 text-right font-mono bg-emerald-950/40 text-emerald-400">$146,338</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-semibold text-white sticky left-0 bg-[#0f0f11]">Cost of Capital (WACC)</td>
+                                <td class="p-2.5 text-right font-mono text-neutral-500">-</td><td class="p-2.5 text-right font-mono text-neutral-400">9.74%</td><td class="p-2.5 text-right font-mono text-neutral-400">9.74%</td><td class="p-2.5 text-right font-mono text-neutral-400">9.74%</td><td class="p-2.5 text-right font-mono text-neutral-400">9.74%</td><td class="p-2.5 text-right font-mono text-neutral-400">9.74%</td><td class="p-2.5 text-right font-mono text-neutral-400">9.62%</td><td class="p-2.5 text-right font-mono text-neutral-400">9.50%</td><td class="p-2.5 text-right font-mono text-neutral-400">9.37%</td><td class="p-2.5 text-right font-mono text-neutral-400">9.25%</td><td class="p-2.5 text-right font-mono text-neutral-400">9.13%</td>
+                                <td class="p-2.5 text-right font-mono bg-emerald-950/20 text-neutral-300">9.13%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-semibold text-white sticky left-0 bg-[#0f0f11]">Discount Factor</td>
+                                <td class="p-2.5 text-right font-mono text-neutral-500">-</td><td class="p-2.5 text-right font-mono text-neutral-400">0.9112</td><td class="p-2.5 text-right font-mono text-neutral-400">0.8304</td><td class="p-2.5 text-right font-mono text-neutral-400">0.7567</td><td class="p-2.5 text-right font-mono text-neutral-400">0.6895</td><td class="p-2.5 text-right font-mono text-neutral-400">0.6283</td><td class="p-2.5 text-right font-mono text-neutral-400">0.5732</td><td class="p-2.5 text-right font-mono text-neutral-400">0.5235</td><td class="p-2.5 text-right font-mono text-neutral-400">0.4786</td><td class="p-2.5 text-right font-mono text-neutral-400">0.4381</td><td class="p-2.5 text-right font-mono text-neutral-400">0.4014</td>
+                                <td class="p-2.5 text-right font-mono bg-emerald-950/20 text-neutral-300">0.4014</td>
+                            </tr>
+                            <tr class="bg-amber-950/20 font-bold text-amber-300">
+                                <td class="p-2.5 sticky left-0 bg-[#141416]">Present Value of FCFF ($M)</td>
+                                <td class="p-2.5 text-right font-mono text-neutral-500">-</td><td class="p-2.5 text-right font-mono">$-8,392</td><td class="p-2.5 text-right font-mono">$0</td><td class="p-2.5 text-right font-mono">$7,026</td><td class="p-2.5 text-right font-mono">$18,182</td><td class="p-2.5 text-right font-mono">$41,756</td><td class="p-2.5 text-right font-mono">$54,790</td><td class="p-2.5 text-right font-mono">$67,723</td><td class="p-2.5 text-right font-mono">$78,623</td><td class="p-2.5 text-right font-mono">$85,438</td><td class="p-2.5 text-right font-mono">$76,582</td>
+                                <td class="p-2.5 text-right font-mono bg-emerald-950/40 text-emerald-300">$1,388,748</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-semibold text-white sticky left-0 bg-[#0f0f11]">Invested Capital ($M)</td>
+                                <td class="p-2.5 text-right font-mono text-neutral-300">$546,820</td><td class="p-2.5 text-right font-mono text-neutral-300">$561,146</td><td class="p-2.5 text-right font-mono text-neutral-300">$581,489</td><td class="p-2.5 text-right font-mono text-neutral-300">$610,376</td><td class="p-2.5 text-right font-mono text-neutral-300">$651,396</td><td class="p-2.5 text-right font-mono text-neutral-300">$699,354</td><td class="p-2.5 text-right font-mono text-neutral-300">$750,046</td><td class="p-2.5 text-right font-mono text-neutral-300">$796,896</td><td class="p-2.5 text-right font-mono text-neutral-300">$831,908</td><td class="p-2.5 text-right font-mono text-neutral-300">$847,548</td><td class="p-2.5 text-right font-mono text-neutral-300">$863,956</td>
+                                <td class="p-2.5 text-right font-mono bg-emerald-950/20 text-neutral-300">$895,420</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-semibold text-white sticky left-0 bg-[#0f0f11]">Economic ROIC (%)</td>
+                                <td class="p-2.5 text-right font-mono text-rose-400">-8.5%</td><td class="p-2.5 text-right font-mono text-emerald-400">0.9%</td><td class="p-2.5 text-right font-mono text-emerald-400">3.6%</td><td class="p-2.5 text-right font-mono text-emerald-400">6.6%</td><td class="p-2.5 text-right font-mono text-emerald-400">11.0%</td><td class="p-2.5 text-right font-mono text-emerald-400">17.6%</td><td class="p-2.5 text-right font-mono text-emerald-400">20.9%</td><td class="p-2.5 text-right font-mono text-emerald-400">23.5%</td><td class="p-2.5 text-right font-mono text-emerald-400">25.0%</td><td class="p-2.5 text-right font-mono text-emerald-400">25.3%</td><td class="p-2.5 text-right font-mono text-emerald-400">24.4%</td>
+                                <td class="p-2.5 text-right font-mono bg-emerald-950/20 text-emerald-400">21.8%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- DCF Charts Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="glass-panel p-6 space-y-3">
+                    <h5 class="text-xs font-serif font-bold text-neutral-100 uppercase tracking-wider">Revenue & Operating Margin Trajectory</h5>
+                    <div class="h-64">
+                        <canvas id="revMarginChart"></canvas>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 space-y-3">
+                    <h5 class="text-xs font-serif font-bold text-neutral-100 uppercase tracking-wider">Free Cash Flow & Present Value Profile</h5>
+                    <div class="h-64">
+                        <canvas id="fcfProfileChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TAB 6: DAMODARAN MACRO DATASETS                                -->
+        <!-- ============================================================== -->
+        <div id="tab-macro" class="tab-content hidden space-y-6">
+            <div class="p-3.5 bg-neutral-900 border border-neutral-800 text-neutral-300 text-xs">
+                <span>[MACRO INGESTION REPOSITORY] Damodaran's institutional datasets ingested into SQLite vault: (1) Cost of Capital by Industry (US & Global), (2) Historical Returns (1928–2025), and (3) S&P 500 Implied Expected Returns (1960–2025).</span>
+            </div>
+
+            <!-- Macro Datasets Charts -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="glass-panel p-6 space-y-3">
+                    <h5 class="text-xs font-serif font-bold text-neutral-100 uppercase tracking-wider">
+                        S&P 500 Implied Expected Return vs 10-Year Treasury (1960–2025)
+                    </h5>
+                    <div class="h-64">
+                        <canvas id="impliedErpChart"></canvas>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 space-y-3">
+                    <h5 class="text-xs font-serif font-bold text-neutral-100 uppercase tracking-wider">
+                        Historical Asset Class Cumulative Growth of $100 (1928–2025)
+                    </h5>
+                    <div class="h-64">
+                        <canvas id="histGrowthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Searchable Industry Cost of Capital Explorer Table -->
+            <div class="glass-panel p-6 space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-neutral-800 pb-3">
+                    <div>
+                        <h4 class="text-sm font-serif font-semibold text-neutral-100 uppercase tracking-wider border-l-2 border-cyan-500 pl-2">
+                            Industry Cost of Capital Lookup (US & Global 2026)
+                        </h4>
+                        <p class="text-xs text-neutral-400 mt-1">Ingested from waccUS.xlsx & waccGlobal.xlsx | 192 Industry Records in Vault</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input id="industrySearch" type="text" placeholder="Search industry (e.g. Software, Semi)..." oninput="filterIndustryTable()" class="bg-[#141416] border border-neutral-700 px-3 py-1.5 text-xs text-white rounded-sm focus:border-amber-500 outline-none w-64 font-mono">
+                        <select id="regionSelect" onchange="filterIndustryTable()" class="bg-[#141416] border border-neutral-700 px-2 py-1.5 text-xs text-white rounded-sm font-mono">
+                            <option value="ALL">All Regions</option>
+                            <option value="US" selected>United States</option>
+                            <option value="GLOBAL">Global</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto border border-neutral-800 max-h-96 custom-scroll">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-[#0c0d0e] text-neutral-400 uppercase border-b border-neutral-800 sticky top-0">
+                            <tr>
+                                <th class="p-2.5">Region</th>
+                                <th class="p-2.5">Industry Name</th>
+                                <th class="p-2.5 text-right">Firms</th>
+                                <th class="p-2.5 text-right">Beta</th>
+                                <th class="p-2.5 text-right">Cost of Equity</th>
+                                <th class="p-2.5 text-right">Debt Weight</th>
+                                <th class="p-2.5 text-right">After-Tax Cost Debt</th>
+                                <th class="p-2.5 text-right">Cost of Capital</th>
+                            </tr>
+                        </thead>
+                        <tbody id="industryTableBody" class="divide-y divide-neutral-800/60 text-neutral-300">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TAB 7: S-1 PROSPECTUS & QUAD-CLASS GOVERNANCE                  -->
+        <!-- ============================================================== -->
+        <div id="tab-prospectus" class="tab-content hidden space-y-6">
+            <div class="p-3.5 bg-neutral-900 border border-neutral-800 text-neutral-300 text-xs">
+                <span>[SEC FORM S-1 GOVERNANCE AUDIT] Quad-Class Share Structure & Public Benefit Corporation (PBC) charter analysis. Foundational conflict between fiduciary shareholder return and ideological safety governance.</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="p-5 glass-panel space-y-2 border-t-2 border-blue-500">
+                    <span class="text-blue-400 font-bold text-[10px] uppercase">Class A Common</span>
+                    <h5 class="text-sm font-serif font-bold text-white">Public Shareholders</h5>
+                    <div class="text-lg font-bold font-mono text-neutral-200">1 Vote / Share</div>
+                    <p class="text-xs text-neutral-400 leading-relaxed">
+                        Offered to public investors in the IPO. Subordinate in corporate control. Zero ability to replace management.
+                    </p>
+                </div>
+                <div class="p-5 glass-panel space-y-2 border-t-2 border-amber-500">
+                    <span class="text-amber-400 font-bold text-[10px] uppercase">Class B Common</span>
+                    <h5 class="text-sm font-serif font-bold text-white">Founders & Insiders</h5>
+                    <div class="text-lg font-bold font-mono text-amber-400">10 Votes / Share</div>
+                    <p class="text-xs text-neutral-400 leading-relaxed">
+                        Held exclusively by Dario Amodei, Daniela Amodei, and key early executives, securing complete voting majority.
+                    </p>
+                </div>
+                <div class="p-5 glass-panel space-y-2 border-t-2 border-neutral-600">
+                    <span class="text-neutral-400 font-bold text-[10px] uppercase">Class C Common</span>
+                    <h5 class="text-sm font-serif font-bold text-white">Non-Voting Stock</h5>
+                    <div class="text-lg font-bold font-mono text-neutral-400">0 Votes / Share</div>
+                    <p class="text-xs text-neutral-400 leading-relaxed">
+                        Reserved for strategic cloud partners (Amazon, Google) and employee equity grants to prevent dilution of voting power.
+                    </p>
+                </div>
+                <div class="p-5 glass-panel space-y-2 border-t-2 border-rose-500">
+                    <span class="text-rose-400 font-bold text-[10px] uppercase">Class D Governance</span>
+                    <h5 class="text-sm font-serif font-bold text-white">Long-Term Benefit Trust</h5>
+                    <div class="text-lg font-bold font-mono text-rose-400">Golden Veto Share</div>
+                    <p class="text-xs text-neutral-400 leading-relaxed">
+                        Five independent trustees holding irrevocable veto power over board elections, mergers, acquisitions, and commercial releases.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TAB 8: CROWD BENCHMARK & SIMULATOR                             -->
+        <!-- ============================================================== -->
+        <div id="tab-simulator" class="tab-content hidden space-y-6">
+            <div class="p-3.5 bg-neutral-900 border border-neutral-800 text-neutral-300 text-xs">
+                <span>[STORY-TO-NUMBERS VALUATION SIMULATOR] Adjust the four core Damodaran levers to test your own narrative and compute Anthropic's equity fair value in real time.</span>
+            </div>
+
+            <!-- Interactive Simulator Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Controls Column -->
+                <div class="glass-panel p-6 space-y-5 lg:col-span-1">
+                    <h4 class="text-xs font-serif font-bold text-neutral-100 uppercase tracking-wider border-b border-neutral-800 pb-2">
+                        Interactive Story Levers
+                    </h4>
+
+                    <!-- Lever 1: Target Revenue -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs">
+                            <label class="text-neutral-400">2036 Target Revenue ($B)</label>
+                            <span id="disp-rev" class="text-amber-400 font-bold font-mono">$1,005 B</span>
+                        </div>
+                        <input id="slider-rev" type="range" min="200" max="1500" step="50" value="1005" oninput="runSimulation()" class="w-full accent-amber-500">
+                        <div class="flex justify-between text-[10px] text-neutral-600 font-mono">
+                            <span>$200B (Niche)</span>
+                            <span>$1,000B (Damodaran)</span>
+                            <span>$1,500B (Titan)</span>
+                        </div>
+                    </div>
+
+                    <!-- Lever 2: Operating Margin -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs">
+                            <label class="text-neutral-400">Target Operating Margin</label>
+                            <span id="disp-margin" class="text-cyan-400 font-bold font-mono">27.5%</span>
+                        </div>
+                        <input id="slider-margin" type="range" min="10" max="40" step="1" value="27.5" oninput="runSimulation()" class="w-full accent-cyan-500">
+                        <div class="flex justify-between text-[10px] text-neutral-600 font-mono">
+                            <span>10% (Commodity)</span>
+                            <span>27.5% (Baseline)</span>
+                            <span>40% (Monopoly)</span>
+                        </div>
+                    </div>
+
+                    <!-- Lever 3: Sales to Capital -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs">
+                            <label class="text-neutral-400">Sales to Invested Capital</label>
+                            <span id="disp-s2c" class="text-emerald-400 font-bold font-mono">3.0x</span>
+                        </div>
+                        <input id="slider-s2c" type="range" min="1.0" max="4.0" step="0.25" value="3.0" oninput="runSimulation()" class="w-full accent-emerald-500">
+                        <div class="flex justify-between text-[10px] text-neutral-600 font-mono">
+                            <span>1.0x (Scarce Compute)</span>
+                            <span>3.0x (Baseline)</span>
+                            <span>4.0x (Surplus)</span>
+                        </div>
+                    </div>
+
+                    <!-- Lever 4: Cost of Capital -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs">
+                            <label class="text-neutral-400">Initial Cost of Capital (WACC)</label>
+                            <span id="disp-wacc" class="text-purple-400 font-bold font-mono">9.74%</span>
+                        </div>
+                        <input id="slider-wacc" type="range" min="6.5" max="15.0" step="0.25" value="9.74" oninput="runSimulation()" class="w-full accent-purple-500">
+                        <div class="flex justify-between text-[10px] text-neutral-600 font-mono">
+                            <span>6.5% (Low Risk)</span>
+                            <span>9.74% (Damodaran)</span>
+                            <span>15.0% (VC Level)</span>
+                        </div>
+                    </div>
+
+                    <!-- Lever 5: Failure Risk -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs">
+                            <label class="text-neutral-400">Probability of Distress Failure</label>
+                            <span id="disp-fail" class="text-rose-400 font-bold font-mono">10.0%</span>
+                        </div>
+                        <input id="slider-fail" type="range" min="0" max="40" step="2" value="10" oninput="runSimulation()" class="w-full accent-rose-500">
+                        <div class="flex justify-between text-[10px] text-neutral-600 font-mono">
+                            <span>0% (Invulnerable)</span>
+                            <span>10% (Baseline)</span>
+                            <span>40% (Distress)</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <button onclick="resetSimulation()" class="w-full py-2 bg-neutral-800 hover:bg-neutral-700 text-white font-mono text-xs rounded-sm transition-colors">
+                            RESET TO DAMODARAN BASELINE
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Simulation Output Cockpit -->
+                <div class="glass-panel p-6 space-y-6 lg:col-span-2">
+                    <h4 class="text-xs font-serif font-bold text-neutral-100 uppercase tracking-wider border-b border-neutral-800 pb-2">
+                        Simulated Valuation Outputs
+                    </h4>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <div class="p-4 bg-[#141416] border border-neutral-800 rounded-sm">
+                            <div class="text-[10px] uppercase text-neutral-500">Implied Equity Value</div>
+                            <div id="sim-equity" class="text-lg font-bold text-emerald-400 font-mono mt-1">$1,450.9B</div>
+                        </div>
+                        <div class="p-4 bg-[#141416] border border-neutral-800 rounded-sm">
+                            <div class="text-[10px] uppercase text-neutral-500">Simulated Fair Value</div>
+                            <div id="sim-share" class="text-2xl font-bold text-amber-400 font-mono mt-1">$439.24</div>
+                        </div>
+                        <div class="p-4 bg-[#141416] border border-neutral-800 rounded-sm">
+                            <div class="text-[10px] uppercase text-neutral-500">Versus $525 IPO Spot</div>
+                            <div id="sim-gap" class="text-lg font-bold text-rose-400 font-mono mt-1">+13.1%</div>
+                        </div>
+                        <div class="p-4 bg-[#141416] border border-neutral-800 rounded-sm">
+                            <div class="text-[10px] uppercase text-neutral-500">Tactical Recommendation</div>
+                            <div id="sim-rec" class="text-xs font-bold text-rose-400 font-mono mt-2">ACCUMULATE AT IPO</div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-[#141416] border border-neutral-800 space-y-3">
+                        <h5 class="text-xs font-serif font-bold text-neutral-200">Crowd Distribution vs Your Simulation</h5>
+                        <div class="h-48">
+                            <canvas id="crowdDistChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Client-side Logic & Chart Scripts -->
+    <script>
+        // Data injected from Python
+        const waccData = [{"region": "GLOBAL", "industry": "Advertising", "firms": 419, "beta": 1.27, "ke": 11.69, "wd": 28.9, "kd_at": 5.23, "wacc": 9.82}, {"region": "GLOBAL", "industry": "Aerospace/Defense", "firms": 319, "beta": 1.23, "ke": 11.46, "wd": 11.5, "kd_at": 5.23, "wacc": 10.75}, {"region": "GLOBAL", "industry": "Air Transport", "firms": 150, "beta": 0.99, "ke": 10.19, "wd": 44.1, "kd_at": 5.06, "wacc": 7.93}, {"region": "GLOBAL", "industry": "Apparel", "firms": 1207, "beta": 0.76, "ke": 8.98, "wd": 15.8, "kd_at": 5.06, "wacc": 8.36}, {"region": "GLOBAL", "industry": "Auto & Truck", "firms": 165, "beta": 1.41, "ke": 12.39, "wd": 32.3, "kd_at": 5.23, "wacc": 10.07}, {"region": "GLOBAL", "industry": "Auto Parts", "firms": 797, "beta": 1.45, "ke": 12.62, "wd": 21.8, "kd_at": 5.06, "wacc": 10.98}, {"region": "GLOBAL", "industry": "Bank (Money Center)", "firms": 604, "beta": 0.7, "ke": 8.64, "wd": 67.9, "kd_at": 4.81, "wacc": 6.04}, {"region": "GLOBAL", "industry": "Banks (Regional)", "firms": 825, "beta": 0.51, "ke": 7.66, "wd": 66.9, "kd_at": 4.81, "wacc": 5.75}, {"region": "GLOBAL", "industry": "Beverage (Alcoholic)", "firms": 217, "beta": 0.79, "ke": 9.14, "wd": 16.9, "kd_at": 5.06, "wacc": 8.45}, {"region": "GLOBAL", "industry": "Beverage (Soft)", "firms": 94, "beta": 0.59, "ke": 8.08, "wd": 15.8, "kd_at": 5.06, "wacc": 7.61}, {"region": "GLOBAL", "industry": "Broadcasting", "firms": 127, "beta": 0.83, "ke": 9.35, "wd": 36.2, "kd_at": 5.06, "wacc": 7.8}, {"region": "GLOBAL", "industry": "Brokerage & Investment Banking", "firms": 623, "beta": 0.98, "ke": 10.16, "wd": 64.2, "kd_at": 5.06, "wacc": 6.89}, {"region": "GLOBAL", "industry": "Building Materials", "firms": 469, "beta": 1.0, "ke": 10.27, "wd": 18.6, "kd_at": 5.06, "wacc": 9.3}, {"region": "GLOBAL", "industry": "Business & Consumer Services", "firms": 994, "beta": 0.99, "ke": 10.2, "wd": 17.1, "kd_at": 5.06, "wacc": 9.32}, {"region": "GLOBAL", "industry": "Cable TV", "firms": 42, "beta": 1.1, "ke": 10.75, "wd": 55.4, "kd_at": 5.06, "wacc": 7.6}, {"region": "GLOBAL", "industry": "Chemical (Basic)", "firms": 909, "beta": 1.26, "ke": 11.6, "wd": 33.5, "kd_at": 5.06, "wacc": 9.4}, {"region": "GLOBAL", "industry": "Chemical (Diversified)", "firms": 63, "beta": 1.17, "ke": 11.14, "wd": 34.4, "kd_at": 4.81, "wacc": 8.96}, {"region": "GLOBAL", "industry": "Chemical (Specialty)", "firms": 952, "beta": 1.15, "ke": 11.05, "wd": 19.0, "kd_at": 5.06, "wacc": 9.91}, {"region": "GLOBAL", "industry": "Coal & Related Energy", "firms": 212, "beta": 1.14, "ke": 11.0, "wd": 16.6, "kd_at": 5.23, "wacc": 10.04}, {"region": "GLOBAL", "industry": "Computer Services", "firms": 1225, "beta": 1.12, "ke": 10.86, "wd": 13.1, "kd_at": 5.06, "wacc": 10.1}, {"region": "GLOBAL", "industry": "Computers/Peripherals", "firms": 343, "beta": 1.49, "ke": 12.82, "wd": 5.8, "kd_at": 5.06, "wacc": 12.36}, {"region": "GLOBAL", "industry": "Construction Supplies", "firms": 804, "beta": 1.03, "ke": 10.42, "wd": 23.2, "kd_at": 5.06, "wacc": 9.18}, {"region": "GLOBAL", "industry": "Diversified", "firms": 329, "beta": 0.8, "ke": 9.17, "wd": 32.7, "kd_at": 5.06, "wacc": 7.83}, {"region": "GLOBAL", "industry": "Drugs (Biotechnology)", "firms": 1193, "beta": 1.23, "ke": 11.46, "wd": 11.0, "kd_at": 5.77, "wacc": 10.84}, {"region": "GLOBAL", "industry": "Drugs (Pharmaceutical)", "firms": 1260, "beta": 1.06, "ke": 10.57, "wd": 13.0, "kd_at": 5.23, "wacc": 9.88}, {"region": "GLOBAL", "industry": "Education", "firms": 281, "beta": 0.81, "ke": 9.24, "wd": 22.2, "kd_at": 5.06, "wacc": 8.31}, {"region": "GLOBAL", "industry": "Electrical Equipment", "firms": 1158, "beta": 1.37, "ke": 12.22, "wd": 12.1, "kd_at": 5.23, "wacc": 11.37}, {"region": "GLOBAL", "industry": "Electronics (Consumer & Office)", "firms": 122, "beta": 1.2, "ke": 11.28, "wd": 14.0, "kd_at": 5.06, "wacc": 10.41}, {"region": "GLOBAL", "industry": "Electronics (General)", "firms": 1481, "beta": 1.6, "ke": 13.41, "wd": 12.4, "kd_at": 5.06, "wacc": 12.37}, {"region": "GLOBAL", "industry": "Engineering/Construction", "firms": 1390, "beta": 1.0, "ke": 10.25, "wd": 43.4, "kd_at": 5.06, "wacc": 8.0}, {"region": "GLOBAL", "industry": "Entertainment", "firms": 733, "beta": 1.01, "ke": 10.31, "wd": 11.3, "kd_at": 5.23, "wacc": 9.73}, {"region": "GLOBAL", "industry": "Environmental & Waste Services", "firms": 397, "beta": 1.1, "ke": 10.78, "wd": 26.3, "kd_at": 5.06, "wacc": 9.28}, {"region": "GLOBAL", "industry": "Farming/Agriculture", "firms": 428, "beta": 0.67, "ke": 8.49, "wd": 37.1, "kd_at": 5.06, "wacc": 7.22}, {"region": "GLOBAL", "industry": "Financial Svcs. (Non-bank & Insurance)", "firms": 1138, "beta": 0.82, "ke": 9.3, "wd": 72.6, "kd_at": 5.06, "wacc": 6.22}, {"region": "GLOBAL", "industry": "Food Processing", "firms": 1450, "beta": 0.67, "ke": 8.51, "wd": 27.1, "kd_at": 5.06, "wacc": 7.58}, {"region": "GLOBAL", "industry": "Food Wholesalers", "firms": 183, "beta": 0.68, "ke": 8.57, "wd": 36.8, "kd_at": 5.06, "wacc": 7.28}, {"region": "GLOBAL", "industry": "Furn/Home Furnishings", "firms": 383, "beta": 0.97, "ke": 10.07, "wd": 20.5, "kd_at": 5.06, "wacc": 9.04}, {"region": "GLOBAL", "industry": "Green & Renewable Energy", "firms": 258, "beta": 0.84, "ke": 9.37, "wd": 41.7, "kd_at": 5.06, "wacc": 7.58}, {"region": "GLOBAL", "industry": "Healthcare Products", "firms": 842, "beta": 1.18, "ke": 11.2, "wd": 12.2, "kd_at": 5.23, "wacc": 10.48}, {"region": "GLOBAL", "industry": "Healthcare Support Services", "firms": 478, "beta": 0.92, "ke": 9.8, "wd": 27.6, "kd_at": 5.06, "wacc": 8.49}, {"region": "GLOBAL", "industry": "Heathcare Information and Technology", "firms": 430, "beta": 1.29, "ke": 11.78, "wd": 12.2, "kd_at": 5.23, "wacc": 10.97}, {"region": "GLOBAL", "industry": "Homebuilding", "firms": 160, "beta": 0.96, "ke": 10.03, "wd": 28.5, "kd_at": 5.06, "wacc": 8.61}, {"region": "GLOBAL", "industry": "Hospitals/Healthcare Facilities", "firms": 249, "beta": 0.76, "ke": 8.97, "wd": 31.8, "kd_at": 5.06, "wacc": 7.73}, {"region": "GLOBAL", "industry": "Hotel/Gaming", "firms": 656, "beta": 0.8, "ke": 9.17, "wd": 28.7, "kd_at": 5.06, "wacc": 7.99}, {"region": "GLOBAL", "industry": "Household Products", "firms": 588, "beta": 0.83, "ke": 9.34, "wd": 13.6, "kd_at": 5.06, "wacc": 8.76}, {"region": "GLOBAL", "industry": "Information Services", "firms": 86, "beta": 1.02, "ke": 10.37, "wd": 24.2, "kd_at": 5.06, "wacc": 9.08}, {"region": "GLOBAL", "industry": "Insurance (General)", "firms": 204, "beta": 0.51, "ke": 7.64, "wd": 23.1, "kd_at": 5.06, "wacc": 7.05}, {"region": "GLOBAL", "industry": "Insurance (Life)", "firms": 143, "beta": 0.8, "ke": 9.2, "wd": 42.9, "kd_at": 5.06, "wacc": 7.42}, {"region": "GLOBAL", "industry": "Insurance (Prop/Cas.)", "firms": 248, "beta": 0.43, "ke": 7.23, "wd": 14.0, "kd_at": 4.81, "wacc": 6.89}, {"region": "GLOBAL", "industry": "Investments & Asset Management", "firms": 1315, "beta": 0.75, "ke": 8.91, "wd": 37.6, "kd_at": 5.06, "wacc": 7.46}, {"region": "GLOBAL", "industry": "Machinery", "firms": 1553, "beta": 1.37, "ke": 12.2, "wd": 11.9, "kd_at": 5.06, "wacc": 11.35}, {"region": "GLOBAL", "industry": "Metals & Mining", "firms": 1874, "beta": 1.24, "ke": 11.49, "wd": 18.7, "kd_at": 5.77, "wacc": 10.42}, {"region": "GLOBAL", "industry": "Office Equipment & Services", "firms": 139, "beta": 0.76, "ke": 8.96, "wd": 22.2, "kd_at": 5.06, "wacc": 8.09}, {"region": "GLOBAL", "industry": "Oil/Gas (Integrated)", "firms": 34, "beta": 0.69, "ke": 8.59, "wd": 17.8, "kd_at": 4.81, "wacc": 7.92}, {"region": "GLOBAL", "industry": "Oil/Gas (Production and Exploration)", "firms": 539, "beta": 0.89, "ke": 9.63, "wd": 26.4, "kd_at": 5.23, "wacc": 8.47}, {"region": "GLOBAL", "industry": "Oil/Gas Distribution", "firms": 186, "beta": 0.65, "ke": 8.4, "wd": 38.1, "kd_at": 5.06, "wacc": 7.13}, {"region": "GLOBAL", "industry": "Oilfield Svcs/Equip.", "firms": 431, "beta": 0.95, "ke": 9.97, "wd": 28.4, "kd_at": 5.06, "wacc": 8.57}, {"region": "GLOBAL", "industry": "Packaging & Container", "firms": 438, "beta": 0.76, "ke": 8.96, "wd": 34.5, "kd_at": 5.06, "wacc": 7.62}, {"region": "GLOBAL", "industry": "Paper/Forest Products", "firms": 271, "beta": 0.89, "ke": 9.65, "wd": 43.8, "kd_at": 5.06, "wacc": 7.64}, {"region": "GLOBAL", "industry": "Power", "firms": 486, "beta": 0.71, "ke": 8.72, "wd": 46.2, "kd_at": 5.06, "wacc": 7.03}, {"region": "GLOBAL", "industry": "Precious Metals", "firms": 777, "beta": 1.4, "ke": 12.35, "wd": 8.3, "kd_at": 5.77, "wacc": 11.8}, {"region": "GLOBAL", "industry": "Publishing & Newspapers", "firms": 307, "beta": 0.82, "ke": 9.27, "wd": 21.9, "kd_at": 5.06, "wacc": 8.35}, {"region": "GLOBAL", "industry": "R.E.I.T.", "firms": 643, "beta": 0.56, "ke": 7.93, "wd": 44.5, "kd_at": 4.81, "wacc": 6.54}, {"region": "GLOBAL", "industry": "Real Estate (Development)", "firms": 895, "beta": 0.93, "ke": 9.85, "wd": 65.7, "kd_at": 5.06, "wacc": 6.7}, {"region": "GLOBAL", "industry": "Real Estate (General/Diversified)", "firms": 312, "beta": 0.93, "ke": 9.86, "wd": 47.0, "kd_at": 5.06, "wacc": 7.6}, {"region": "GLOBAL", "industry": "Real Estate (Operations & Services)", "firms": 752, "beta": 0.78, "ke": 9.08, "wd": 45.2, "kd_at": 5.06, "wacc": 7.26}, {"region": "GLOBAL", "industry": "Recreation", "firms": 332, "beta": 1.01, "ke": 10.27, "wd": 25.0, "kd_at": 5.06, "wacc": 8.97}, {"region": "GLOBAL", "industry": "Reinsurance", "firms": 32, "beta": 0.99, "ke": 10.18, "wd": 16.9, "kd_at": 5.06, "wacc": 9.32}, {"region": "GLOBAL", "industry": "Restaurant/Dining", "firms": 410, "beta": 0.75, "ke": 8.94, "wd": 20.6, "kd_at": 5.06, "wacc": 8.14}, {"region": "GLOBAL", "industry": "Retail (Automotive)", "firms": 212, "beta": 0.83, "ke": 9.36, "wd": 34.5, "kd_at": 5.06, "wacc": 7.88}, {"region": "GLOBAL", "industry": "Retail (Building Supply)", "firms": 121, "beta": 0.94, "ke": 9.95, "wd": 20.6, "kd_at": 5.06, "wacc": 8.94}, {"region": "GLOBAL", "industry": "Retail (Distributors)", "firms": 1079, "beta": 0.81, "ke": 9.25, "wd": 32.6, "kd_at": 5.06, "wacc": 7.89}, {"region": "GLOBAL", "industry": "Retail (General)", "firms": 252, "beta": 0.98, "ke": 10.15, "wd": 11.5, "kd_at": 5.06, "wacc": 9.56}, {"region": "GLOBAL", "industry": "Retail (Grocery and Food)", "firms": 215, "beta": 0.87, "ke": 9.57, "wd": 31.5, "kd_at": 5.06, "wacc": 8.15}, {"region": "GLOBAL", "industry": "Retail (REITs)", "firms": 113, "beta": 0.61, "ke": 8.16, "wd": 41.6, "kd_at": 4.81, "wacc": 6.77}, {"region": "GLOBAL", "industry": "Retail (Special Lines)", "firms": 649, "beta": 0.96, "ke": 10.03, "wd": 15.5, "kd_at": 5.06, "wacc": 9.26}, {"region": "GLOBAL", "industry": "Rubber& Tires", "firms": 91, "beta": 0.94, "ke": 9.93, "wd": 30.6, "kd_at": 5.06, "wacc": 8.44}, {"region": "GLOBAL", "industry": "Semiconductor", "firms": 675, "beta": 1.88, "ke": 14.89, "wd": 4.0, "kd_at": 5.23, "wacc": 14.5}, {"region": "GLOBAL", "industry": "Semiconductor Equip", "firms": 391, "beta": 2.13, "ke": 16.21, "wd": 5.3, "kd_at": 5.23, "wacc": 15.62}, {"region": "GLOBAL", "industry": "Shipbuilding & Marine", "firms": 359, "beta": 0.87, "ke": 9.57, "wd": 29.4, "kd_at": 5.06, "wacc": 8.25}, {"region": "GLOBAL", "industry": "Shoe", "firms": 84, "beta": 0.92, "ke": 9.81, "wd": 12.5, "kd_at": 5.06, "wacc": 9.21}, {"region": "GLOBAL", "industry": "Software (Entertainment)", "firms": 298, "beta": 1.25, "ke": 11.55, "wd": 3.0, "kd_at": 5.23, "wacc": 11.35}, {"region": "GLOBAL", "industry": "Software (Internet)", "firms": 150, "beta": 1.39, "ke": 12.32, "wd": 9.1, "kd_at": 5.23, "wacc": 11.67}, {"region": "GLOBAL", "industry": "Software (System & Application)", "firms": 1532, "beta": 1.35, "ke": 12.12, "wd": 5.5, "kd_at": 5.23, "wacc": 11.74}, {"region": "GLOBAL", "industry": "Steel", "firms": 719, "beta": 1.13, "ke": 10.92, "wd": 32.1, "kd_at": 5.06, "wacc": 9.04}, {"region": "GLOBAL", "industry": "Telecom (Wireless)", "firms": 101, "beta": 0.78, "ke": 9.09, "wd": 33.3, "kd_at": 4.81, "wacc": 7.66}, {"region": "GLOBAL", "industry": "Telecom. Equipment", "firms": 437, "beta": 1.33, "ke": 11.98, "wd": 8.8, "kd_at": 5.23, "wacc": 11.39}, {"region": "GLOBAL", "industry": "Telecom. Services", "firms": 283, "beta": 0.73, "ke": 8.8, "wd": 42.3, "kd_at": 5.06, "wacc": 7.22}, {"region": "GLOBAL", "industry": "Tobacco", "firms": 48, "beta": 0.43, "ke": 7.2, "wd": 19.1, "kd_at": 5.06, "wacc": 6.79}, {"region": "GLOBAL", "industry": "Total Market", "firms": 48156, "beta": 1.04, "ke": 10.45, "wd": 34.0, "kd_at": 5.06, "wacc": 8.62}, {"region": "GLOBAL", "industry": "Total Market (without financials)", "firms": 43056, "beta": 1.08, "ke": 10.65, "wd": 20.6, "kd_at": 5.06, "wacc": 9.5}, {"region": "GLOBAL", "industry": "Transportation", "firms": 451, "beta": 0.96, "ke": 10.05, "wd": 34.8, "kd_at": 5.06, "wacc": 8.31}, {"region": "GLOBAL", "industry": "Transportation (Railroads)", "firms": 54, "beta": 0.72, "ke": 8.76, "wd": 32.2, "kd_at": 4.81, "wacc": 7.49}, {"region": "GLOBAL", "industry": "Trucking", "firms": 130, "beta": 0.85, "ke": 9.44, "wd": 28.5, "kd_at": 5.06, "wacc": 8.19}, {"region": "GLOBAL", "industry": "Utility (General)", "firms": 52, "beta": 0.5, "ke": 7.61, "wd": 43.3, "kd_at": 4.81, "wacc": 6.4}, {"region": "GLOBAL", "industry": "Utility (Water)", "firms": 106, "beta": 0.7, "ke": 8.67, "wd": 47.7, "kd_at": 5.06, "wacc": 6.95}, {"region": "US", "industry": "Advertising", "firms": 52, "beta": 1.21, "ke": 9.78, "wd": 28.7, "kd_at": 4.7, "wacc": 8.33}, {"region": "US", "industry": "Aerospace/Defense", "firms": 79, "beta": 0.95, "ke": 8.72, "wd": 13.5, "kd_at": 4.7, "wacc": 8.18}, {"region": "US", "industry": "Air Transport", "firms": 23, "beta": 1.19, "ke": 9.68, "wd": 47.7, "kd_at": 4.7, "wacc": 7.31}, {"region": "US", "industry": "Apparel", "firms": 35, "beta": 0.94, "ke": 8.68, "wd": 23.8, "kd_at": 4.7, "wacc": 7.73}, {"region": "US", "industry": "Auto & Truck", "firms": 33, "beta": 1.46, "ke": 10.77, "wd": 16.5, "kd_at": 4.7, "wacc": 9.77}, {"region": "US", "industry": "Auto Parts", "firms": 35, "beta": 1.34, "ke": 10.3, "wd": 29.3, "kd_at": 4.7, "wacc": 8.66}, {"region": "US", "industry": "Bank (Money Center)", "firms": 15, "beta": 0.76, "ke": 7.98, "wd": 62.1, "kd_at": 4.28, "wacc": 5.68}, {"region": "US", "industry": "Banks (Regional)", "firms": 568, "beta": 0.4, "ke": 6.53, "wd": 34.3, "kd_at": 4.28, "wacc": 5.76}, {"region": "US", "industry": "Beverage (Alcoholic)", "firms": 14, "beta": 0.81, "ke": 8.19, "wd": 30.2, "kd_at": 4.7, "wacc": 7.14}, {"region": "US", "industry": "Beverage (Soft)", "firms": 27, "beta": 0.64, "ke": 7.51, "wd": 17.1, "kd_at": 4.7, "wacc": 7.03}, {"region": "US", "industry": "Broadcasting", "firms": 24, "beta": 0.47, "ke": 6.82, "wd": 46.2, "kd_at": 4.7, "wacc": 5.84}, {"region": "US", "industry": "Brokerage & Investment Banking", "firms": 32, "beta": 1.17, "ke": 9.63, "wd": 57.6, "kd_at": 4.54, "wacc": 6.7}, {"region": "US", "industry": "Building Materials", "firms": 41, "beta": 1.11, "ke": 9.39, "wd": 20.6, "kd_at": 4.54, "wacc": 8.39}, {"region": "US", "industry": "Business & Consumer Services", "firms": 155, "beta": 0.89, "ke": 8.49, "wd": 16.5, "kd_at": 4.54, "wacc": 7.84}, {"region": "US", "industry": "Cable TV", "firms": 9, "beta": 0.74, "ke": 7.9, "wd": 59.5, "kd_at": 4.54, "wacc": 5.9}, {"region": "US", "industry": "Chemical (Basic)", "firms": 29, "beta": 1.01, "ke": 8.99, "wd": 49.8, "kd_at": 4.7, "wacc": 6.85}, {"region": "US", "industry": "Chemical (Diversified)", "firms": 4, "beta": 0.85, "ke": 8.34, "wd": 63.8, "kd_at": 4.54, "wacc": 5.91}, {"region": "US", "industry": "Chemical (Specialty)", "firms": 59, "beta": 0.97, "ke": 8.82, "wd": 23.0, "kd_at": 4.54, "wacc": 7.83}, {"region": "US", "industry": "Coal & Related Energy", "firms": 16, "beta": 1.07, "ke": 9.22, "wd": 6.7, "kd_at": 4.7, "wacc": 8.92}, {"region": "US", "industry": "Computer Services", "firms": 64, "beta": 1.09, "ke": 9.29, "wd": 20.1, "kd_at": 4.7, "wacc": 8.37}, {"region": "US", "industry": "Computers/Peripherals", "firms": 36, "beta": 1.35, "ke": 10.34, "wd": 4.4, "kd_at": 4.7, "wacc": 10.09}, {"region": "US", "industry": "Construction Supplies", "firms": 40, "beta": 1.15, "ke": 9.54, "wd": 15.0, "kd_at": 4.54, "wacc": 8.79}, {"region": "US", "industry": "Diversified", "firms": 20, "beta": 0.88, "ke": 8.46, "wd": 13.5, "kd_at": 4.28, "wacc": 7.9}, {"region": "US", "industry": "Drugs (Biotechnology)", "firms": 496, "beta": 1.14, "ke": 9.48, "wd": 11.5, "kd_at": 5.25, "wacc": 8.99}, {"region": "US", "industry": "Drugs (Pharmaceutical)", "firms": 228, "beta": 0.98, "ke": 8.87, "wd": 12.7, "kd_at": 5.25, "wacc": 8.41}, {"region": "US", "industry": "Education", "firms": 32, "beta": 0.78, "ke": 8.06, "wd": 19.6, "kd_at": 4.7, "wacc": 7.41}, {"region": "US", "industry": "Electrical Equipment", "firms": 112, "beta": 1.25, "ke": 9.94, "wd": 10.7, "kd_at": 5.25, "wacc": 9.44}, {"region": "US", "industry": "Electronics (Consumer & Office)", "firms": 8, "beta": 0.87, "ke": 8.4, "wd": 5.5, "kd_at": 5.25, "wacc": 8.23}, {"region": "US", "industry": "Electronics (General)", "firms": 114, "beta": 0.97, "ke": 8.83, "wd": 9.9, "kd_at": 4.7, "wacc": 8.42}, {"region": "US", "industry": "Engineering/Construction", "firms": 48, "beta": 1.21, "ke": 9.78, "wd": 12.3, "kd_at": 4.7, "wacc": 9.16}, {"region": "US", "industry": "Entertainment", "firms": 92, "beta": 0.83, "ke": 8.24, "wd": 13.7, "kd_at": 4.7, "wacc": 7.76}, {"region": "US", "industry": "Environmental & Waste Services", "firms": 53, "beta": 0.95, "ke": 8.72, "wd": 17.7, "kd_at": 4.7, "wacc": 8.01}, {"region": "US", "industry": "Farming/Agriculture", "firms": 35, "beta": 1.13, "ke": 9.46, "wd": 34.1, "kd_at": 4.7, "wacc": 7.83}, {"region": "US", "industry": "Financial Svcs. (Non-bank & Insurance)", "firms": 176, "beta": 0.97, "ke": 8.82, "wd": 73.1, "kd_at": 4.54, "wacc": 5.69}, {"region": "US", "industry": "Food Processing", "firms": 78, "beta": 0.61, "ke": 7.37, "wd": 30.4, "kd_at": 4.54, "wacc": 6.51}, {"region": "US", "industry": "Food Wholesalers", "firms": 13, "beta": 0.87, "ke": 8.41, "wd": 32.0, "kd_at": 4.54, "wacc": 7.17}, {"region": "US", "industry": "Furn/Home Furnishings", "firms": 27, "beta": 0.82, "ke": 8.23, "wd": 29.7, "kd_at": 4.7, "wacc": 7.18}, {"region": "US", "industry": "Green & Renewable Energy", "firms": 15, "beta": 0.86, "ke": 8.37, "wd": 53.1, "kd_at": 5.25, "wacc": 6.71}, {"region": "US", "industry": "Healthcare Products", "firms": 204, "beta": 0.91, "ke": 8.57, "wd": 11.3, "kd_at": 4.7, "wacc": 8.14}, {"region": "US", "industry": "Healthcare Support Services", "firms": 104, "beta": 0.87, "ke": 8.43, "wd": 26.2, "kd_at": 4.7, "wacc": 7.45}, {"region": "US", "industry": "Heathcare Information and Technology", "firms": 115, "beta": 1.11, "ke": 9.37, "wd": 13.6, "kd_at": 4.7, "wacc": 8.74}, {"region": "US", "industry": "Homebuilding", "firms": 30, "beta": 0.91, "ke": 8.58, "wd": 17.6, "kd_at": 4.54, "wacc": 7.87}, {"region": "US", "industry": "Hospitals/Healthcare Facilities", "firms": 31, "beta": 0.8, "ke": 8.14, "wd": 37.5, "kd_at": 4.7, "wacc": 6.85}, {"region": "US", "industry": "Hotel/Gaming", "firms": 63, "beta": 1.08, "ke": 9.26, "wd": 28.4, "kd_at": 4.54, "wacc": 7.92}, {"region": "US", "industry": "Household Products", "firms": 110, "beta": 0.82, "ke": 8.2, "wd": 15.4, "kd_at": 4.7, "wacc": 7.66}, {"region": "US", "industry": "Information Services", "firms": 15, "beta": 0.92, "ke": 8.62, "wd": 24.9, "kd_at": 4.54, "wacc": 7.6}, {"region": "US", "industry": "Insurance (General)", "firms": 21, "beta": 0.67, "ke": 7.63, "wd": 20.4, "kd_at": 4.7, "wacc": 7.03}, {"region": "US", "industry": "Insurance (Life)", "firms": 20, "beta": 0.64, "ke": 7.52, "wd": 40.4, "kd_at": 4.54, "wacc": 6.31}, {"region": "US", "industry": "Insurance (Prop/Cas.)", "firms": 57, "beta": 0.48, "ke": 6.88, "wd": 12.9, "kd_at": 4.28, "wacc": 6.54}, {"region": "US", "industry": "Investments & Asset Management", "firms": 283, "beta": 0.66, "ke": 7.58, "wd": 24.6, "kd_at": 4.54, "wacc": 6.83}, {"region": "US", "industry": "Machinery", "firms": 105, "beta": 0.96, "ke": 8.79, "wd": 12.8, "kd_at": 4.7, "wacc": 8.27}, {"region": "US", "industry": "Metals & Mining", "firms": 73, "beta": 1.04, "ke": 9.11, "wd": 9.9, "kd_at": 5.25, "wacc": 8.73}, {"region": "US", "industry": "Office Equipment & Services", "firms": 14, "beta": 1.33, "ke": 10.28, "wd": 32.5, "kd_at": 4.54, "wacc": 8.41}, {"region": "US", "industry": "Oil/Gas (Integrated)", "firms": 4, "beta": 0.3, "ke": 6.14, "wd": 12.2, "kd_at": 4.28, "wacc": 5.91}, {"region": "US", "industry": "Oil/Gas (Production and Exploration)", "firms": 142, "beta": 0.72, "ke": 7.83, "wd": 27.3, "kd_at": 4.54, "wacc": 6.93}, {"region": "US", "industry": "Oil/Gas Distribution", "firms": 23, "beta": 0.67, "ke": 7.62, "wd": 36.9, "kd_at": 4.54, "wacc": 6.48}, {"region": "US", "industry": "Oilfield Svcs/Equip.", "firms": 97, "beta": 0.95, "ke": 8.74, "wd": 27.2, "kd_at": 4.7, "wacc": 7.65}, {"region": "US", "industry": "Packaging & Container", "firms": 19, "beta": 1.02, "ke": 9.03, "wd": 35.5, "kd_at": 4.28, "wacc": 7.34}, {"region": "US", "industry": "Paper/Forest Products", "firms": 6, "beta": 0.96, "ke": 8.77, "wd": 30.4, "kd_at": 4.7, "wacc": 7.53}, {"region": "US", "industry": "Power", "firms": 46, "beta": 0.48, "ke": 6.87, "wd": 42.6, "kd_at": 4.28, "wacc": 5.77}, {"region": "US", "industry": "Precious Metals", "firms": 56, "beta": 0.84, "ke": 8.29, "wd": 6.8, "kd_at": 5.25, "wacc": 8.08}, {"region": "US", "industry": "Publishing & Newspapers", "firms": 19, "beta": 0.56, "ke": 7.19, "wd": 19.3, "kd_at": 4.54, "wacc": 6.68}, {"region": "US", "industry": "R.E.I.T.", "firms": 190, "beta": 0.64, "ke": 7.51, "wd": 45.8, "kd_at": 4.28, "wacc": 6.03}, {"region": "US", "industry": "Real Estate (Development)", "firms": 14, "beta": 0.84, "ke": 8.31, "wd": 50.5, "kd_at": 4.7, "wacc": 6.49}, {"region": "US", "industry": "Real Estate (General/Diversified)", "firms": 12, "beta": 0.81, "ke": 8.18, "wd": 34.9, "kd_at": 4.54, "wacc": 6.91}, {"region": "US", "industry": "Real Estate (Operations & Services)", "firms": 54, "beta": 0.97, "ke": 8.8, "wd": 19.8, "kd_at": 4.7, "wacc": 7.99}, {"region": "US", "industry": "Recreation", "firms": 49, "beta": 1.02, "ke": 9.03, "wd": 38.6, "kd_at": 4.7, "wacc": 7.36}, {"region": "US", "industry": "Reinsurance", "firms": 1, "beta": 0.58, "ke": 7.27, "wd": 30.3, "kd_at": 4.28, "wacc": 6.36}, {"region": "US", "industry": "Restaurant/Dining", "firms": 64, "beta": 0.92, "ke": 8.64, "wd": 21.4, "kd_at": 4.54, "wacc": 7.76}, {"region": "US", "industry": "Retail (Automotive)", "firms": 34, "beta": 0.94, "ke": 8.68, "wd": 31.2, "kd_at": 4.54, "wacc": 7.39}, {"region": "US", "industry": "Retail (Building Supply)", "firms": 14, "beta": 1.54, "ke": 11.08, "wd": 18.9, "kd_at": 4.7, "wacc": 9.88}, {"region": "US", "industry": "Retail (Distributors)", "firms": 62, "beta": 0.95, "ke": 8.73, "wd": 22.0, "kd_at": 4.54, "wacc": 7.81}, {"region": "US", "industry": "Retail (General)", "firms": 23, "beta": 0.81, "ke": 8.16, "wd": 7.4, "kd_at": 4.54, "wacc": 7.89}, {"region": "US", "industry": "Retail (Grocery and Food)", "firms": 15, "beta": 1.12, "ke": 9.41, "wd": 34.2, "kd_at": 4.7, "wacc": 7.8}, {"region": "US", "industry": "Retail (REITs)", "firms": 26, "beta": 0.62, "ke": 7.42, "wd": 36.1, "kd_at": 4.28, "wacc": 6.29}, {"region": "US", "industry": "Retail (Special Lines)", "firms": 94, "beta": 1.09, "ke": 9.3, "wd": 16.5, "kd_at": 4.7, "wacc": 8.54}, {"region": "US", "industry": "Rubber& Tires", "firms": 3, "beta": 0.53, "ke": 7.06, "wd": 78.2, "kd_at": 4.7, "wacc": 5.22}, {"region": "US", "industry": "Semiconductor", "firms": 66, "beta": 1.52, "ke": 11.01, "wd": 2.5, "kd_at": 4.7, "wacc": 10.85}, {"region": "US", "industry": "Semiconductor Equip", "firms": 31, "beta": 1.4, "ke": 10.53, "wd": 4.6, "kd_at": 4.7, "wacc": 10.26}, {"region": "US", "industry": "Shipbuilding & Marine", "firms": 8, "beta": 0.75, "ke": 7.95, "wd": 18.4, "kd_at": 4.7, "wacc": 7.35}, {"region": "US", "industry": "Shoe", "firms": 11, "beta": 1.02, "ke": 9.01, "wd": 10.7, "kd_at": 4.7, "wacc": 8.55}, {"region": "US", "industry": "Software (Entertainment)", "firms": 77, "beta": 1.03, "ke": 9.05, "wd": 2.0, "kd_at": 4.7, "wacc": 8.97}, {"region": "US", "industry": "Software (Internet)", "firms": 29, "beta": 1.69, "ke": 11.69, "wd": 11.0, "kd_at": 4.7, "wacc": 10.93}, {"region": "US", "industry": "Software (System & Application)", "firms": 309, "beta": 1.28, "ke": 10.05, "wd": 5.3, "kd_at": 4.7, "wacc": 9.76}, {"region": "US", "industry": "Steel", "firms": 19, "beta": 1.06, "ke": 9.19, "wd": 19.0, "kd_at": 4.54, "wacc": 8.31}, {"region": "US", "industry": "Telecom (Wireless)", "firms": 12, "beta": 0.54, "ke": 7.09, "wd": 34.2, "kd_at": 4.54, "wacc": 6.22}, {"region": "US", "industry": "Telecom. Equipment", "firms": 57, "beta": 0.92, "ke": 8.63, "wd": 8.4, "kd_at": 4.7, "wacc": 8.3}, {"region": "US", "industry": "Telecom. Services", "firms": 39, "beta": 0.63, "ke": 7.45, "wd": 49.0, "kd_at": 4.7, "wacc": 6.11}, {"region": "US", "industry": "Tobacco", "firms": 10, "beta": 0.79, "ke": 8.12, "wd": 18.7, "kd_at": 5.25, "wacc": 7.58}, {"region": "US", "industry": "Total Market", "firms": 5994, "beta": 0.91, "ke": 8.59, "wd": 26.0, "kd_at": 4.7, "wacc": 7.58}, {"region": "US", "industry": "Total Market (without financials)", "firms": 4822, "beta": 0.99, "ke": 8.91, "wd": 14.7, "kd_at": 4.7, "wacc": 8.29}, {"region": "US", "industry": "Transportation", "firms": 19, "beta": 0.86, "ke": 8.38, "wd": 26.7, "kd_at": 4.54, "wacc": 7.35}, {"region": "US", "industry": "Transportation (Railroads)", "firms": 4, "beta": 0.98, "ke": 8.84, "wd": 21.7, "kd_at": 4.28, "wacc": 7.85}, {"region": "US", "industry": "Trucking", "firms": 26, "beta": 1.01, "ke": 8.99, "wd": 20.1, "kd_at": 4.54, "wacc": 8.09}, {"region": "US", "industry": "Utility (General)", "firms": 14, "beta": 0.24, "ke": 5.9, "wd": 44.9, "kd_at": 4.28, "wacc": 5.17}, {"region": "US", "industry": "Utility (Water)", "firms": 14, "beta": 0.41, "ke": 6.59, "wd": 38.4, "kd_at": 4.28, "wacc": 5.7}];
+        const histData = [{"year": 1928, "sp500": 43.81, "small_cap": 62.15, "tbill": 3.08, "tbond": 0.84, "corp": 3.22, "real_estate": 1.49, "gold": 0.1, "sp500_cum": 143.81, "small_cap_cum": 162.15, "tbill_cum": 103.08}, {"year": 1929, "sp500": -8.3, "small_cap": -46.08, "tbill": 3.16, "tbond": 4.2, "corp": 3.02, "real_estate": -2.06, "gold": -0.15, "sp500_cum": 131.88, "small_cap_cum": 87.43, "tbill_cum": 106.34}, {"year": 1930, "sp500": -25.12, "small_cap": -48.35, "tbill": 4.55, "tbond": 4.54, "corp": 0.54, "real_estate": -4.3, "gold": 0.1, "sp500_cum": 98.75, "small_cap_cum": 45.16, "tbill_cum": 111.18}, {"year": 1931, "sp500": -43.84, "small_cap": -43.62, "tbill": 2.31, "tbond": -2.56, "corp": -15.68, "real_estate": -8.15, "gold": -17.38, "sp500_cum": 55.46, "small_cap_cum": 25.46, "tbill_cum": 113.74}, {"year": 1932, "sp500": -8.64, "small_cap": 28.65, "tbill": 1.07, "tbond": 8.79, "corp": 23.59, "real_estate": -10.47, "gold": 21.28, "sp500_cum": 50.66, "small_cap_cum": 32.75, "tbill_cum": 114.96}, {"year": 1933, "sp500": 49.98, "small_cap": 146.6, "tbill": 0.96, "tbond": 1.86, "corp": 12.97, "real_estate": -3.81, "gold": 27.26, "sp500_cum": 75.99, "small_cap_cum": 80.77, "tbill_cum": 116.06}, {"year": 1934, "sp500": -1.19, "small_cap": 23.07, "tbill": 0.28, "tbond": 7.96, "corp": 18.82, "real_estate": 2.91, "gold": 31.75, "sp500_cum": 75.09, "small_cap_cum": 99.41, "tbill_cum": 116.39}, {"year": 1935, "sp500": 46.74, "small_cap": 54.9, "tbill": 0.17, "tbond": 4.47, "corp": 13.31, "real_estate": 9.77, "gold": 0.43, "sp500_cum": 110.18, "small_cap_cum": 153.98, "tbill_cum": 116.58}, {"year": 1936, "sp500": 31.94, "small_cap": 96.41, "tbill": 0.17, "tbond": 5.02, "corp": 11.38, "real_estate": 3.22, "gold": 0.09, "sp500_cum": 145.38, "small_cap_cum": 302.44, "tbill_cum": 116.78}, {"year": 1937, "sp500": -35.34, "small_cap": -53.94, "tbill": 0.28, "tbond": 1.38, "corp": -4.42, "real_estate": 2.56, "gold": -0.23, "sp500_cum": 94.0, "small_cap_cum": 139.3, "tbill_cum": 117.11}, {"year": 1938, "sp500": 29.28, "small_cap": 5.16, "tbill": 0.07, "tbond": 4.21, "corp": 9.24, "real_estate": -0.87, "gold": 0.17, "sp500_cum": 121.53, "small_cap_cum": 146.49, "tbill_cum": 117.18}, {"year": 1939, "sp500": -1.1, "small_cap": -4.86, "tbill": 0.05, "tbond": 4.41, "corp": 7.98, "real_estate": -1.3, "gold": -1.23, "sp500_cum": 120.2, "small_cap_cum": 139.37, "tbill_cum": 117.24}, {"year": 1940, "sp500": -10.67, "small_cap": -32.88, "tbill": 0.04, "tbond": 5.4, "corp": 8.65, "real_estate": 3.31, "gold": -1.66, "sp500_cum": 107.37, "small_cap_cum": 93.55, "tbill_cum": 117.28}, {"year": 1941, "sp500": -12.77, "small_cap": -6.75, "tbill": 0.13, "tbond": -2.02, "corp": 5.01, "real_estate": -8.38, "gold": 0.0, "sp500_cum": 93.66, "small_cap_cum": 87.23, "tbill_cum": 117.43}, {"year": 1942, "sp500": 19.17, "small_cap": 63.01, "tbill": 0.34, "tbond": 2.29, "corp": 5.18, "real_estate": 3.33, "gold": 0.0, "sp500_cum": 111.61, "small_cap_cum": 142.2, "tbill_cum": 117.83}, {"year": 1943, "sp500": 25.06, "small_cap": 143.02, "tbill": 0.38, "tbond": 2.49, "corp": 8.04, "real_estate": 11.45, "gold": 0.0, "sp500_cum": 139.59, "small_cap_cum": 345.56, "tbill_cum": 118.28}, {"year": 1944, "sp500": 19.03, "small_cap": 71.15, "tbill": 0.38, "tbond": 2.58, "corp": 6.57, "real_estate": 16.58, "gold": 0.0, "sp500_cum": 166.15, "small_cap_cum": 591.43, "tbill_cum": 118.73}, {"year": 1945, "sp500": 35.82, "small_cap": 94.41, "tbill": 0.38, "tbond": 3.8, "corp": 6.8, "real_estate": 11.78, "gold": 2.54, "sp500_cum": 225.67, "small_cap_cum": 1149.8, "tbill_cum": 119.18}, {"year": 1946, "sp500": -8.43, "small_cap": -13.73, "tbill": 0.38, "tbond": 3.13, "corp": 2.51, "real_estate": 24.1, "gold": 0.0, "sp500_cum": 206.65, "small_cap_cum": 991.93, "tbill_cum": 119.63}, {"year": 1947, "sp500": 5.2, "small_cap": -1.74, "tbill": 0.6, "tbond": 0.92, "corp": 0.26, "real_estate": 21.26, "gold": 0.0, "sp500_cum": 217.39, "small_cap_cum": 974.67, "tbill_cum": 120.35}, {"year": 1948, "sp500": 5.7, "small_cap": -0.01, "tbill": 1.04, "tbond": 1.95, "corp": 3.44, "real_estate": 2.06, "gold": 0.0, "sp500_cum": 229.79, "small_cap_cum": 974.58, "tbill_cum": 121.61}, {"year": 1949, "sp500": 18.3, "small_cap": 27.6, "tbill": 1.11, "tbond": 4.66, "corp": 5.38, "real_estate": 0.09, "gold": -8.7, "sp500_cum": 271.85, "small_cap_cum": 1243.56, "tbill_cum": 122.96}, {"year": 1950, "sp500": 30.81, "small_cap": 52.81, "tbill": 1.2, "tbond": 0.43, "corp": 4.24, "real_estate": 3.64, "gold": 9.56, "sp500_cum": 355.6, "small_cap_cum": 1900.28, "tbill_cum": 124.44}, {"year": 1951, "sp500": 23.68, "small_cap": 3.87, "tbill": 1.52, "tbond": -0.3, "corp": -0.19, "real_estate": 6.05, "gold": 0.0, "sp500_cum": 439.8, "small_cap_cum": 1973.82, "tbill_cum": 126.33}, {"year": 1952, "sp500": 18.15, "small_cap": 1.02, "tbill": 1.72, "tbond": 2.27, "corp": 4.44, "real_estate": 4.41, "gold": -0.35, "sp500_cum": 519.62, "small_cap_cum": 1993.96, "tbill_cum": 128.51}, {"year": 1953, "sp500": -1.21, "small_cap": -5.97, "tbill": 1.89, "tbond": 4.14, "corp": 1.62, "real_estate": 11.52, "gold": 0.69, "sp500_cum": 513.35, "small_cap_cum": 1874.92, "tbill_cum": 130.94}, {"year": 1954, "sp500": 52.56, "small_cap": 64.97, "tbill": 0.94, "tbond": 3.29, "corp": 6.16, "real_estate": 0.92, "gold": 0.57, "sp500_cum": 783.18, "small_cap_cum": 3093.05, "tbill_cum": 132.17}, {"year": 1955, "sp500": 32.6, "small_cap": 26.72, "tbill": 1.72, "tbond": -1.34, "corp": 2.04, "real_estate": 0.0, "gold": -0.03, "sp500_cum": 1038.47, "small_cap_cum": 3919.51, "tbill_cum": 134.45}, {"year": 1956, "sp500": 7.44, "small_cap": -0.89, "tbill": 2.62, "tbond": -2.26, "corp": -2.35, "real_estate": 0.91, "gold": -0.11, "sp500_cum": 1115.73, "small_cap_cum": 3884.63, "tbill_cum": 137.97}, {"year": 1957, "sp500": -10.46, "small_cap": -15.19, "tbill": 3.22, "tbond": 6.8, "corp": -0.72, "real_estate": 2.72, "gold": -0.11, "sp500_cum": 999.05, "small_cap_cum": 3294.55, "tbill_cum": 142.42}, {"year": 1958, "sp500": 43.72, "small_cap": 68.8, "tbill": 1.77, "tbond": -2.1, "corp": 6.43, "real_estate": 0.66, "gold": 0.43, "sp500_cum": 1435.84, "small_cap_cum": 5561.21, "tbill_cum": 144.93}, {"year": 1959, "sp500": 12.06, "small_cap": 12.7, "tbill": 3.39, "tbond": -2.65, "corp": 1.57, "real_estate": 0.11, "gold": 0.0, "sp500_cum": 1608.95, "small_cap_cum": 6267.48, "tbill_cum": 149.84}, {"year": 1960, "sp500": 0.34, "small_cap": -3.57, "tbill": 2.87, "tbond": 11.64, "corp": 6.66, "real_estate": 0.77, "gold": 0.48, "sp500_cum": 1614.37, "small_cap_cum": 6043.73, "tbill_cum": 154.15}, {"year": 1961, "sp500": 26.64, "small_cap": 29.45, "tbill": 2.35, "tbond": 2.06, "corp": 5.1, "real_estate": 0.98, "gold": -0.06, "sp500_cum": 2044.4, "small_cap_cum": 7823.61, "tbill_cum": 157.77}, {"year": 1962, "sp500": -8.81, "small_cap": -9.78, "tbill": 2.77, "tbond": 5.69, "corp": 6.5, "real_estate": 0.32, "gold": -0.06, "sp500_cum": 1864.26, "small_cap_cum": 7058.46, "tbill_cum": 162.15}, {"year": 1963, "sp500": 22.61, "small_cap": 19.65, "tbill": 3.16, "tbond": 1.68, "corp": 5.46, "real_estate": 2.14, "gold": -0.4, "sp500_cum": 2285.8, "small_cap_cum": 8445.45, "tbill_cum": 167.27}, {"year": 1964, "sp500": 16.42, "small_cap": 23.25, "tbill": 3.55, "tbond": 3.73, "corp": 5.16, "real_estate": 1.26, "gold": 0.03, "sp500_cum": 2661.02, "small_cap_cum": 10409.02, "tbill_cum": 173.2}, {"year": 1965, "sp500": 12.4, "small_cap": 45.24, "tbill": 3.95, "tbond": 0.72, "corp": 3.19, "real_estate": 1.66, "gold": 0.06, "sp500_cum": 2990.97, "small_cap_cum": 15118.06, "tbill_cum": 180.04}, {"year": 1966, "sp500": -9.97, "small_cap": -9.47, "tbill": 4.86, "tbond": 2.91, "corp": -3.45, "real_estate": 1.22, "gold": 0.03, "sp500_cum": 2692.74, "small_cap_cum": 13686.38, "tbill_cum": 188.78}, {"year": 1967, "sp500": 23.8, "small_cap": 115.87, "tbill": 4.29, "tbond": -1.58, "corp": 0.9, "real_estate": 2.32, "gold": -0.51, "sp500_cum": 3333.69, "small_cap_cum": 29544.78, "tbill_cum": 196.88}, {"year": 1968, "sp500": 10.81, "small_cap": 60.69, "tbill": 5.34, "tbond": 3.27, "corp": 4.85, "real_estate": 4.13, "gold": 12.47, "sp500_cum": 3694.23, "small_cap_cum": 47475.51, "tbill_cum": 207.39}, {"year": 1969, "sp500": -8.24, "small_cap": -32.95, "tbill": 6.67, "tbond": -5.01, "corp": -2.03, "real_estate": 6.99, "gold": 5.01, "sp500_cum": 3389.77, "small_cap_cum": 31832.33, "tbill_cum": 221.22}, {"year": 1970, "sp500": 3.56, "small_cap": -18.78, "tbill": 6.39, "tbond": 16.75, "corp": 5.65, "real_estate": 8.22, "gold": -9.45, "sp500_cum": 3510.49, "small_cap_cum": 25854.22, "tbill_cum": 235.36}, {"year": 1971, "sp500": 14.22, "small_cap": 15.96, "tbill": 4.33, "tbond": 9.79, "corp": 14.0, "real_estate": 4.24, "gold": 16.69, "sp500_cum": 4009.72, "small_cap_cum": 29980.55, "tbill_cum": 245.56}, {"year": 1972, "sp500": 18.76, "small_cap": 0.16, "tbill": 4.06, "tbond": 2.82, "corp": 11.41, "real_estate": 2.98, "gold": 48.78, "sp500_cum": 4761.76, "small_cap_cum": 30028.52, "tbill_cum": 255.53}, {"year": 1973, "sp500": -14.31, "small_cap": -38.8, "tbill": 7.04, "tbond": 3.66, "corp": 4.32, "real_estate": 3.42, "gold": 72.96, "sp500_cum": 4080.44, "small_cap_cum": 18377.45, "tbill_cum": 273.51}, {"year": 1974, "sp500": -25.9, "small_cap": -26.9, "tbill": 7.85, "tbond": 1.99, "corp": -4.38, "real_estate": 10.07, "gold": 66.15, "sp500_cum": 3023.54, "small_cap_cum": 13433.92, "tbill_cum": 294.97}, {"year": 1975, "sp500": 37.0, "small_cap": 59.68, "tbill": 5.79, "tbond": 3.61, "corp": 11.05, "real_estate": 6.77, "gold": -24.8, "sp500_cum": 4142.1, "small_cap_cum": 21451.28, "tbill_cum": 312.04}, {"year": 1976, "sp500": 23.83, "small_cap": 48.62, "tbill": 4.98, "tbond": 15.98, "corp": 19.75, "real_estate": 8.18, "gold": -4.1, "sp500_cum": 5129.2, "small_cap_cum": 31880.9, "tbill_cum": 327.57}, {"year": 1977, "sp500": -6.98, "small_cap": 30.29, "tbill": 5.26, "tbond": 1.29, "corp": 9.95, "real_estate": 14.65, "gold": 22.64, "sp500_cum": 4771.2, "small_cap_cum": 41537.62, "tbill_cum": 344.8}, {"year": 1978, "sp500": 6.51, "small_cap": 28.89, "tbill": 7.18, "tbond": -0.78, "corp": 3.14, "real_estate": 15.72, "gold": 37.01, "sp500_cum": 5081.77, "small_cap_cum": 53537.84, "tbill_cum": 369.55}, {"year": 1979, "sp500": 18.52, "small_cap": 41.69, "tbill": 10.05, "tbond": 0.67, "corp": -2.01, "real_estate": 13.74, "gold": 126.55, "sp500_cum": 6022.89, "small_cap_cum": 75857.76, "tbill_cum": 406.71}, {"year": 1980, "sp500": 31.74, "small_cap": 41.92, "tbill": 11.39, "tbond": -2.99, "corp": -3.32, "real_estate": 7.4, "gold": 15.19, "sp500_cum": 7934.26, "small_cap_cum": 107657.34, "tbill_cum": 453.04}, {"year": 1981, "sp500": -4.7, "small_cap": -4.29, "tbill": 14.04, "tbond": 8.2, "corp": 8.46, "real_estate": 5.1, "gold": -32.6, "sp500_cum": 7561.16, "small_cap_cum": 103038.84, "tbill_cum": 516.63}, {"year": 1982, "sp500": 20.42, "small_cap": 26.85, "tbill": 11.09, "tbond": 32.81, "corp": 29.05, "real_estate": 0.56, "gold": 15.62, "sp500_cum": 9105.08, "small_cap_cum": 130704.76, "tbill_cum": 573.93}, {"year": 1983, "sp500": 22.34, "small_cap": 34.86, "tbill": 8.95, "tbond": 3.2, "corp": 16.19, "real_estate": 4.75, "gold": -16.8, "sp500_cum": 11138.9, "small_cap_cum": 176268.44, "tbill_cum": 625.29}, {"year": 1984, "sp500": 6.15, "small_cap": -14.5, "tbill": 9.92, "tbond": 13.73, "corp": 15.62, "real_estate": 4.68, "gold": -19.38, "sp500_cum": 11823.51, "small_cap_cum": 150709.52, "tbill_cum": 687.32}, {"year": 1985, "sp500": 31.24, "small_cap": 24.51, "tbill": 7.72, "tbond": 25.71, "corp": 23.86, "real_estate": 7.47, "gold": 6.0, "sp500_cum": 15516.6, "small_cap_cum": 187648.42, "tbill_cum": 740.38}, {"year": 1986, "sp500": 18.49, "small_cap": 2.09, "tbill": 6.15, "tbond": 24.28, "corp": 22.15, "real_estate": 9.61, "gold": 18.96, "sp500_cum": 18386.33, "small_cap_cum": 191570.28, "tbill_cum": 785.92}, {"year": 1987, "sp500": 5.81, "small_cap": -14.0, "tbill": 5.96, "tbond": -4.96, "corp": 1.12, "real_estate": 7.85, "gold": 24.53, "sp500_cum": 19455.08, "small_cap_cum": 164750.44, "tbill_cum": 832.76}, {"year": 1988, "sp500": 16.54, "small_cap": 17.15, "tbill": 6.89, "tbond": 8.22, "corp": 15.68, "real_estate": 7.22, "gold": -15.26, "sp500_cum": 22672.4, "small_cap_cum": 193005.14, "tbill_cum": 890.13}, {"year": 1989, "sp500": 31.48, "small_cap": 6.96, "tbill": 8.39, "tbond": 17.69, "corp": 16.31, "real_estate": 4.39, "gold": -2.84, "sp500_cum": 29808.58, "small_cap_cum": 206438.29, "tbill_cum": 964.81}, {"year": 1990, "sp500": -3.06, "small_cap": -27.77, "tbill": 7.75, "tbond": 6.24, "corp": 5.65, "real_estate": -0.69, "gold": -3.11, "sp500_cum": 28895.11, "small_cap_cum": 149110.38, "tbill_cum": 1039.59}, {"year": 1991, "sp500": 30.23, "small_cap": 46.07, "tbill": 5.54, "tbond": 15.0, "corp": 16.4, "real_estate": -0.17, "gold": -8.56, "sp500_cum": 37631.51, "small_cap_cum": 217805.53, "tbill_cum": 1097.18}, {"year": 1992, "sp500": 7.49, "small_cap": 25.34, "tbill": 3.51, "tbond": 9.36, "corp": 13.68, "real_estate": 0.82, "gold": -5.73, "sp500_cum": 40451.51, "small_cap_cum": 272997.45, "tbill_cum": 1135.69}, {"year": 1993, "sp500": 9.97, "small_cap": 25.56, "tbill": 3.07, "tbond": 14.21, "corp": 16.44, "real_estate": 2.16, "gold": 17.68, "sp500_cum": 44483.33, "small_cap_cum": 342775.6, "tbill_cum": 1170.56}, {"year": 1994, "sp500": 1.33, "small_cap": -4.76, "tbill": 4.37, "tbond": -8.04, "corp": -1.23, "real_estate": 2.52, "gold": -2.17, "sp500_cum": 45073.14, "small_cap_cum": 326459.48, "tbill_cum": 1221.71}, {"year": 1995, "sp500": 37.2, "small_cap": 32.12, "tbill": 5.66, "tbond": 23.48, "corp": 20.09, "real_estate": 1.79, "gold": 0.98, "sp500_cum": 61838.19, "small_cap_cum": 431318.27, "tbill_cum": 1290.86}, {"year": 1996, "sp500": 22.68, "small_cap": 14.79, "tbill": 5.15, "tbond": 1.43, "corp": 5.28, "real_estate": 2.43, "gold": -4.59, "sp500_cum": 75863.69, "small_cap_cum": 495110.24, "tbill_cum": 1357.34}, {"year": 1997, "sp500": 33.1, "small_cap": 22.06, "tbill": 5.2, "tbond": 9.94, "corp": 11.3, "real_estate": 4.02, "gold": -21.41, "sp500_cum": 100977.34, "small_cap_cum": 604331.56, "tbill_cum": 1427.92}, {"year": 1998, "sp500": 28.34, "small_cap": -13.47, "tbill": 4.91, "tbond": 14.92, "corp": 8.1, "real_estate": 6.44, "gold": -0.83, "sp500_cum": 129592.25, "small_cap_cum": 522928.1, "tbill_cum": 1498.03}, {"year": 1999, "sp500": 20.89, "small_cap": 37.71, "tbill": 4.78, "tbond": -8.25, "corp": 0.97, "real_estate": 7.68, "gold": 0.85, "sp500_cum": 156658.05, "small_cap_cum": 720124.29, "tbill_cum": 1569.64}, {"year": 2000, "sp500": -9.03, "small_cap": -9.13, "tbill": 6.0, "tbond": 16.66, "corp": 9.38, "real_estate": 9.29, "gold": -5.44, "sp500_cum": 142508.98, "small_cap_cum": 654376.94, "tbill_cum": 1663.82}, {"year": 2001, "sp500": -11.85, "small_cap": 32.14, "tbill": 3.48, "tbond": 5.57, "corp": 8.6, "real_estate": 6.68, "gold": 0.75, "sp500_cum": 125622.01, "small_cap_cum": 864693.69, "tbill_cum": 1721.72}, {"year": 2002, "sp500": -21.97, "small_cap": -3.61, "tbill": 1.64, "tbond": 15.12, "corp": 12.06, "real_estate": 9.56, "gold": 25.57, "sp500_cum": 98027.82, "small_cap_cum": 833478.25, "tbill_cum": 1749.95}, {"year": 2003, "sp500": 28.36, "small_cap": 91.23, "tbill": 1.03, "tbond": 0.38, "corp": 12.38, "real_estate": 9.81, "gold": 19.89, "sp500_cum": 125824.39, "small_cap_cum": 1593860.45, "tbill_cum": 1767.98}, {"year": 2004, "sp500": 10.74, "small_cap": 17.3, "tbill": 1.4, "tbond": 4.49, "corp": 10.33, "real_estate": 13.64, "gold": 4.65, "sp500_cum": 139341.42, "small_cap_cum": 1869598.31, "tbill_cum": 1792.73}, {"year": 2005, "sp500": 4.83, "small_cap": 3.78, "tbill": 3.22, "tbond": 2.87, "corp": 5.13, "real_estate": 13.51, "gold": 17.77, "sp500_cum": 146077.85, "small_cap_cum": 1940269.12, "tbill_cum": 1850.46}, {"year": 2006, "sp500": 15.61, "small_cap": 18.4, "tbill": 4.85, "tbond": 1.96, "corp": 5.27, "real_estate": 1.73, "gold": 23.2, "sp500_cum": 168884.34, "small_cap_cum": 2297278.64, "tbill_cum": 1940.2}, {"year": 2007, "sp500": 5.48, "small_cap": -9.11, "tbill": 4.48, "tbond": 10.21, "corp": 4.9, "real_estate": -5.4, "gold": 31.92, "sp500_cum": 178147.2, "small_cap_cum": 2087996.56, "tbill_cum": 2027.12}, {"year": 2008, "sp500": -36.55, "small_cap": -44.68, "tbill": 1.4, "tbond": 20.1, "corp": -3.44, "real_estate": -12.0, "gold": 4.32, "sp500_cum": 113030.22, "small_cap_cum": 1155079.7, "tbill_cum": 2055.5}, {"year": 2009, "sp500": 25.94, "small_cap": 46.94, "tbill": 0.15, "tbond": -11.12, "corp": 19.96, "real_estate": -3.85, "gold": 25.04, "sp500_cum": 142344.87, "small_cap_cum": 1697274.1, "tbill_cum": 2058.59}, {"year": 2010, "sp500": 14.82, "small_cap": 27.73, "tbill": 0.14, "tbond": 8.46, "corp": 9.4, "real_estate": -4.12, "gold": 29.24, "sp500_cum": 163441.94, "small_cap_cum": 2167928.21, "tbill_cum": 2061.47}, {"year": 2011, "sp500": 2.1, "small_cap": -14.04, "tbill": 0.05, "tbond": 16.04, "corp": 12.26, "real_estate": -3.89, "gold": 12.02, "sp500_cum": 166871.56, "small_cap_cum": 1863551.09, "tbill_cum": 2062.5}, {"year": 2012, "sp500": 15.89, "small_cap": 18.96, "tbill": 0.09, "tbond": 2.97, "corp": 9.4, "real_estate": 6.44, "gold": 5.68, "sp500_cum": 193388.43, "small_cap_cum": 2216880.38, "tbill_cum": 2064.36}, {"year": 2013, "sp500": 32.15, "small_cap": 50.3, "tbill": 0.06, "tbond": -9.1, "corp": -1.13, "real_estate": 10.72, "gold": -27.61, "sp500_cum": 255553.31, "small_cap_cum": 3331971.21, "tbill_cum": 2065.59}, {"year": 2014, "sp500": 13.52, "small_cap": 1.53, "tbill": 0.03, "tbond": 10.75, "corp": 10.75, "real_estate": 4.5, "gold": 0.12, "sp500_cum": 290115.42, "small_cap_cum": 3382950.37, "tbill_cum": 2066.21}, {"year": 2015, "sp500": 1.38, "small_cap": -9.12, "tbill": 0.05, "tbond": 1.28, "corp": -1.5, "real_estate": 5.19, "gold": -12.11, "sp500_cum": 294115.79, "small_cap_cum": 3074425.3, "tbill_cum": 2067.25}, {"year": 2016, "sp500": 11.77, "small_cap": 17.02, "tbill": 0.32, "tbond": 0.69, "corp": 11.52, "real_estate": 5.31, "gold": 8.1, "sp500_cum": 328742.28, "small_cap_cum": 3597692.48, "tbill_cum": 2073.86}, {"year": 2017, "sp500": 21.61, "small_cap": 15.13, "tbill": 0.95, "tbond": 2.8, "corp": 9.15, "real_estate": 6.21, "gold": 12.66, "sp500_cum": 399768.64, "small_cap_cum": 4142023.35, "tbill_cum": 2093.56}, {"year": 2018, "sp500": -4.23, "small_cap": -16.21, "tbill": 1.97, "tbond": -0.02, "corp": -3.18, "real_estate": 4.52, "gold": -0.93, "sp500_cum": 382870.94, "small_cap_cum": 3470601.37, "tbill_cum": 2134.81}, {"year": 2019, "sp500": 31.21, "small_cap": 11.92, "tbill": 2.11, "tbond": 9.64, "corp": 15.25, "real_estate": 3.69, "gold": 19.08, "sp500_cum": 502371.39, "small_cap_cum": 3884297.05, "tbill_cum": 2179.85}, {"year": 2020, "sp500": 18.02, "small_cap": 34.16, "tbill": 0.36, "tbond": 11.33, "corp": 10.6, "real_estate": 10.43, "gold": 24.17, "sp500_cum": 592914.8, "small_cap_cum": 5211172.92, "tbill_cum": 2187.7}, {"year": 2021, "sp500": 28.47, "small_cap": 22.41, "tbill": 0.04, "tbond": -4.42, "corp": 1.02, "real_estate": 18.86, "gold": -3.75, "sp500_cum": 761710.83, "small_cap_cum": 6378996.77, "tbill_cum": 2188.57}, {"year": 2022, "sp500": -18.04, "small_cap": -22.9, "tbill": 2.09, "tbond": -17.83, "corp": -15.23, "real_estate": 5.65, "gold": 0.55, "sp500_cum": 624317.2, "small_cap_cum": 4918206.51, "tbill_cum": 2234.31}, {"year": 2023, "sp500": 26.06, "small_cap": 5.19, "tbill": 5.28, "tbond": 3.88, "corp": 8.74, "real_estate": 5.68, "gold": 13.26, "sp500_cum": 787018.53, "small_cap_cum": 5173461.43, "tbill_cum": 2352.29}, {"year": 2024, "sp500": 24.88, "small_cap": 8.7, "tbill": 5.18, "tbond": -1.64, "corp": 1.74, "real_estate": 3.96, "gold": 25.96, "sp500_cum": 982817.82, "small_cap_cum": 5623552.58, "tbill_cum": 2474.14}, {"year": 2025, "sp500": 17.72, "small_cap": 16.53, "tbill": 4.21, "tbond": 7.8, "corp": 6.96, "real_estate": 1.58, "gold": 66.22, "sp500_cum": 1157009.09, "small_cap_cum": 6553125.82, "tbill_cum": 2578.3}];
+        const implData = [{"year": 1960, "sp500": 58.11, "ey": 5.34, "dy": 3.41, "tbond": 2.76, "erp": 2.45, "expected_return": 5.21}, {"year": 1961, "sp500": 71.55, "ey": 4.71, "dy": 2.85, "tbond": 2.35, "erp": 2.41, "expected_return": 4.76}, {"year": 1962, "sp500": 63.1, "ey": 5.81, "dy": 3.4, "tbond": 3.85, "erp": 4.05, "expected_return": 7.9}, {"year": 1963, "sp500": 75.02, "ey": 5.51, "dy": 3.13, "tbond": 4.14, "erp": 4.96, "expected_return": 9.1}, {"year": 1964, "sp500": 84.75, "ey": 5.62, "dy": 3.05, "tbond": 4.21, "erp": 5.13, "expected_return": 9.34}, {"year": 1965, "sp500": 92.43, "ey": 5.73, "dy": 3.06, "tbond": 4.65, "erp": 5.46, "expected_return": 10.11}, {"year": 1966, "sp500": 80.33, "ey": 6.74, "dy": 3.59, "tbond": 4.64, "erp": 4.19, "expected_return": 8.83}, {"year": 1967, "sp500": 96.47, "ey": 5.66, "dy": 3.09, "tbond": 5.7, "erp": 5.25, "expected_return": 10.95}, {"year": 1968, "sp500": 103.86, "ey": 5.51, "dy": 2.93, "tbond": 6.16, "erp": 5.32, "expected_return": 11.48}, {"year": 1969, "sp500": 92.06, "ey": 6.63, "dy": 3.52, "tbond": 7.88, "erp": 7.55, "expected_return": 15.43}, {"year": 1970, "sp500": 92.15, "ey": 5.98, "dy": 3.46, "tbond": 6.5, "erp": 4.78, "expected_return": 11.28}, {"year": 1971, "sp500": 102.09, "ey": 5.46, "dy": 3.1, "tbond": 5.89, "erp": 4.57, "expected_return": 10.46}, {"year": 1972, "sp500": 118.05, "ey": 5.23, "dy": 2.7, "tbond": 6.41, "erp": 5.21, "expected_return": 11.62}, {"year": 1973, "sp500": 97.55, "ey": 8.16, "dy": 3.7, "tbond": 6.9, "erp": 8.3, "expected_return": 15.2}, {"year": 1974, "sp500": 68.56, "ey": 13.64, "dy": 5.43, "tbond": 7.4, "erp": 6.42, "expected_return": 13.82}, {"year": 1975, "sp500": 90.19, "ey": 8.55, "dy": 4.14, "tbond": 7.76, "erp": 5.99, "expected_return": 13.75}, {"year": 1976, "sp500": 107.46, "ey": 9.07, "dy": 3.93, "tbond": 6.81, "erp": 8.19, "expected_return": 15.0}, {"year": 1977, "sp500": 95.1, "ey": 11.43, "dy": 5.11, "tbond": 7.78, "erp": 9.52, "expected_return": 17.3}, {"year": 1978, "sp500": 96.11, "ey": 12.11, "dy": 5.39, "tbond": 9.15, "erp": 8.48, "expected_return": 17.63}, {"year": 1979, "sp500": 107.94, "ey": 13.48, "dy": 5.53, "tbond": 10.33, "erp": 11.7, "expected_return": 22.03}, {"year": 1980, "sp500": 135.76, "ey": 11.04, "dy": 4.74, "tbond": 12.43, "erp": 11.01, "expected_return": 23.44}, {"year": 1981, "sp500": 122.55, "ey": 12.39, "dy": 5.57, "tbond": 13.98, "erp": 11.42, "expected_return": 25.4}, {"year": 1982, "sp500": 140.64, "ey": 9.83, "dy": 4.93, "tbond": 10.47, "erp": 7.96, "expected_return": 18.43}, {"year": 1983, "sp500": 164.93, "ey": 8.06, "dy": 4.32, "tbond": 11.8, "erp": 9.09, "expected_return": 20.89}, {"year": 1984, "sp500": 167.24, "ey": 10.07, "dy": 4.68, "tbond": 11.51, "erp": 11.02, "expected_return": 22.53}, {"year": 1985, "sp500": 211.28, "ey": 7.42, "dy": 3.88, "tbond": 8.99, "erp": 7.89, "expected_return": 16.88}, {"year": 1986, "sp500": 242.17, "ey": 5.96, "dy": 3.38, "tbond": 7.22, "erp": 5.54, "expected_return": 12.76}, {"year": 1987, "sp500": 247.08, "ey": 6.49, "dy": 3.71, "tbond": 8.86, "erp": 9.66, "expected_return": 18.52}, {"year": 1988, "sp500": 277.72, "ey": 8.2, "dy": 3.68, "tbond": 9.14, "erp": 9.76, "expected_return": 18.9}, {"year": 1989, "sp500": 353.4, "ey": 6.8, "dy": 3.32, "tbond": 7.93, "erp": 9.58, "expected_return": 17.51}, {"year": 1990, "sp500": 330.22, "ey": 6.58, "dy": 3.74, "tbond": 8.07, "erp": 7.39, "expected_return": 15.46}, {"year": 1991, "sp500": 417.09, "ey": 4.58, "dy": 3.11, "tbond": 6.7, "erp": 6.34, "expected_return": 13.04}, {"year": 1992, "sp500": 435.71, "ey": 4.16, "dy": 2.9, "tbond": 6.68, "erp": 4.67, "expected_return": 11.35}, {"year": 1993, "sp500": 466.45, "ey": 4.25, "dy": 2.72, "tbond": 5.79, "erp": 4.73, "expected_return": 10.52}, {"year": 1994, "sp500": 459.27, "ey": 5.89, "dy": 2.91, "tbond": 7.82, "erp": 7.23, "expected_return": 15.05}, {"year": 1995, "sp500": 615.93, "ey": 5.74, "dy": 2.3, "tbond": 5.57, "erp": 5.65, "expected_return": 11.22}, {"year": 1996, "sp500": 740.74, "ey": 4.83, "dy": 2.01, "tbond": 6.41, "erp": 6.13, "expected_return": 12.54}, {"year": 1997, "sp500": 970.43, "ey": 4.08, "dy": 1.6, "tbond": 5.74, "erp": 5.45, "expected_return": 11.19}, {"year": 1998, "sp500": 1229.23, "ey": 3.11, "dy": 1.32, "tbond": 4.65, "erp": 4.6, "expected_return": 9.25}, {"year": 1999, "sp500": 1469.25, "ey": 3.07, "dy": 1.14, "tbond": 6.44, "erp": 5.75, "expected_return": 12.19}, {"year": 2000, "sp500": 1320.28, "ey": 3.94, "dy": 1.23, "tbond": 5.11, "erp": 3.71, "expected_return": 8.82}, {"year": 2001, "sp500": 1148.09, "ey": 3.85, "dy": 1.37, "tbond": 5.05, "erp": 3.56, "expected_return": 8.61}, {"year": 2002, "sp500": 879.82, "ey": 5.23, "dy": 1.83, "tbond": 3.81, "erp": 3.57, "expected_return": 7.38}, {"year": 2003, "sp500": 1111.91, "ey": 4.87, "dy": 1.61, "tbond": 4.25, "erp": 5.35, "expected_return": 9.6}, {"year": 2004, "sp500": 1211.92, "ey": 5.58, "dy": 1.6, "tbond": 4.22, "erp": 4.9, "expected_return": 9.12}, {"year": 2005, "sp500": 1248.29, "ey": 5.47, "dy": 1.79, "tbond": 4.39, "erp": 6.16, "expected_return": 10.55}, {"year": 2006, "sp500": 1418.3, "ey": 6.18, "dy": 1.77, "tbond": 4.7, "erp": 5.93, "expected_return": 10.63}, {"year": 2007, "sp500": 1468.36, "ey": 5.62, "dy": 1.89, "tbond": 4.02, "erp": 5.03, "expected_return": 9.05}, {"year": 2008, "sp500": 903.25, "ey": 7.24, "dy": 3.11, "tbond": 2.21, "erp": 2.11, "expected_return": 4.32}, {"year": 2009, "sp500": 1115.1, "ey": 5.35, "dy": 2.0, "tbond": 3.84, "erp": 0.28, "expected_return": 4.12}, {"year": 2010, "sp500": 1257.64, "ey": 6.65, "dy": 1.84, "tbond": 3.29, "erp": 3.33, "expected_return": 6.62}, {"year": 2011, "sp500": 1257.6, "ey": 7.72, "dy": 2.07, "tbond": 1.88, "erp": 2.75, "expected_return": 4.63}, {"year": 2012, "sp500": 1426.19, "ey": 7.18, "dy": 2.13, "tbond": 1.76, "erp": 2.93, "expected_return": 4.69}, {"year": 2013, "sp500": 1848.36, "ey": 5.81, "dy": 1.96, "tbond": 3.04, "erp": 5.01, "expected_return": 8.05}, {"year": 2014, "sp500": 2058.9, "ey": 5.49, "dy": 1.92, "tbond": 2.17, "erp": 2.77, "expected_return": 4.94}, {"year": 2015, "sp500": 2043.94, "ey": 5.2, "dy": 2.11, "tbond": 2.27, "erp": 2.96, "expected_return": 5.23}, {"year": 2016, "sp500": 2238.83, "ey": 4.86, "dy": 2.01, "tbond": 2.45, "erp": 2.64, "expected_return": 5.09}, {"year": 2017, "sp500": 2673.61, "ey": 4.67, "dy": 1.86, "tbond": 2.41, "erp": 3.22, "expected_return": 5.63}, {"year": 2018, "sp500": 2506.85, "ey": 5.92, "dy": 2.14, "tbond": 2.68, "erp": 3.24, "expected_return": 5.92}, {"year": 2019, "sp500": 3230.78, "ey": 5.03, "dy": 1.82, "tbond": 1.92, "erp": 2.57, "expected_return": 4.49}, {"year": 2020, "sp500": 3756.07, "ey": 3.72, "dy": 1.51, "tbond": 0.93, "erp": 0.74, "expected_return": 1.67}, {"year": 2021, "sp500": 4766.18, "ey": 4.33, "dy": 1.24, "tbond": 1.51, "erp": 1.71, "expected_return": 3.22}, {"year": 2022, "sp500": 3839.5, "ey": 5.72, "dy": 1.78, "tbond": 3.88, "erp": 5.59, "expected_return": 9.47}, {"year": 2023, "sp500": 4769.83, "ey": 4.64, "dy": 1.47, "tbond": 3.88, "erp": 3.68, "expected_return": 7.56}, {"year": 2024, "sp500": 5881.63, "ey": 4.14, "dy": 1.25, "tbond": 4.58, "erp": 4.61, "expected_return": 9.19}, {"year": 2025, "sp500": 6845.5, "ey": 3.97, "dy": 1.15, "tbond": 4.18, "erp": 4.61, "expected_return": 8.79}];
+
+        // Tab Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active', 'border-amber-500', 'text-amber-400', 'bg-neutral-900/60');
+                el.classList.add('border-transparent', 'text-neutral-400');
+            });
+            
+            const target = document.getElementById(tabId);
+            if (target) target.classList.remove('hidden');
+            
+            const btn = document.getElementById('btn-' + tabId);
+            if (btn) {
+                btn.classList.add('active', 'border-amber-500', 'text-amber-400', 'bg-neutral-900/60');
+                btn.classList.remove('border-transparent', 'text-neutral-400');
+            }
+        }
+
+        // Render Waterfall Chart
+        const ctxWf = document.getElementById('waterfallChart')?.getContext('2d');
+        if (ctxWf) {
+            new Chart(ctxWf, {
+                type: 'bar',
+                data: {
+                    labels: ['10-Yr Cash Flows', 'Terminal Value PV', 'Distress Haircut', 'Operating Assets', 'Adjusted Debt', 'Cash & Cross Holdings', 'Net IPO Proceeds', 'Non-Operating', 'Options Overhang', 'Common Equity'],
+                    datasets: [{
+                        label: 'Waterfall ($ Billions)',
+                        data: [421.7, 1388.7, -90.5, 1720.0, -485.3, 112.4, 100.0, 3.9, -0.5, 1450.5],
+                        backgroundColor: [
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(244, 63, 94, 0.7)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(244, 63, 94, 0.7)',
+                            'rgba(6, 182, 212, 0.7)',
+                            'rgba(6, 182, 212, 0.7)',
+                            'rgba(16, 185, 129, 0.5)',
+                            'rgba(244, 63, 94, 0.5)',
+                            'rgba(245, 158, 11, 0.9)'
+                        ],
+                        borderColor: '#27272a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { grid: { color: '#27272a' }, ticks: { color: '#a1a1aa', font: { family: 'JetBrains Mono' } } },
+                        x: { grid: { display: false }, ticks: { color: '#a1a1aa', font: { family: 'JetBrains Mono', size: 9 } } }
+                    }
+                }
+            });
+        }
+
+        // Render Revenue & Margin Chart
+        const ctxRev = document.getElementById('revMarginChart')?.getContext('2d');
+        if (ctxRev) {
+            new Chart(ctxRev, {
+                type: 'line',
+                data: {
+                    labels: ['Base', 'Yr 1', 'Yr 2', 'Yr 3', 'Yr 4', 'Yr 5', 'Yr 6', 'Yr 7', 'Yr 8', 'Yr 9', 'Yr 10'],
+                    datasets: [
+                        {
+                            label: 'Revenues ($B)',
+                            data: [35.3, 102.3, 145.3, 206.3, 293.0, 416.1, 559.9, 712.0, 852.6, 957.6, 1004.5],
+                            borderColor: '#38bdf8',
+                            backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Operating Margin (%)',
+                            data: [-131.3, 5.0, 14.0, 18.5, 23.0, 27.5, 27.5, 27.5, 27.5, 27.5, 27.5],
+                            borderColor: '#10b981',
+                            borderDash: [5, 5],
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { position: 'left', grid: { color: '#27272a' }, ticks: { color: '#38bdf8' } },
+                        y1: { position: 'right', grid: { display: false }, ticks: { color: '#10b981' } },
+                        x: { ticks: { color: '#a1a1aa' } }
+                    }
+                }
+            });
+        }
+
+        // Render FCF Profile Chart
+        const ctxFcf = document.getElementById('fcfProfileChart')?.getContext('2d');
+        if (ctxFcf) {
+            new Chart(ctxFcf, {
+                type: 'bar',
+                data: {
+                    labels: ['Yr 1', 'Yr 2', 'Yr 3', 'Yr 4', 'Yr 5', 'Yr 6', 'Yr 7', 'Yr 8', 'Yr 9', 'Yr 10'],
+                    datasets: [{
+                        label: 'FCFF ($ Millions)',
+                        data: [-9209.6, 0, 9285.2, 26369.9, 66458.3, 95589.5, 129371.8, 164273.8, 195029.9, 190774.3],
+                        backgroundColor: function(ctx) {
+                            const v = ctx.raw;
+                            return v < 0 ? 'rgba(244, 63, 94, 0.7)' : 'rgba(16, 185, 129, 0.7)';
+                        }
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { grid: { color: '#27272a' }, ticks: { color: '#a1a1aa' } },
+                        x: { ticks: { color: '#a1a1aa' } }
+                    }
+                }
+            });
+        }
+
+        // Render Implied ERP Chart
+        const ctxImpl = document.getElementById('impliedErpChart')?.getContext('2d');
+        if (ctxImpl) {
+            const years = implData.map(d => d.year);
+            const erp = implData.map(d => d.erp);
+            const expRet = implData.map(d => d.expected_return);
+            const tbond = implData.map(d => d.tbond);
+
+            new Chart(ctxImpl, {
+                type: 'line',
+                data: {
+                    labels: years,
+                    datasets: [
+                        {
+                            label: 'Implied Expected Return (Rf + ERP)',
+                            data: expRet,
+                            borderColor: '#a855f7',
+                            borderWidth: 2,
+                            fill: false
+                        },
+                        {
+                            label: '10-Yr Treasury Yield',
+                            data: tbond,
+                            borderColor: '#64748b',
+                            borderWidth: 1.5,
+                            fill: false
+                        },
+                        {
+                            label: 'Implied ERP',
+                            data: erp,
+                            borderColor: '#06b6d4',
+                            borderWidth: 1.5,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { grid: { color: '#27272a' }, ticks: { color: '#a1a1aa', callback: v => v + '%' } },
+                        x: { ticks: { color: '#a1a1aa', maxTicksLimit: 12 } }
+                    }
+                }
+            });
+        }
+
+        // Render Historical Cumulative Growth Chart
+        const ctxHist = document.getElementById('histGrowthChart')?.getContext('2d');
+        if (ctxHist) {
+            const hYears = histData.map(d => d.year);
+            const spCum = histData.map(d => d.sp500_cum);
+            const scCum = histData.map(d => d.small_cap_cum);
+            const tbCum = histData.map(d => d.tbill_cum);
+
+            new Chart(ctxHist, {
+                type: 'line',
+                data: {
+                    labels: hYears,
+                    datasets: [
+                        {
+                            label: 'S&P 500 ($100 Invested)',
+                            data: spCum,
+                            borderColor: '#38bdf8',
+                            borderWidth: 2,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Small Cap ($100 Invested)',
+                            data: scCum,
+                            borderColor: '#f59e0b',
+                            borderWidth: 1.5,
+                            pointRadius: 0
+                        },
+                        {
+                            label: '3-Month T-Bill',
+                            data: tbCum,
+                            borderColor: '#64748b',
+                            borderWidth: 1.5,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { type: 'logarithmic', grid: { color: '#27272a' }, ticks: { color: '#a1a1aa', callback: v => '$' + Number(v).toLocaleString() } },
+                        x: { ticks: { color: '#a1a1aa', maxTicksLimit: 12 } }
+                    }
+                }
+            });
+        }
+
+        // Populate Industry Table
+        function filterIndustryTable() {
+            const query = (document.getElementById('industrySearch')?.value || '').toLowerCase();
+            const region = document.getElementById('regionSelect')?.value || 'ALL';
+            const tbody = document.getElementById('industryTableBody');
+            if (!tbody) return;
+
+            const filtered = waccData.filter(item => {
+                const matchRegion = region === 'ALL' || item.region === region;
+                const matchQuery = item.industry.toLowerCase().includes(query);
+                return matchRegion && matchQuery;
+            });
+
+            tbody.innerHTML = filtered.map(row => `
+                <tr class="hover:bg-neutral-800/40">
+                    <td class="p-2.5 font-bold ${row.region === 'US' ? 'text-amber-400' : 'text-cyan-400'}">${row.region}</td>
+                    <td class="p-2.5 font-semibold text-white">${row.industry}</td>
+                    <td class="p-2.5 text-right text-neutral-400">${row.firms}</td>
+                    <td class="p-2.5 text-right text-neutral-300 font-mono">${row.beta.toFixed(2)}</td>
+                    <td class="p-2.5 text-right text-emerald-400 font-mono font-semibold">${row.ke.toFixed(2)}%</td>
+                    <td class="p-2.5 text-right text-neutral-400 font-mono">${row.wd.toFixed(1)}%</td>
+                    <td class="p-2.5 text-right text-neutral-300 font-mono">${row.kd_at.toFixed(2)}%</td>
+                    <td class="p-2.5 text-right text-amber-400 font-mono font-bold">${row.wacc.toFixed(2)}%</td>
+                </tr>
+            `).join('');
+        }
+        filterIndustryTable();
+
+        // Simulator Logic
+        function runSimulation() {
+            const rev2036 = parseFloat(document.getElementById('slider-rev').value);
+            const margin = parseFloat(document.getElementById('slider-margin').value) / 100;
+            const s2c = parseFloat(document.getElementById('slider-s2c').value);
+            const wacc = parseFloat(document.getElementById('slider-wacc').value) / 100;
+            const fail = parseFloat(document.getElementById('slider-fail').value) / 100;
+
+            document.getElementById('disp-rev').innerText = '$' + rev2036 + ' B';
+            document.getElementById('disp-margin').innerText = (margin * 100).toFixed(1) + '%';
+            document.getElementById('disp-s2c').innerText = s2c.toFixed(2) + 'x';
+            document.getElementById('disp-wacc').innerText = (wacc * 100).toFixed(2) + '%';
+            document.getElementById('disp-fail').innerText = (fail * 100).toFixed(1) + '%';
+
+            const revScale = rev2036 / 1004.5;
+            const marginScale = margin / 0.275;
+            const waccScale = (0.0974 / wacc);
+            const failAdj = (1 - fail * 0.5) / (1 - 0.10 * 0.5);
+            const reinvFactor = 1.0 + (s2c - 3.0) * 0.08;
+
+            let simEquity = 1415.48 * revScale * marginScale * Math.pow(waccScale, 0.75) * reinvFactor * failAdj;
+            if (simEquity < 50) simEquity = 50;
+
+            const shares = 16936.82;
+            const simShare = (simEquity * 1000) / shares;
+            const spot = 74.00;
+            const gap = ((simShare - spot) / spot) * 100;
+
+            document.getElementById('sim-equity').innerText = '$' + simEquity.toFixed(1) + 'B';
+            document.getElementById('sim-share').innerText = '$' + simShare.toFixed(2);
+            document.getElementById('sim-gap').innerText = (gap > 0 ? '+' : '') + gap.toFixed(1) + '%';
+            
+            const recEl = document.getElementById('sim-rec');
+            if (gap >= 15) {
+                recEl.innerText = 'BUY / STRONG ACCUMULATE';
+                recEl.className = 'text-xs font-bold text-emerald-400 font-mono mt-2';
+            } else if (gap >= -5) {
+                recEl.innerText = 'HOLD / FAIRLY VALUED';
+                recEl.className = 'text-xs font-bold text-amber-400 font-mono mt-2';
+            } else {
+                recEl.innerText = 'AVOID IPO / OVERVALUED';
+                recEl.className = 'text-xs font-bold text-rose-400 font-mono mt-2';
+            }
+        }
+
+        function resetSimulation() {
+            document.getElementById('slider-rev').value = 1005;
+            document.getElementById('slider-margin').value = 27.5;
+            document.getElementById('slider-s2c').value = 3.0;
+            document.getElementById('slider-wacc').value = 9.74;
+            document.getElementById('slider-fail').value = 10;
+            runSimulation();
+        }
+
+        // Render Crowd Distribution Chart
+        const ctxCrowd = document.getElementById('crowdDistChart')?.getContext('2d');
+        if (ctxCrowd) {
+            new Chart(ctxCrowd, {
+                type: 'bar',
+                data: {
+                    labels: ['<$100', '$100-$200', '$200-$300', '$300-$400', '$400-$500 (Damodaran $439)', '$500-$600 (IPO $525)', '$600-$800', '>$800'],
+                    datasets: [{
+                        label: '% of Crowd Submissions',
+                        data: [8, 18, 24, 26, 14, 7, 3],
+                        backgroundColor: function(ctx) {
+                            const idx = ctx.dataIndex;
+                            if (idx === 4) return 'rgba(16, 185, 129, 0.8)';
+                            if (idx === 5) return 'rgba(244, 63, 94, 0.8)';
+                            return 'rgba(6, 182, 212, 0.5)';
+                        }
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { grid: { color: '#27272a' }, ticks: { color: '#a1a1aa', callback: v => v + '%' } },
+                        x: { ticks: { color: '#a1a1aa', font: { size: 9 } } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

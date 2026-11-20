@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anthropic, PBC (NASDAQ: ANT) — Project Case File Master Dossier</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --bg-page: #FAF7F2;
+            --bg-card: #FFFFFF;
+            --bg-subtle: #F4EFEB;
+            --bg-active: #EFE8DF;
+            --border-main: #E5E0D8;
+            --border-dark: #D8D2C5;
+            --text-primary: #1C1917;
+            --text-secondary: #57534E;
+            --text-muted: #8C867A;
+            --accent-amber: #B45309;
+            --accent-amber-light: #FEF3C7;
+            --accent-green: #15803D;
+            --accent-green-light: #DCFCE7;
+            --accent-red: #B91C1C;
+            --accent-red-light: #FEE2E2;
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-serif: 'Newsreader', Georgia, serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 13.5px;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-serif { font-family: var(--font-serif); }
+        .font-mono { font-family: var(--font-mono); }
+        .font-sans { font-family: var(--font-sans); }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-main);
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .portal-door:hover {
+            border-color: var(--accent-amber);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(180, 83, 9, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+        }
+
+        .custom-scroll::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: var(--bg-page);
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: var(--border-dark);
+            border-radius: 3px;
+        }
+    </style>
+    <!-- PWA & iPadOS Standalone Settings -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ERVIS ANT">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="theme-color" content="#FAF7F2">
+</head>
+<body class="min-h-screen">
+
+    <!-- Top Command Header -->
+    <header class="bg-[#FFFFFF] border-b border-[#E5E0D8] sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div>
+                <div class="flex items-center space-x-2 text-[10.5px] font-mono text-[#8C867A] mb-1">
+                    <span>ERVIS INSTITUTIONAL RESEARCH</span>
+                    <span>/</span>
+                    <span>US EQUITIES</span>
+                    <span>/</span>
+                    <span class="text-[#B45309] font-bold">CASE FILE: ANTH</span>
+                </div>
+                <div class="flex items-baseline space-x-3">
+                    <h1 class="text-2xl font-serif font-bold text-[#1C1917] tracking-tight">
+                        Anthropic, PBC
+                    </h1>
+                    <span class="text-xs font-mono font-bold px-2 py-0.5 bg-[#FEF3C7] border border-[#FDE68A] rounded text-[#92400E]">
+                        NASDAQ: ANT
+                    </span>
+                    <span class="text-xs text-[#57534E]">
+                        Delaware Public Benefit Corporation &bull; Project Case File Master Dossier
+                    </span>
+                </div>
+            </div>
+
+            <!-- Top Ticker Strip -->
+            <div class="flex items-center space-x-4 text-xs font-mono">
+                <div class="text-right">
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">IPO Pricing Band</div>
+                    <div class="text-sm font-bold text-[#1C1917]">$525.00 <span class="text-[10.5px] font-normal text-[#8C867A]">($1.73T)</span></div>
+                </div>
+                <div class="h-8 w-px bg-[#E5E0D8]"></div>
+                <div class="text-right">
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Damodaran DCF Value</div>
+                    <div class="text-sm font-bold text-[#15803D]">$439.24 <span class="text-[10.5px] font-normal text-[#8C867A]">($1.45T)</span></div>
+                </div>
+                <div class="h-8 w-px bg-[#E5E0D8]"></div>
+                <div class="text-right">
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Variant Signal</div>
+                    <div class="text-xs font-bold px-2 py-0.5 bg-[#FEE2E2] border border-[#FECACA] rounded text-[#B91C1C]">
+                        OVERVALUED (-16.3%)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8 space-y-8">
+
+        <!-- Executive Case Overview Hero -->
+        <div class="card p-6 border-l-4 border-l-[#B45309] space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#E5E0D8] pb-3">
+                <div>
+                    <span class="text-[11px] font-mono uppercase tracking-wider text-[#B45309] font-bold">
+                        Institutional Research Briefing & Consolidated Index
+                    </span>
+                    <h2 class="text-lg font-serif font-bold text-[#1C1917]">
+                        Anthropic IPO Valuation, S-1 Prospectus Audit & Master Model Suite
+                    </h2>
+                </div>
+                <span class="text-xs font-mono text-[#8C867A]">
+                    Coverage Date: November 2026 &bull; Model Status: Gate 5 Sign-Off
+                </span>
+            </div>
+
+            <p class="text-xs text-[#57534E] leading-relaxed">
+                Anthropic, PBC filed its 416-page SEC Form S-1 registration statement on October 26, 2026 (Amended Nov 17, 2026 via S-1/A #3), targeting a public market valuation between <strong>$1.5 Trillion and $2.0 Trillion</strong> (~$525/share). Professor Aswath Damodaran completed a comprehensive intrinsic valuation utilizing his Narrative & Numbers framework and Ginzu DCF engine, concluding that while Anthropic exhibits extraordinary top-line execution (14x YoY revenue growth to $16.3B in H1 2026) and compute cost decoupling, the firm’s <strong>$265.6B+ in non-cancelable compute commitments</strong> acts as fixed senior debt that limits safety margin. Damodaran estimates equity fair value at <strong>$1.45T to $1.48T ($439.24/share)</strong>, advising investors to avoid the initial IPO pricing and wait for post-IPO lockup release pullbacks.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3 pt-2 font-mono text-xs">
+                <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                    <div class="text-[10px] text-[#8C867A] uppercase">H1 2026 Revenue</div>
+                    <div class="font-bold text-[#1C1917]">$16,286M <span class="text-[10px] text-[#15803D]">(14x)</span></div>
+                </div>
+                <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                    <div class="text-[10px] text-[#8C867A] uppercase">Cash & Short-Term</div>
+                    <div class="font-bold text-[#15803D]">$131,651M</div>
+                </div>
+                <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                    <div class="text-[10px] text-[#8C867A] uppercase">Compute Commitments</div>
+                    <div class="font-bold text-[#B91C1C]">$265.6B+</div>
+                </div>
+                <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                    <div class="text-[10px] text-[#8C867A] uppercase">Top 5 Concentration</div>
+                    <div class="font-bold text-[#B45309]">25.0%</div>
+                </div>
+                <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                    <div class="text-[10px] text-[#8C867A] uppercase">Governance Structure</div>
+                    <div class="font-bold text-[#7C3AED]">50.1% Founder Golden</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 Central Portals (The Consolidated Suite) -->
+        <div class="space-y-4">
+            <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                <div>
+                    <h3 class="text-base font-serif font-bold text-[#1C1917]">
+                        Consolidated Research Portals (The Anthropic Suite)
+                    </h3>
+                    <p class="text-xs text-[#57534E]">
+                        Select a specialized terminal to inspect primary filings, cell-by-cell spreadsheet calculations, or the master DCF cockpit
+                    </p>
+                </div>
+                <span class="text-[11px] font-mono text-[#8C867A]">3 Integrated Modules</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Portal 1: S-1 Prospectus Dashboard -->
+                <div class="card portal-door p-5 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10.5px] font-mono px-2 py-0.5 bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] rounded font-bold">
+                                MODULE 01 &bull; FILING AUDIT
+                            </span>
+                            <span class="text-[10px] font-mono text-[#8C867A]">416-PAGE S-1</span>
+                        </div>
+                        <h4 class="text-lg font-serif font-bold text-[#1C1917]">
+                            S-1 Prospectus Intelligence & Financial Dashboard
+                        </h4>
+                        <p class="text-xs text-[#57534E] leading-relaxed">
+                            Complete deconstruction of Anthropic's primary SEC Form S-1 registration statement. Features audited three-statement financial models, business model token economics, quarterly COGS decoupling, 5-class equity architecture, Note 13 compute commitments schedule, and interactive qualitative risk pop-up modals.
+                        </p>
+                        <div class="space-y-1.5 text-xs text-[#57534E] font-mono pt-2 border-t border-[#ECE7DE]">
+                            <div class="flex items-center gap-1.5">&bull; <span>Income Statement, Balance Sheet, Cash Flow</span></div>
+                            <div class="flex items-center gap-1.5">&bull; <span>Quarterly COGS & Gross Margin Inflection Chart</span></div>
+                            <div class="flex items-center gap-1.5">&bull; <span>5-Class Share Design & LTBT Governance</span></div>
+                            <div class="flex items-center gap-1.5">&bull; <span>$1.5B Bartz Settlement & Day-1 Lockup Unlock</span></div>
+                        </div>
+                    </div>
+                    <div class="pt-5">
+                        <a href="anthropic_prospectus_dashboard.html" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#1C1917] hover:bg-[#333] text-[#FFFFFF] text-xs font-mono font-semibold rounded transition-colors">
+                            <span>Open Prospectus Dashboard</span>
+                            <span>&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portal 2: Damodaran Breakdown Reader -->
+                <div class="card portal-door p-5 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10.5px] font-mono px-2 py-0.5 bg-[#FAF7F2] text-[#B45309] border border-[#D8D2C5] rounded font-bold">
+                                MODULE 02 &bull; MODEL EXPLORER
+                            </span>
+                            <span class="text-[10px] font-mono text-[#8C867A]">10-SHEET MIRROR</span>
+                        </div>
+                        <h4 class="text-lg font-serif font-bold text-[#1C1917]">
+                            Damodaran Excel Breakdown & Methodology Explorer
+                        </h4>
+                        <p class="text-xs text-[#57534E] leading-relaxed">
+                            Interactive spreadsheet reader mirroring Professor Aswath Damodaran's master <code>AnthropicIPO.xlsx</code> model. Inspect live cell formulas, converter pipelines (R&D asset capitalization, operating lease debt conversion), bottom-up beta regressions, synthetic rating spreads, and option dilution mathematics.
+                        </p>
+                        <div class="space-y-1.5 text-xs text-[#57534E] font-mono pt-2 border-t border-[#ECE7DE]">
+                            <div class="flex items-center gap-1.5">&bull; <span>Valuation Output Grid & Formula Inspector</span></div>
+                            <div class="flex items-center gap-1.5">&bull; <span>Operating Lease Converter ($485.3B Debt PV)</span></div>
+                            <div class="flex items-center gap-1.5">&bull; <span>Cost of Capital (WACC 9.74% &rarr; 9.13%)</span></div>
+                            <div class="flex items-center gap-1.5">&bull; <span>Failure Rate Worksheet (10% Distress Prob)</span></div>
+                        </div>
+                    </div>
+                    <div class="pt-5">
+                        <a href="damodaran_breakdown_reader.html" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#FAF7F2] hover:bg-[#EFE8DF] border border-[#D8D2C5] text-[#1C1917] text-xs font-mono font-semibold rounded transition-colors">
+                            <span>Open Model Explorer</span>
+                            <span>&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portal 3: ERVIS Valuation Cockpit -->
+                <div class="card portal-door p-5 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10.5px] font-mono px-2 py-0.5 bg-[#DCFCE7] text-[#166534] border border-[#BBF7D0] rounded font-bold">
+                                MODULE 03 &bull; ERVIS TERMINAL
+                            </span>
+                            <span class="text-[10px] font-mono text-[#8C867A]">8-TAB COCKPIT</span>
+                        </div>
+                        <h4 class="text-lg font-serif font-bold text-[#1C1917]">
+                            ERVIS Valuation Cockpit & Terminal Engine
+                        </h4>
+                        <p class="text-xs text-[#57534E] leading-relaxed">
+                            Institutional equity research workstation tailored to our default beige design language. Includes the 10-year pro-forma Ginzu DCF schedule, 4-lever sensitivity fragility analysis, Damodaran macro datasets ingestion, interactive scenario simulator, and Gate 1–5 research sign-off audits.
+                        </p>
+                        <div class="space-y-1.5 text-xs text-[#57534E] font-mono pt-2 border-t border-[#ECE7DE]">
+                            <div class="flex items-center gap-1.5">&bull; <span>Valuation Waterfall Bridge & Exit Multiple Grid</span></div>
+                            <div class="flex items-center gap-1.5">&bull; <span>4 Valuation Levers & Reverse DCF Sensitivity</span></div>
+                            <div class="flex items-center gap-1.5">&bull; <span>10-Yr Pro-Forma Ginzu DCF Model Schedule</span></div>
+                            <div class="flex items-center gap-1.5">&bull; <span>Interactive Monte Carlo & Valuation Simulator</span></div>
+                        </div>
+                    </div>
+                    <div class="pt-5">
+                        <a href="ervis_valuation_cockpit.html" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#FAF7F2] hover:bg-[#EFE8DF] border border-[#D8D2C5] text-[#1C1917] text-xs font-mono font-semibold rounded transition-colors">
+                            <span>Open ERVIS Cockpit</span>
+                            <span>&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Comparative Synthesis Table -->
+        <div class="card p-5 space-y-3">
+            <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                    Comparative Analytical Synthesis: Prospectus Disclosures vs. Damodaran DCF Engine
+                </h3>
+                <span class="text-[11px] font-mono text-[#8C867A]">S-1 vs. Ginzu Valuation Model</span>
+            </div>
+
+            <table class="w-full border-collapse font-mono text-xs">
+                <thead>
+                    <tr class="bg-[#F4EFEB] border-b border-[#D8D2C5] text-left text-[11px] font-sans font-semibold text-[#57534E]">
+                        <th class="p-2.5">Dimension</th>
+                        <th class="p-2.5">S-1 Prospectus Disclosures</th>
+                        <th class="p-2.5">Damodaran DCF Ingestion & Assumptions</th>
+                        <th class="p-2.5">Analytical Variant Take</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-[#ECE7DE]">
+                    <tr>
+                        <td class="p-2.5 font-bold text-[#1C1917]">Revenue Scaling</td>
+                        <td class="p-2.5 text-[#57534E]">$16,286M in H1 2026 (14x YoY); $35.3B annual base run-rate</td>
+                        <td class="p-2.5 text-[#1C1917]">Scales 190% in Y1, 42% Y2–Y5, reaching <strong>$1.005T by 2036</strong></td>
+                        <td class="p-2.5 text-[#15803D]">Aggressive scaling plausible due to enterprise expansion & Anthropic Pharma</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2.5 font-bold text-[#1C1917]">Operating Margins</td>
+                        <td class="p-2.5 text-[#57534E]">Operating loss shrunk to $(693)M in H1; Q2 2026 reached +$974M</td>
+                        <td class="p-2.5 text-[#1C1917]">32.5% pre-tax target margin - <strong>5.0% regulatory drag = 27.5%</strong></td>
+                        <td class="p-2.5 text-[#B45309]">Regulatory compliance & alignment oversight create long-term margin tax</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2.5 font-bold text-[#1C1917]">Capital Intensity</td>
+                        <td class="p-2.5 text-[#57534E]">$265.6B+ in non-cancelable compute & hosting commitments</td>
+                        <td class="p-2.5 text-[#1C1917]">Sales-to-Capital = <strong>3.0x</strong> ($1 reinvestment per $3 incremental rev)</td>
+                        <td class="p-2.5 text-[#B91C1C]">Hardware obsolescence requires continuous multi-billion annual reinvestment</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2.5 font-bold text-[#1C1917]">Credit & Distress</td>
+                        <td class="p-2.5 text-[#57534E]">$108.6B convertibles; $131.7B liquidity; BB+ synthetic rating</td>
+                        <td class="p-2.5 text-[#1C1917]">WACC = <strong>9.74% &rarr; 9.13%</strong>; <strong>10% probability of failure</strong></td>
+                        <td class="p-2.5 text-[#57534E]">Distress risk cushioned by $131.7B cash and public capital market access</td>
+                    </tr>
+                    <tr class="bg-[#FAF7F2] font-bold">
+                        <td class="p-2.5 text-[#1C1917]">Implied Value</td>
+                        <td class="p-2.5 text-[#B45309]">$1,500B – $2,000B ($525.00 / share)</td>
+                        <td class="p-2.5 text-[#15803D]">$1,450.5B Common Equity ($439.24 / share)</td>
+                        <td class="p-2.5 text-[#B91C1C]">Stock is 15%–25% overvalued at IPO; wait for lockup discount</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Raw Artifacts Vault -->
+        <div class="card p-5 space-y-3">
+            <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                    Primary Source Documents & Repository Vault
+                </h3>
+                <span class="text-[11px] font-mono text-[#8C867A]">Direct Repository Files</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs font-mono">
+                <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex flex-col justify-between">
+                    <div>
+                        <div class="text-[10px] text-[#8C867A] uppercase mb-1">SEC Form S-1 Filing</div>
+                        <div class="font-bold text-[#1C1917] truncate">anthropicpbc-sx1.htm</div>
+                        <div class="text-[11px] text-[#57534E] mt-1">416-page raw HTML EDGAR registration document (14 MB).</div>
+                    </div>
+                    <div class="mt-2 pt-2 border-t border-[#ECE7DE]">
+                        <span class="text-[#B45309] font-bold">Local File: raw_filings/</span>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex flex-col justify-between">
+                    <div>
+                        <div class="text-[10px] text-[#8C867A] uppercase mb-1">Damodaran Ginzu Model</div>
+                        <div class="font-bold text-[#1C1917] truncate">AnthropicIPO.xlsx</div>
+                        <div class="text-[11px] text-[#57534E] mt-1">Full 18-sheet Excel valuation workbook with dynamic formulas (288 KB).</div>
+                    </div>
+                    <div class="mt-2 pt-2 border-t border-[#ECE7DE]">
+                        <span class="text-[#B45309] font-bold">Local File: models/</span>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex flex-col justify-between">
+                    <div>
+                        <div class="text-[10px] text-[#8C867A] uppercase mb-1">Damodaran Analysis</div>
+                        <div class="font-bold text-[#1C1917] truncate">substack_damodaran.txt</div>
+                        <div class="text-[11px] text-[#57534E] mt-1">Complete original Substack narrative: "The Anthropic Valuation: Story and Numbers".</div>
+                    </div>
+                    <div class="mt-2 pt-2 border-t border-[#ECE7DE]">
+                        <span class="text-[#B45309] font-bold">Local File: root/</span>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex flex-col justify-between">
+                    <div>
+                        <div class="text-[10px] text-[#8C867A] uppercase mb-1">UI & Visualization Wiki</div>
+                        <div class="font-bold text-[#1C1917] truncate">UI_Standard.md</div>
+                        <div class="text-[11px] text-[#57534E] mt-1">Default design tokens, beige palette standard, and Chart.js blueprint.</div>
+                    </div>
+                    <div class="mt-2 pt-2 border-t border-[#ECE7DE]">
+                        <span class="text-[#B45309] font-bold">Local File: ValuationWiki/</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-[#E5E0D8] bg-[#FFFFFF] py-6 text-center text-xs text-[#8C867A] font-mono">
+        Anthropic, PBC (NASDAQ: ANT) Case File &bull; ERVIS Institutional Valuation & Gate 5 Sign-Off &bull; Default Beige Standard
+    </footer>
+
+</body>
+</html>

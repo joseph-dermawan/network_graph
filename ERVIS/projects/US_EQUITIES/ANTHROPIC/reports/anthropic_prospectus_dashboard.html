@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anthropic, PBC — SEC Form S-1 Prospectus Intelligence & Financial Dashboard</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --bg-page: #FAF7F2;
+            --bg-card: #FFFFFF;
+            --bg-subtle: #F4EFEB;
+            --bg-active: #EFE8DF;
+            --border-main: #E5E0D8;
+            --border-dark: #D8D2C5;
+            --text-primary: #1C1917;
+            --text-secondary: #57534E;
+            --text-muted: #8C867A;
+            --accent-amber: #B45309;
+            --accent-amber-light: #FEF3C7;
+            --accent-green: #15803D;
+            --accent-green-light: #DCFCE7;
+            --accent-red: #B91C1C;
+            --accent-red-light: #FEE2E2;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Newsreader', Georgia, serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 13px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-serif { font-family: var(--font-serif); }
+        .font-mono { font-family: var(--font-mono); }
+        .font-sans { font-family: var(--font-sans); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-page);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-dark);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B0A898;
+        }
+
+        /* Institutional Financial Table Styling */
+        .fin-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+        }
+        .fin-table th {
+            font-family: var(--font-sans);
+            font-size: 10.5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            padding: 8px 12px;
+            border-bottom: 2px solid var(--border-dark);
+            background-color: var(--bg-subtle);
+            text-align: right;
+            white-space: nowrap;
+        }
+        .fin-table th:first-child {
+            text-align: left;
+        }
+        .fin-table td {
+            padding: 6px 12px;
+            border-bottom: 1px solid #ECE7DE;
+            color: var(--text-primary);
+            text-align: right;
+            white-space: nowrap;
+        }
+        .fin-table td:first-child {
+            text-align: left;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--text-primary);
+            white-space: normal;
+        }
+        .fin-table tr:hover td {
+            background-color: #F8F5EE;
+        }
+        .fin-table .row-indent-1 td:first-child { padding-left: 24px; color: var(--text-secondary); }
+        .fin-table .row-indent-2 td:first-child { padding-left: 36px; color: var(--text-secondary); }
+        .fin-table .row-subtotal td {
+            font-weight: 600;
+            border-top: 1px solid var(--border-dark);
+            border-bottom: 1px solid var(--border-dark);
+            background-color: #FAF6EF;
+        }
+        .fin-table .row-total td {
+            font-weight: 700;
+            border-top: 1px solid var(--text-primary);
+            border-bottom: 3px double var(--text-primary);
+            background-color: var(--bg-subtle);
+        }
+        .fin-table .row-section-header td {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-size: 11px;
+            color: var(--text-primary);
+            background-color: var(--bg-subtle);
+            padding-top: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        /* Navigation Tabs */
+        .nav-tab {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            padding: 9px 16px;
+            color: var(--text-secondary);
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            white-space: nowrap;
+        }
+        .nav-tab:hover {
+            color: var(--text-primary);
+            background-color: rgba(244, 239, 235, 0.6);
+        }
+        .nav-tab.active {
+            color: var(--accent-amber);
+            font-weight: 600;
+            border-bottom-color: var(--accent-amber);
+            background-color: #FFFFFF;
+        }
+
+        /* Sub-tab Pill Switcher */
+        .sub-tab-pill {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            border: 1px solid var(--border-main);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .sub-tab-pill:hover {
+            background: var(--bg-subtle);
+            color: var(--text-primary);
+        }
+        .sub-tab-pill.active {
+            background: var(--text-primary);
+            color: #FFFFFF;
+            border-color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Card / Panel */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-main);
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        /* Risk Badge */
+        .risk-item {
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: 1px solid var(--border-main);
+        }
+        .risk-item:hover {
+            border-color: var(--accent-amber);
+            background-color: #FFFDF8;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(180, 83, 9, 0.08);
+        }
+
+        /* Modal / Slide-over */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(28, 25, 23, 0.45);
+            backdrop-filter: blur(2px);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: #FFFFFF;
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            max-width: 640px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            animation: fadeIn 0.18s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.97); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+    <!-- PWA & iPadOS Standalone Settings -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ERVIS ANT">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="theme-color" content="#FAF7F2">
+</head>
+<body class="min-h-screen">
+
+    <!-- Top Institutional Header -->
+    <header class="bg-[#FFFFFF] border-b border-[#E5E0D8] sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div>
+                <div class="flex items-center space-x-2 text-[10.5px] font-mono text-[#8C867A] mb-1">
+                    <a href="anthropic_case_file.html" class="text-[#B45309] font-bold hover:underline flex items-center gap-1">&larr; CASE FILE HOME</a>
+                    <span>/</span>
+                    <a href="damodaran_breakdown_reader.html" class="hover:underline text-[#57534E]">DAMODARAN EXCEL</a>
+                    <span>/</span>
+                    <a href="ervis_valuation_cockpit.html" class="hover:underline text-[#57534E]">ERVIS TERMINAL</a>
+                    <span>/</span>
+                    <span class="text-[#1C1917] font-semibold">FORM S-1 (Q2 2026)</span>
+                </div>
+                <div class="flex items-baseline space-x-3">
+                    <h1 class="text-xl font-serif font-semibold text-[#1C1917] tracking-tight">
+                        Anthropic, PBC
+                    </h1>
+                    <span class="text-xs font-mono font-bold px-2 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded text-[#B45309]">
+                        NASDAQ: ANT
+                    </span>
+                    <span class="text-xs text-[#57534E]">
+                        Delaware Public Benefit Corporation &bull; CIK: 00018696045
+                    </span>
+                </div>
+            </div>
+
+            <!-- Key Quick Figures -->
+            <div class="flex items-center space-x-4 text-xs font-mono">
+                <div class="text-right">
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">H1 2026 Revenue</div>
+                    <div class="text-sm font-bold text-[#1C1917]">$16,286M <span class="text-[10px] font-normal text-[#15803D]">(14x YoY)</span></div>
+                </div>
+                <div class="h-7 w-px bg-[#E5E0D8]"></div>
+                <div class="text-right">
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Cash & Short-Term</div>
+                    <div class="text-sm font-bold text-[#1C1917]">$131,651M</div>
+                </div>
+                <div class="h-7 w-px bg-[#E5E0D8]"></div>
+                <div class="text-right">
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Compute Commitments</div>
+                    <div class="text-sm font-bold text-[#B45309]">$265.6B+</div>
+                </div>
+                <div class="h-7 w-px bg-[#E5E0D8]"></div>
+                <div class="text-right">
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Target Valuation</div>
+                    <div class="text-sm font-bold text-[#1C1917]">$1.5T – $2.0T</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5-Component Main Navigation Bar -->
+        <div class="max-w-7xl mx-auto px-6 flex space-x-1 border-t border-[#ECE7DE] overflow-x-auto">
+            <button class="nav-tab active" onclick="switchMainTab('tab-statements')">
+                [01] FINANCIAL STATEMENTS
+            </button>
+            <button class="nav-tab" onclick="switchMainTab('tab-business')">
+                [02] BUSINESS MODEL & MARGINS
+            </button>
+            <button class="nav-tab" onclick="switchMainTab('tab-equity')">
+                [03] CAPITAL STRUCTURE & PARTNERSHIPS
+            </button>
+            <button class="nav-tab" onclick="switchMainTab('tab-risk')">
+                [04] QUANTITATIVE RISK & AUDIT
+            </button>
+            <button class="nav-tab" onclick="switchMainTab('tab-special')">
+                [05] SPECIAL DISCLOSURES & IPO MECHANICS
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-6 py-6">
+
+        <!-- ========================================================================================= -->
+        <!-- COMPONENT 1: FINANCIAL STATEMENTS                                                         -->
+        <!-- ========================================================================================= -->
+        <section id="tab-statements" class="tab-pane block space-y-5">
+            <!-- Header Bar with Subtabs & Export info -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E5E0D8]">
+                <div>
+                    <h2 class="text-base font-serif font-bold text-[#1C1917]">
+                        Consolidated Financial Statements
+                    </h2>
+                    <p class="text-xs text-[#57534E]">
+                        Sourced directly from Anthropic, PBC SEC Form S-1 Filing (In Millions USD, except share data)
+                    </p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class="sub-tab-pill active" onclick="switchStatement('stmt-income')">Income Statement</button>
+                    <button class="sub-tab-pill" onclick="switchStatement('stmt-balance')">Balance Sheet</button>
+                    <button class="sub-tab-pill" onclick="switchStatement('stmt-cashflow')">Cash Flows</button>
+                </div>
+            </div>
+
+            <!-- Statement 1A: Income Statement -->
+            <div id="stmt-income" class="statement-view card p-5 overflow-x-auto">
+                <div class="flex items-baseline justify-between mb-3 border-b border-[#E5E0D8] pb-2">
+                    <h3 class="text-sm font-serif font-semibold text-[#1C1917]">
+                        Consolidated Statements of Operations
+                    </h3>
+                    <span class="text-[11px] font-mono text-[#8C867A]">Amounts in Millions USD</span>
+                </div>
+                <table class="fin-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 44%;">Line Item</th>
+                            <th>FY 2023</th>
+                            <th>FY 2024</th>
+                            <th>FY 2025</th>
+                            <th>6M Ended Jun 2025</th>
+                            <th>6M Ended Jun 2026</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Revenue</strong></td>
+                            <td>$41</td>
+                            <td>$386</td>
+                            <td>$4,585</td>
+                            <td>$1,163</td>
+                            <td><strong>$16,286</strong></td>
+                        </tr>
+                        <tr class="row-section-header">
+                            <td colspan="6">Operating Expenses</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Compute and infrastructure</td>
+                            <td>433</td>
+                            <td>2,522</td>
+                            <td>7,326</td>
+                            <td>2,334</td>
+                            <td>8,945</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Personnel (including SBC)</td>
+                            <td>95</td>
+                            <td>454</td>
+                            <td>1,839</td>
+                            <td>538</td>
+                            <td>3,152</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Bartz copyright settlement</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>1,500</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Sales, marketing, and partnerships</td>
+                            <td>2</td>
+                            <td>43</td>
+                            <td>568</td>
+                            <td>120</td>
+                            <td>3,168</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Other operating and administrative</td>
+                            <td>62</td>
+                            <td>347</td>
+                            <td>1,412</td>
+                            <td>306</td>
+                            <td>1,714</td>
+                        </tr>
+                        <tr class="row-subtotal">
+                            <td>Total operating expenses</td>
+                            <td>592</td>
+                            <td>3,366</td>
+                            <td>12,645</td>
+                            <td>3,298</td>
+                            <td>16,979</td>
+                        </tr>
+                        <tr class="row-subtotal" style="background-color: #FAF4EB;">
+                            <td><strong>Operating Income (Loss)</strong></td>
+                            <td class="text-[#B91C1C]">(551)</td>
+                            <td class="text-[#B91C1C]">(2,980)</td>
+                            <td class="text-[#B91C1C]">(8,060)</td>
+                            <td class="text-[#B91C1C]">(2,135)</td>
+                            <td class="text-[#B45309]"><strong>(693)</strong></td>
+                        </tr>
+                        <tr class="row-section-header">
+                            <td colspan="6">Other Income (Expense)</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Interest income</td>
+                            <td>69</td>
+                            <td>106</td>
+                            <td>431</td>
+                            <td>115</td>
+                            <td>1,111</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Change in fair value of convertibles, derivatives, SAFEs</td>
+                            <td class="text-[#B91C1C]">(1,045)</td>
+                            <td class="text-[#B91C1C]">(5,434)</td>
+                            <td class="text-[#B91C1C]">(34,308)</td>
+                            <td class="text-[#B91C1C]">(10,942)</td>
+                            <td class="text-[#B91C1C]">(72,388)</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Other income (expense), net</td>
+                            <td class="text-[#B91C1C]">(2)</td>
+                            <td>—</td>
+                            <td class="text-[#B91C1C]">(8)</td>
+                            <td>—</td>
+                            <td class="text-[#B91C1C]">(8,757)</td>
+                        </tr>
+                        <tr class="row-subtotal">
+                            <td>Total other expense, net</td>
+                            <td class="text-[#B91C1C]">(978)</td>
+                            <td class="text-[#B91C1C]">(5,328)</td>
+                            <td class="text-[#B91C1C]">(33,885)</td>
+                            <td class="text-[#B91C1C]">(10,827)</td>
+                            <td class="text-[#B91C1C]">(80,034)</td>
+                        </tr>
+                        <tr>
+                            <td>Loss before provision for income taxes</td>
+                            <td class="text-[#B91C1C]">(1,529)</td>
+                            <td class="text-[#B91C1C]">(8,308)</td>
+                            <td class="text-[#B91C1C]">(41,945)</td>
+                            <td class="text-[#B91C1C]">(12,962)</td>
+                            <td class="text-[#B91C1C]">(80,727)</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Provision for income taxes</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>20</td>
+                            <td>7</td>
+                            <td>21</td>
+                        </tr>
+                        <tr class="row-total">
+                            <td><strong>Net Loss</strong></td>
+                            <td class="text-[#B91C1C]"><strong>$(1,531)</strong></td>
+                            <td class="text-[#B91C1C]"><strong>$(8,309)</strong></td>
+                            <td class="text-[#B91C1C]"><strong>$(41,965)</strong></td>
+                            <td class="text-[#B91C1C]"><strong>$(12,969)</strong></td>
+                            <td class="text-[#B91C1C]"><strong>$(80,748)</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mt-3 p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded text-xs text-[#57534E]">
+                    <strong class="text-[#1C1917]">Key Insight:</strong> 
+                    While headline GAAP Net Loss was $(80,748)M, a staggering <strong>$72,388M (89.6%)</strong> represents a non-cash mark-to-market expensing of the conversion option liability on convertible debt as Anthropic's private valuation multiplied. True operating loss for H1 2026 shrunk by 67.5% YoY to just <strong>$(693)M</strong> on $16.3B revenue.
+                </div>
+            </div>
+
+            <!-- Statement 1B: Balance Sheet -->
+            <div id="stmt-balance" class="statement-view card p-5 overflow-x-auto hidden">
+                <div class="flex items-baseline justify-between mb-3 border-b border-[#E5E0D8] pb-2">
+                    <h3 class="text-sm font-serif font-semibold text-[#1C1917]">
+                        Consolidated Balance Sheets
+                    </h3>
+                    <span class="text-[11px] font-mono text-[#8C867A]">Amounts in Millions USD</span>
+                </div>
+                <table class="fin-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">Line Item</th>
+                            <th>As of Dec 31, 2024</th>
+                            <th>As of Dec 31, 2025</th>
+                            <th>As of Jun 30, 2026</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row-section-header">
+                            <td colspan="4">Current Assets</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Cash and cash equivalents</td>
+                            <td>$3,141</td>
+                            <td>$17,388</td>
+                            <td><strong>$112,389</strong></td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Short-term investments</td>
+                            <td>—</td>
+                            <td>2,889</td>
+                            <td>19,262</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Accounts receivable, net</td>
+                            <td>95</td>
+                            <td>909</td>
+                            <td>5,833</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Prepaid expenses and other current assets</td>
+                            <td>2,076</td>
+                            <td>2,560</td>
+                            <td>496</td>
+                        </tr>
+                        <tr class="row-subtotal">
+                            <td>Total current assets</td>
+                            <td>5,312</td>
+                            <td>23,746</td>
+                            <td><strong>137,980</strong></td>
+                        </tr>
+                        <tr class="row-section-header">
+                            <td colspan="4">Non-Current Assets</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Restricted cash</td>
+                            <td>13</td>
+                            <td>13</td>
+                            <td>2,529</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Property and equipment, net</td>
+                            <td>19</td>
+                            <td>146</td>
+                            <td>1,187</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Operating lease right-of-use assets</td>
+                            <td>35</td>
+                            <td>126</td>
+                            <td>1,157</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Goodwill</td>
+                            <td>—</td>
+                            <td>154</td>
+                            <td>576</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Other noncurrent assets (including investments)</td>
+                            <td>2,373</td>
+                            <td>476</td>
+                            <td>3,929</td>
+                        </tr>
+                        <tr class="row-total">
+                            <td><strong>Total Assets</strong></td>
+                            <td><strong>$7,752</strong></td>
+                            <td><strong>$24,661</strong></td>
+                            <td><strong>$147,358</strong></td>
+                        </tr>
+                        <tr class="row-section-header">
+                            <td colspan="4">Current Liabilities</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Accounts payable, accrued expenses & other current liabilities</td>
+                            <td>$333</td>
+                            <td>$2,511</td>
+                            <td>$5,422</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Operating lease liabilities, current</td>
+                            <td>13</td>
+                            <td>37</td>
+                            <td>148</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Deferred revenue</td>
+                            <td>28</td>
+                            <td>269</td>
+                            <td>1,650</td>
+                        </tr>
+                        <tr class="row-subtotal">
+                            <td>Total current liabilities</td>
+                            <td>374</td>
+                            <td>2,817</td>
+                            <td>7,220</td>
+                        </tr>
+                        <tr class="row-section-header">
+                            <td colspan="4">Non-Current Liabilities</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Convertible notes payable (fair value)</td>
+                            <td>14,116</td>
+                            <td>41,677</td>
+                            <td><strong>108,566</strong></td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Operating lease liabilities, noncurrent</td>
+                            <td>39</td>
+                            <td>80</td>
+                            <td>931</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Other noncurrent liabilities</td>
+                            <td>150</td>
+                            <td>823</td>
+                            <td>750</td>
+                        </tr>
+                        <tr class="row-subtotal">
+                            <td>Total liabilities</td>
+                            <td>14,679</td>
+                            <td>45,397</td>
+                            <td><strong>117,467</strong></td>
+                        </tr>
+                        <tr class="row-subtotal" style="background-color: #FAF4EB;">
+                            <td><strong>Redeemable Convertible Preferred Stock</strong></td>
+                            <td><strong>$2,874</strong></td>
+                            <td><strong>$29,769</strong></td>
+                            <td><strong>$157,510</strong></td>
+                        </tr>
+                        <tr class="row-section-header">
+                            <td colspan="4">Stockholders' Deficit</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Common Stock (Class A, N, T, par $0.00001)</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Additional paid-in capital</td>
+                            <td>239</td>
+                            <td>1,644</td>
+                            <td>5,336</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Accumulated other comprehensive income (loss)</td>
+                            <td>—</td>
+                            <td>5</td>
+                            <td class="text-[#B91C1C]">(53)</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Accumulated deficit</td>
+                            <td class="text-[#B91C1C]">(10,040)</td>
+                            <td class="text-[#B91C1C]">(52,154)</td>
+                            <td class="text-[#B91C1C]">(132,902)</td>
+                        </tr>
+                        <tr class="row-subtotal">
+                            <td>Total stockholders' deficit</td>
+                            <td class="text-[#B91C1C]">(9,801)</td>
+                            <td class="text-[#B91C1C]">(50,505)</td>
+                            <td class="text-[#B91C1C]">(127,619)</td>
+                        </tr>
+                        <tr class="row-total">
+                            <td><strong>Total Liabilities, Preferred Stock & Deficit</strong></td>
+                            <td><strong>$7,752</strong></td>
+                            <td><strong>$24,661</strong></td>
+                            <td><strong>$147,358</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Statement 1C: Statement of Cash Flows -->
+            <div id="stmt-cashflow" class="statement-view card p-5 overflow-x-auto hidden">
+                <div class="flex items-baseline justify-between mb-3 border-b border-[#E5E0D8] pb-2">
+                    <h3 class="text-sm font-serif font-semibold text-[#1C1917]">
+                        Consolidated Statements of Cash Flows
+                    </h3>
+                    <span class="text-[11px] font-mono text-[#8C867A]">Amounts in Millions USD</span>
+                </div>
+                <table class="fin-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 44%;">Line Item</th>
+                            <th>FY 2023</th>
+                            <th>FY 2024</th>
+                            <th>FY 2025</th>
+                            <th>6M Ended Jun 2025</th>
+                            <th>6M Ended Jun 2026</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row-section-header">
+                            <td colspan="6">Operating Activities</td>
+                        </tr>
+                        <tr>
+                            <td>Net Loss</td>
+                            <td class="text-[#B91C1C]">$(1,531)</td>
+                            <td class="text-[#B91C1C]">$(8,309)</td>
+                            <td class="text-[#B91C1C]">$(41,965)</td>
+                            <td class="text-[#B91C1C]">$(12,969)</td>
+                            <td class="text-[#B91C1C]">$(80,748)</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Change in fair value of convertibles & derivatives</td>
+                            <td>1,045</td>
+                            <td>5,434</td>
+                            <td>34,308</td>
+                            <td>10,942</td>
+                            <td><strong>72,388</strong></td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Other non-cash financial instruments adjustment</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>8,720</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Stock-based compensation</td>
+                            <td>29</td>
+                            <td>192</td>
+                            <td>1,158</td>
+                            <td>279</td>
+                            <td>2,185</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Depreciation and amortization</td>
+                            <td>3</td>
+                            <td>21</td>
+                            <td>40</td>
+                            <td>14</td>
+                            <td>97</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Net changes in operating assets & liabilities</td>
+                            <td class="text-[#B91C1C]">(1,173)</td>
+                            <td class="text-[#B91C1C]">(3,030)</td>
+                            <td>3,822</td>
+                            <td>216</td>
+                            <td>1,287</td>
+                        </tr>
+                        <tr class="row-subtotal" style="background-color: #FAF4EB;">
+                            <td><strong>Net Cash Provided by (Used in) Operating Activities</strong></td>
+                            <td class="text-[#B91C1C]">(1,627)</td>
+                            <td class="text-[#B91C1C]">(5,692)</td>
+                            <td class="text-[#B91C1C]">(2,637)</td>
+                            <td class="text-[#B91C1C]">(1,513)</td>
+                            <td class="text-[#15803D]"><strong>+3,929</strong></td>
+                        </tr>
+                        <tr class="row-section-header">
+                            <td colspan="6">Investing Activities</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Purchases of property and equipment (CapEx)</td>
+                            <td class="text-[#B91C1C]">(2)</td>
+                            <td class="text-[#B91C1C]">(15)</td>
+                            <td class="text-[#B91C1C]">(131)</td>
+                            <td class="text-[#B91C1C]">(18)</td>
+                            <td class="text-[#B91C1C]">(482)</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Purchases of short-term investments</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td class="text-[#B91C1C]">(3,082)</td>
+                            <td>—</td>
+                            <td class="text-[#B91C1C]">(18,972)</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Sales/maturities of short-term investments & other</td>
+                            <td>—</td>
+                            <td class="text-[#B91C1C]">(7)</td>
+                            <td>136</td>
+                            <td class="text-[#B91C1C]">(31)</td>
+                            <td>2,273</td>
+                        </tr>
+                        <tr class="row-subtotal">
+                            <td>Net Cash Used in Investing Activities</td>
+                            <td class="text-[#B91C1C]">(2)</td>
+                            <td class="text-[#B91C1C]">(22)</td>
+                            <td class="text-[#B91C1C]">(3,077)</td>
+                            <td class="text-[#B91C1C]">(49)</td>
+                            <td class="text-[#B91C1C]"><strong>(17,181)</strong></td>
+                        </tr>
+                        <tr class="row-section-header">
+                            <td colspan="6">Financing Activities</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Proceeds from preferred stock issuance</td>
+                            <td>445</td>
+                            <td>1,188</td>
+                            <td>16,548</td>
+                            <td>3,549</td>
+                            <td><strong>110,432</strong></td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Issuance of convertible notes & SAFEs</td>
+                            <td>1,872</td>
+                            <td>6,050</td>
+                            <td>3,450</td>
+                            <td>1,300</td>
+                            <td>—</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Common stock issuance, repurchases & other</td>
+                            <td>3</td>
+                            <td>10</td>
+                            <td class="text-[#B91C1C]">(38)</td>
+                            <td class="text-[#B91C1C]">(100)</td>
+                            <td>342</td>
+                        </tr>
+                        <tr class="row-subtotal">
+                            <td>Net Cash Provided by Financing Activities</td>
+                            <td>2,320</td>
+                            <td>7,248</td>
+                            <td>19,960</td>
+                            <td>4,749</td>
+                            <td><strong>110,774</strong></td>
+                        </tr>
+                        <tr class="row-total">
+                            <td><strong>Cash, Cash Eq. & Restricted Cash (Ending)</strong></td>
+                            <td><strong>$1,620</strong></td>
+                            <td><strong>$3,154</strong></td>
+                            <td><strong>$17,401</strong></td>
+                            <td><strong>$6,342</strong></td>
+                            <td><strong>$114,918</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ========================================================================================= -->
+        <!-- COMPONENT 2: BUSINESS MODEL, COGS & MARGIN DYNAMICS                                       -->
+        <!-- ========================================================================================= -->
+        <section id="tab-business" class="tab-pane hidden space-y-6">
+            <div class="flex items-baseline justify-between pb-3 border-b border-[#E5E0D8]">
+                <div>
+                    <h2 class="text-base font-serif font-bold text-[#1C1917]">
+                        Business Model, Unit Economics & COGS Decoupling
+                    </h2>
+                    <p class="text-xs text-[#57534E]">
+                        Dissecting Anthropic's monetization engines, inference scaling laws, and quarterly operating leverage
+                    </p>
+                </div>
+                <span class="text-xs font-mono px-2 py-0.5 bg-[#DCFCE7] text-[#15803D] border border-[#BBF7D0] rounded">
+                    Q2 2026: Operating Profit Turnaround
+                </span>
+            </div>
+
+            <!-- 3 Monetization Pillars -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="card p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-mono font-semibold text-[#B45309]">REVENUE ENGINE 01</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 bg-[#FEF3C7] text-[#92400E] rounded">~80% MIX</span>
+                    </div>
+                    <h3 class="text-sm font-serif font-bold text-[#1C1917] mb-1">Enterprise API Usage (Tokens)</h3>
+                    <p class="text-xs text-[#57534E] mb-3">
+                        Dynamic usage-based consumption priced per million input/output tokens. Distributed via first-party Anthropic API, AWS Bedrock, and Google Cloud Vertex AI.
+                    </p>
+                    <div class="border-t border-[#ECE7DE] pt-2 text-[11px] font-mono text-[#1C1917] flex justify-between">
+                        <span class="text-[#8C867A]">Key Tier:</span>
+                        <span>Claude 3.5 Sonnet / Opus</span>
+                    </div>
+                </div>
+
+                <div class="card p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-mono font-semibold text-[#15803D]">REVENUE ENGINE 02</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 bg-[#DCFCE7] text-[#166534] rounded">RAPIDLY SCALING</span>
+                    </div>
+                    <h3 class="text-sm font-serif font-bold text-[#1C1917] mb-1">Claude Enterprise Subscriptions</h3>
+                    <p class="text-xs text-[#57534E] mb-3">
+                        Fixed-seat multi-year contracts with 500K context windows, SSO, enterprise audit logs, and dedicated inferencing throughput for Fortune 500 workflows.
+                    </p>
+                    <div class="border-t border-[#ECE7DE] pt-2 text-[11px] font-mono text-[#1C1917] flex justify-between">
+                        <span class="text-[#8C867A]">$1M+ Clients:</span>
+                        <span>1,900 accounts (up from <100)</span>
+                    </div>
+                </div>
+
+                <div class="card p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-mono font-semibold text-[#4338CA]">REVENUE ENGINE 03</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 bg-[#EEF2FF] text-[#3730A3] rounded">CONSUMER / PRO</span>
+                    </div>
+                    <h3 class="text-sm font-serif font-bold text-[#1C1917] mb-1">Claude Pro / Team Tiers</h3>
+                    <p class="text-xs text-[#57534E] mb-3">
+                        $20/user/month recurring SaaS tier for individual knowledge workers, researchers, developers, and small teams with Claude Artifacts collaboration.
+                    </p>
+                    <div class="border-t border-[#ECE7DE] pt-2 text-[11px] font-mono text-[#1C1917] flex justify-between">
+                        <span class="text-[#8C867A]">Retention:</span>
+                        <span>High product stickiness</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quarterly Progression Table & Chart -->
+            <div class="card p-5 space-y-4">
+                <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                    <div>
+                        <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                            Quarterly Cost & Margin Decoupling (Q1 2025 &rarr; Q2 2026)
+                        </h3>
+                        <p class="text-xs text-[#57534E]">
+                            Compute costs (primary COGS) collapsed from 251.1% of revenue down to 48.1% as infrastructure scaled
+                        </p>
+                    </div>
+                    <span class="text-[11px] font-mono text-[#8C867A]">S-1 Unaudited Quarterly Financial Data</span>
+                </div>
+
+                <table class="fin-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 28%;">Metric ($ Millions)</th>
+                            <th>Q1 2025</th>
+                            <th>Q2 2025</th>
+                            <th>Q3 2025</th>
+                            <th>Q4 2025</th>
+                            <th>Q1 2026</th>
+                            <th>Q2 2026</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Revenue</strong></td>
+                            <td>$376</td>
+                            <td>$787</td>
+                            <td>$1,382</td>
+                            <td>$2,040</td>
+                            <td>$4,731</td>
+                            <td><strong>$11,555</strong></td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Compute and Infrastructure (COGS)</td>
+                            <td>$944</td>
+                            <td>$1,390</td>
+                            <td>$2,047</td>
+                            <td>$2,945</td>
+                            <td>$3,387</td>
+                            <td>$5,558</td>
+                        </tr>
+                        <tr class="row-subtotal">
+                            <td><strong>Compute Cost as % of Revenue</strong></td>
+                            <td class="text-[#B91C1C]"><strong>251.1%</strong></td>
+                            <td class="text-[#B91C1C]"><strong>176.6%</strong></td>
+                            <td class="text-[#B91C1C]"><strong>148.1%</strong></td>
+                            <td class="text-[#B91C1C]"><strong>144.4%</strong></td>
+                            <td class="text-[#15803D]"><strong>71.6%</strong></td>
+                            <td class="text-[#15803D]"><strong>48.1%</strong></td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Personnel & Talent</td>
+                            <td>$218</td>
+                            <td>$320</td>
+                            <td>$489</td>
+                            <td>$812</td>
+                            <td>$1,295</td>
+                            <td>$1,857</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Sales, Marketing & Partnerships</td>
+                            <td>$24</td>
+                            <td>$96</td>
+                            <td>$202</td>
+                            <td>$246</td>
+                            <td>$1,033</td>
+                            <td>$2,135</td>
+                        </tr>
+                        <tr class="row-indent-1">
+                            <td>Other Operating & Admin</td>
+                            <td>$125</td>
+                            <td>$181</td>
+                            <td>$233</td>
+                            <td>$873</td>
+                            <td>$683</td>
+                            <td>$1,031</td>
+                        </tr>
+                        <tr class="row-total">
+                            <td><strong>Operating Profit (Loss)</strong></td>
+                            <td class="text-[#B91C1C] font-mono">$(935)</td>
+                            <td class="text-[#B91C1C] font-mono">$(1,200)</td>
+                            <td class="text-[#B91C1C] font-mono">$(3,089)*</td>
+                            <td class="text-[#B91C1C] font-mono">$(2,836)</td>
+                            <td class="text-[#B91C1C] font-mono">$(1,667)</td>
+                            <td class="text-[#15803D] font-mono"><strong>+$974</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-[11px] text-[#8C867A] italic">
+                    *Q3 2025 operating loss includes the one-off $1,500M Bartz copyright litigation settlement charge. Excluding this, operating loss was $(1,589)M.
+                </div>
+            </div>
+
+            
+            <!-- Visual Inflection Chart -->
+            <div class="card p-4 space-y-2">
+                <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-2">
+                    <span class="text-xs font-mono font-bold text-[#1C1917] uppercase tracking-wide">
+                        Visualizing Compute Decoupling & Gross Margin Surge
+                    </span>
+                    <span class="text-[10px] font-mono text-[#8C867A]">Quarterly Data ($ Millions)</span>
+                </div>
+                <div class="h-64 w-full">
+                    <canvas id="cogsMarginChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Margin Drivers Breakdown -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="card p-4">
+                    <h3 class="text-xs font-mono font-bold text-[#1C1917] mb-2 uppercase tracking-wide">
+                        Gross Margin Inflection Dynamics
+                    </h3>
+                    <p class="text-xs text-[#57534E] leading-relaxed mb-3">
+                        Historically, Anthropic suffered from negative gross margins because frontier model pre-training clusters were continuously expensed alongside serving costs. As API query volumes scaled exponentially (14x YoY), the fixed cost base of baseline training clusters amortized across billions of billable tokens, expanding gross margin to <strong>+51.9% in Q2 2026</strong>.
+                    </p>
+                    <div class="flex items-center justify-between text-xs font-mono p-2 bg-[#FAF7F2] rounded border border-[#E5E0D8]">
+                        <span class="text-[#57534E]">Damodaran 10-Yr Target Margin:</span>
+                        <span class="font-bold text-[#1C1917]">27.5% Operating Margin</span>
+                    </div>
+                </div>
+
+                <div class="card p-4">
+                    <h3 class="text-xs font-mono font-bold text-[#1C1917] mb-2 uppercase tracking-wide">
+                        Operating Leverage & Fixed-Cost Shift
+                    </h3>
+                    <p class="text-xs text-[#57534E] leading-relaxed mb-3">
+                        By locking in multi-year compute capacity agreements totaling $265.6B+, Anthropic effectively converted variable GPU spot costs into fixed debt-like operating obligations. While this enables high margins at hyperscale, it drastically magnifies operating downside if revenue growth slows down.
+                    </p>
+                    <div class="flex items-center justify-between text-xs font-mono p-2 bg-[#FAF7F2] rounded border border-[#E5E0D8]">
+                        <span class="text-[#57534E]">Breakeven Revenue Run-Rate:</span>
+                        <span class="font-bold text-[#B45309]">~$35B – $40B ARR</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================================= -->
+        <!-- COMPONENT 3: EQUITY, COLLABORATIONS & STRATEGIC TIES                                      -->
+        <!-- ========================================================================================= -->
+        <section id="tab-equity" class="tab-pane hidden space-y-6">
+            <div class="flex items-baseline justify-between pb-3 border-b border-[#E5E0D8]">
+                <div>
+                    <h2 class="text-base font-serif font-bold text-[#1C1917]">
+                        Equity Architecture, Strategic Ties & Hyperscaler Circularity
+                    </h2>
+                    <p class="text-xs text-[#57534E]">
+                        Dissecting the 5-class share design, the Long-Term Benefit Trust, cloud partner circularity, and corporate ventures
+                    </p>
+                </div>
+                <span class="text-xs font-mono px-2 py-0.5 bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] rounded">
+                    5-Class Share Structure
+                </span>
+            </div>
+
+            <!-- The 5-Class Capital Structure Exhibit -->
+            <div class="card p-5 space-y-3">
+                <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                    <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                        Capital Structure & Governance Engineering (5 Share Classes)
+                    </h3>
+                    <span class="text-[11px] font-mono text-[#8C867A]">S-1 "Description of Capital Stock"</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="text-[10px] font-mono font-bold text-[#15803D] mb-1">CLASS A COMMON</div>
+                        <div class="font-serif font-semibold text-xs text-[#1C1917] mb-1">Public Investors</div>
+                        <div class="text-[11px] text-[#57534E] space-y-1">
+                            <div>&bull; <strong>1 Vote / Share</strong></div>
+                            <div>&bull; 100% Economic Rights</div>
+                            <div>&bull; Nasdaq listed ("ANT")</div>
+                            <div>&bull; Dilutable by preferred</div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-[#FAF7F2] border border-[#B45309] rounded">
+                        <div class="text-[10px] font-mono font-bold text-[#B45309] mb-1">CLASS F COMMON</div>
+                        <div class="font-serif font-semibold text-xs text-[#1C1917] mb-1">Founder LLC</div>
+                        <div class="text-[11px] text-[#57534E] space-y-1">
+                            <div>&bull; <strong>50.1% Voting Power</strong></div>
+                            <div>&bull; Exactly 1 share issued</div>
+                            <div>&bull; <strong>Zero Economic Rights</strong></div>
+                            <div>&bull; Held by 7 co-founders</div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-[#FAF7F2] border border-[#4338CA] rounded">
+                        <div class="text-[10px] font-mono font-bold text-[#4338CA] mb-1">CLASS T COMMON</div>
+                        <div class="font-serif font-semibold text-xs text-[#1C1917] mb-1">Long-Term Benefit Trust</div>
+                        <div class="text-[11px] text-[#57534E] space-y-1">
+                            <div>&bull; <strong>Elects Board Majority</strong></div>
+                            <div>&bull; Financially disinterested</div>
+                            <div>&bull; <strong>Zero Economic Rights</strong></div>
+                            <div>&bull; AI safety governance</div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="text-[10px] font-mono font-bold text-[#713F12] mb-1">CLASS E COMMON</div>
+                        <div class="font-serif font-semibold text-xs text-[#1C1917] mb-1">Non-Founder Employees</div>
+                        <div class="text-[11px] text-[#57534E] space-y-1">
+                            <div>&bull; Limited voting rights</div>
+                            <div>&bull; <strong>Zero Economic Rights</strong></div>
+                            <div>&bull; Carried interest pool</div>
+                            <div>&bull; Excludes co-founders</div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="text-[10px] font-mono font-bold text-[#64748B] mb-1">CLASS N COMMON</div>
+                        <div class="font-serif font-semibold text-xs text-[#1C1917] mb-1">Hyperscaler Partners</div>
+                        <div class="text-[11px] text-[#57534E] space-y-1">
+                            <div>&bull; <strong>Non-Voting Stock</strong></div>
+                            <div>&bull; 100% Economic Rights</div>
+                            <div>&bull; Avoids antitrust limits</div>
+                            <div>&bull; Converts 1:1 on transfer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-[#FEF2F2] border border-[#FECACA] rounded text-xs text-[#991B1B]">
+                    <strong>Damodaran's Editorial Critique:</strong> Public shareholders have effectively zero leverage. The Long-Term Benefit Trust selects the majority of the board, while Dario & Daniela Amodei's Founder LLC controls 50.1% of votes via a single golden share. Damodaran quipped that this voting structure is <em>"so deviously self-serving that it would put Kim Jong Un to shame."</em>
+                </div>
+            </div>
+
+            <!-- Strategic Collaborations & Cloud Circularity -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="card p-5 space-y-3">
+                    <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-2">
+                        <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                            Major Hyperscaler Alliances & Circularity
+                        </h3>
+                        <span class="text-[10px] font-mono px-2 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded">SYNDICATE</span>
+                    </div>
+
+                    <div class="space-y-3 text-xs text-[#57534E]">
+                        <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                            <div class="flex justify-between font-mono font-bold text-[#1C1917] mb-1">
+                                <span>Amazon Web Services (AWS)</span>
+                                <span class="text-[#B45309]">Primary Cloud Partner</span>
+                            </div>
+                            <p class="leading-relaxed">
+                                Amazon invested billions across convertible notes and preferred rounds. In exchange, Anthropic committed to AWS as its primary cloud training platform, optimizing models for Trainium/Inferentia chips, and distributing Claude natively on Bedrock.
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                            <div class="flex justify-between font-mono font-bold text-[#1C1917] mb-1">
+                                <span>Google Cloud Platform (GCP)</span>
+                                <span class="text-[#4338CA]">Compute & Cap-Table Ally</span>
+                            </div>
+                            <p class="leading-relaxed">
+                                Google committed multi-billion investments alongside dedicated TPU v5e/v5p cluster compute capacity agreements. Claude models are co-distributed on Google Cloud Vertex AI.
+                            </p>
+                        </div>
+
+                        <div class="p-2.5 bg-[#FFFBEB] border border-[#FDE68A] rounded text-[11.5px] text-[#92400E]">
+                            <strong>Circularity Risk:</strong> Capital flows in a closed loop: Big Tech finances Anthropic's equity and convertibles, and Anthropic immediately recycles those proceeds back to Big Tech via non-cancelable compute lease commitments.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategic Stakes & Corporate Ventures -->
+                <div class="card p-5 space-y-3">
+                    <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-2">
+                        <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                            Stakes in Other Entities & Vertical Ventures
+                        </h3>
+                        <span class="text-[10px] font-mono px-2 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded">EXPANSION</span>
+                    </div>
+
+                    <div class="space-y-3 text-xs text-[#57534E]">
+                        <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                            <div class="flex justify-between font-mono font-bold text-[#1C1917] mb-1">
+                                <span>Ode with Anthropic</span>
+                                <span class="text-[#15803D]">PE Joint Venture</span>
+                            </div>
+                            <p class="leading-relaxed">
+                                Newly established AI services company co-launched with leading private equity firms. Directly builds, embeds, and manages custom agentic Claude workflows across mid-sized portfolio enterprises.
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                            <div class="flex justify-between font-mono font-bold text-[#1C1917] mb-1">
+                                <span>Life Sciences & "Anthropic Pharma"</span>
+                                <span class="text-[#7C3AED]">Vertical Disruption</span>
+                            </div>
+                            <p class="leading-relaxed">
+                                S-1 reveals strategic deployment into the $2 Trillion global pharmaceutical market. Deploys autonomous Claude agents for de-novo molecular design, protein folding, and clinical trials—positioning Anthropic to capture direct economics from proprietary drug pipelines.
+                            </p>
+                        </div>
+
+                        <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded text-[11.5px] text-[#57534E]">
+                            <strong>Balance Sheet Strategic Assets:</strong> Anthropic carries <strong>$3,929M</strong> in other non-current assets and minority strategic investments in foundational AI research and data infrastructure.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================================= -->
+        <!-- COMPONENT 4: RISK & ASSESSMENT (QUANTITATIVE FIRST, CLEAN POP-UPS)                         -->
+        <!-- ========================================================================================= -->
+        <section id="tab-risk" class="tab-pane hidden space-y-6">
+            <div class="flex items-baseline justify-between pb-3 border-b border-[#E5E0D8]">
+                <div>
+                    <h2 class="text-base font-serif font-bold text-[#1C1917]">
+                        Risk Architecture & Quantitative Audit
+                    </h2>
+                    <p class="text-xs text-[#57534E]">
+                        Prioritizing balance sheet exposures and hard metrics; click qualitative items for detailed modal analysis
+                    </p>
+                </div>
+                <span class="text-xs font-mono px-2 py-0.5 bg-[#FEE2E2] text-[#991B1B] border border-[#FECACA] rounded">
+                    BB+ Credit Profile &bull; 10% Failure Probability
+                </span>
+            </div>
+
+            <!-- Quantitative Risk Grid (Audited Numbers) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="card p-4">
+                    <div class="text-[10.5px] font-mono text-[#8C867A] uppercase">Contractual Commitments</div>
+                    <div class="text-xl font-mono font-bold text-[#B91C1C] my-1">$265.6B</div>
+                    <div class="text-[11px] text-[#57534E]">
+                        Fixed minimum payments to CSPs (1 to 20-year terms). $54.6B due by 2030.
+                    </div>
+                </div>
+
+                <div class="card p-4">
+                    <div class="text-[10.5px] font-mono text-[#8C867A] uppercase">Top 5 Concentration</div>
+                    <div class="text-xl font-mono font-bold text-[#B45309] my-1">25.0%</div>
+                    <div class="text-[11px] text-[#57534E]">
+                        Top 5 enterprise customers generate a quarter of total company revenues.
+                    </div>
+                </div>
+
+                <div class="card p-4">
+                    <div class="text-[10.5px] font-mono text-[#8C867A] uppercase">Convertible Notes Debt</div>
+                    <div class="text-xl font-mono font-bold text-[#1C1917] my-1">$108.6B</div>
+                    <div class="text-[11px] text-[#57534E]">
+                        Carrying fair value of convertible obligations prior to IPO equity conversion.
+                    </div>
+                </div>
+
+                <div class="card p-4">
+                    <div class="text-[10.5px] font-mono text-[#8C867A] uppercase">Liquidity Cushion</div>
+                    <div class="text-xl font-mono font-bold text-[#15803D] my-1">$131.7B</div>
+                    <div class="text-[11px] text-[#57534E]">
+                        $112.4B cash + $19.3B short-term investments (+ $100B expected at IPO).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Future Minimum Commitments Schedule -->
+            <div class="card p-5 space-y-3">
+                <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                    <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                        Audited Purchase & Compute Commitments by Year (Note 13)
+                    </h3>
+                    <span class="text-[11px] font-mono text-[#8C867A]">Amounts in Millions USD</span>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-7 gap-2 text-center font-mono">
+                    <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="text-[10px] text-[#8C867A]">2026</div>
+                        <div class="text-xs font-bold text-[#1C1917]">$7,059M</div>
+                    </div>
+                    <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="text-[10px] text-[#8C867A]">2027</div>
+                        <div class="text-xs font-bold text-[#1C1917]">$11,128M</div>
+                    </div>
+                    <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="text-[10px] text-[#8C867A]">2028</div>
+                        <div class="text-xs font-bold text-[#1C1917]">$10,832M</div>
+                    </div>
+                    <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="text-[10px] text-[#8C867A]">2029</div>
+                        <div class="text-xs font-bold text-[#1C1917]">$8,304M</div>
+                    </div>
+                    <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="text-[10px] text-[#8C867A]">2030</div>
+                        <div class="text-xs font-bold text-[#1C1917]">$5,428M</div>
+                    </div>
+                    <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                        <div class="text-[10px] text-[#8C867A]">Thereafter</div>
+                        <div class="text-xs font-bold text-[#1C1917]">$11,808M</div>
+                    </div>
+                    <div class="p-2 bg-[#FEF3C7] border border-[#FDE68A] rounded">
+                        <div class="text-[10px] text-[#92400E]">June 30 Fixed</div>
+                        <div class="text-xs font-bold text-[#B45309]">$265,600M</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qualitative Risks: Minimalist Interactive Grid (Click to elaborate) -->
+            <div class="card p-5 space-y-3">
+                <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
+                    <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                        Qualitative Risk Audit (Click Item for S-1 Citation & Analysis)
+                    </h3>
+                    <span class="text-[11px] font-mono text-[#8C867A]">Minimalist UI &bull; Pop-up Elaborations</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                    <div class="risk-item p-3.5 rounded bg-[#FFFFFF] flex items-center justify-between" onclick="openRiskModal('risk-pbc')">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-2 h-2 rounded-full bg-[#B91C1C]"></span>
+                            <span class="font-medium text-[#1C1917]">Public Benefit Charter Fiduciary Divergence</span>
+                        </div>
+                        <span class="text-[11px] font-mono text-[#B45309]">&rarr; View Citation</span>
+                    </div>
+
+                    <div class="risk-item p-3.5 rounded bg-[#FFFFFF] flex items-center justify-between" onclick="openRiskModal('risk-compute')">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-2 h-2 rounded-full bg-[#B91C1C]"></span>
+                            <span class="font-medium text-[#1C1917]">Compute Accelerator Obsolescence & Drag</span>
+                        </div>
+                        <span class="text-[11px] font-mono text-[#B45309]">&rarr; View Citation</span>
+                    </div>
+
+                    <div class="risk-item p-3.5 rounded bg-[#FFFFFF] flex items-center justify-between" onclick="openRiskModal('risk-opensource')">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-2 h-2 rounded-full bg-[#B45309]"></span>
+                            <span class="font-medium text-[#1C1917]">Open-Weight / Open-Source Commoditization</span>
+                        </div>
+                        <span class="text-[11px] font-mono text-[#B45309]">&rarr; View Citation</span>
+                    </div>
+
+                    <div class="risk-item p-3.5 rounded bg-[#FFFFFF] flex items-center justify-between" onclick="openRiskModal('risk-regulatory')">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-2 h-2 rounded-full bg-[#B45309]"></span>
+                            <span class="font-medium text-[#1C1917]">Global AI Safety Regulation & Margin Friction</span>
+                        </div>
+                        <span class="text-[11px] font-mono text-[#B45309]">&rarr; View Citation</span>
+                    </div>
+
+                    <div class="risk-item p-3.5 rounded bg-[#FFFFFF] flex items-center justify-between" onclick="openRiskModal('risk-circularity')">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-2 h-2 rounded-full bg-[#B45309]"></span>
+                            <span class="font-medium text-[#1C1917]">Hyperscaler Vendor & Financing Circularity</span>
+                        </div>
+                        <span class="text-[11px] font-mono text-[#B45309]">&rarr; View Citation</span>
+                    </div>
+
+                    <div class="risk-item p-3.5 rounded bg-[#FFFFFF] flex items-center justify-between" onclick="openRiskModal('risk-personnel')">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-2 h-2 rounded-full bg-[#713F12]"></span>
+                            <span class="font-medium text-[#1C1917]">Co-Founder & Core Alignment Research Dependence</span>
+                        </div>
+                        <span class="text-[11px] font-mono text-[#B45309]">&rarr; View Citation</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================================= -->
+        <!-- COMPONENT 5: SPECIAL DISCLOSURES & IPO MECHANICS                                          -->
+        <!-- ========================================================================================= -->
+        <section id="tab-special" class="tab-pane hidden space-y-6">
+            <div class="flex items-baseline justify-between pb-3 border-b border-[#E5E0D8]">
+                <div>
+                    <h2 class="text-base font-serif font-bold text-[#1C1917]">
+                        Special Prospectus Disclosures & Offering Mechanics
+                    </h2>
+                    <p class="text-xs text-[#57534E]">
+                        Day-1 lock-up exceptions, the $1.5B Bartz copyright precedent, stock-based compensation, and underwriting syndicate
+                    </p>
+                </div>
+                <span class="text-xs font-mono px-2 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded text-[#1C1917]">
+                    Offering Syndicate: Morgan Stanley Lead
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Lock-up provisions -->
+                <div class="card p-5 space-y-3">
+                    <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-2">
+                        <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                            Unorthodox Lock-Up Release Structure
+                        </h3>
+                        <span class="text-[10px] font-mono px-2 py-0.5 bg-[#FEF3C7] text-[#92400E] rounded">
+                            DAY 1 UNLOCK
+                        </span>
+                    </div>
+                    <p class="text-xs text-[#57534E] leading-relaxed">
+                        Deviating from traditional tech IPO norms (which enforce strict 180-day lockups for all pre-IPO investors), Anthropic established a phased liquidity schedule:
+                    </p>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between items-center">
+                            <span><strong class="text-[#B45309]">Day 1 Opening:</strong> Existing Non-Affiliates</span>
+                            <span class="font-bold text-[#1C1917]">Up to 10% Immediate Sale</span>
+                        </div>
+                        <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between items-center">
+                            <span><strong class="text-[#1C1917]">Day 30–180:</strong> Staggered Tranches</span>
+                            <span class="text-[#57534E]">Volume & Price Gates</span>
+                        </div>
+                        <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between items-center">
+                            <span><strong class="text-[#15803D]">Day 365:</strong> Founders & Executive LLC</span>
+                            <span class="text-[#15803D]">1-Year Standoff</span>
+                        </div>
+                    </div>
+                    <div class="text-[11px] text-[#8C867A] italic">
+                        Damodaran notes this Day 1 unlock provides early venture backers partial liquidity while testing market appetite.
+                    </div>
+                </div>
+
+                <!-- Bartz Copyright Settlement -->
+                <div class="card p-5 space-y-3">
+                    <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-2">
+                        <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                            $1.50B Bartz Copyright Settlement
+                        </h3>
+                        <span class="text-[10px] font-mono px-2 py-0.5 bg-[#FEE2E2] text-[#991B1B] rounded">
+                            JUDICIAL PRECEDENT
+                        </span>
+                    </div>
+                    <p class="text-xs text-[#57534E] leading-relaxed">
+                        In August 2024, prominent authors filed a class-action lawsuit (*Bartz, et al. v. Anthropic*, N.D. Cal.) alleging copyright infringement for utilizing copyrighted literary works in Claude's pre-training corpus without licenses.
+                    </p>
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded text-xs space-y-1">
+                        <div class="flex justify-between font-mono">
+                            <span class="text-[#57534E]">Total Settlement Approved:</span>
+                            <span class="font-bold text-[#1C1917]">$1,500 Million (July 2026)</span>
+                        </div>
+                        <div class="flex justify-between font-mono">
+                            <span class="text-[#57534E]">Cash Paid in FY 2025:</span>
+                            <span class="text-[#1C1917]">$300 Million</span>
+                        </div>
+                        <div class="flex justify-between font-mono">
+                            <span class="text-[#57534E]">Remaining Balance Sheet Accrual:</span>
+                            <span class="text-[#B91C1C]">$1,200 Million</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-[#57534E]">
+                        This landmark settlement formally insulates Anthropic from historical training liabilities but raises the bar for future dataset licensing fees.
+                    </p>
+                </div>
+
+                <!-- Stock-Based Compensation & Talent Burn -->
+                <div class="card p-5 space-y-3">
+                    <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-2">
+                        <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                            Stock-Based Compensation (SBC) Velocity
+                        </h3>
+                        <span class="text-[10px] font-mono px-2 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded">
+                            TALENT RETENTION
+                        </span>
+                    </div>
+                    <p class="text-xs text-[#57534E] leading-relaxed">
+                        To attract and retain premier frontier AI alignment researchers against Meta, OpenAI, and Google, Anthropic has escalated equity grants:
+                    </p>
+                    <div class="grid grid-cols-3 gap-2 font-mono text-center text-xs">
+                        <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                            <div class="text-[10px] text-[#8C867A]">FY 2024</div>
+                            <div class="font-bold text-[#1C1917]">$192M</div>
+                        </div>
+                        <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                            <div class="text-[10px] text-[#8C867A]">FY 2025</div>
+                            <div class="font-bold text-[#1C1917]">$1,158M</div>
+                        </div>
+                        <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
+                            <div class="text-[10px] text-[#8C867A]">6M 2026</div>
+                            <div class="font-bold text-[#B45309]">$2,185M</div>
+                        </div>
+                    </div>
+                    <div class="text-[11px] text-[#57534E]">
+                        Unrecognized SBC expense associated with RSUs was <strong>$6.8B+</strong>, to be recognized over an average weighted period of 2.8 years.
+                    </div>
+                </div>
+
+                <!-- IPO Offering Parameters & Use of Proceeds -->
+                <div class="card p-5 space-y-3">
+                    <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-2">
+                        <h3 class="text-sm font-serif font-bold text-[#1C1917]">
+                            IPO Offering Parameters & Capital Allocation
+                        </h3>
+                        <span class="text-[10px] font-mono px-2 py-0.5 bg-[#DCFCE7] text-[#166534] rounded">
+                            PRIMARY CAPITAL
+                        </span>
+                    </div>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between">
+                            <span class="text-[#57534E]">Exchange & Ticker:</span>
+                            <span class="font-bold text-[#1C1917]">Nasdaq Global Select &bull; "ANT"</span>
+                        </div>
+                        <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between">
+                            <span class="text-[#57534E]">Anticipated Valuation Band:</span>
+                            <span class="font-bold text-[#1C1917]">$1,500B – $2,000B ($1.5T – $2.0T)</span>
+                        </div>
+                        <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between">
+                            <span class="text-[#57534E]">Target Net Proceeds:</span>
+                            <span class="font-bold text-[#15803D]">~$100,000M ($100.0B)</span>
+                        </div>
+                        <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between">
+                            <span class="text-[#57534E]">Primary Use of Proceeds:</span>
+                            <span class="text-[#1C1917]">Future compute commitments & data center R&D</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Sleek Interactive Pop-up / Modal for Qualitative Risks -->
+    <div id="risk-modal" class="modal-overlay" onclick="closeRiskModal(event)">
+        <div class="modal-box p-6 space-y-4" onclick="event.stopPropagation()">
+            <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-3">
+                <div class="flex items-center space-x-2">
+                    <span id="modal-category" class="text-[10px] font-mono px-2 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded font-bold text-[#B45309]">
+                        RISK ANALYSIS
+                    </span>
+                    <h3 id="modal-title" class="text-base font-serif font-bold text-[#1C1917]">
+                        Risk Title
+                    </h3>
+                </div>
+                <button onclick="closeRiskModal()" class="text-[#8C867A] hover:text-[#1C1917] font-mono text-base">&times;</button>
+            </div>
+
+            <div>
+                <div class="text-[10.5px] font-mono text-[#8C867A] uppercase mb-1">Exact S-1 Prospectus Disclosure Citation:</div>
+                <blockquote id="modal-quote" class="p-3 bg-[#FAF7F2] border-l-2 border-[#B45309] font-serif italic text-xs text-[#1C1917] leading-relaxed">
+                    Quote text here...
+                </blockquote>
+            </div>
+
+            <div class="space-y-1.5 text-xs text-[#57534E] leading-relaxed">
+                <div class="text-[10.5px] font-mono text-[#8C867A] uppercase">Analytical & Valuation Impact:</div>
+                <p id="modal-elaboration">
+                    Elaboration text here...
+                </p>
+            </div>
+
+            <div class="border-t border-[#E5E0D8] pt-3 flex justify-between items-center text-[11px] font-mono text-[#8C867A]">
+                <span>S-1 Registration Statement Risk Factor Audit</span>
+                <button onclick="closeRiskModal()" class="px-3 py-1 bg-[#1C1917] text-[#FFFFFF] rounded text-xs font-sans font-medium hover:bg-[#333]">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- UI Interaction Scripts -->
+    <script>
+        // Ensure functions are globally bound to window for inline onclick handlers
+        window.switchMainTab = function(tabId) {
+            console.log('[Dashboard] Switching to tab:', tabId);
+            // Hide all main tab panes
+            const panes = document.querySelectorAll('.tab-pane');
+            panes.forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+                el.style.display = 'none';
+            });
+
+            // Show active pane
+            const target = document.getElementById(tabId);
+            if (target) {
+                target.classList.remove('hidden');
+                target.classList.add('block');
+                target.style.display = 'block';
+            }
+
+            // Update nav tab active button styles
+            document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = Array.from(document.querySelectorAll('.nav-tab')).find(b => {
+                const attr = b.getAttribute('onclick') || '';
+                return attr.includes(tabId);
+            });
+            if (activeBtn) activeBtn.classList.add('active');
+
+            // Trigger Chart.js if business tab selected
+            if (tabId === 'tab-business') {
+                setTimeout(initMarginChart, 60);
+            }
+        };
+
+        window.switchStatement = function(stmtId) {
+            console.log('[Dashboard] Switching statement to:', stmtId);
+            // Hide all statement views
+            const views = document.querySelectorAll('.statement-view');
+            views.forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+                el.style.display = 'none';
+            });
+
+            // Show active statement view
+            const target = document.getElementById(stmtId);
+            if (target) {
+                target.classList.remove('hidden');
+                target.classList.add('block');
+                target.style.display = 'block';
+            }
+
+            // Update pill styling
+            document.querySelectorAll('.sub-tab-pill').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = Array.from(document.querySelectorAll('.sub-tab-pill')).find(b => {
+                const attr = b.getAttribute('onclick') || '';
+                return attr.includes(stmtId);
+            });
+            if (activeBtn) activeBtn.classList.add('active');
+        };
+
+        // Qualitative Risk Data Dictionary for Modal Pop-ups
+        const riskData = {
+            'risk-pbc': {
+                category: 'GOVERNANCE RISK',
+                title: 'Public Benefit Charter Fiduciary Divergence',
+                quote: '“We may make decisions that we believe appropriately balance the pecuniary interests of our stockholders, the best interests of those materially affected by our conduct, and the Company Purpose, but that negatively impact the short-, medium-, or long-term performance of our business or the market price of our Class A common stock.” (S-1 p. 32)',
+                elaboration: 'Unlike conventional Delaware corporations whose directors owe exclusive fiduciary duties to maximize shareholder value, Anthropic directors are legally shielded from shareholder suits if they intentionally restrict product deployment, cancel commercial contracts, or incur substantial costs in pursuit of AI safety. Damodaran views this as \'ESG on steroids,\' warranting a governance discount in common equity.'
+            },
+            'risk-compute': {
+                category: 'CAPITAL EFFICIENCY',
+                title: 'Compute Accelerator Obsolescence & Drag',
+                quote: '“We have committed hundreds of billions of dollars to multi-year compute and hosting agreements with cloud service providers... The fast pace of hardware innovation may render our contracted capacity less efficient or more expensive than next-generation architectures.” (S-1 p. 45)',
+                elaboration: 'AI accelerator hardware (GPUs and TPUs) turns over every 24 to 36 months. Fixed long-term commitments lock Anthropic into elevated capacity charges even if competing model builders access drastically cheaper inference silicon, creating operating margin compression.'
+            },
+            'risk-opensource': {
+                category: 'COMPETITIVE THREAT',
+                title: 'Open-Weight / Open-Source Commoditization',
+                quote: '“Certain competitors, including Meta Platforms and open-source consortiums, release high-capability frontier models under open licenses without usage fees... This may induce enterprise customers to transition internal workloads away from our paid API services.” (S-1 p. 41)',
+                elaboration: 'As open-weight models achieve performance parity with closed frontier models for standard reasoning and coding tasks, pricing power on API tokens faces downward pressure, compressing enterprise gross margins toward business-service multiples (~10–15%).'
+            },
+            'risk-regulatory': {
+                category: 'REGULATORY RISK',
+                title: 'Global AI Safety Regulation & Margin Friction',
+                quote: '“Governments in the United States, the European Union, the United Kingdom, and elsewhere are enacting strict legal regimes governing the training, evaluation, cybersecurity, and societal deployment of advanced foundation models.” (S-1 p. 58)',
+                elaboration: 'Compliance costs, mandatory third-party pre-deployment red-teaming, national security audits, and watermarking mandates act as a structural operational tax. Damodaran explicitly shaved 5.0% off normalized operating margins (from 32.5% to 27.5%) to account for this regulatory drag.'
+            },
+            'risk-circularity': {
+                category: 'COUNTERPARTY RISK',
+                title: 'Hyperscaler Vendor & Financing Circularity',
+                quote: '“Our primary cloud providers, AWS and Google Cloud, are simultaneously major investors, board observers, and our principal infrastructure suppliers. We have agreed to substantial minimum spend commitments on their proprietary platforms.” (S-1 p. 62)',
+                elaboration: 'This circular dynamic raises opacity concerns regarding whether contract pricing represents true arms-length fair market value. In addition, an interruption or pricing dispute with either partner directly impairs Anthropic\'s training capability.'
+            },
+            'risk-personnel': {
+                category: 'TALENT DEPENDENCE',
+                title: 'Co-Founder & Core Alignment Research Dependence',
+                quote: '“Our future success depends substantially on the continued service and performance of our senior management, especially our Chief Executive Officer Dario Amodei, President Daniela Amodei, and our foundational AI safety researchers.” (S-1 p. 68)',
+                elaboration: 'Anthropic was founded by former OpenAI VP of Research Dario Amodei and top scientists who authored landmark transformer and alignment papers. The departure of key technical leadership could rapidly erode Anthropic\'s safety positioning and model leadership.'
+            }
+        };
+
+        window.openRiskModal = function(riskKey) {
+            const data = riskData[riskKey];
+            if (!data) return;
+            document.getElementById('modal-category').innerText = data.category;
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-quote').innerText = data.quote;
+            document.getElementById('modal-elaboration').innerText = data.elaboration;
+            document.getElementById('risk-modal').classList.add('active');
+        };
+
+        window.closeRiskModal = function(event) {
+            document.getElementById('risk-modal').classList.remove('active');
+        };
+
+        // Close on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') window.closeRiskModal();
+        });
+
+        // Initialize COGS & Margin Inflection Chart
+        let chartInitialized = false;
+        function initMarginChart() {
+            if (chartInitialized) return;
+            const ctx = document.getElementById('cogsMarginChart');
+            if (!ctx) return;
+
+            if (typeof Chart === 'undefined') {
+                console.warn('Chart.js not loaded yet');
+                return;
+            }
+
+            try {
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025', 'Q1 2026', 'Q2 2026'],
+                        datasets: [
+                            {
+                                type: 'bar',
+                                label: 'Revenue ($M)',
+                                data: [376, 787, 1382, 2040, 4731, 11555],
+                                backgroundColor: '#1C1917',
+                                borderRadius: 3,
+                                barPercentage: 0.5,
+                                order: 2,
+                                yAxisID: 'y'
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Compute COGS ($M)',
+                                data: [944, 1390, 2047, 2945, 3387, 5558],
+                                backgroundColor: '#D8D2C5',
+                                borderRadius: 3,
+                                barPercentage: 0.5,
+                                order: 3,
+                                yAxisID: 'y'
+                            },
+                            {
+                                type: 'line',
+                                label: 'Compute Cost % of Revenue',
+                                data: [251.1, 176.6, 148.1, 144.4, 71.6, 48.1],
+                                borderColor: '#B45309',
+                                backgroundColor: '#B45309',
+                                borderWidth: 2.2,
+                                pointRadius: 4,
+                                pointBackgroundColor: '#FFFFFF',
+                                pointBorderColor: '#B45309',
+                                pointBorderWidth: 2,
+                                tension: 0.25,
+                                order: 1,
+                                yAxisID: 'y1'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                align: 'end',
+                                labels: {
+                                    font: { family: "'JetBrains Mono', monospace", size: 10.5 },
+                                    boxWidth: 12,
+                                    usePointStyle: true,
+                                    color: '#57534E'
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: '#FFFFFF',
+                                titleColor: '#1C1917',
+                                bodyColor: '#57534E',
+                                borderColor: '#D8D2C5',
+                                borderWidth: 1,
+                                titleFont: { family: "'Newsreader', Georgia, serif", size: 13, weight: 'bold' },
+                                bodyFont: { family: "'JetBrains Mono', monospace", size: 11 },
+                                padding: 10,
+                                callbacks: {
+                                    label: function(context) {
+                                        if (context.dataset.yAxisID === 'y1') {
+                                            return `${context.dataset.label}: ${context.parsed.y.toFixed(1)}%`;
+                                        }
+                                        return `${context.dataset.label}: $${context.parsed.y.toLocaleString()}M`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { display: false },
+                                ticks: { font: { family: "'JetBrains Mono', monospace", size: 10.5 }, color: '#57534E' }
+                            },
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                grid: { color: '#ECE7DE' },
+                                ticks: {
+                                    font: { family: "'JetBrains Mono', monospace", size: 10 },
+                                    color: '#57534E',
+                                    callback: val => '$' + (val >= 1000 ? (val/1000) + 'B' : val + 'M')
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                grid: { drawOnChartArea: false },
+                                ticks: {
+                                    font: { family: "'JetBrains Mono', monospace", size: 10 },
+                                    color: '#B45309',
+                                    callback: val => val + '%'
+                                }
+                            }
+                        }
+                    }
+                });
+                chartInitialized = true;
+            } catch (err) {
+                console.error('Error initializing chart:', err);
+            }
+        }
+
+        // Attach event listeners after DOM loads as fallback
+        window.addEventListener('DOMContentLoaded', () => {
+            // Bind nav tabs
+            document.querySelectorAll('.nav-tab').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const onclickAttr = this.getAttribute('onclick') || '';
+                    const match = onclickAttr.match(/switchMainTab\('([^']+)'\)/);
+                    if (match && match[1]) {
+                        window.switchMainTab(match[1]);
+                    }
+                });
+            });
+
+            // Bind statement sub-tabs
+            document.querySelectorAll('.sub-tab-pill').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const onclickAttr = this.getAttribute('onclick') || '';
+                    const match = onclickAttr.match(/switchStatement\('([^']+)'\)/);
+                    if (match && match[1]) {
+                        window.switchStatement(match[1]);
+                    }
+                });
+            });
+
+            // Preload chart if tab-business active
+            if (!document.getElementById('tab-business').classList.contains('hidden')) {
+                initMarginChart();
+            }
+        });
+    </script>
+</body>
+</html>

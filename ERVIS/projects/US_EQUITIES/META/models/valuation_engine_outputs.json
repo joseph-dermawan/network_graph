@@ -1,9 +1,9 @@
 {
   "ticker": "META",
   "company_name": "Meta Platforms, Inc.",
-  "spot_price_usd": 738.79,
+  "spot_price_usd": 728.08,
   "shares_outstanding_m": 2529.64,
-  "market_cap_m": 1882070.0,
+  "market_cap_m": 1854790.0,
   "gate_1_forensic_normalization": {
     "reported_ebit_0": 83276.0,
     "operating_lease_discounted_debt": 25153.0,
@@ -54,8 +54,8 @@
     },
     "liquidation_haircut_floor_usd": 14.49,
     "final_target_price_usd": 736.95,
-    "final_rating": "NEUTRAL / HOLD (-0.2%)",
-    "upside_pct": -0.25
+    "final_rating": "NEUTRAL / HOLD (+1.2%)",
+    "upside_pct": 1.22
   },
   "gate_4b_ai_capex_roi": {
     "annual_ai_capex_surge_m": 68000.0,
@@ -77,8 +77,8 @@
   },
   "final_triangulation": {
     "target_price_usd": 736.95,
-    "upside_percent": -0.25,
-    "rating": "NEUTRAL / HOLD (-0.2%)",
-    "updated_at": "2026-09-30T16:08:01.261444"
+    "upside_percent": 1.22,
+    "rating": "NEUTRAL / HOLD (+1.2%)",
+    "updated_at": "2026-10-04T14:05:38.690138"
   }
 }

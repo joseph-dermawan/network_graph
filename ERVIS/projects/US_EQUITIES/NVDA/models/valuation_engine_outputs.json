@@ -2,9 +2,9 @@
   "ticker": "NVDA",
   "company_name": "NVIDIA Corporation",
   "currency": "USD",
-  "spot_price_usd": 227.21,
+  "spot_price_usd": 233.95,
   "shares_outstanding_m": 24147.0,
-  "market_cap_m": 5486440.0,
+  "market_cap_m": 5649190.0,
   "wacc_schedule": {
     "base_wacc": 0.0999,
     "terminal_wacc": 0.09,
@@ -48,8 +48,8 @@
   "liquidation_floor_usd": 2.12,
   "final_triangulation": {
     "target_price_usd": 125.93,
-    "upside_percent": -44.58,
-    "rating": "UNDERWEIGHT / SELL (-44.6%)",
-    "updated_at": "2026-09-30T16:07:59.225264"
+    "upside_percent": -46.17,
+    "rating": "UNDERWEIGHT / SELL (-46.2%)",
+    "updated_at": "2026-10-04T14:05:37.446575"
   }
 }

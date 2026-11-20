@@ -2,10 +2,10 @@
   "ticker": "TSM",
   "company_name": "Taiwan Semiconductor Manufactur",
   "currency": "USD",
-  "spot_price_usd": 456.94,
+  "spot_price_usd": 472.78,
   "spot_price_pence": null,
   "shares_outstanding_m": 5186.47,
-  "market_cap_m": 2369910.0,
+  "market_cap_m": 2452060.0,
   "wacc_schedule": {
     "base_wacc": 0.104,
     "terminal_wacc": 0.095,
@@ -16,28 +16,28 @@
     "interest_coverage": 99.9
   },
   "dcf_schedule": {
-    "pv_10yr_fcff_m": 807456.4,
-    "pv_terminal_value_m": 1461896.5,
-    "enterprise_value_m": 2269352.9,
-    "equity_bridge_net_cash_m": 53486.4,
-    "equity_value_m": 2322839.3,
-    "dcf_intrinsic_value_usd": 447.86,
+    "pv_10yr_fcff_m": 806165.3,
+    "pv_terminal_value_m": 1459559.0,
+    "enterprise_value_m": 2265724.4,
+    "equity_bridge_net_cash_m": 53400.9,
+    "equity_value_m": 2319125.2,
+    "dcf_intrinsic_value_usd": 447.15,
     "dcf_intrinsic_pence": null,
     "pro_forma_growth_rate": 35.0,
     "target_ebit_margin": 53.4
   },
   "sotp_divisional": {
-    "core_segment_ev_m": 1186634.2,
+    "core_segment_ev_m": 1184736.8,
     "forward_ev_ebitda_multiple": 14.4,
-    "total_sotp_ev_m": 1186634.2,
-    "sotp_intrinsic_usd": 239.11,
+    "total_sotp_ev_m": 1184736.8,
+    "sotp_intrinsic_usd": 238.72,
     "sotp_intrinsic_pence": null
   },
   "monte_carlo_10k": {
     "trials": 10000,
-    "p10_usd": 346.83,
-    "median_usd": 449.77,
-    "p90_usd": 549.28,
+    "p10_usd": 346.29,
+    "median_usd": 449.06,
+    "p90_usd": 548.41,
     "win_rate_percent": 46.2
   },
   "financial_health": {
@@ -51,17 +51,17 @@
     "altman_zone": "SAFE ZONE"
   },
   "ai_capex_audit": {
-    "annual_capex_m": 40276.3,
+    "annual_capex_m": 40211.9,
     "capex_as_pct_rev": 33.67,
     "fcf_conversion_pct": 51.26,
     "structural_fragility_evaluation": "CRITICAL SEMICONDUCTOR TOLLBOOTH (DURABLE CASH SPREAD)"
   },
-  "liquidation_floor_usd": 11.77,
+  "liquidation_floor_usd": 11.75,
   "final_triangulation": {
-    "target_price_usd": 406.68,
+    "target_price_usd": 406.04,
     "target_price_pence": null,
-    "upside_percent": -11.0,
-    "rating": "TRIM / TAKE PROFITS (-11.0%)",
-    "updated_at": "2026-09-30T16:08:01.808324"
+    "upside_percent": -14.12,
+    "rating": "TRIM / TAKE PROFITS (-14.1%)",
+    "updated_at": "2026-10-04T14:05:39.196631"
   }
 }

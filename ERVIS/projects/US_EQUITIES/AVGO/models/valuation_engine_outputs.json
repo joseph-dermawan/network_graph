@@ -1,7 +1,7 @@
 {
   "ticker": "AVGO",
   "company_name": "Broadcom Inc.",
-  "spot_price_usd": 355.1,
+  "spot_price_usd": 355.14,
   "dcf_intrinsic_value_usd": 213.73,
   "sotp_intrinsic_value_usd": 232.94,
   "monte_carlo_median_usd": 495.76,
@@ -17,11 +17,11 @@
   "normalized_ebit_0_m": 46743.64,
   "normalized_nopat_0_m": 40433.25,
   "true_net_debt_m": 37594.0,
-  "market_cap_m": 1695120.0,
+  "market_cap_m": 1695310.0,
   "final_triangulation": {
     "target_price_usd": 247.7,
     "upside_percent": -30.25,
     "rating": "UNDERWEIGHT / SELL (-30.2%)",
-    "updated_at": "2026-09-30T16:08:01.538325"
+    "updated_at": "2026-10-04T14:05:38.994999"
   }
 }
