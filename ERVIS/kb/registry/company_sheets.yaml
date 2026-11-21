@@ -220,3 +220,16 @@ COMPANIES:
     last_intrinsic_value: 83.69
     published_rating: ACCUMULATE AT IPO (11.6% DISCOUNT AT $74 MIDPOINT)
     last_spot_price: 74.00
+  MU:
+    company_name: Micron Technology, Inc.
+    market: US_EQUITIES
+    currency: USD
+    gsheet_id: ''
+    gsheet_url: ''
+    drive_folder_id: ''
+    current_status: VALUATION_COMPLETED
+    last_published_version: v1.0
+    last_published_at: '2026-11-21T17:30:00Z'
+    last_intrinsic_value: 604.08
+    published_rating: NEUTRAL / FAIR VALUE ANCHORED (HOLD)
+    last_spot_price: 594.51

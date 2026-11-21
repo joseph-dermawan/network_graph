@@ -8,8 +8,10 @@ Welcome to the **ValuationWiki Catalog**. This page is automatically maintained 
 
 ### 🏢 Entity & Company Profile
 * [[POWL_Powell_Industries]]: Powell Industries (NASDAQ: POWL) business overview, product mix (PCRs, switchgear), Jacintoport facility expansion (+62% yard space), and $2.4B record backlog.
+* [[MU_Micron_Technology_Valuation_and_HBM_Supercycle]]: Micron Technology, Inc. (NASDAQ: MU) business overview, High-Bandwidth Memory (HBM3E/HBM4), server DRAM supercycle, 3-player oligopoly structure, and $68B unencumbered net cash fortress.
 
 ### 💰 Valuation & Financial Models
+* [[MU_Micron_Technology_Valuation_and_HBM_Supercycle]]: **Micron Technology Institutional Valuation Forensics & Cyclical Normalization**. 5-Gate pairing valuation: audited FY26 10-K ($133.2B revenue, $99.3B EBIT), 4-year R&D capitalization ($6.99B Research Asset, $101.0B adjusted EBIT), Plan A mean-reverting margin schedule (74.6% -> 35.0%), $604.08 DCF intrinsic fair value anchor vs $594.51 spot, SOTP divisional multiple model ($501.54), 10,000-trial Monte Carlo ($590.70 median, 49.1% win rate), and $58.68 liquidation floor.
 * [[Universal_Institutional_Valuation_Spreadsheet_Model]]: **Universal Institutional Valuation Spreadsheet Model & Google Sheets Integration**. 7-tab cloud valuation model (`https://docs.google.com/spreadsheets/d/1wBFDDikiaw-9R-xu6ZKVLz-So3Ij2XNDnPtf951yF6k/edit#gid=0`) with 1,035 dynamic live formulas, Damodaran R&D/Lease converters, Moody's synthetic credit rating grid, 10-year FCFF schedule, DuPont 5-point ROE, Altman Z-Score, and asset haircut liquidation floor.
 * [[DCF_Valuation_Model]]: 10-Year Pro-Forma Income Statement & FCFF Schedule, $261.82 DCF Perpetual Growth Target, $310.53 Exit Multiple Target, and $286.18 Blended Bull Target Price.
 * [[WACC_Cost_of_Capital]]: Comprehensive Cost of Capital derivation ($K_e = 11.02\%$, $K_d = 0.00\%$, $\beta = 1.15$, 99.97% Equity / 0.03% Debt capital structure).

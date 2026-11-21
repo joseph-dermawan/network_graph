@@ -1,0 +1,46 @@
+{
+  "ticker": "MU",
+  "gate": "GATE_3_WACC_AND_CREDIT_SYNTHESIS",
+  "macro_anchors": {
+    "us_10y_treasury_rf": 0.0494,
+    "damodaran_implied_erp": 0.0461,
+    "statutory_tax_rate": 0.21,
+    "effective_tax_rate_fy26": 0.1481
+  },
+  "beta_decomposition": {
+    "semiconductor_memory_peer_unlevered_beta": 1.21,
+    "debt_to_equity_market_ratio": 0.00816,
+    "hamada_relevered_beta": 1.218,
+    "terminal_beta": 1.00
+  },
+  "moodys_6_metric_rating_grid": {
+    "interest_coverage_x": 952.8,
+    "interest_coverage_rating": "Aaa/AAA",
+    "debt_to_ebitda_x": 0.05,
+    "debt_to_ebitda_rating": "Aaa/AAA",
+    "return_on_assets_pct": 51.56,
+    "roa_rating": "Aaa/AAA",
+    "asset_coverage_x": 25.0,
+    "asset_coverage_rating": "Aaa/AAA",
+    "operating_margin_pct": 75.83,
+    "operating_margin_rating": "Aaa/AAA",
+    "current_ratio_x": 3.31,
+    "current_ratio_rating": "Aaa/AAA",
+    "synthetic_rating_unconstrained": "Aaa/AAA",
+    "cyclical_industry_cap_rating": "Baa1/BBB+",
+    "default_spread_bps": 60,
+    "capped_default_spread_bps": 135
+  },
+  "cost_of_capital_schedule": {
+    "cost_of_equity_ke": 0.1056,
+    "pretax_cost_of_debt_kd": 0.0554,
+    "aftertax_cost_of_debt_kd": 0.0472,
+    "capital_weights": {
+      "equity_weight_we": 0.9919,
+      "debt_weight_wd": 0.0081
+    },
+    "base_wacc_years_1_to_5": 0.1051,
+    "transition_wacc_years_6_to_9": 0.0950,
+    "terminal_wacc_year_10_plus": 0.0850
+  }
+}

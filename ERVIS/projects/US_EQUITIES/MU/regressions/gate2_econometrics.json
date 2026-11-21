@@ -1,0 +1,73 @@
+{
+  "ticker": "MU",
+  "gate": "GATE_2_OPERATIONAL_DRIVERS_AND_HEALTH",
+  "primary_regressor": {
+    "name": "Compute & Networking Business Unit (CNBU / Cloud & AI Memory)",
+    "r_squared": 0.9986,
+    "beta_coefficient": 1.432,
+    "intercept_usd_m": 9429.6,
+    "status": "VERIFIED_PRIMARY_DRIVER"
+  },
+  "rejected_regressors": [
+    {
+      "name": "Net Fab PP&E Asset Base",
+      "r_squared": 0.7975,
+      "status": "REJECTED_BELOW_0_85_THRESHOLD"
+    },
+    {
+      "name": "Gross Headcount",
+      "r_squared": 0.9758,
+      "status": "REJECTED_COST_LAG_NOT_CAUSAL_DEMAND"
+    }
+  ],
+  "dupont_5_point_roe_history": {
+    "FY2022": {
+      "tax_burden": 0.933,
+      "interest_burden": 0.960,
+      "operating_margin_pct": 31.54,
+      "asset_turnover_x": 0.480,
+      "equity_multiplier_x": 1.31,
+      "roe_pct": 17.74
+    },
+    "FY2023": {
+      "tax_burden": 1.012,
+      "interest_burden": 1.066,
+      "operating_margin_pct": -34.78,
+      "asset_turnover_x": 0.257,
+      "equity_multiplier_x": 1.40,
+      "roe_pct": -13.53
+    },
+    "FY2024": {
+      "tax_burden": 0.842,
+      "interest_burden": 0.709,
+      "operating_margin_pct": 5.19,
+      "asset_turnover_x": 0.374,
+      "equity_multiplier_x": 1.52,
+      "roe_pct": 1.76
+    },
+    "FY2025": {
+      "tax_burden": 0.903,
+      "interest_burden": 0.968,
+      "operating_margin_pct": 26.14,
+      "asset_turnover_x": 0.453,
+      "equity_multiplier_x": 1.58,
+      "roe_pct": 16.39
+    },
+    "FY2026": {
+      "tax_burden": 0.852,
+      "interest_burden": 1.003,
+      "operating_margin_pct": 74.59,
+      "asset_turnover_x": 0.680,
+      "equity_multiplier_x": 1.42,
+      "roe_pct": 61.40
+    }
+  },
+  "financial_health_audit": {
+    "altman_z_score": 10.70,
+    "altman_zone": "EXTREMELY_SAFE_ZONE",
+    "piotroski_f_score": 9,
+    "piotroski_max": 9,
+    "beneish_m_score": -2.48,
+    "beneish_status": "UNLIKELY_MANIPULATOR"
+  }
+}
