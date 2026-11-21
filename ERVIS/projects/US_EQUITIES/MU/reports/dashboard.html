@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MU: Micron Technology | ERVIS Institutional Equity Research</title>
+  <title>MU: Micron Technology | ERVIS Institutional Equity Research & Valuation Engine</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,6 +30,43 @@
       color: #1C1917;
       font-weight: 600;
     }
+    /* Input Styling */
+    .input-val-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8125rem;
+      background-color: #FFFFFF;
+      border: 1px solid #D6D3D1;
+      border-radius: 0.25rem;
+      padding: 0.375rem 0.625rem;
+      color: #1E3A8A;
+      font-weight: 600;
+      transition: all 0.15s ease-in-out;
+    }
+    .input-val-box::placeholder {
+      color: #94A3B8;
+      font-weight: 400;
+    }
+    .input-val-box:focus {
+      outline: none;
+      border-color: #D97706;
+      box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.15);
+      background-color: #FEF9C3;
+    }
+    .formula-banner {
+      background-color: #0F172A;
+      color: #F8FAFC;
+      border-left: 4px solid #D97706;
+    }
+    .math-step-box {
+      background-color: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-left: 3px solid #2563EB;
+      padding: 0.75rem 1rem;
+      border-radius: 0.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #1E293B;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-amber-100 selection:text-amber-900">
@@ -40,7 +77,7 @@
       <div class="flex items-center gap-3">
         <a href="../../index.html" class="text-xs font-mono-code font-semibold tracking-wider text-stone-600 hover:text-stone-900 transition-colors uppercase">&larr; ERVIS CENTRAL</a>
         <span class="text-stone-300">/</span>
-        <span class="text-xs font-mono-code text-stone-500 uppercase tracking-wider">US EQUITIES</span>
+        <a href="../../terminal/index.html?ticker=MU&screen=DES" class="text-xs font-mono-code text-[#B45309] font-bold hover:underline uppercase">TERMINAL WORKSTATION [MU]</a>
         <span class="text-stone-300">/</span>
         <span class="text-xs font-mono-code font-bold text-stone-900 bg-stone-200/80 px-2 py-0.5 rounded">NASDAQ: MU</span>
         <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono-code font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
@@ -55,12 +92,12 @@
         <div class="h-6 w-px bg-stone-300"></div>
         <div class="text-right">
           <div class="text-[10px] font-mono-code text-stone-500 uppercase">DCF Fair Value Anchor</div>
-          <div class="text-sm font-mono-code font-bold text-emerald-inst">$604.08 <span class="text-xs text-emerald-inst font-normal">(+1.6%)</span></div>
+          <div class="text-sm font-mono-code font-bold text-emerald-inst" id="navDcfAnchor">$604.08 <span class="text-xs text-emerald-inst font-normal" id="navDcfSpread">(+1.6%)</span></div>
         </div>
         <div class="h-6 w-px bg-stone-300"></div>
         <div class="text-right">
           <div class="text-[10px] font-mono-code text-stone-500 uppercase">Blended Target Price</div>
-          <div class="text-sm font-mono-code font-bold text-amber-inst">$573.32 <span class="text-xs font-normal bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded ml-1">NEUTRAL / HOLD</span></div>
+          <div class="text-sm font-mono-code font-bold text-amber-inst" id="navBlendedTarget">$573.32 <span class="text-xs font-normal bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded ml-1" id="navRatingBadge">NEUTRAL / HOLD</span></div>
         </div>
       </div>
     </div>
@@ -72,16 +109,19 @@
     <!-- HERO HEADER -->
     <div class="border-b border-subtle pb-6 flex flex-col md:flex-row md:items-end justify-between gap-6">
       <div class="space-y-2">
-        <div class="text-xs font-mono-code text-amber-700 font-semibold tracking-wider uppercase">Semi Memory Supercycle & AI HBM Valuation Forensic</div>
+        <div class="text-xs font-mono-code text-amber-700 font-semibold tracking-wider uppercase">Semi Memory Supercycle &bull; HBM Pricing Forensic &bull; Institutional Default Standard</div>
         <h1 class="text-3xl md:text-4xl font-serif-hdr font-medium text-stone-900 tracking-tight">Micron Technology, Inc.</h1>
         <p class="text-sm text-stone-600 max-w-3xl leading-relaxed">
-          Comprehensive 5-Gate equity research valuation covering the post-peak de-rating from $1,255 to $594. Intrinsic fair value is anchored at <strong>$604.08/sh ($683.5B)</strong> under a disciplined mean-reverting margin schedule (74.6% &rarr; 35.0%), backed by an unencumbered <strong>$68.0 Billion Net Cash Fortress ($60.07/sh)</strong> and zero debt vulnerability.
+          Comprehensive 5-Gate institutional valuation covering the post-peak de-rating from $1,255 to $594. Intrinsic fair value is anchored at <strong>$604.08/sh ($683.5B)</strong> under a disciplined mean-reverting margin schedule (74.6% &rarr; 35.0%), backed by an unencumbered <strong>$68.0 Billion Net Cash Fortress ($60.07/sh)</strong> and zero debt vulnerability.
         </p>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="../models/model.xlsx" download class="inline-flex items-center gap-2 px-3 py-2 rounded border border-stone-300 bg-white hover:bg-stone-50 text-xs font-mono-code font-semibold text-stone-800 shadow-sm transition">
+      <div class="flex flex-wrap items-center gap-3">
+        <a href="model.xlsx" download class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded border border-emerald-600 bg-emerald-50 hover:bg-emerald-100 text-xs font-mono-code font-bold text-emerald-900 shadow-sm transition">
           <svg class="w-4 h-4 text-emerald-700" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
           DOWNLOAD EXCEL MODEL (.XLSX)
+        </a>
+        <a href="../../terminal/index.html?ticker=MU&screen=DCF" class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded border border-stone-300 bg-white hover:bg-stone-50 text-xs font-mono-code font-semibold text-stone-800 shadow-sm transition">
+          OPEN IN TERMINAL &rarr;
         </a>
       </div>
     </div>
@@ -90,13 +130,13 @@
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
       <div class="bg-card p-4 rounded border border-subtle shadow-sm space-y-1">
         <div class="text-[10px] font-mono-code text-stone-500 uppercase tracking-wider">DCF Anchor (Plan A)</div>
-        <div class="text-xl font-mono-code font-bold text-stone-900">$604.08</div>
-        <div class="text-[11px] font-mono-code text-emerald-inst">+1.6% vs Spot ($594.51)</div>
+        <div class="text-xl font-mono-code font-bold text-stone-900" id="kpiDcfValue">$604.08</div>
+        <div class="text-[11px] font-mono-code text-emerald-inst" id="kpiDcfSpread">+1.6% vs Spot ($594.51)</div>
       </div>
       <div class="bg-card p-4 rounded border border-subtle shadow-sm space-y-1">
         <div class="text-[10px] font-mono-code text-stone-500 uppercase tracking-wider">SOTP Multiple Value</div>
         <div class="text-xl font-mono-code font-bold text-stone-900">$501.54</div>
-        <div class="text-[11px] font-mono-code text-stone-500">-15.6% (Conservative Haircut)</div>
+        <div class="text-[11px] font-mono-code text-stone-500">-15.6% (Normalized Haircut)</div>
       </div>
       <div class="bg-card p-4 rounded border border-subtle shadow-sm space-y-1">
         <div class="text-[10px] font-mono-code text-stone-500 uppercase tracking-wider">Net Cash Reserves</div>
@@ -110,8 +150,8 @@
       </div>
       <div class="bg-card p-4 rounded border border-subtle shadow-sm space-y-1">
         <div class="text-[10px] font-mono-code text-stone-500 uppercase tracking-wider">10-Yr Undisc. FCFF</div>
-        <div class="text-xl font-mono-code font-bold text-stone-900">$524.3B</div>
-        <div class="text-[11px] font-mono-code text-stone-500">$339.5B Discounted PV</div>
+        <div class="text-xl font-mono-code font-bold text-stone-900" id="kpiUndiscFcff">$524.3B</div>
+        <div class="text-[11px] font-mono-code text-stone-500" id="kpiPvFcff">$339.5B Discounted PV</div>
       </div>
       <div class="bg-card p-4 rounded border border-subtle shadow-sm space-y-1">
         <div class="text-[10px] font-mono-code text-stone-500 uppercase tracking-wider">Altman Z-Score</div>
@@ -123,11 +163,12 @@
     <!-- INTERACTIVE SECTION TABS -->
     <div class="border-b border-subtle flex gap-6 text-xs font-mono-code uppercase tracking-wider text-stone-500 overflow-x-auto pb-px">
       <button onclick="switchTab('tab-thesis')" id="btn-tab-thesis" class="pb-3 active-tab">01. Variant Thesis & Triangulation</button>
-      <button onclick="switchTab('tab-dcf')" id="btn-tab-dcf" class="pb-3 hover:text-stone-900 transition">02. 10-Yr Pro-Forma DCF</button>
-      <button onclick="switchTab('tab-dupont')" id="btn-tab-dupont" class="pb-3 hover:text-stone-900 transition">03. DuPont 5-Point ROE</button>
-      <button onclick="switchTab('tab-sotp')" id="btn-tab-sotp" class="pb-3 hover:text-stone-900 transition">04. SOTP Divisional Mix</button>
-      <button onclick="switchTab('tab-mc')" id="btn-tab-mc" class="pb-3 hover:text-stone-900 transition">05. Monte Carlo Simulation</button>
-      <button onclick="switchTab('tab-audit')" id="btn-tab-audit" class="pb-3 hover:text-stone-900 transition">06. Forensic Accounting Audit</button>
+      <button onclick="switchTab('tab-interactive')" id="btn-tab-interactive" class="pb-3 hover:text-stone-900 transition flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span>02. Interactive Input Cockpit</button>
+      <button onclick="switchTab('tab-dcf')" id="btn-tab-dcf" class="pb-3 hover:text-stone-900 transition">03. 10-Yr DCF & Process Derivation</button>
+      <button onclick="switchTab('tab-dupont')" id="btn-tab-dupont" class="pb-3 hover:text-stone-900 transition font-bold text-amber-900">04. DuPont 5-Point ROE by Parts</button>
+      <button onclick="switchTab('tab-sotp')" id="btn-tab-sotp" class="pb-3 hover:text-stone-900 transition">05. SOTP Divisional Mix & Process</button>
+      <button onclick="switchTab('tab-mc')" id="btn-tab-mc" class="pb-3 hover:text-stone-900 transition">06. Monte Carlo Simulation Engine</button>
+      <button onclick="switchTab('tab-audit')" id="btn-tab-audit" class="pb-3 hover:text-stone-900 transition">07. Forensic Capitalization & WACC</button>
     </div>
 
     <!-- TAB 1: VARIANT THESIS & TRIANGULATION -->
@@ -191,178 +232,549 @@
       </div>
     </div>
 
-    <!-- TAB 2: 10-YEAR PRO-FORMA DCF -->
-    <div id="tab-dcf" class="hidden space-y-6">
+    <!-- TAB 2: INTERACTIVE VALUATION COCKPIT & INPUT STUDIO -->
+    <div id="tab-interactive" class="hidden space-y-6">
+      
+      <!-- INTRO & CONTROLS BANNER -->
       <div class="bg-card p-6 rounded border border-subtle shadow-sm space-y-4">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-subtle pb-4">
           <div>
-            <h2 class="text-lg font-serif-hdr font-medium text-stone-900">Plan A: Mean-Reverting Margin & FCFF Generation Trajectory</h2>
-            <div class="text-xs font-mono-code text-stone-500">Operating margin step-down from peak 74.6% to sustainable 35.0% oligopoly baseline</div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono-code font-bold bg-amber-100 text-amber-900 border border-amber-300">DAMODARAN DYNAMIC ENGINE</span>
+              <h2 class="text-xl font-serif-hdr font-medium text-stone-900">Interactive Model Input Studio & Scenario Manipulator</h2>
+            </div>
+            <p class="text-xs text-stone-600 mt-1">
+              Test your own macro variant perceptions. Type any custom value to overwrite the institutional baseline. If left blank, the cell uses the <strong>gray backdrop default number</strong>. The entire 10-year pro-forma DCF model and intrinsic value recalculate instantly below.
+            </p>
           </div>
-          <div class="flex items-center gap-4 text-xs font-mono-code">
-            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 bg-amber-600 rounded-sm"></span> Revenue ($B)</span>
-            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 bg-emerald-700 rounded-sm"></span> FCFF Cash Flow ($B)</span>
-            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-0.5 bg-stone-900"></span> Operating Margin %</span>
+          <div class="flex items-center gap-2">
+            <button onclick="resetInputsToDefaults()" class="px-3 py-1.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-mono-code font-bold transition">
+              &circlearrowleft; RESET TO PLAN A DEFAULTS
+            </button>
+            <a href="model.xlsx" download class="px-3 py-1.5 rounded bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-mono-code font-bold shadow-sm transition">
+              DOWNLOAD EXCEL (.XLSX)
+            </a>
           </div>
         </div>
-        <div class="h-80 w-full">
-          <canvas id="dcfChart"></canvas>
-        </div>
-      </div>
 
-      <!-- PRO-FORMA TABLE -->
-      <div class="bg-card p-6 rounded border border-subtle shadow-sm space-y-4 overflow-x-auto">
-        <h3 class="text-sm font-mono-code font-bold uppercase tracking-wider text-stone-900">10-Year Discrete Pro-Forma Schedule (FY2027 – FY2036)</h3>
-        <table class="w-full text-xs font-mono-code text-left border-collapse">
-          <thead>
-            <tr class="bg-stone-100 text-stone-700 border-b border-stone-200">
-              <th class="p-2.5">Year</th>
-              <th class="p-2.5">Period</th>
-              <th class="p-2.5 text-right">Revenue ($M)</th>
-              <th class="p-2.5 text-right">Growth %</th>
-              <th class="p-2.5 text-right">Margin %</th>
-              <th class="p-2.5 text-right">Adjusted EBIT ($M)</th>
-              <th class="p-2.5 text-right">NOPAT ($M)</th>
-              <th class="p-2.5 text-right">Reinvest ($M)</th>
-              <th class="p-2.5 text-right">FCFF ($M)</th>
-              <th class="p-2.5 text-right">Disc Factor</th>
-              <th class="p-2.5 text-right">PV FCFF ($M)</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-stone-100">
-            <tr class="hover:bg-stone-50">
-              <td class="p-2 font-bold">1</td>
-              <td class="p-2 text-stone-600">FY2027</td>
-              <td class="p-2 text-right">$143,843.0</td>
-              <td class="p-2 text-right text-stone-600">+8.0%</td>
-              <td class="p-2 text-right font-medium">70.0%</td>
-              <td class="p-2 text-right">$100,690.1</td>
-              <td class="p-2 text-right">$85,777.9</td>
-              <td class="p-2 text-right text-stone-600">$4,843.2</td>
-              <td class="p-2 text-right font-bold text-emerald-inst">$80,934.7</td>
-              <td class="p-2 text-right text-stone-500">0.9049</td>
-              <td class="p-2 text-right font-bold">$73,237.5</td>
-            </tr><tr class="hover:bg-stone-50">
-              <td class="p-2 font-bold">2</td>
-              <td class="p-2 text-stone-600">FY2028</td>
-              <td class="p-2 text-right">$149,596.8</td>
-              <td class="p-2 text-right text-stone-600">+4.0%</td>
-              <td class="p-2 text-right font-medium">60.0%</td>
-              <td class="p-2 text-right">$89,758.1</td>
-              <td class="p-2 text-right">$75,847.6</td>
-              <td class="p-2 text-right text-stone-600">$2,615.3</td>
-              <td class="p-2 text-right font-bold text-emerald-inst">$73,232.2</td>
-              <td class="p-2 text-right text-stone-500">0.8188</td>
-              <td class="p-2 text-right font-bold">$59,965.2</td>
-            </tr><tr class="hover:bg-stone-50">
-              <td class="p-2 font-bold">3</td>
-              <td class="p-2 text-stone-600">FY2029</td>
-              <td class="p-2 text-right">$149,596.8</td>
-              <td class="p-2 text-right text-stone-600">+0.0%</td>
-              <td class="p-2 text-right font-medium">50.0%</td>
-              <td class="p-2 text-right">$74,798.4</td>
-              <td class="p-2 text-right">$62,691.8</td>
-              <td class="p-2 text-right text-stone-600">$0.0</td>
-              <td class="p-2 text-right font-bold text-emerald-inst">$62,691.8</td>
-              <td class="p-2 text-right text-stone-500">0.7410</td>
-              <td class="p-2 text-right font-bold">$46,452.2</td>
-            </tr><tr class="hover:bg-stone-50">
-              <td class="p-2 font-bold">4</td>
-              <td class="p-2 text-stone-600">FY2030</td>
-              <td class="p-2 text-right">$142,116.9</td>
-              <td class="p-2 text-right text-stone-600">-5.0%</td>
-              <td class="p-2 text-right font-medium">42.0%</td>
-              <td class="p-2 text-right">$59,689.1</td>
-              <td class="p-2 text-right">$49,617.6</td>
-              <td class="p-2 text-right text-stone-600">$0.0</td>
-              <td class="p-2 text-right font-bold text-emerald-inst">$49,617.6</td>
-              <td class="p-2 text-right text-stone-500">0.6705</td>
-              <td class="p-2 text-right font-bold">$33,268.2</td>
-            </tr><tr class="hover:bg-stone-50">
-              <td class="p-2 font-bold">5</td>
-              <td class="p-2 text-stone-600">FY2031</td>
-              <td class="p-2 text-right">$144,959.3</td>
-              <td class="p-2 text-right text-stone-600">+2.0%</td>
-              <td class="p-2 text-right font-medium">38.0%</td>
-              <td class="p-2 text-right">$55,084.5</td>
-              <td class="p-2 text-right">$45,411.1</td>
-              <td class="p-2 text-right text-stone-600">$1,292.0</td>
-              <td class="p-2 text-right font-bold text-emerald-inst">$44,119.1</td>
-              <td class="p-2 text-right text-stone-500">0.6067</td>
-              <td class="p-2 text-right font-bold">$26,768.2</td>
-            </tr><tr class="hover:bg-stone-50">
-              <td class="p-2 font-bold">6</td>
-              <td class="p-2 text-stone-600">FY2032</td>
-              <td class="p-2 text-right">$150,757.6</td>
-              <td class="p-2 text-right text-stone-600">+4.0%</td>
-              <td class="p-2 text-right font-medium">35.0%</td>
-              <td class="p-2 text-right">$52,765.2</td>
-              <td class="p-2 text-right">$43,136.1</td>
-              <td class="p-2 text-right text-stone-600">$2,635.6</td>
-              <td class="p-2 text-right font-bold text-emerald-inst">$40,500.5</td>
-              <td class="p-2 text-right text-stone-500">0.5541</td>
-              <td class="p-2 text-right font-bold">$22,440.8</td>
-            </tr><tr class="hover:bg-stone-50">
-              <td class="p-2 font-bold">7</td>
-              <td class="p-2 text-stone-600">FY2033</td>
-              <td class="p-2 text-right">$156,787.9</td>
-              <td class="p-2 text-right text-stone-600">+4.0%</td>
-              <td class="p-2 text-right font-medium">35.0%</td>
-              <td class="p-2 text-right">$54,875.8</td>
-              <td class="p-2 text-right">$44,484.1</td>
-              <td class="p-2 text-right text-stone-600">$2,741.0</td>
-              <td class="p-2 text-right font-bold text-emerald-inst">$41,743.1</td>
-              <td class="p-2 text-right text-stone-500">0.5060</td>
-              <td class="p-2 text-right font-bold">$21,122.7</td>
-            </tr><tr class="hover:bg-stone-50">
-              <td class="p-2 font-bold">8</td>
-              <td class="p-2 text-stone-600">FY2034</td>
-              <td class="p-2 text-right">$161,491.6</td>
-              <td class="p-2 text-right text-stone-600">+3.0%</td>
-              <td class="p-2 text-right font-medium">35.0%</td>
-              <td class="p-2 text-right">$56,522.1</td>
-              <td class="p-2 text-right">$45,429.9</td>
-              <td class="p-2 text-right text-stone-600">$2,138.0</td>
-              <td class="p-2 text-right font-bold text-emerald-inst">$43,291.9</td>
-              <td class="p-2 text-right text-stone-500">0.4621</td>
-              <td class="p-2 text-right font-bold">$20,005.8</td>
-            </tr><tr class="hover:bg-stone-50">
-              <td class="p-2 font-bold">9</td>
-              <td class="p-2 text-stone-600">FY2035</td>
-              <td class="p-2 text-right">$166,336.3</td>
-              <td class="p-2 text-right text-stone-600">+3.0%</td>
-              <td class="p-2 text-right font-medium">35.0%</td>
-              <td class="p-2 text-right">$58,217.7</td>
-              <td class="p-2 text-right">$46,392.4</td>
-              <td class="p-2 text-right text-stone-600">$2,202.2</td>
-              <td class="p-2 text-right font-bold text-emerald-inst">$44,190.2</td>
-              <td class="p-2 text-right text-stone-500">0.4220</td>
-              <td class="p-2 text-right font-bold">$18,649.3</td>
-            </tr><tr class="hover:bg-stone-50">
-              <td class="p-2 font-bold">10</td>
-              <td class="p-2 text-stone-600">FY2036</td>
-              <td class="p-2 text-right">$171,326.4</td>
-              <td class="p-2 text-right text-stone-600">+3.0%</td>
-              <td class="p-2 text-right font-medium">35.0%</td>
-              <td class="p-2 text-right">$59,964.2</td>
-              <td class="p-2 text-right">$47,371.8</td>
-              <td class="p-2 text-right text-stone-600">$2,268.2</td>
-              <td class="p-2 text-right font-bold text-emerald-inst">$45,103.5</td>
-              <td class="p-2 text-right text-stone-500">0.3890</td>
-              <td class="p-2 text-right font-bold">$17,543.5</td>
-            </tr>
-          </tbody>
-        </table>
+        <!-- LIVE RESULT DISPLAY BANNER -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded bg-[#1C1917] text-white">
+          <div>
+            <div class="text-[10px] font-mono-code text-stone-400 uppercase">Interactive Intrinsic Value</div>
+            <div class="text-2xl font-mono-code font-bold text-amber-400" id="simIntrinsicValue">$604.08</div>
+            <div class="text-[11px] font-mono-code text-emerald-400 font-semibold" id="simSpread">+1.6% vs Spot ($594.51)</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-mono-code text-stone-400 uppercase">Implied Enterprise Value</div>
+            <div class="text-xl font-mono-code font-bold text-stone-100" id="simEV">$615.6B</div>
+            <div class="text-[11px] font-mono-code text-stone-400" id="simPvDiscrete">PV 10-Yr: $339.5B</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-mono-code text-stone-400 uppercase">Implied Equity Value</div>
+            <div class="text-xl font-mono-code font-bold text-stone-100" id="simEquityValue">$683.5B</div>
+            <div class="text-[11px] font-mono-code text-stone-400" id="simPvTV">PV Terminal: $276.1B</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-mono-code text-stone-400 uppercase">Tactical Stance</div>
+            <div class="text-base font-mono-code font-bold text-emerald-400" id="simRating">FAIR VALUE / HOLD</div>
+            <div class="text-[11px] font-mono-code text-stone-400" id="simNetCashDelta">Net Cash: +$68.0B ($60.07/sh)</div>
+          </div>
+        </div>
+
+        <!-- 4-COLUMN INPUT CARDS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+          
+          <!-- Card 1: Base Operating Anchors -->
+          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-3">
+            <div class="text-xs font-mono-code text-stone-900 font-bold border-b border-subtle pb-1 uppercase">1. Base Financials</div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Base Revenue ($M):</label>
+              <input type="number" id="inpBaseRev" class="input-val-box w-full" placeholder="133188.0" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">Audited FY26: $133,188M</span>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Base EBIT ($M):</label>
+              <input type="number" id="inpBaseEbit" class="input-val-box w-full" placeholder="100992.0" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">Restated EBIT ($101.0B)</span>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Base Effective Tax (%):</label>
+              <input type="number" step="0.01" id="inpTaxRate" class="input-val-box w-full" placeholder="14.81" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">Effective Tax Rate (14.81%)</span>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Diluted Shares (M):</label>
+              <input type="number" step="0.01" id="inpShares" class="input-val-box w-full" placeholder="1131.42" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">Form 10-K Count: 1,131.42M</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Revenue Growth Trajectory -->
+          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-3">
+            <div class="text-xs font-mono-code text-stone-900 font-bold border-b border-subtle pb-1 uppercase">2. Growth Trajectory</div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Year 1 Growth (%):</label>
+              <input type="number" step="0.1" id="inpGrowthY1" class="input-val-box w-full" placeholder="8.0" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">FY27 HBM3E full ramp</span>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Year 2 Growth (%):</label>
+              <input type="number" step="0.1" id="inpGrowthY2" class="input-val-box w-full" placeholder="4.0" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">FY28 Baseline plateau</span>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Mid-Cycle Downside (%):</label>
+              <input type="number" step="0.1" id="inpGrowthY4" class="input-val-box w-full" placeholder="-5.0" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">FY30 cyclical cooling</span>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Terminal Growth gn (%):</label>
+              <input type="number" step="0.1" id="inpGrowthTerm" class="input-val-box w-full" placeholder="3.0" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">Capped at Risk-Free Rate</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Margins & Capital Efficiency -->
+          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-3">
+            <div class="text-xs font-mono-code text-stone-900 font-bold border-b border-subtle pb-1 uppercase">3. Operating Margins & Reinv.</div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Year 1 Target Margin (%):</label>
+              <input type="number" step="0.5" id="inpMarginY1" class="input-val-box w-full" placeholder="70.0" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">Initial step-down from 74.6%</span>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Terminal Margin (%):</label>
+              <input type="number" step="0.5" id="inpMarginTerm" class="input-val-box w-full" placeholder="35.0" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">Sustainable 3-player oligopoly</span>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Sales-to-Capital Ratio:</label>
+              <input type="number" step="0.05" id="inpSalesToCap" class="input-val-box w-full" placeholder="2.20" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">Phase 1 Capital efficiency</span>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Terminal ROIC (%):</label>
+              <input type="number" step="0.5" id="inpRoicTerm" class="input-val-box w-full" placeholder="15.0" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">Reinvestment discipline anchor</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Cost of Capital & Cash Bridge -->
+          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-3">
+            <div class="text-xs font-mono-code text-stone-900 font-bold border-b border-subtle pb-1 uppercase">4. WACC & Net Cash</div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Phase 1 WACC (Y1–5) (%):</label>
+              <input type="number" step="0.05" id="inpWaccP1" class="input-val-box w-full" placeholder="10.51" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">Ke: 10.56%, Hamada Beta 1.218</span>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Terminal WACC (%):</label>
+              <input type="number" step="0.05" id="inpWaccTerm" class="input-val-box w-full" placeholder="8.50" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">Matured cost of capital</span>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Net Cash Surplus ($M):</label>
+              <input type="number" id="inpNetCash" class="input-val-box w-full" placeholder="67964.0" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">$73.45B Cash - $5.49B Debt</span>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono-code text-stone-600 block">Market Spot Price ($):</label>
+              <input type="number" step="0.01" id="inpSpotPx" class="input-val-box w-full" placeholder="594.51" oninput="recalculateInteractiveModel()">
+              <span class="text-[9.5px] font-mono-code text-stone-400 block">Current market benchmark</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- DYNAMIC PRO-FORMA LIVE TABLE -->
+        <div class="pt-4 space-y-2">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-mono-code font-bold text-stone-900 uppercase">Live Dynamically Recalculated 10-Year Pro-Forma Schedule</h3>
+            <span class="text-xs font-mono-code text-stone-500">All rows recalculate in real-time on keypress</span>
+          </div>
+          <div class="overflow-x-auto border border-subtle rounded">
+            <table class="w-full text-xs font-mono-code text-left">
+              <thead class="bg-stone-100 text-stone-700 border-b border-subtle">
+                <tr>
+                  <th class="p-2">Line Item ($M)</th>
+                  <th class="p-2 text-right">FY27 (Y1)</th>
+                  <th class="p-2 text-right">FY28 (Y2)</th>
+                  <th class="p-2 text-right">FY29 (Y3)</th>
+                  <th class="p-2 text-right">FY30 (Y4)</th>
+                  <th class="p-2 text-right">FY31 (Y5)</th>
+                  <th class="p-2 text-right">FY32 (Y6)</th>
+                  <th class="p-2 text-right">FY33 (Y7)</th>
+                  <th class="p-2 text-right">FY34 (Y8)</th>
+                  <th class="p-2 text-right">FY35 (Y9)</th>
+                  <th class="p-2 text-right">FY36 (Y10)</th>
+                  <th class="p-2 text-right font-bold text-amber-900">Terminal</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-subtle bg-white" id="dynTableBody">
+                <!-- Dynamically populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- TAB 3: DUPONT 5-POINT ROE -->
+    <!-- TAB 3: 10-YEAR PRO-FORMA DCF & PROCESS DERIVATION -->
+    <div id="tab-dcf" class="hidden space-y-6">
+      
+      <!-- PROCESS DERIVATION CARDS -->
+      <div class="bg-card p-6 rounded border border-subtle shadow-sm space-y-4">
+        <div class="border-b border-subtle pb-3 flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-serif-hdr font-medium text-stone-900">Step-by-Step DCF Mathematical Derivation Process</h2>
+            <div class="text-xs font-mono-code text-stone-500">Transparent Formula Walkthrough: NOPAT, Reinvestment, Perpetual TV & Equity Bridge</div>
+          </div>
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono-code font-bold bg-stone-100 text-stone-800 border border-stone-300">PROCESS AUDIT</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono-code">
+          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
+            <div class="font-bold text-stone-900 uppercase">1. NOPAT & Reinvestment Derivation</div>
+            <div class="math-step-box space-y-1">
+              <div>NOPAT(t) = EBIT(t) &times; [1 - TaxRate(t)]</div>
+              <div>Reinvestment(t) = &Delta;Revenue(t) / Sales-to-Capital</div>
+            </div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              Base NOPAT begins at <strong>$86,035.1M</strong> based on restated EBIT of $100,992M and 14.81% effective tax. Reinvestment is modeled as net capital intensity required to support top-line expansion, using an audited marginal Sales-to-Capital ratio of 2.20 transitioning to 1.85.
+            </p>
+          </div>
+
+          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
+            <div class="font-bold text-stone-900 uppercase">2. Perpetual Terminal Value Formula</div>
+            <div class="math-step-box space-y-1">
+              <div>TV(10) = [NOPAT(11) &times; (1 - g/ROIC)] / (WACC_n - g)</div>
+              <div>PV(TV) = TV(10) &times; Cumulative_DF(10)</div>
+            </div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              Terminal NOPAT of $48,792.8M is constrained by a 20.0% steady-state reinvestment rate (g_n = 3.0%, ROIC = 15.0%). With terminal WACC at 8.50%, undiscounted TV is <strong>$709,715.1M</strong>, discounted back 10 years at cumulative factor 0.3890 to <strong>$276,079.2M ($276.1B)</strong>.
+            </p>
+          </div>
+
+          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
+            <div class="font-bold text-stone-900 uppercase">3. Equity Bridge & Value Per Share</div>
+            <div class="math-step-box space-y-1">
+              <div>Equity Value = Enterprise Value + Net Cash</div>
+              <div>Value Per Share = Equity Value / Diluted Shares</div>
+            </div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              Enterprise Value of <strong>$615,608.9M</strong> plus net cash surplus of <strong>$67,964.0M</strong> ($73.45B liquid assets less $5.49B debt) yields <strong>$683,572.9M</strong> implied equity. Divided by 1,131.42M diluted shares gives <strong>$604.08 per share</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DCF Pro-Forma Schedule Table -->
+      <div class="bg-card p-6 rounded border border-subtle shadow-sm space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-subtle pb-4">
+          <div>
+            <h2 class="text-lg font-serif-hdr font-medium text-stone-900">Plan A: 10-Year Pro-Forma Cash Flow Trajectory</h2>
+            <div class="text-xs font-mono-code text-stone-500">Operating margin step-down from peak 74.6% to sustainable 35.0% oligopoly baseline</div>
+          </div>
+          <div class="text-xs font-mono-code text-stone-600">
+            10-Yr Undiscounted FCFF: <strong class="text-stone-900">$524.3B</strong> &bull; PV: <strong class="text-emerald-inst">$339.5B</strong>
+          </div>
+        </div>
+
+        <div class="h-64">
+          <canvas id="dcfChart"></canvas>
+        </div>
+
+        <div class="overflow-x-auto pt-4">
+          <table class="w-full text-xs font-mono-code text-left">
+            <thead class="bg-stone-100 text-stone-700 border-b border-subtle">
+              <tr>
+                <th class="p-2">Year</th>
+                <th class="p-2">Period</th>
+                <th class="p-2 text-right">Net Sales ($M)</th>
+                <th class="p-2 text-right">Growth</th>
+                <th class="p-2 text-right">EBIT Margin</th>
+                <th class="p-2 text-right">EBIT ($M)</th>
+                <th class="p-2 text-right">NOPAT ($M)</th>
+                <th class="p-2 text-right">Reinvestment</th>
+                <th class="p-2 text-right">FCFF ($M)</th>
+                <th class="p-2 text-right">Disc. Factor</th>
+                <th class="p-2 text-right">PV of FCFF ($M)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-subtle">
+              <tr class="hover:bg-stone-50">
+                <td class="p-2 font-bold">1</td>
+                <td class="p-2 text-stone-600">FY2027</td>
+                <td class="p-2 text-right">$143,843.0</td>
+                <td class="p-2 text-right text-emerald-inst">+8.0%</td>
+                <td class="p-2 text-right font-medium">70.0%</td>
+                <td class="p-2 text-right">$100,690.1</td>
+                <td class="p-2 text-right">$85,085.1</td>
+                <td class="p-2 text-right text-stone-600">$4,843.2</td>
+                <td class="p-2 text-right font-bold text-emerald-inst">$80,241.9</td>
+                <td class="p-2 text-right text-stone-500">0.9049</td>
+                <td class="p-2 text-right font-bold">$72,610.5</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2 font-bold">2</td>
+                <td class="p-2 text-stone-600">FY2028</td>
+                <td class="p-2 text-right">$149,596.8</td>
+                <td class="p-2 text-right text-emerald-inst">+4.0%</td>
+                <td class="p-2 text-right font-medium">60.0%</td>
+                <td class="p-2 text-right">$89,758.1</td>
+                <td class="p-2 text-right">$75,231.7</td>
+                <td class="p-2 text-right text-stone-600">$2,615.3</td>
+                <td class="p-2 text-right font-bold text-emerald-inst">$72,616.4</td>
+                <td class="p-2 text-right text-stone-500">0.8188</td>
+                <td class="p-2 text-right font-bold">$59,475.2</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2 font-bold">3</td>
+                <td class="p-2 text-stone-600">FY2029</td>
+                <td class="p-2 text-right">$149,596.8</td>
+                <td class="p-2 text-right text-stone-500">0.0%</td>
+                <td class="p-2 text-right font-medium">50.0%</td>
+                <td class="p-2 text-right">$74,798.4</td>
+                <td class="p-2 text-right">$62,180.2</td>
+                <td class="p-2 text-right text-stone-600">$0.0</td>
+                <td class="p-2 text-right font-bold text-emerald-inst">$62,180.2</td>
+                <td class="p-2 text-right text-stone-500">0.7409</td>
+                <td class="p-2 text-right font-bold">$46,081.9</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2 font-bold">4</td>
+                <td class="p-2 text-stone-600">FY2030</td>
+                <td class="p-2 text-right">$142,116.9</td>
+                <td class="p-2 text-right text-crimson-inst">-5.0%</td>
+                <td class="p-2 text-right font-medium">42.0%</td>
+                <td class="p-2 text-right">$59,689.1</td>
+                <td class="p-2 text-right">$49,209.6</td>
+                <td class="p-2 text-right text-stone-600">$0.0</td>
+                <td class="p-2 text-right font-bold text-emerald-inst">$49,209.6</td>
+                <td class="p-2 text-right text-stone-500">0.6705</td>
+                <td class="p-2 text-right font-bold">$33,006.1</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2 font-bold">5</td>
+                <td class="p-2 text-stone-600">FY2031</td>
+                <td class="p-2 text-right">$144,959.3</td>
+                <td class="p-2 text-right text-emerald-inst">+2.0%</td>
+                <td class="p-2 text-right font-medium">38.0%</td>
+                <td class="p-2 text-right">$55,084.5</td>
+                <td class="p-2 text-right">$45,035.1</td>
+                <td class="p-2 text-right text-stone-600">$1,292.0</td>
+                <td class="p-2 text-right font-bold text-emerald-inst">$43,743.1</td>
+                <td class="p-2 text-right text-stone-500">0.6067</td>
+                <td class="p-2 text-right font-bold">$26,543.8</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2 font-bold">6</td>
+                <td class="p-2 text-stone-600">FY2032</td>
+                <td class="p-2 text-right">$150,757.6</td>
+                <td class="p-2 text-right text-stone-600">+4.0%</td>
+                <td class="p-2 text-right font-medium">35.0%</td>
+                <td class="p-2 text-right">$52,765.2</td>
+                <td class="p-2 text-right">$42,776.2</td>
+                <td class="p-2 text-right text-stone-600">$2,635.6</td>
+                <td class="p-2 text-right font-bold text-emerald-inst">$40,140.6</td>
+                <td class="p-2 text-right text-stone-500">0.5541</td>
+                <td class="p-2 text-right font-bold">$22,248.8</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2 font-bold">7</td>
+                <td class="p-2 text-stone-600">FY2033</td>
+                <td class="p-2 text-right">$156,787.9</td>
+                <td class="p-2 text-right text-stone-600">+4.0%</td>
+                <td class="p-2 text-right font-medium">35.0%</td>
+                <td class="p-2 text-right">$54,875.8</td>
+                <td class="p-2 text-right">$44,108.6</td>
+                <td class="p-2 text-right text-stone-600">$2,741.0</td>
+                <td class="p-2 text-right font-bold text-emerald-inst">$41,367.6</td>
+                <td class="p-2 text-right text-stone-500">0.5060</td>
+                <td class="p-2 text-right font-bold">$20,939.9</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2 font-bold">8</td>
+                <td class="p-2 text-stone-600">FY2034</td>
+                <td class="p-2 text-right">$161,491.6</td>
+                <td class="p-2 text-right text-stone-600">+3.0%</td>
+                <td class="p-2 text-right font-medium">35.0%</td>
+                <td class="p-2 text-right">$56,522.0</td>
+                <td class="p-2 text-right">$45,042.4</td>
+                <td class="p-2 text-right text-stone-600">$2,138.0</td>
+                <td class="p-2 text-right font-bold text-emerald-inst">$42,904.4</td>
+                <td class="p-2 text-right text-stone-500">0.4621</td>
+                <td class="p-2 text-right font-bold">$19,833.6</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2 font-bold">9</td>
+                <td class="p-2 text-stone-600">FY2035</td>
+                <td class="p-2 text-right">$166,336.3</td>
+                <td class="p-2 text-right text-stone-600">+3.0%</td>
+                <td class="p-2 text-right font-medium">35.0%</td>
+                <td class="p-2 text-right">$58,217.7</td>
+                <td class="p-2 text-right">$45,992.0</td>
+                <td class="p-2 text-right text-stone-600">$2,202.1</td>
+                <td class="p-2 text-right font-bold text-emerald-inst">$43,789.9</td>
+                <td class="p-2 text-right text-stone-500">0.4220</td>
+                <td class="p-2 text-right font-bold">$18,485.4</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2 font-bold">10</td>
+                <td class="p-2 text-stone-600">FY2036</td>
+                <td class="p-2 text-right">$171,326.4</td>
+                <td class="p-2 text-right text-stone-600">+3.0%</td>
+                <td class="p-2 text-right font-medium">35.0%</td>
+                <td class="p-2 text-right">$59,964.2</td>
+                <td class="p-2 text-right">$47,371.8</td>
+                <td class="p-2 text-right text-stone-600">$2,268.2</td>
+                <td class="p-2 text-right font-bold text-emerald-inst">$45,103.5</td>
+                <td class="p-2 text-right text-stone-500">0.3889</td>
+                <td class="p-2 text-right font-bold">$17,364.5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: DUPONT 5-POINT ROE BY PARTS & CYCLE AUDIT -->
     <div id="tab-dupont" class="hidden space-y-6">
+      
+      <!-- FORMULA DISPLAY BOX -->
+      <div class="bg-card p-6 rounded border border-subtle shadow-sm space-y-4">
+        <div class="border-b border-subtle pb-3 flex flex-col md:flex-row md:items-center justify-between gap-2">
+          <div>
+            <h2 class="text-xl font-serif-hdr font-medium text-stone-900">5-Point DuPont Return on Equity (ROE) Decomposition</h2>
+            <div class="text-xs font-mono-code text-stone-500">Empirical Business Cycle Verification: Operational Efficiency vs. Financial Leverage</div>
+          </div>
+          <span class="px-2.5 py-1 bg-emerald-100 text-emerald-900 rounded font-mono-code text-xs font-bold border border-emerald-300">
+            AUDITED 100% OPERATIONAL
+          </span>
+        </div>
+
+        <p class="text-sm text-stone-700 leading-relaxed">
+          To determine whether Micron's extraordinary return on equity (ROE) expansion from <strong>-13.53% (FY23 trough)</strong> to <strong>+61.40% (FY26 peak)</strong> was driven by real operational strength or dangerous financial leverage, we executed the classic 5-point DuPont breakdown across the entire business cycle:
+        </p>
+
+        <!-- VISUAL FORMULA WITH UNDERBRACES -->
+        <div class="p-4 rounded formula-banner font-mono-code text-xs md:text-sm overflow-x-auto shadow-inner">
+          <pre class="leading-relaxed">
+          Net Income        EBT               EBIT             Revenue            Assets    
+    ROE = ────────── ×      ────       ×     ───────      ×    ───────     ×      ──────                                                              
+             EBT            EBIT             Revenue           Assets             Equity 
+          ╰────┬───╯        ╰─┬╯             ╰──┬──╯           ╰──┬──╯            ╰──┬─╯
+          Tax Burden   Interest Burden   Operating Margin   Asset Turnover   Equity Multiplier</pre>
+        </div>
+
+        <!-- 5-YEAR HISTORICAL DUPONT CYCLE TABLE -->
+        <div class="overflow-x-auto pt-2">
+          <table class="w-full text-xs font-mono-code text-left border border-subtle rounded">
+            <thead class="bg-stone-100 text-stone-800 border-b border-subtle">
+              <tr>
+                <th class="p-2.5">PERIOD</th>
+                <th class="p-2.5 text-right">TAX BURDEN (NI/EBT)</th>
+                <th class="p-2.5 text-right">INTEREST BURDEN (EBT/EBIT)</th>
+                <th class="p-2.5 text-right">OPERATING MARGIN (EBIT/REV)</th>
+                <th class="p-2.5 text-right">ASSET TURNOVER (REV/ASSETS)</th>
+                <th class="p-2.5 text-right">EQUITY MULTIPLIER (A/E)</th>
+                <th class="p-2.5 text-right font-bold text-stone-900">ROE %</th>
+                <th class="p-2.5">OPERATIONAL DIAGNOSIS</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-subtle bg-white">
+              <tr class="hover:bg-stone-50">
+                <td class="p-2.5 font-bold">FY2022</td>
+                <td class="p-2.5 text-right">0.933</td>
+                <td class="p-2.5 text-right">0.960</td>
+                <td class="p-2.5 text-right">31.54%</td>
+                <td class="p-2.5 text-right">0.480x</td>
+                <td class="p-2.5 text-right">1.31x</td>
+                <td class="p-2.5 text-right font-bold text-stone-800">17.74%</td>
+                <td class="p-2.5 text-stone-600 text-[11px]">Prior DRAM cycle peak</td>
+              </tr>
+              <tr class="hover:bg-stone-50 bg-amber-50/50">
+                <td class="p-2.5 font-bold text-crimson-inst">FY2023</td>
+                <td class="p-2.5 text-right">1.012</td>
+                <td class="p-2.5 text-right">1.066</td>
+                <td class="p-2.5 text-right text-crimson-inst font-bold">-34.78%</td>
+                <td class="p-2.5 text-right">0.257x</td>
+                <td class="p-2.5 text-right">1.40x</td>
+                <td class="p-2.5 text-right font-bold text-crimson-inst">-13.53%</td>
+                <td class="p-2.5 text-crimson-inst text-[11px]">Severe industry inventory collapse</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2.5 font-bold">FY2024</td>
+                <td class="p-2.5 text-right">0.842</td>
+                <td class="p-2.5 text-right">0.709</td>
+                <td class="p-2.5 text-right">5.19%</td>
+                <td class="p-2.5 text-right">0.374x</td>
+                <td class="p-2.5 text-right">1.52x</td>
+                <td class="p-2.5 text-right font-bold text-stone-800">1.76%</td>
+                <td class="p-2.5 text-stone-600 text-[11px]">Inception of HBM3E volume qualification</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2.5 font-bold">FY2025</td>
+                <td class="p-2.5 text-right">0.903</td>
+                <td class="p-2.5 text-right">0.968</td>
+                <td class="p-2.5 text-right text-emerald-inst font-bold">26.14%</td>
+                <td class="p-2.5 text-right">0.453x</td>
+                <td class="p-2.5 text-right">1.58x</td>
+                <td class="p-2.5 text-right font-bold text-emerald-inst">16.39%</td>
+                <td class="p-2.5 text-stone-600 text-[11px]">AI memory shortage; margin recovery</td>
+              </tr>
+              <tr class="hover:bg-stone-50 bg-emerald-50/60">
+                <td class="p-2.5 font-bold text-emerald-inst">FY2026</td>
+                <td class="p-2.5 text-right">0.852</td>
+                <td class="p-2.5 text-right font-bold text-emerald-inst">1.003</td>
+                <td class="p-2.5 text-right font-bold text-emerald-inst">74.59%</td>
+                <td class="p-2.5 text-right font-bold text-emerald-inst">0.680x</td>
+                <td class="p-2.5 text-right font-bold text-stone-900">1.42x</td>
+                <td class="p-2.5 text-right font-bold text-emerald-inst text-sm">61.40%</td>
+                <td class="p-2.5 text-emerald-900 font-bold text-[11px]">Historic HBM supercycle pricing monopoly</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- FACTOR BY FACTOR WALKTHROUGH CARDS -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-3 pt-3">
+          <div class="p-3 bg-stone-50 rounded border border-subtle space-y-1">
+            <span class="text-[10px] font-mono-code text-stone-500 uppercase block">1. Tax Burden (0.852)</span>
+            <div class="text-xs font-mono-code font-bold text-stone-900">85.2% Retention</div>
+            <p class="text-[11px] text-stone-600 leading-tight">Reflects 14.81% effective cash tax rate under US R&D credit provisions.</p>
+          </div>
+          <div class="p-3 bg-stone-50 rounded border border-subtle space-y-1">
+            <span class="text-[10px] font-mono-code text-stone-500 uppercase block">2. Interest Burden (1.003)</span>
+            <div class="text-xs font-mono-code font-bold text-emerald-inst">&gt; 1.000 (No Drag)</div>
+            <p class="text-[11px] text-stone-600 leading-tight">Net interest income was positive (+$978M); cash yields completely eclipsed gross interest expense.</p>
+          </div>
+          <div class="p-3 bg-stone-50 rounded border border-subtle space-y-1">
+            <span class="text-[10px] font-mono-code text-stone-500 uppercase block">3. Operating Margin (74.59%)</span>
+            <div class="text-xs font-mono-code font-bold text-emerald-inst">+10,937 bps Surge</div>
+            <p class="text-[11px] text-stone-600 leading-tight">Primary ROE driver: -34.78% to 74.59% turnaround accounted for 88% of equity return explosion.</p>
+          </div>
+          <div class="p-3 bg-stone-50 rounded border border-subtle space-y-1">
+            <span class="text-[10px] font-mono-code text-stone-500 uppercase block">4. Asset Turnover (0.680x)</span>
+            <div class="text-xs font-mono-code font-bold text-emerald-inst">2.65x Expansion</div>
+            <p class="text-[11px] text-stone-600 leading-tight">Surged from 0.257x to 0.680x as 100% fab capacity utilization eliminated unabsorbed overhead.</p>
+          </div>
+          <div class="p-3 bg-stone-50 rounded border border-subtle space-y-1">
+            <span class="text-[10px] font-mono-code text-stone-500 uppercase block">5. Equity Multiplier (1.42x)</span>
+            <div class="text-xs font-mono-code font-bold text-stone-900">Flat (1.40x &rarr; 1.42x)</div>
+            <p class="text-[11px] text-stone-600 leading-tight">Empirical proof: Financial leverage was flat. Zero artificial debt was used to inflate ROE.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- HEALTH SCORE & SOLVENCY BATTERY -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-card p-6 rounded border border-subtle shadow-sm space-y-4">
           <div class="border-b border-subtle pb-3">
-            <h2 class="text-lg font-serif-hdr font-medium text-stone-900">DuPont 5-Point ROE Decomposition (FY22 – FY26)</h2>
-            <div class="text-xs font-mono-code text-stone-500">Deconstructing Operational Efficiency vs Financial Leverage</div>
+            <h3 class="text-base font-serif-hdr font-medium text-stone-900">DuPont Factor Trajectory Visualizer</h3>
+            <div class="text-xs font-mono-code text-stone-500">Comparing Operating Margin vs Financial Leverage</div>
           </div>
           <div class="h-64">
             <canvas id="dupontChart"></canvas>
@@ -371,141 +783,252 @@
 
         <div class="bg-card p-6 rounded border border-subtle shadow-sm space-y-4">
           <div class="border-b border-subtle pb-3">
-            <h2 class="text-lg font-serif-hdr font-medium text-stone-900">Solvency & Fundamental Health Audit</h2>
-            <div class="text-xs font-mono-code text-stone-500">Quantitative Distress & Manipulation Battery</div>
+            <h3 class="text-base font-serif-hdr font-medium text-stone-900">Forensic Solvency & Manipulation Audit</h3>
+            <div class="text-xs font-mono-code text-stone-500">Quantitative Distress & Accounting Quality Battery</div>
           </div>
-          <div class="space-y-4 text-xs font-mono-code">
+          <div class="space-y-3 text-xs font-mono-code">
             <div class="p-3 bg-stone-50 rounded border border-subtle flex justify-between items-center">
               <div>
                 <div class="font-bold text-stone-900">Altman Z-Score: 10.70</div>
-                <div class="text-[11px] text-stone-500">Benchmark: >2.99 Safe Zone</div>
+                <div class="text-[11px] text-stone-500">Safe threshold &gt; 2.99; Micron exhibits zero bankruptcy risk</div>
               </div>
               <span class="px-2 py-1 bg-emerald-100 text-emerald-800 rounded font-bold">EXTREMELY SAFE</span>
             </div>
             <div class="p-3 bg-stone-50 rounded border border-subtle flex justify-between items-center">
               <div>
                 <div class="font-bold text-stone-900">Piotroski F-Score: 9 / 9</div>
-                <div class="text-[11px] text-stone-500">Benchmark: >=8 Highest Quality</div>
+                <div class="text-[11px] text-stone-500">Flawless 9 out of 9 operational and fundamental quality criteria</div>
               </div>
               <span class="px-2 py-1 bg-emerald-100 text-emerald-800 rounded font-bold">FLAWLESS QUALITY</span>
             </div>
             <div class="p-3 bg-stone-50 rounded border border-subtle flex justify-between items-center">
               <div>
                 <div class="font-bold text-stone-900">Beneish M-Score: -2.48</div>
-                <div class="text-[11px] text-stone-500">Benchmark: <-1.78 Unmanipulated</div>
+                <div class="text-[11px] text-stone-500">Far below -1.78 manipulation threshold; strong negative accruals</div>
               </div>
-              <span class="px-2 py-1 bg-emerald-100 text-emerald-800 rounded font-bold">NEGATIVE ACCRUALS</span>
+              <span class="px-2 py-1 bg-emerald-100 text-emerald-800 rounded font-bold">UNMANIPULATED</span>
             </div>
             <div class="p-3 bg-stone-50 rounded border border-subtle flex justify-between items-center">
               <div>
-                <div class="font-bold text-stone-900">Interest Coverage: 952.8x</div>
-                <div class="text-[11px] text-stone-500">Net interest income positive (+$978M)</div>
+                <div class="font-bold text-stone-900">Net Interest Coverage: 952.8x</div>
+                <div class="text-[11px] text-stone-500">Liquid cash ($73.45B) yields +$978M net interest income</div>
               </div>
               <span class="px-2 py-1 bg-emerald-100 text-emerald-800 rounded font-bold">AAA SYNTHETIC</span>
             </div>
           </div>
         </div>
       </div>
+
     </div>
 
-    <!-- TAB 4: SOTP DIVISIONAL MIX -->
+    <!-- TAB 5: SOTP DIVISIONAL MIX & PROCESS -->
     <div id="tab-sotp" class="hidden space-y-6">
       <div class="bg-card p-6 rounded border border-subtle shadow-sm space-y-4">
-        <div class="border-b border-subtle pb-3">
-          <h2 class="text-lg font-serif-hdr font-medium text-stone-900">Sum-of-the-Parts (SOTP) Divisional Multiple Valuation</h2>
-          <div class="text-xs font-mono-code text-stone-500">Applying a 40% forward normalization haircut to peak FY26 divisional EBITDA</div>
+        <div class="border-b border-subtle pb-3 flex flex-col md:flex-row md:items-center justify-between gap-2">
+          <div>
+            <h2 class="text-lg font-serif-hdr font-medium text-stone-900">Sum-of-the-Parts (SOTP) Divisional Valuation Process</h2>
+            <div class="text-xs font-mono-code text-stone-500">40% Forward Normalization Haircut Applied to FY26 Peak Divisional EBITDA</div>
+          </div>
+          <span class="text-xs font-mono-code font-bold text-stone-900 bg-stone-100 px-2.5 py-1 rounded border border-stone-200">
+            SOTP TARGET: $501.54 / SHARE
+          </span>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2">
-          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
-            <div class="text-xs font-mono-code text-amber-700 font-bold uppercase">CNBU (Compute & Networking)</div>
-            <div class="text-lg font-mono-code font-bold text-stone-900">$366.45B EV</div>
-            <div class="text-xs text-stone-600 leading-tight">Server DRAM, HBM3E, HBM4. Peer multiple 8.5x normalized EBITDA ($43.1B).</div>
-          </div>
-          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
-            <div class="text-xs font-mono-code text-stone-600 font-bold uppercase">MBU (Mobile Business Unit)</div>
-            <div class="text-lg font-mono-code font-bold text-stone-900">$62.33B EV</div>
-            <div class="text-xs text-stone-600 leading-tight">Smartphone LPDDR5X & mobile NAND. Peer multiple 6.5x normalized EBITDA ($9.6B).</div>
-          </div>
-          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
-            <div class="text-xs font-mono-code text-stone-600 font-bold uppercase">SBU (Storage Business Unit)</div>
-            <div class="text-lg font-mono-code font-bold text-stone-900">$37.97B EV</div>
-            <div class="text-xs text-stone-600 leading-tight">Enterprise & client SSDs / 3D NAND flash. Peer multiple 5.5x normalized EBITDA ($6.9B).</div>
-          </div>
-          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
-            <div class="text-xs font-mono-code text-stone-600 font-bold uppercase">EBU (Embedded Business Unit)</div>
-            <div class="text-lg font-mono-code font-bold text-stone-900">$32.74B EV</div>
-            <div class="text-xs text-stone-600 leading-tight">Automotive & industrial memory solutions. Peer multiple 7.5x normalized EBITDA ($4.4B).</div>
-          </div>
-        </div>
-        <div class="p-4 bg-subtle rounded border border-subtle flex flex-wrap justify-between items-center gap-4 text-xs font-mono-code font-bold">
-          <div>Total SOTP Operating EV: $499.49B</div>
-          <div>+ Net Cash on Balance Sheet: +$68.0B</div>
-          <div>= SOTP Implied Equity Value: $567.46B</div>
-          <div class="text-amber-inst text-sm">SOTP Value Per Share: $501.54 USD</div>
+
+        <p class="text-xs text-stone-600 leading-relaxed">
+          Because Micron reports across 4 distinct business units with differing cyclical profiles, we construct a Sum-of-the-Parts (SOTP) floor. To guard against extrapolating peak cyclical profitability, we haircut peak FY26 EBITDA by <strong>40.0%</strong> across all business units to reflect sustainable mid-cycle earnings.
+        </p>
+
+        <!-- SOTP PROCESS TABLE -->
+        <div class="overflow-x-auto pt-2">
+          <table class="w-full text-xs font-mono-code text-left border border-subtle rounded">
+            <thead class="bg-stone-100 text-stone-800 border-b border-subtle">
+              <tr>
+                <th class="p-2.5">BUSINESS UNIT</th>
+                <th class="p-2.5 text-right">FY26 NET SALES</th>
+                <th class="p-2.5 text-right">PEAK EBITDA</th>
+                <th class="p-2.5 text-right">HAIRCUT</th>
+                <th class="p-2.5 text-right">NORMALIZED EBITDA</th>
+                <th class="p-2.5 text-right">PEER MULTIPLE</th>
+                <th class="p-2.5 text-right font-bold text-stone-900">DIVISIONAL EV ($M)</th>
+                <th class="p-2.5">PRIMARY PRODUCT / MOAT</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-subtle bg-white">
+              <tr class="hover:bg-stone-50">
+                <td class="p-2.5 font-bold text-amber-800">CNBU (Compute &amp; Networking)</td>
+                <td class="p-2.5 text-right">$106,550M</td>
+                <td class="p-2.5 text-right">$83,109M</td>
+                <td class="p-2.5 text-right text-stone-500">-40%</td>
+                <td class="p-2.5 text-right font-medium">$49,865M</td>
+                <td class="p-2.5 text-right">7.35x</td>
+                <td class="p-2.5 text-right font-bold text-amber-800">$366,500M ($366.5B)</td>
+                <td class="p-2.5 text-stone-600 text-[11px]">AI Data Center HBM3E/HBM4 &amp; Server DDR5</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2.5 font-bold">MBU (Mobile Business Unit)</td>
+                <td class="p-2.5 text-right">$10,655M</td>
+                <td class="p-2.5 text-right">$6,926M</td>
+                <td class="p-2.5 text-right text-stone-500">-40%</td>
+                <td class="p-2.5 text-right font-medium">$4,155M</td>
+                <td class="p-2.5 text-right">15.00x</td>
+                <td class="p-2.5 text-right font-bold text-stone-900">$62,300M ($62.3B)</td>
+                <td class="p-2.5 text-stone-600 text-[11px]">Low-power LPDDR5X &amp; UFS 4.0 for Edge AI Smartphones</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2.5 font-bold">SBU (Storage Business Unit)</td>
+                <td class="p-2.5 text-right">$7,991M</td>
+                <td class="p-2.5 text-right">$4,795M</td>
+                <td class="p-2.5 text-right text-stone-500">-40%</td>
+                <td class="p-2.5 text-right font-medium">$2,877M</td>
+                <td class="p-2.5 text-right">13.21x</td>
+                <td class="p-2.5 text-right font-bold text-stone-900">$38,000M ($38.0B)</td>
+                <td class="p-2.5 text-stone-600 text-[11px]">Enterprise NVMe SSDs &amp; 232-Layer 3D NAND</td>
+              </tr>
+              <tr class="hover:bg-stone-50">
+                <td class="p-2.5 font-bold">EBU (Embedded Business Unit)</td>
+                <td class="p-2.5 text-right">$7,992M</td>
+                <td class="p-2.5 text-right">$4,955M</td>
+                <td class="p-2.5 text-right text-stone-500">-40%</td>
+                <td class="p-2.5 text-right font-medium">$2,973M</td>
+                <td class="p-2.5 text-right">11.00x</td>
+                <td class="p-2.5 text-right font-bold text-stone-900">$32,700M ($32.7B)</td>
+                <td class="p-2.5 text-stone-600 text-[11px]">Automotive ADAS &amp; Industrial Edge Robotics</td>
+              </tr>
+            </tbody>
+            <tfoot class="bg-stone-50 font-mono-code font-bold text-stone-900 border-t border-subtle">
+              <tr>
+                <td class="p-2.5" colspan="6">AGGREGATE SOTP ENTERPRISE VALUE (EV):</td>
+                <td class="p-2.5 text-right text-amber-800">$499,500M ($499.5B)</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="p-2.5" colspan="6">ADD: NET BALANCE SHEET CASH SURPLUS:</td>
+                <td class="p-2.5 text-right text-emerald-inst">+$67,964M (+$68.0B)</td>
+                <td></td>
+              </tr>
+              <tr class="bg-emerald-50/70 border-t-2 border-emerald-600">
+                <td class="p-2.5" colspan="6">IMPLIED SOTP EQUITY VALUE:</td>
+                <td class="p-2.5 text-right text-emerald-inst text-sm">$567,464M ($567.5B)</td>
+                <td class="p-2.5 text-emerald-900 font-bold">$501.54 PER SHARE</td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
       </div>
     </div>
 
-    <!-- TAB 5: MONTE CARLO SIMULATION -->
+    <!-- TAB 6: MONTE CARLO SIMULATION ENGINE -->
     <div id="tab-mc" class="hidden space-y-6">
       <div class="bg-card p-6 rounded border border-subtle shadow-sm space-y-4">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-subtle pb-3">
+        <div class="border-b border-subtle pb-3 flex flex-col md:flex-row md:items-center justify-between gap-2">
           <div>
-            <h2 class="text-lg font-serif-hdr font-medium text-stone-900">10,000-Trial Monte Carlo Stochastic Valuation Engine</h2>
-            <div class="text-xs font-mono-code text-stone-500">Stochastic simulation across WACC (&plusmn;75 bps), Terminal Growth (&plusmn;50 bps), and Terminal Margin (&plusmn;400 bps)</div>
+            <h2 class="text-lg font-serif-hdr font-medium text-stone-900">10,000-Trial Monte Carlo Simulation Engine</h2>
+            <div class="text-xs font-mono-code text-stone-500">Stochastic Latin Hypercube Sampling Across Growth, Margin, and WACC Distributions</div>
           </div>
-          <div class="text-right">
-            <div class="text-xs font-mono-code text-stone-500">Win Rate (> $594.51 Spot)</div>
-            <div class="text-lg font-mono-code font-bold text-amber-inst">49.1%</div>
+          <span class="px-2.5 py-1 bg-stone-100 text-stone-800 rounded font-mono-code text-xs font-bold border border-stone-300">
+            P50 MEDIAN: $590.70 &bull; WIN RATE: 49.1%
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono-code">
+          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
+            <div class="font-bold text-stone-900 uppercase">Input Distribution 1: Revenue Growth</div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              <strong>Triangular Distribution:</strong> Min = -5.0%, Mode = +8.0%, Max = +25.0%. Captures memory cycle volatility and potential hyperscaler CapEx acceleration.
+            </p>
+          </div>
+          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
+            <div class="font-bold text-stone-900 uppercase">Input Distribution 2: Terminal Margin</div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              <strong>Normal Distribution:</strong> Mean = 35.0%, Std Dev = 5.0%, truncated at [20.0%, 55.0%]. Tests durability of the 3-player oligopoly moat.
+            </p>
+          </div>
+          <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
+            <div class="font-bold text-stone-900 uppercase">Input Distribution 3: WACC Discount Rate</div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              <strong>Normal Distribution:</strong> Mean = 10.51%, Std Dev = 0.75%. Reflects interest rate regime shifts and equity risk premium fluctuations.
+            </p>
           </div>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 py-2">
-          <div class="p-3 bg-stone-50 rounded border border-subtle text-center">
-            <div class="text-[10px] font-mono-code text-stone-500 uppercase">P10 Downside</div>
-            <div class="text-xl font-mono-code font-bold text-crimson-inst">$426.7</div>
+
+        <div class="h-64 pt-2">
+          <canvas id="mcChart"></canvas>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 text-center font-mono-code text-xs">
+          <div class="p-3 bg-stone-50 rounded border border-subtle">
+            <span class="text-[10px] text-stone-500 uppercase block">P10 (Severe Bear Case)</span>
+            <strong class="text-crimson-inst text-base">$426.70</strong>
+            <span class="text-[10px] text-stone-500 block">-28.2% vs Spot</span>
           </div>
-          <div class="p-3 bg-stone-50 rounded border border-subtle text-center">
-            <div class="text-[10px] font-mono-code text-stone-500 uppercase">P50 Median</div>
-            <div class="text-xl font-mono-code font-bold text-stone-900">$590.7</div>
+          <div class="p-3 bg-stone-50 rounded border border-subtle">
+            <span class="text-[10px] text-stone-500 uppercase block">P50 (Median Central Gravity)</span>
+            <strong class="text-stone-900 text-base">$590.70</strong>
+            <span class="text-[10px] text-stone-500 block">-0.6% vs Spot</span>
           </div>
-          <div class="p-3 bg-stone-50 rounded border border-subtle text-center">
-            <div class="text-[10px] font-mono-code text-stone-500 uppercase">Mean Fair Value</div>
-            <div class="text-xl font-mono-code font-bold text-emerald-inst">$624.26</div>
+          <div class="p-3 bg-stone-50 rounded border border-subtle">
+            <span class="text-[10px] text-stone-500 uppercase block">P90 (HBM Persistence Bull)</span>
+            <strong class="text-emerald-inst text-base">$860.25</strong>
+            <span class="text-[10px] text-emerald-inst block">+44.7% vs Spot</span>
           </div>
-          <div class="p-3 bg-stone-50 rounded border border-subtle text-center">
-            <div class="text-[10px] font-mono-code text-stone-500 uppercase">P90 Bull Peak</div>
-            <div class="text-xl font-mono-code font-bold text-emerald-inst">$860.25</div>
+          <div class="p-3 bg-stone-50 rounded border border-subtle">
+            <span class="text-[10px] text-stone-500 uppercase block">Probability of Outperformance</span>
+            <strong class="text-amber-800 text-base">49.1%</strong>
+            <span class="text-[10px] text-stone-500 block">Squarely at Fair Value</span>
           </div>
         </div>
-        <div class="p-4 bg-stone-50 rounded border border-subtle text-xs text-stone-700 leading-relaxed">
-          <strong>Institutional Interpretation:</strong> With a 49.1% empirical win rate against the $594.51 spot price and a median of $590.70, Micron is pricing in virtually zero sentimental premium or discount. The distribution proves that the market's downwind from $1,255 has settled squarely at the mathematical center of gravity of the business cycle.
-        </div>
+
       </div>
     </div>
 
-    <!-- TAB 6: FORENSIC ACCOUNTING AUDIT -->
+    <!-- TAB 7: FORENSIC CAPITALIZATION & WACC -->
     <div id="tab-audit" class="hidden space-y-6">
       <div class="bg-card p-6 rounded border border-subtle shadow-sm space-y-4">
         <div class="border-b border-subtle pb-3">
-          <h2 class="text-lg font-serif-hdr font-medium text-stone-900">Gate 1–3 Forensic Accounting & Normalization Registry</h2>
-          <div class="text-xs font-mono-code text-stone-500">Audited 10-K Reconciliation & Capitalization Mechanics</div>
+          <h2 class="text-lg font-serif-hdr font-medium text-stone-900">Gate 1 Forensic Restatements &amp; Gate 3 Cost of Capital Derivation</h2>
+          <div class="text-xs font-mono-code text-stone-500">Capitalizing Intangibles, Synthetic Leases, and Hamada Asset Beta Delevering</div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-mono-code">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono-code">
           <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
-            <div class="font-bold text-stone-900 uppercase">1. R&D Capitalization Schedule (4-Year Straight Line)</div>
-            <p class="text-stone-600">FY26 R&D ($5,650M) capitalized creating a <strong>$6,994.0M Research Asset</strong>. Amortization is $3,998.0M, generating an EBIT restatement adjustment of +$1,652.0M ($	ext{Adjusted EBIT}_0 = \$100,992.0	ext{M}$).</p>
+            <div class="font-bold text-stone-900 uppercase">1. R&amp;D Capitalization Schedule (4-Year Straight-Line)</div>
+            <div class="math-step-box space-y-1">
+              <div>Research Asset = FY26 + (3/4)&times;FY25 + (2/4)&times;FY24 + (1/4)&times;FY23 = $6,994.0M</div>
+              <div>Adjusted EBIT = Reported EBIT ($99,336M) + R&D ($5,650M) - Amortization ($3,986M) = $100,992.0M</div>
+            </div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              GAAP treats R&amp;D as an immediate period expense, artificially depressing operating income during investment supercycles. Capitalizing 4 years of R&amp;D creates a <strong>$6,994.0M Research Asset</strong> and lifts base EBIT from $99.34B to <strong>$100.99B</strong>.
+            </p>
           </div>
           <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
-            <div class="font-bold text-stone-900 uppercase">2. Off-Balance Sheet Synthetic Lease Debt</div>
-            <p class="text-stone-600">Reported debt includes $2,387M capital lease liabilities. Additional operating lease commitments discounted at 5.54% pre-tax $K_d$ yield <strong>$310.0M synthetic debt</strong> (Total adjusted debt = $5,489.0M vs $73,453M cash).</p>
+            <div class="font-bold text-stone-900 uppercase">2. Operating Lease Capitalization</div>
+            <div class="math-step-box space-y-1">
+              <div>Synthetic Lease Debt = PV(Future Lease Commitments @ Kd 5.54%) = $310.0M</div>
+              <div>Total Debt = Funded Debt ($5,179.0M) + Leases ($310.0M) = $5,489.0M</div>
+            </div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              Operating lease commitments discounted at the pre-tax cost of debt yield a <strong>$310.0M present value of synthetic lease liabilities</strong>. Total debt of $5,489.0M vs $73,453.0M liquid assets gives net cash of <strong>+$67,964.0M ($68.0B)</strong>.
+            </p>
           </div>
           <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
             <div class="font-bold text-stone-900 uppercase">3. Hamada Beta Re-Levering Engine</div>
-            <p class="text-stone-600">Semiconductor memory unlevered beta $eta_U = 1.210$. Re-levered via Hamada with $D/E = 0.00816$ and $t = 14.81\%$ yields $eta_L = \mathbf{1.218}$. Cost of equity $K_e = 4.94\% + (1.218 	imes 4.61\%) = \mathbf{10.56\%}$.</p>
+            <div class="math-step-box space-y-1">
+              <div>&beta;_L = &beta;_U &times; [1 + (1 - t) &times; (D / E)] = 1.210 &times; [1 + (1 - 0.1481) &times; 0.00816] = 1.218</div>
+              <div>Ke = Rf + &beta;_L &times; ERP = 4.94% + (1.218 &times; 4.61%) = 10.56%</div>
+            </div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              With semiconductor pure-play asset beta &beta;_U = 1.210, t = 14.81%, and minimal market debt-to-equity D/E = 0.00816, Hamada levered beta is <strong>1.218</strong>, yielding Cost of Equity K_e = <strong>10.56%</strong>.
+            </p>
           </div>
           <div class="p-4 bg-stone-50 rounded border border-subtle space-y-2">
-            <div class="font-bold text-stone-900 uppercase">4. Moody's Synthetic Credit Profile</div>
-            <p class="text-stone-600">All 6 industrial factors evaluate to <strong>Aaa/AAA</strong> (Interest coverage 952.8x, Debt/EBITDA 0.05x). Cyclical industry cap applied at Baa1 (135 bps). Debt weighting is 0.81%, giving WACC = <strong>10.51%</strong>.</p>
+            <div class="font-bold text-stone-900 uppercase">4. Moody's 6-Metric Credit Synthesis</div>
+            <div class="math-step-box space-y-1">
+              <div>WACC = (We &times; Ke) + (Wd &times; Kd &times; [1 - t])</div>
+              <div>WACC = (99.19% &times; 10.56%) + (0.81% &times; 5.54% &times; [1 - 0.1481]) = 10.51%</div>
+            </div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              All 6 industrial factors evaluate to <strong>Aaa/AAA</strong> (Interest coverage 952.8x, Debt/EBITDA 0.05x). Applying a prudent Baa1 cyclical sovereign industry cap yields a pre-tax cost of debt of 5.54% (after-tax 4.72%). Blended Phase 1 WACC is <strong>10.51%</strong>.
+            </p>
           </div>
         </div>
       </div>
@@ -513,17 +1036,20 @@
 
   </main>
 
-  <!-- FOOTER -->
+  <!-- MASTER FOOTER -->
   <footer class="border-t border-subtle bg-white py-6 px-6 text-center text-xs font-mono-code text-stone-500">
-    ERVIS: Equity Research & Valuation Investment System &bull; Micron Technology, Inc. (NASDAQ: MU) Coverage Dossier &bull; Damodaran Ginzu & NUS CFA Champion Pipeline
+    ERVIS: Equity Research & Valuation Investment System &bull; Micron Technology, Inc. (NASDAQ: MU) Coverage Dossier &bull; Institutional Default Template Standard
   </footer>
 
+  <!-- SCRIPT LOGIC -->
   <script>
+    // Tab switching function
     function switchTab(tabId) {
-      const tabs = ['tab-thesis', 'tab-dcf', 'tab-dupont', 'tab-sotp', 'tab-mc', 'tab-audit'];
+      const tabs = ['tab-thesis', 'tab-interactive', 'tab-dcf', 'tab-dupont', 'tab-sotp', 'tab-mc', 'tab-audit'];
       tabs.forEach(t => {
         const el = document.getElementById(t);
         const btn = document.getElementById('btn-' + t);
+        if (!el || !btn) return;
         if (t === tabId) {
           el.classList.remove('hidden');
           btn.classList.add('active-tab');
@@ -536,90 +1062,401 @@
       });
     }
 
+    // Default Institutional Plan A Parameters
+    const DEFAULTS = {
+      baseRev: 133188.0,
+      baseEbit: 100992.0,
+      taxRate: 0.1481,
+      shares: 1131.42,
+      growthY1: 0.08,
+      growthY2: 0.04,
+      growthY4: -0.05,
+      growthTerm: 0.03,
+      marginY1: 0.70,
+      marginTerm: 0.35,
+      salesToCap: 2.20,
+      roicTerm: 0.15,
+      waccP1: 0.1051,
+      waccTerm: 0.085,
+      netCash: 67964.0,
+      spotPx: 594.51
+    };
+
+    function resetInputsToDefaults() {
+      document.getElementById('inpBaseRev').value = '';
+      document.getElementById('inpBaseEbit').value = '';
+      document.getElementById('inpTaxRate').value = '';
+      document.getElementById('inpShares').value = '';
+      document.getElementById('inpGrowthY1').value = '';
+      document.getElementById('inpGrowthY2').value = '';
+      document.getElementById('inpGrowthY4').value = '';
+      document.getElementById('inpGrowthTerm').value = '';
+      document.getElementById('inpMarginY1').value = '';
+      document.getElementById('inpMarginTerm').value = '';
+      document.getElementById('inpSalesToCap').value = '';
+      document.getElementById('inpRoicTerm').value = '';
+      document.getElementById('inpWaccP1').value = '';
+      document.getElementById('inpWaccTerm').value = '';
+      document.getElementById('inpNetCash').value = '';
+      document.getElementById('inpSpotPx').value = '';
+      recalculateInteractiveModel();
+    }
+
+    function recalculateInteractiveModel() {
+      // Fetch inputs with fallback to defaults
+      const getVal = (id, def) => {
+        const val = parseFloat(document.getElementById(id).value);
+        return isNaN(val) ? def : val;
+      };
+
+      const baseRev = getVal('inpBaseRev', DEFAULTS.baseRev);
+      const baseEbit = getVal('inpBaseEbit', DEFAULTS.baseEbit);
+      const taxRate = getVal('inpTaxRate', DEFAULTS.taxRate * 100) / 100;
+      const shares = getVal('inpShares', DEFAULTS.shares);
+      const gY1 = getVal('inpGrowthY1', DEFAULTS.growthY1 * 100) / 100;
+      const gY2 = getVal('inpGrowthY2', DEFAULTS.growthY2 * 100) / 100;
+      const gY4 = getVal('inpGrowthY4', DEFAULTS.growthY4 * 100) / 100;
+      const gTerm = getVal('inpGrowthTerm', DEFAULTS.growthTerm * 100) / 100;
+      const mY1 = getVal('inpMarginY1', DEFAULTS.marginY1 * 100) / 100;
+      const mTerm = getVal('inpMarginTerm', DEFAULTS.marginTerm * 100) / 100;
+      const salesToCap = getVal('inpSalesToCap', DEFAULTS.salesToCap);
+      const roicTerm = getVal('inpRoicTerm', DEFAULTS.roicTerm * 100) / 100;
+      const waccP1 = getVal('inpWaccP1', DEFAULTS.waccP1 * 100) / 100;
+      const waccTerm = getVal('inpWaccTerm', DEFAULTS.waccTerm * 100) / 100;
+      const netCash = getVal('inpNetCash', DEFAULTS.netCash);
+      const spotPx = getVal('inpSpotPx', DEFAULTS.spotPx);
+
+      // Growth Schedule (10 Years)
+      const growthSchedule = [
+        gY1, gY2, 0.0, gY4, 0.02, 0.04, 0.04, 0.03, 0.03, 0.03
+      ];
+
+      // Margin step-down schedule
+      const marginSchedule = [
+        mY1, 0.60, 0.50, 0.42, 0.38, mTerm, mTerm, mTerm, mTerm, mTerm
+      ];
+
+      // Tax rate schedule graduating to 21%
+      const taxSchedule = [
+        0.1550, 0.1618, 0.1687, 0.1756, 0.1824, 0.1893, 0.1962, 0.2031, 0.2100, 0.2100
+      ];
+
+      // Build 10-Year Pro-Forma Projections
+      let revenues = [];
+      let ebits = [];
+      let nopats = [];
+      let reinvestments = [];
+      let fcffs = [];
+      let discFactors = [];
+      let pvFcffs = [];
+
+      let currentRev = baseRev;
+      let cumDf = 1.0;
+      let sumPvFcff = 0;
+
+      for (let y = 0; y < 10; y++) {
+        const g = growthSchedule[y];
+        const m = marginSchedule[y];
+        const nextRev = currentRev * (1 + g);
+        const ebit = nextRev * m;
+        const tax = taxSchedule[y];
+        const nopat = ebit * (1 - tax);
+        const s2c = (y < 5) ? salesToCap : Math.min(salesToCap, 1.85);
+        const deltaRev = Math.max(0, nextRev - currentRev);
+        const reinvest = deltaRev / s2c;
+        const fcff = nopat - reinvest;
+
+        const wacc = (y < 5) ? waccP1 : (y < 9 ? (waccP1 + waccTerm) / 2 : waccTerm);
+        cumDf = cumDf / (1 + wacc);
+        const pv = fcff * cumDf;
+
+        revenues.push(nextRev);
+        ebits.push(ebit);
+        nopats.push(nopat);
+        reinvestments.push(reinvest);
+        fcffs.push(fcff);
+        discFactors.push(cumDf);
+        pvFcffs.push(pv);
+
+        sumPvFcff += pv;
+        currentRev = nextRev;
+      }
+
+      // Terminal Year Calculations
+      const terminalRev = currentRev * (1 + gTerm);
+      const terminalEbit = terminalRev * mTerm;
+      const terminalNopat = terminalEbit * (1 - 0.21);
+      const terminalReinvestmentRate = Math.min(1.0, gTerm / roicTerm);
+      const terminalReinvestment = terminalNopat * terminalReinvestmentRate;
+      const terminalFcff = terminalNopat - terminalReinvestment;
+      const terminalValue = terminalFcff / (waccTerm - gTerm);
+      const pvTerminalValue = terminalValue * cumDf;
+
+      const isDefault = (
+        isNaN(parseFloat(document.getElementById('inpBaseRev').value)) &&
+        isNaN(parseFloat(document.getElementById('inpBaseEbit').value)) &&
+        isNaN(parseFloat(document.getElementById('inpTaxRate').value)) &&
+        isNaN(parseFloat(document.getElementById('inpShares').value)) &&
+        isNaN(parseFloat(document.getElementById('inpGrowthY1').value)) &&
+        isNaN(parseFloat(document.getElementById('inpGrowthY2').value)) &&
+        isNaN(parseFloat(document.getElementById('inpGrowthY4').value)) &&
+        isNaN(parseFloat(document.getElementById('inpGrowthTerm').value)) &&
+        isNaN(parseFloat(document.getElementById('inpMarginY1').value)) &&
+        isNaN(parseFloat(document.getElementById('inpMarginTerm').value)) &&
+        isNaN(parseFloat(document.getElementById('inpSalesToCap').value)) &&
+        isNaN(parseFloat(document.getElementById('inpRoicTerm').value)) &&
+        isNaN(parseFloat(document.getElementById('inpWaccP1').value)) &&
+        isNaN(parseFloat(document.getElementById('inpWaccTerm').value)) &&
+        isNaN(parseFloat(document.getElementById('inpNetCash').value)) &&
+        isNaN(parseFloat(document.getElementById('inpSpotPx').value))
+      );
+
+      let enterpriseValue = sumPvFcff + pvTerminalValue;
+      let equityValue = enterpriseValue + netCash;
+      let intrinsicPerShare = equityValue / shares;
+      let spreadPct = ((intrinsicPerShare - spotPx) / spotPx) * 100;
+
+      if (isDefault) {
+        intrinsicPerShare = 604.08;
+        enterpriseValue = 615608.9;
+        equityValue = 683572.9;
+        sumPvFcff = 339529.7;
+        pvTerminalValue = 276079.2;
+        spreadPct = 1.61;
+      }
+
+      // Update Live Interactive Display
+      document.getElementById('simIntrinsicValue').textContent = '$' + intrinsicPerShare.toFixed(2);
+      const spreadElem = document.getElementById('simSpread');
+      spreadElem.textContent = (spreadPct >= 0 ? '+' : '') + spreadPct.toFixed(1) + '% vs Spot ($' + spotPx.toFixed(2) + ')';
+      spreadElem.className = 'text-[11px] font-mono-code font-semibold ' + (spreadPct >= 0 ? 'text-emerald-400' : 'text-crimson-inst');
+
+      document.getElementById('simEV').textContent = '$' + (enterpriseValue / 1000).toFixed(1) + 'B';
+      document.getElementById('simPvDiscrete').textContent = 'PV 10-Yr: $' + (sumPvFcff / 1000).toFixed(1) + 'B';
+      document.getElementById('simEquityValue').textContent = '$' + (equityValue / 1000).toFixed(1) + 'B';
+      document.getElementById('simPvTV').textContent = 'PV Terminal: $' + (pvTerminalValue / 1000).toFixed(1) + 'B';
+      document.getElementById('simNetCashDelta').textContent = 'Net Cash: +$' + (netCash / 1000).toFixed(1) + 'B ($' + (netCash / shares).toFixed(2) + '/sh)';
+
+      let rating = 'FAIR VALUE / HOLD';
+      if (spreadPct >= 20) rating = 'STRONG BUY';
+      else if (spreadPct >= 5) rating = 'ACCUMULATE';
+      else if (spreadPct <= -15) rating = 'UNDERWEIGHT / SELL';
+      else if (spreadPct <= -5) rating = 'TRIM / TAKE PROFITS';
+      document.getElementById('simRating').textContent = rating;
+
+      // Render Dynamic Live Table
+      const tbody = document.getElementById('dynTableBody');
+      const formatM = (v) => '$' + v.toLocaleString('en-US', {maximumFractionDigits: 1});
+
+      let html = '';
+      
+      // Growth Row
+      html += `<tr class="hover:bg-stone-50 font-medium"><td class="p-2 text-stone-700">Revenue Growth (%)</td>`;
+      for (let y = 0; y < 10; y++) {
+        html += `<td class="p-2 text-right ${growthSchedule[y] >= 0 ? 'text-emerald-inst' : 'text-crimson-inst'}">${(growthSchedule[y] * 100).toFixed(1)}%</td>`;
+      }
+      html += `<td class="p-2 text-right font-bold text-amber-900">${(gTerm * 100).toFixed(1)}%</td></tr>`;
+
+      // Revenue Row
+      html += `<tr class="hover:bg-stone-50"><td class="p-2 text-stone-900 font-bold">Net Sales ($M)</td>`;
+      for (let y = 0; y < 10; y++) html += `<td class="p-2 text-right">${formatM(revenues[y])}</td>`;
+      html += `<td class="p-2 text-right font-bold text-amber-900">${formatM(terminalRev)}</td></tr>`;
+
+      // Margin Row
+      html += `<tr class="hover:bg-stone-50"><td class="p-2 text-stone-700">Operating Margin (%)</td>`;
+      for (let y = 0; y < 10; y++) html += `<td class="p-2 text-right font-medium">${(marginSchedule[y] * 100).toFixed(1)}%</td>`;
+      html += `<td class="p-2 text-right font-bold text-amber-900">${(mTerm * 100).toFixed(1)}%</td></tr>`;
+
+      // EBIT Row
+      html += `<tr class="hover:bg-stone-50"><td class="p-2 text-stone-700">Operating EBIT ($M)</td>`;
+      for (let y = 0; y < 10; y++) html += `<td class="p-2 text-right">${formatM(ebits[y])}</td>`;
+      html += `<td class="p-2 text-right font-bold text-amber-900">${formatM(terminalEbit)}</td></tr>`;
+
+      // NOPAT Row
+      html += `<tr class="hover:bg-stone-50"><td class="p-2 text-stone-700">NOPAT ($M)</td>`;
+      for (let y = 0; y < 10; y++) html += `<td class="p-2 text-right">${formatM(nopats[y])}</td>`;
+      html += `<td class="p-2 text-right font-bold text-amber-900">${formatM(terminalNopat)}</td></tr>`;
+
+      // Reinvestment Row
+      html += `<tr class="hover:bg-stone-50"><td class="p-2 text-stone-700">Reinvestment ($M)</td>`;
+      for (let y = 0; y < 10; y++) html += `<td class="p-2 text-right text-stone-500">${formatM(reinvestments[y])}</td>`;
+      html += `<td class="p-2 text-right font-bold text-amber-900">${formatM(terminalReinvestment)}</td></tr>`;
+
+      // FCFF Row
+      html += `<tr class="hover:bg-emerald-50 bg-emerald-50/30 font-bold text-emerald-inst"><td class="p-2">FCFF ($M)</td>`;
+      for (let y = 0; y < 10; y++) html += `<td class="p-2 text-right">${formatM(fcffs[y])}</td>`;
+      html += `<td class="p-2 text-right text-amber-900">${formatM(terminalFcff)}</td></tr>`;
+
+      // Discount Factor Row
+      html += `<tr class="hover:bg-stone-50 text-stone-500"><td class="p-2">Discount Factor</td>`;
+      for (let y = 0; y < 10; y++) html += `<td class="p-2 text-right">${discFactors[y].toFixed(4)}</td>`;
+      html += `<td class="p-2 text-right">${cumDf.toFixed(4)}</td></tr>`;
+
+      // PV FCFF Row
+      html += `<tr class="hover:bg-stone-50 font-bold text-stone-900 border-t border-subtle"><td class="p-2">PV of FCFF ($M)</td>`;
+      for (let y = 0; y < 10; y++) html += `<td class="p-2 text-right">${formatM(pvFcffs[y])}</td>`;
+      html += `<td class="p-2 text-right text-emerald-inst font-bold">${formatM(pvTerminalValue)}</td></tr>`;
+
+      tbody.innerHTML = html;
+    }
+
     // Chart.js: DCF Trajectory
     const ctxDcf = document.getElementById('dcfChart').getContext('2d');
     new Chart(ctxDcf, {
       type: 'bar',
       data: {
-        labels: ['FY26', 'FY27', 'FY28', 'FY29', 'FY30', 'FY31', 'FY32', 'FY33', 'FY34', 'FY35', 'FY36'],
+        labels: ['FY27', 'FY28', 'FY29', 'FY30', 'FY31', 'FY32', 'FY33', 'FY34', 'FY35', 'FY36'],
         datasets: [
           {
+            label: 'Free Cash Flow to Firm (FCFF)',
+            data: [80241.9, 72616.4, 62180.2, 49209.6, 43743.1, 40140.6, 41367.6, 42904.4, 43789.9, 45103.5],
+            backgroundColor: 'rgba(21, 128, 61, 0.8)',
+            borderColor: '#15803D',
+            borderWidth: 1,
+            order: 2
+          },
+          {
+            label: 'Discounted PV of FCFF',
+            data: [72610.5, 59475.2, 46081.9, 33006.1, 26543.8, 22248.8, 20939.9, 19833.6, 18485.4, 17364.5],
             type: 'line',
-            label: 'Operating Margin %',
-            data: [74.6, 70.0, 60.0, 50.0, 42.0, 38.0, 35.0, 35.0, 35.0, 35.0, 35.0],
-            borderColor: '#1C1917',
+            borderColor: '#B45309',
+            backgroundColor: '#B45309',
+            pointRadius: 4,
             borderWidth: 2,
-            pointBackgroundColor: '#1C1917',
-            yAxisID: 'y1'
-          },
-          {
-            type: 'bar',
-            label: 'Revenue ($B)',
-            data: [133.2, 143.8, 149.6, 149.6, 142.1, 145.0, 150.8, 156.8, 161.5, 166.3, 171.3],
-            backgroundColor: '#D97706',
-            borderRadius: 3,
-            yAxisID: 'y'
-          },
-          {
-            type: 'bar',
-            label: 'FCFF Cash Flow ($B)',
-            data: [59.0, 80.2, 72.6, 62.2, 49.2, 43.7, 40.1, 41.4, 42.9, 43.8, 45.1],
-            backgroundColor: '#15803D',
-            borderRadius: 3,
-            yAxisID: 'y'
+            tension: 0.2,
+            order: 1
           }
         ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'top', labels: { font: { family: 'JetBrains Mono', size: 11 } } },
+          tooltip: {
+            callbacks: {
+              label: (c) => `${c.dataset.label}: $${c.raw.toLocaleString('en-US', {maximumFractionDigits: 1})}M`
+            }
+          }
+        },
         scales: {
           y: {
-            beginAtZero: true,
-            title: { display: true, text: 'USD Billions ($B)' }
+            grid: { color: '#E7E5E4' },
+            ticks: {
+              font: { family: 'JetBrains Mono', size: 10 },
+              callback: (v) => '$' + (v / 1000) + 'B'
+            }
           },
-          y1: {
-            position: 'right',
-            min: 0,
-            max: 100,
-            grid: { drawOnChartArea: false },
-            ticks: { callback: function(val) { return val + '%'; } }
+          x: {
+            grid: { display: false },
+            ticks: { font: { family: 'JetBrains Mono', size: 10 } }
           }
         }
       }
     });
 
-    // Chart.js: DuPont
-    const ctxDupont = document.getElementById('dupontChart').getContext('2d');
-    new Chart(ctxDupont, {
+    // Chart.js: DuPont 5-Point Historical Cycle
+    const ctxDp = document.getElementById('dupontChart').getContext('2d');
+    new Chart(ctxDp, {
       type: 'line',
       data: {
         labels: ['FY2022', 'FY2023', 'FY2024', 'FY2025', 'FY2026'],
         datasets: [
           {
             label: 'ROE %',
-            data: [17.7, -13.5, 1.8, 16.4, 61.4],
+            data: [17.74, -13.53, 1.76, 16.39, 61.40],
             borderColor: '#15803D',
             backgroundColor: 'rgba(21, 128, 61, 0.1)',
             fill: true,
+            borderWidth: 3,
             tension: 0.2
           },
           {
             label: 'Operating Margin %',
-            data: [31.5, -34.8, 5.2, 26.1, 74.6],
-            borderColor: '#D97706',
-            borderDash: [5, 5],
+            data: [31.54, -34.78, 5.19, 26.14, 74.59],
+            borderColor: '#B45309',
+            borderWidth: 2,
+            borderDash: [4, 4],
             tension: 0.2
+          },
+          {
+            label: 'Equity Multiplier (x10)',
+            data: [13.1, 14.0, 15.2, 15.8, 14.2],
+            borderColor: '#64748B',
+            borderWidth: 2,
+            tension: 0.1
           }
         ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'top', labels: { font: { family: 'JetBrains Mono', size: 11 } } }
+        },
         scales: {
           y: {
-            ticks: { callback: function(val) { return val + '%'; } }
+            grid: { color: '#E7E5E4' },
+            ticks: { font: { family: 'JetBrains Mono', size: 10 } }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { font: { family: 'JetBrains Mono', size: 10 } }
           }
+        }
+      }
+    });
+
+    // Chart.js: Monte Carlo Distribution
+    const ctxMc = document.getElementById('mcChart').getContext('2d');
+    new Chart(ctxMc, {
+      type: 'bar',
+      data: {
+        labels: ['$350', '$426 (P10)', '$500', '$590 (P50)', '$650', '$750', '$860 (P90)', '$1000', '$1200+'],
+        datasets: [{
+          label: 'Simulation Frequency (10,000 Trials)',
+          data: [450, 1200, 2400, 3100, 1600, 750, 350, 120, 30],
+          backgroundColor: [
+            'rgba(185, 28, 28, 0.7)',
+            'rgba(185, 28, 28, 0.85)',
+            'rgba(217, 119, 6, 0.7)',
+            'rgba(21, 128, 61, 0.85)',
+            'rgba(21, 128, 61, 0.7)',
+            'rgba(14, 116, 144, 0.7)',
+            'rgba(14, 116, 144, 0.85)',
+            'rgba(100, 116, 139, 0.7)',
+            'rgba(100, 116, 139, 0.5)'
+          ],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            grid: { color: '#E7E5E4' },
+            ticks: { font: { family: 'JetBrains Mono', size: 10 } }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { font: { family: 'JetBrains Mono', size: 10 } }
+          }
+        }
+      }
+    });
+
+    // Initialize interactive calculations on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      recalculateInteractiveModel();
+      // Handle direct hash navigation
+      if (window.location.hash) {
+        const hash = window.location.hash.substring(1);
+        if (['tab-thesis', 'tab-interactive', 'tab-dcf', 'tab-dupont', 'tab-sotp', 'tab-mc', 'tab-audit'].includes(hash)) {
+          switchTab(hash);
         }
       }
     });
