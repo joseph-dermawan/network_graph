@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "title": "Anthropic Contractual Compute Commitments & Hyperscaler Counterparty Ledger",
+    "source": "Anthropic PBC SEC Form S-1/A (Note 13) & Aswath Damodaran Ginzu DCF Engine",
+    "currency": "USD_MILLIONS",
+    "updated_at": "2026-11-21T11:50:00Z"
+  },
+  "anthropic_commitments_schedule": {
+    "2027": 28400.0,
+    "2028": 38600.0,
+    "2029": 45200.0,
+    "2030": 52100.0,
+    "2031_2033": 101300.0,
+    "total_nominal_commitments": 265600.0,
+    "discount_rate_kd_pretax": 0.0625,
+    "present_value_capitalized_leases": 376003.8,
+    "book_debt_and_notes": 109316.0,
+    "total_senior_capitalized_claims": 485319.8
+  },
+  "counterparty_breakdown": {
+    "amazon_aws": {
+      "nominal_share_pct": 62.0,
+      "nominal_commitments_usd_m": 164672.0,
+      "capitalized_debt_pv_usd_m": 233122.4,
+      "primary_infrastructure_role": "Primary Tier-1 Cloud & Trainium / Bedrock strategic partner",
+      "historical_equity_investments_usd_m": 8000.0,
+      "ipo_private_sidecar_usd_m": 15000.0,
+      "total_equity_exposure_usd_m": 23000.0,
+      "circularity_multiplier": 7.16
+    },
+    "google_gcp": {
+      "nominal_share_pct": 38.0,
+      "nominal_commitments_usd_m": 100928.0,
+      "capitalized_debt_pv_usd_m": 142881.4,
+      "primary_infrastructure_role": "Secondary Cloud Tier & TPU v5e/v5p cluster provider",
+      "historical_equity_investments_usd_m": 2000.0,
+      "ipo_private_sidecar_usd_m": 11000.0,
+      "total_equity_exposure_usd_m": 13000.0,
+      "circularity_multiplier": 7.76
+    }
+  },
+  "cloud_segment_financial_impact": {
+    "aws_annual_run_rate_2026_usd_m": 118500.0,
+    "aws_anthropic_share_2027_pct": 14.86,
+    "aws_implied_ebit_margin_on_anthropic_spend": 38.5,
+    "aws_annual_operating_income_contribution_usd_m": 6779.1,
+    "gcp_annual_run_rate_2026_usd_m": 50800.0,
+    "gcp_anthropic_share_2027_pct": 21.24,
+    "gcp_implied_ebit_margin_on_anthropic_spend": 28.0,
+    "gcp_annual_operating_income_contribution_usd_m": 3021.8
+  },
+  "ipo_capital_infusion": {
+    "public_offering_gross_proceeds_usd_m": 68475.0,
+    "underwriter_fees_usd_m": 548.8,
+    "net_primary_ipo_cash_usd_m": 67926.2,
+    "strategic_private_sidecar_usd_m": 26000.0,
+    "total_new_liquidity_usd_m": 93926.2,
+    "existing_cash_and_short_term_usd_m": 112389.0,
+    "pro_forma_liquidity_buffer_usd_m": 206315.2
+  }
+}

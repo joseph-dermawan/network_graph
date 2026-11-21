@@ -118,3 +118,24 @@ This log is an append-only timeline of all ingestion events, financial model bui
 
 
 
+
+## [2026-11-21] thematic | Track 1: Thematic AI CapEx & Counterparty Circularity Matrix Forensics
+* **Action:** Built, audited, calibrated, and deployed Track 1: Thematic AI CapEx & Counterparty Circularity Matrix across all 4 phases, modeling the closed-loop feedback flywheel between Anthropic, cloud hyperscalers (AWS, GCP, Azure, Meta), and upstream infrastructure providers (NVDA, AVGO, TSM, POWL).
+* **Components Built & Integrated:**
+  - **Phase 1 Data Repositories:** Created structured datasets inside `ERVIS/projects/THEMATIC_AI_CAPEX/data/`:
+    - `commitments_matrix_anthropic_aws_gcp.json`: Full Note 13 schedule ($265.6B total, $164.7B AWS, $100.9B GCP, $26.0B IPO private sidecar, ARR contribution metrics).
+    - `hyperscaler_capex_depreciation_timeseries.json`: 2020–2026E CapEx, D&A, CFO, and server useful life disclosures for AMZN, GOOGL, MSFT, and META.
+    - `token_deflation_vs_gpu_amortization.json`: Token pricing history (Claude 1 $\to$ Claude 3.5 $\to$ DeepSeek) vs. H100 GPU amortization ($5.74/M token breakeven threshold).
+  - **Phase 2 Circularity & Depreciation Calculation Engine:** Built `ai_capex_circularity_engine.py` and generated `data/model_outputs.json`:
+    - *Cash Flow Circularity:* Proved that hyperscaler equity injected into Anthropic ($23B AMZN, $13B GOOGL) generates $164.7B (AWS) and $100.9B (GCP) in high-margin Cloud ARR. Capitalized at 8.5x–9.0x EV/Sales, this yields +$1,482B (AWS) and +$857.9B (GCP) in cumulative enterprise value—a **64.4x to 66.0x value multiplier** on the cash equity check.
+    - *ASC 360 Depreciation Cliff:* Compared stated 5.5-year 10-K server useful lives against realistic 3.5-year AI GPU technological obsolescence across $394B (2026E) hyperscaler CapEx. Quantified unrecorded annual D&A gap rising from $5.1B (2024) to $21.1B (2026) and peaking at **$45.5B per year in 2028 (989 bps operating margin drag)**, with an unamortized balance sheet asset overhang of **$176.7 Billion**.
+    - *Unit Token Inversion:* Derived H100 node all-in amortized hardware cost ($5.74 per 1M blended tokens) against market token price deflation ($1.37/M for DeepSeek and sub-$1 for next-gen), illustrating the acute negative gross margin impairment zone (-91% on Haiku, -319% on DeepSeek).
+  - **Phase 3 Interactive Terminal Report (`thematic_capex.html`):** Deployed full institutional report in `THEMATIC_AI_CAPEX/reports/index.html`, `equities/anthropic/thematic_capex.html`, and `US_EQUITIES/ANTHROPIC/reports/thematic_capex.html`:
+    - 4 interactive Chart.js modules: Circular Flow Bar/Sankey (`#circularFlowChart`), CapEx Supercycle 2021–2030E (`#capexSupercycleChart`), ASC 360 Depreciation Cliff (`#depreciationCliffChart`), and Token Deflation vs H100 Breakeven (`#tokenBreakevenChart`).
+    - Dynamic Client-Side Sensitivity Simulator with real-time sliders for Commitment Drawdown (50%–100%), GPU Depreciable Life (2.5–5.5 yrs), and Token Deflation Shocker (-0% to -75%).
+    - 3 Granular Forensic Audit Tables: Note 13 Annual Schedule, Upstream Value Chain Matrix (NVDA, AVGO, TSM, POWL), and Hyperscaler 10-K Useful Life Accounting Audit.
+  - **Cross-Linking & Terminal Integration:** Added Module 06 to Anthropic Master Dossier (`equities/anthropic/index.html`), quick jump on Master Workstation (`index.html`), nav tab on DCF Cockpit (`cockpit.html`), and header link on Almanac (`almanac.html`).
+* **New Wiki Pages & Updates:**
+  - `wiki/Thematic_AI_Capex_Closed_Loop_Forensics.md` (Master institutional research document)
+  - `wiki/index.md`
+  - `wiki/log.md`

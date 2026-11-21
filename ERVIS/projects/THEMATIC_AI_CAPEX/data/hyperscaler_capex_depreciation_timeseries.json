@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "title": "Hyperscaler Big 4 AI CapEx, D&A & Cash Flow Supercycle Timeseries (2020–2026E)",
+    "source": "SEC Form 10-K Filings & ERVIS Thematic Research Desk",
+    "currency": "USD_BILLIONS",
+    "updated_at": "2026-11-21T11:50:00Z"
+  },
+  "cohort_aggregate": {
+    "2020": { "capex": 93.5, "dna": 58.3, "cfo": 230.6, "capex_cfo_pct": 40.5, "free_cash_flow": 137.1 },
+    "2021": { "capex": 126.5, "dna": 65.6, "cfo": 272.4, "capex_cfo_pct": 46.4, "free_cash_flow": 145.9 },
+    "2022": { "capex": 151.0, "dna": 79.1, "cfo": 277.8, "capex_cfo_pct": 54.4, "free_cash_flow": 126.8 },
+    "2023": { "capex": 141.2, "dna": 83.3, "cfo": 345.3, "capex_cfo_pct": 40.9, "free_cash_flow": 204.1 },
+    "2024": { "capex": 223.6, "dna": 95.9, "cfo": 436.4, "capex_cfo_pct": 51.2, "free_cash_flow": 212.8 },
+    "2025": { "capex": 312.5, "dna": 120.2, "cfo": 507.2, "capex_cfo_pct": 61.6, "free_cash_flow": 194.7 },
+    "2026E": { "capex": 394.0, "dna": 151.0, "cfo": 582.0, "capex_cfo_pct": 67.7, "free_cash_flow": 188.0 }
+  },
+  "firms": {
+    "AMZN": {
+      "name": "Amazon.com, Inc.",
+      "cloud_unit": "Amazon Web Services (AWS)",
+      "server_useful_life_stated_years": 5.5,
+      "server_useful_life_realistic_years": 3.5,
+      "annual_depreciation_extension_benefit_usd_b": 3.7,
+      "timeseries": {
+        "2020": { "capex": 40.1, "dna": 25.3, "cfo": 66.1, "ratio": 60.7 },
+        "2021": { "capex": 61.1, "dna": 34.3, "cfo": 46.3, "ratio": 131.9 },
+        "2022": { "capex": 63.6, "dna": 41.9, "cfo": 46.8, "ratio": 135.9 },
+        "2023": { "capex": 52.7, "dna": 48.7, "cfo": 84.9, "ratio": 62.1 },
+        "2024": { "capex": 76.2, "dna": 54.2, "cfo": 112.7, "ratio": 67.6 },
+        "2025": { "capex": 98.5, "dna": 63.1, "cfo": 134.2, "ratio": 73.4 },
+        "2026E": { "capex": 122.0, "dna": 74.5, "cfo": 158.0, "ratio": 77.2 }
+      }
+    },
+    "GOOGL": {
+      "name": "Alphabet Inc.",
+      "cloud_unit": "Google Cloud Platform (GCP)",
+      "server_useful_life_stated_years": 6.0,
+      "server_useful_life_realistic_years": 3.5,
+      "annual_depreciation_extension_benefit_usd_b": 3.9,
+      "timeseries": {
+        "2020": { "capex": 22.3, "dna": 13.8, "cfo": 65.1, "ratio": 34.2 },
+        "2021": { "capex": 24.6, "dna": 12.4, "cfo": 91.7, "ratio": 26.8 },
+        "2022": { "capex": 31.5, "dna": 15.9, "cfo": 91.5, "ratio": 34.4 },
+        "2023": { "capex": 32.3, "dna": 11.5, "cfo": 101.7, "ratio": 31.8 },
+        "2024": { "capex": 52.5, "dna": 13.2, "cfo": 118.4, "ratio": 44.3 },
+        "2025": { "capex": 74.0, "dna": 18.5, "cfo": 136.0, "ratio": 54.4 },
+        "2026E": { "capex": 92.0, "dna": 24.8, "cfo": 152.0, "ratio": 60.5 }
+      }
+    },
+    "MSFT": {
+      "name": "Microsoft Corporation",
+      "cloud_unit": "Microsoft Azure",
+      "server_useful_life_stated_years": 6.0,
+      "server_useful_life_realistic_years": 3.5,
+      "annual_depreciation_extension_benefit_usd_b": 3.7,
+      "timeseries": {
+        "2020": { "capex": 15.4, "dna": 12.3, "cfo": 60.7, "ratio": 25.4 },
+        "2021": { "capex": 20.6, "dna": 10.9, "cfo": 76.7, "ratio": 26.9 },
+        "2022": { "capex": 23.9, "dna": 12.6, "cfo": 89.0, "ratio": 26.9 },
+        "2023": { "capex": 28.1, "dna": 13.9, "cfo": 87.6, "ratio": 32.1 },
+        "2024": { "capex": 55.7, "dna": 17.1, "cfo": 118.5, "ratio": 47.0 },
+        "2025": { "capex": 82.0, "dna": 23.4, "cfo": 135.0, "ratio": 60.7 },
+        "2026E": { "capex": 108.0, "dna": 31.2, "cfo": 154.0, "ratio": 70.1 }
+      }
+    },
+    "META": {
+      "name": "Meta Platforms, Inc.",
+      "cloud_unit": "Core AI & Recommendation Clusters",
+      "server_useful_life_stated_years": 5.0,
+      "server_useful_life_realistic_years": 3.5,
+      "annual_depreciation_extension_benefit_usd_b": 2.1,
+      "timeseries": {
+        "2020": { "capex": 15.7, "dna": 6.9, "cfo": 38.7, "ratio": 40.6 },
+        "2021": { "capex": 19.2, "dna": 8.0, "cfo": 57.7, "ratio": 33.3 },
+        "2022": { "capex": 32.0, "dna": 8.7, "cfo": 50.5, "ratio": 63.4 },
+        "2023": { "capex": 28.1, "dna": 9.2, "cfo": 71.1, "ratio": 39.5 },
+        "2024": { "capex": 39.2, "dna": 11.4, "cfo": 86.8, "ratio": 45.2 },
+        "2025": { "capex": 58.0, "dna": 15.2, "cfo": 102.0, "ratio": 56.9 },
+        "2026E": { "capex": 72.0, "dna": 20.5, "cfo": 118.0, "ratio": 61.0 }
+      }
+    }
+  }
+}

@@ -4,9 +4,9 @@
   "market": "US_EQUITIES",
   "currency": "USD",
   "session_start": "2026-10-31T22:00:00.000000",
-  "session_updated": "2026-11-21T11:00:00.000000",
+  "session_updated": "2026-11-21T12:00:00.000000",
   "active_rf": 0.0494,
-  "status": "COMPLETED_GATES_1_THROUGH_5_POST_DEBUT_ANALYZED",
+  "status": "COMPLETED_GATES_1_THROUGH_5_POST_DEBUT_AND_THEMATIC_CAPEX_ANALYZED",
   "current_gate": "GATE_5_COMPLETED",
   "gates_completed": [
     "GATE_1_INGESTION_AND_FORENSICS",
@@ -14,8 +14,25 @@
     "GATE_3_WACC_AND_CREDIT_SYNTHESIS",
     "GATE_4_VALUATION_ENGINE_AND_SCENARIOS",
     "GATE_4B_CAPEX_PAYOUT_AND_CUSTOMER_ROI",
-    "GATE_5_PITCH_MEMO_AND_DELIVERABLES"
+    "GATE_5_PITCH_MEMO_AND_DELIVERABLES",
+    "TRACK_1_THEMATIC_AI_CAPEX_AND_CIRCULARITY_LOOP"
   ],
+  "thematic_ai_capex": {
+    "report_path": "ERVIS/projects/THEMATIC_AI_CAPEX/reports/index.html",
+    "dossier_mirrored_path": "ERVIS/projects/US_EQUITIES/ANTHROPIC/reports/thematic_capex.html",
+    "live_deployment_path": "equities/anthropic/thematic_capex.html",
+    "note13_commitments_usd_m": 265600.0,
+    "aws_captured_arr_usd_m": 164671.9,
+    "gcp_captured_arr_usd_m": 100927.9,
+    "aws_ev_uplift_usd_b": 1482.05,
+    "gcp_ev_uplift_usd_b": 857.89,
+    "amazon_equity_multiplier": 64.44,
+    "google_equity_multiplier": 65.99,
+    "big4_capex_2026e_usd_b": 394.0,
+    "peak_dna_gap_2028_usd_b": 45.5,
+    "peak_margin_compression_bps": 989.0,
+    "h100_breakeven_cost_per_m_tokens_usd": 5.74
+  },
   "spot_price_usd": 88.30,
   "ipo_offer_price_usd": 83.00,
   "day1_open_usd": 111.50,

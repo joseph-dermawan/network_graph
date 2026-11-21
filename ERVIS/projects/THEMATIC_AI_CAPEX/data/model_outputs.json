@@ -1,0 +1,218 @@
+{
+  "status": "ENGINE_RUN_SUCCESSFUL",
+  "circularity_summary": {
+    "total_anthropic_spend_usd_m": 265600.0,
+    "aws_total_revenue_usd_m": 164671.9,
+    "aws_total_ebit_usd_m": 63398.7,
+    "aws_cumulative_ev_uplift_usd_b": 1482.05,
+    "gcp_total_revenue_usd_m": 100927.9,
+    "gcp_total_ebit_usd_m": 28259.9,
+    "gcp_cumulative_ev_uplift_usd_b": 857.89,
+    "amazon_equity_invested_usd_m": 23000.0,
+    "amazon_value_multiplier": 64.44,
+    "google_equity_invested_usd_m": 13000.0,
+    "google_value_multiplier": 65.99
+  },
+  "annual_circularity_schedule": [
+    {
+      "year": 2027,
+      "anthropic_total_spend_usd_m": 28400.0,
+      "aws_revenue_usd_m": 17608.0,
+      "aws_ebit_usd_m": 6779.1,
+      "aws_implied_ev_uplift_usd_b": 158.47,
+      "gcp_revenue_usd_m": 10792.0,
+      "gcp_ebit_usd_m": 3021.8,
+      "gcp_implied_ev_uplift_usd_b": 91.73
+    },
+    {
+      "year": 2028,
+      "anthropic_total_spend_usd_m": 38600.0,
+      "aws_revenue_usd_m": 23932.0,
+      "aws_ebit_usd_m": 9213.8,
+      "aws_implied_ev_uplift_usd_b": 215.39,
+      "gcp_revenue_usd_m": 14668.0,
+      "gcp_ebit_usd_m": 4107.0,
+      "gcp_implied_ev_uplift_usd_b": 124.68
+    },
+    {
+      "year": 2029,
+      "anthropic_total_spend_usd_m": 45200.0,
+      "aws_revenue_usd_m": 28024.0,
+      "aws_ebit_usd_m": 10789.2,
+      "aws_implied_ev_uplift_usd_b": 252.22,
+      "gcp_revenue_usd_m": 17176.0,
+      "gcp_ebit_usd_m": 4809.3,
+      "gcp_implied_ev_uplift_usd_b": 146.0
+    },
+    {
+      "year": 2030,
+      "anthropic_total_spend_usd_m": 52100.0,
+      "aws_revenue_usd_m": 32302.0,
+      "aws_ebit_usd_m": 12436.3,
+      "aws_implied_ev_uplift_usd_b": 290.72,
+      "gcp_revenue_usd_m": 19798.0,
+      "gcp_ebit_usd_m": 5543.4,
+      "gcp_implied_ev_uplift_usd_b": 168.28
+    },
+    {
+      "year": 2031,
+      "anthropic_total_spend_usd_m": 33766.666666666664,
+      "aws_revenue_usd_m": 20935.3,
+      "aws_ebit_usd_m": 8060.1,
+      "aws_implied_ev_uplift_usd_b": 188.42,
+      "gcp_revenue_usd_m": 12831.3,
+      "gcp_ebit_usd_m": 3592.8,
+      "gcp_implied_ev_uplift_usd_b": 109.07
+    },
+    {
+      "year": 2032,
+      "anthropic_total_spend_usd_m": 33766.666666666664,
+      "aws_revenue_usd_m": 20935.3,
+      "aws_ebit_usd_m": 8060.1,
+      "aws_implied_ev_uplift_usd_b": 188.42,
+      "gcp_revenue_usd_m": 12831.3,
+      "gcp_ebit_usd_m": 3592.8,
+      "gcp_implied_ev_uplift_usd_b": 109.07
+    },
+    {
+      "year": 2033,
+      "anthropic_total_spend_usd_m": 33766.666666666664,
+      "aws_revenue_usd_m": 20935.3,
+      "aws_ebit_usd_m": 8060.1,
+      "aws_implied_ev_uplift_usd_b": 188.42,
+      "gcp_revenue_usd_m": 12831.3,
+      "gcp_ebit_usd_m": 3592.8,
+      "gcp_implied_ev_uplift_usd_b": 109.07
+    }
+  ],
+  "depreciation_cliff_schedule": [
+    {
+      "year": 2024,
+      "annual_capex_usd_b": 223.6,
+      "stated_dna_usd_b": 121.5,
+      "realistic_dna_usd_b": 126.7,
+      "annual_depreciation_gap_usd_b": 5.1,
+      "cumulative_balance_sheet_overhang_usd_b": 84.0,
+      "operating_margin_drag_bps": 161.0
+    },
+    {
+      "year": 2025,
+      "annual_capex_usd_b": 312.5,
+      "stated_dna_usd_b": 136.7,
+      "realistic_dna_usd_b": 148.2,
+      "annual_depreciation_gap_usd_b": 11.5,
+      "cumulative_balance_sheet_overhang_usd_b": 91.4,
+      "operating_margin_drag_bps": 325.0
+    },
+    {
+      "year": 2026,
+      "annual_capex_usd_b": 394.0,
+      "stated_dna_usd_b": 164.4,
+      "realistic_dna_usd_b": 185.4,
+      "annual_depreciation_gap_usd_b": 21.1,
+      "cumulative_balance_sheet_overhang_usd_b": 107.7,
+      "operating_margin_drag_bps": 540.0
+    },
+    {
+      "year": 2027,
+      "annual_capex_usd_b": 430.0,
+      "stated_dna_usd_b": 204.4,
+      "realistic_dna_usd_b": 238.3,
+      "annual_depreciation_gap_usd_b": 33.9,
+      "cumulative_balance_sheet_overhang_usd_b": 133.9,
+      "operating_margin_drag_bps": 798.0
+    },
+    {
+      "year": 2028,
+      "annual_capex_usd_b": 460.0,
+      "stated_dna_usd_b": 246.5,
+      "realistic_dna_usd_b": 292.0,
+      "annual_depreciation_gap_usd_b": 45.5,
+      "cumulative_balance_sheet_overhang_usd_b": 176.7,
+      "operating_margin_drag_bps": 989.0
+    },
+    {
+      "year": 2029,
+      "annual_capex_usd_b": 485.0,
+      "stated_dna_usd_b": 292.0,
+      "realistic_dna_usd_b": 336.0,
+      "annual_depreciation_gap_usd_b": 44.0,
+      "cumulative_balance_sheet_overhang_usd_b": 225.9,
+      "operating_margin_drag_bps": 889.0
+    },
+    {
+      "year": 2030,
+      "annual_capex_usd_b": 500.0,
+      "stated_dna_usd_b": 336.8,
+      "realistic_dna_usd_b": 369.5,
+      "annual_depreciation_gap_usd_b": 32.7,
+      "cumulative_balance_sheet_overhang_usd_b": 265.6,
+      "operating_margin_drag_bps": 618.0
+    }
+  ],
+  "token_margin_trajectory": [
+    {
+      "model": "Claude 1.0 (Initial)",
+      "date": "2023-03-01",
+      "blended_price_usd": 20.0,
+      "hardware_cost_usd": 5.74,
+      "gross_profit_usd": 14.26,
+      "gross_margin_pct": 71.3,
+      "economic_status": "HEALTHY_MARGIN"
+    },
+    {
+      "model": "Claude 2.0",
+      "date": "2023-07-01",
+      "blended_price_usd": 16.0,
+      "hardware_cost_usd": 5.74,
+      "gross_profit_usd": 10.26,
+      "gross_margin_pct": 64.1,
+      "economic_status": "HEALTHY_MARGIN"
+    },
+    {
+      "model": "Claude 3 Opus",
+      "date": "2024-03-01",
+      "blended_price_usd": 45.0,
+      "hardware_cost_usd": 5.74,
+      "gross_profit_usd": 39.26,
+      "gross_margin_pct": 87.2,
+      "economic_status": "HEALTHY_MARGIN"
+    },
+    {
+      "model": "Claude 3.5 Sonnet",
+      "date": "2024-06-01",
+      "blended_price_usd": 9.0,
+      "hardware_cost_usd": 5.74,
+      "gross_profit_usd": 3.26,
+      "gross_margin_pct": 36.2,
+      "economic_status": "MARGIN_SQUEEZE"
+    },
+    {
+      "model": "Claude 3.5 Haiku",
+      "date": "2024-10-01",
+      "blended_price_usd": 3.0,
+      "hardware_cost_usd": 5.74,
+      "gross_profit_usd": -2.74,
+      "gross_margin_pct": -91.3,
+      "economic_status": "NEGATIVE_GROSS_MARGIN_IMPAIRMENT"
+    },
+    {
+      "model": "DeepSeek / Open Frontier Distillations",
+      "date": "2025-06-01",
+      "blended_price_usd": 1.37,
+      "hardware_cost_usd": 5.74,
+      "gross_profit_usd": -4.37,
+      "gross_margin_pct": -319.0,
+      "economic_status": "NEGATIVE_GROSS_MARGIN_IMPAIRMENT"
+    },
+    {
+      "model": "Next-Gen Scaled Inference (Est)",
+      "date": "2026-06-01",
+      "blended_price_usd": 0.625,
+      "hardware_cost_usd": 5.74,
+      "gross_profit_usd": -5.12,
+      "gross_margin_pct": -818.4,
+      "economic_status": "NEGATIVE_GROSS_MARGIN_IMPAIRMENT"
+    }
+  ]
+}

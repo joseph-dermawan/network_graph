@@ -1,0 +1,152 @@
+# ==============================================================================
+# AI-CAPEX CITATIONS REGISTRY
+# Project: THEMATIC_AI_CAPEX | ERVIS Thematic Research Desk
+# Rule: Mandatory citation logging for all academic, institutional, and regulatory sources
+# Last Updated: 2026-10-18
+# ==============================================================================
+
+citations:
+  - id: damodaran_2026_ai_spending
+    title: "Earnings, Cashflows and Stock Prices: The AI Spending plays through!"
+    author: "Aswath Damodaran"
+    publication: "Musings on Markets (Substack)"
+    date: "2026-10-08"
+    url: "https://aswathdamodaran.substack.com/p/earnings-cashflows-and-stock-prices"
+    key_theses:
+      - "Surge in Big Tech CapEx is currently boosting supplier revenues and reported earnings (Nvidia, TSMC, Broadcom), creating an illusion of broad profit acceleration."
+      - "Accounting captures CapEx on the balance sheet, elevating book equity and debt while dampening immediate income statement impact through extended depreciation schedules."
+      - "Free cash flow growth lags earnings significantly: S&P 500 cash returned to shareholders (dividends + buybacks) fell to 63% of earnings in LTM 2026, lowest since 2004."
+      - "Market pricing will anticipate the failure or success of AI CapEx long before accountants recognize write-downs."
+    associated_artifacts:
+      - file: "ERPOct26_Clean (Native Google Sheets)"
+        google_drive_id: "1F8fYJbZuRUOY68KbMQWM5HFZ3Sn_o3WMvpZTZL6qN5o"
+        google_drive_url: "https://docs.google.com/spreadsheets/d/1F8fYJbZuRUOY68KbMQWM5HFZ3Sn_o3WMvpZTZL6qN5o/edit"
+        description: "Repaired Native Google Sheets workbook: 100% clean, 0 errors across all 9 sheets, fully interactive in Google Sheets."
+      - file: "ERPOct26.xlsx"
+        google_drive_id: "1TeNC_Kv7uhfDiRMcaoXA6lXS8vL64By3"
+        google_drive_url: "https://drive.google.com/file/d/1TeNC_Kv7uhfDiRMcaoXA6lXS8vL64By3/view"
+        description: "Repaired Excel .xlsx build uploaded to original Drive location."
+
+  - id: damodaran_2024_bar_mitzvah
+    title: "AI's Bar Mitzvah Moment: From Hope and Hype to Business Questions!"
+    author: "Aswath Damodaran"
+    publication: "Musings on Markets"
+    date: "2024-06-15"
+    url: "https://aswathdamodaran.blogspot.com"
+    key_theses:
+      - "Transition of AI from pure narrative option value to disciplined cash-flow hurdle evaluation."
+      - "Three critical unknowns: Total Addressable Market (TAM), steady-state operating margins, and competitive moat sustainability."
+
+  - id: marathon_capital_returns
+    title: "Capital Returns: Investing Through the Capital Cycle: A Money Manager's Reports 2002-15"
+    author: "Edward Chancellor (Editor), Marathon Asset Management"
+    publication: "Palgrave Macmillan"
+    date: "2015"
+    key_theses:
+      - "Capital cycle theory posits that high returns on capital attract excess capital, leading to over-investment, industry overcapacity, falling prices, and collapsing returns."
+      - "Investors chronically over-extrapolate current profitability into perpetuity, failing to account for supply response."
+      - "The turning point occurs when capital spending slows down, triggering a severe revenue contraction for capital equipment providers."
+
+  - id: sequoia_600b_question
+    title: "AI's $600B Question"
+    author: "David Cahn"
+    publication: "Sequoia Capital Research"
+    date: "2024-06-20"
+    url: "https://www.sequoiacap.com/article/ais-600b-question/"
+    key_theses:
+      - "Estimates the AI revenue run-rate required to pay back GPU data center buildout."
+      - "Calculation: If Nvidia hits $150B-$200B data center revenue, and data center GPU capex is ~50% of total buildout (power, cooling, CPUs), total ecosystem capex is $300B-$400B."
+      - "Assuming 50% gross margin for end-user AI software, $600B in annual AI software revenue is required to generate a baseline economic return."
+
+  - id: goldman_sachs_gen_ai_spend
+    title: "Gen AI: Too Much Spend, Too Little Benefit?"
+    author: "Jim Covello, Daron Acemoglu, Allison Nathan"
+    publication: "Goldman Sachs Global Investment Research - Top of Mind"
+    date: "2024-06-25"
+    url: "https://www.goldmansachs.com/insights/top-of-mind/gen-ai-too-much-spend-too-little-benefit"
+    key_theses:
+      - "Jim Covello argues AI hardware costs are too high, technology is not yet economically useful enough to replace human labor cost-effectively, unlike previous internet/mobile waves which were low-cost substitutes."
+      - "Daron Acemoglu estimates only ~25% of tasks exposed to AI can be cost-effectively automated within 10 years, yielding <1% GDP lift over a decade."
+      - "Power and grid infrastructure represent hard physical constraints that drive up capex inflation without increasing software marginal utility."
+
+  - id: casual_finance_accounting_mechanics
+    title: "Big Tech CapEx & Accounting Mechanics"
+    author: "Casual Finance"
+    publication: "YouTube Financial Deep Dives"
+    date: "2024-08-12"
+    url: "https://youtu.be/9eBM5IF_bco?si=aA8K00C0mBpgg6_6"
+    key_theses:
+      - "Divergence between GAAP Net Income and Free Cash Flow due to balance sheet capitalization of GPU servers."
+      - "Big Tech extended server depreciation lives from 3-4 years to 5-6 years during 2020-2023, artificially boosting operating margins."
+      - "GPU cluster obsolescence operates on a 3 to 4 year cycle, guaranteeing a severe depreciation catch-up wave from 2026 onwards."
+
+  - id: dixit_pindyck_real_options
+    title: "Investment under Uncertainty"
+    author: "Avinash K. Dixit, Robert S. Pindyck"
+    publication: "Princeton University Press"
+    date: "1994"
+    key_theses:
+      - "Real options analysis shows that when investments are irreversible and future payoff is uncertain, the option to wait has positive value."
+      - "However, strategic competition converts the option into a game-theoretic preemption race: firms invest prematurely (negative NPV under standalone criteria) to prevent competitor dominance."
+
+  - id: grenadier_game_theoretic_options
+    title: "Option Exercise Games: An Application to the Real Estate and Infrastructure Cycles"
+    author: "Steven R. Grenadier"
+    publication: "Journal of Financial Economics"
+    date: "2002"
+    key_theses:
+      - "Combines game theory and real options to explain massive overbuilding in cyclical industries."
+      - "In competitive races, fear of preemption causes simultaneous over-investment, eroding option values and creating prolonged capacity overhangs."
+
+  - id: perez_technological_revolutions
+    title: "Technological Revolutions and Financial Capital: The Dynamics of Bubbles and Golden Ages"
+    author: "Carlota Perez"
+    publication: "Edward Elgar Publishing"
+    date: "2002"
+    key_theses:
+      - "Installation Period (Irruption + Frenzy): Financial capital pours into infrastructure buildout, decoupling asset prices from real cash flows."
+      - "Turning Point: Over-investment leads to financial crisis / consolidation as infrastructure outpaces deployment."
+      - "Deployment Period (Synergy + Maturity): Production capital takes over, and real economic productivity gains emerge after the crash of infrastructure purveyors."
+
+  - id: meta_llama3_cluster_reliability
+    title: "The Llama 3 Herd of Models"
+    author: "Dubey et al. (Meta AI Infrastructure & Fundamental AI Research)"
+    publication: "arXiv:2407.21783 [cs.AI]"
+    date: "2024-07-23"
+    url: "https://arxiv.org/abs/2407.21783"
+    key_theses:
+      - "Empirical telemetry from a 16,384 NVIDIA H100 (700W) GPU cluster during a continuous 54-day 405B model pre-training run."
+      - "Documented 466 total interruptions, of which 419 were unexpected/unplanned (averaging one failure every 3.1 hours)."
+      - "Hardware failures caused 78% of all interruptions, with GPUs and HBM3 memory accounting for 58.7% (148 GPU/NVLink faults, 72 HBM3 memory faults), while host CPUs suffered only 2 failures."
+      - "Extreme power-draw dynamics: 700W chips cycling between compute and checkpoint flushes create massive thermal/voltage fluctuations and local grid stress."
+
+  - id: jeon_mlsys_cluster_reliability
+    title: "Revisiting Reliability in Large-Scale Machine Learning Research Clusters"
+    author: "Myeongjae Jeon et al. (Meta, University of Wisconsin, KAIST)"
+    publication: "Proceedings of Machine Learning and Systems (MLSys 2023)"
+    date: "2023-05-04"
+    url: "https://proceedings.mlsys.org"
+    key_theses:
+      - "Longitudinal empirical study of GPU cluster reliability, showing that failure rates scale non-linearly with cluster size due to gang-scheduling and distributed synchronization."
+      - "Hardware degradation is heavily correlated with sustained high power states and high thermal cycles."
+
+  - id: jouppi_google_tpu_isca2023
+    title: "TPU v4: An Optically Reconfigurable Supercomputer for Machine Learning with Hardware Support for Embeddings"
+    author: "Norm Jouppi, George Kurian, Sheng Li et al. (Google Research)"
+    publication: "ACM/IEEE International Symposium on Computer Architecture (ISCA 2023)"
+    date: "2023-06-17"
+    url: "https://doi.org/10.1145/3579371.3589350"
+    key_theses:
+      - "Demonstrates that performance-per-watt efficiency gains between successive AI accelerator generations (2x-3x every 2-3 years) dictate economic obsolescence."
+      - "Because hyperscale datacenters are physically power-constrained (megawatt ceiling per facility), operators are economically forced to replace older generation chips with higher FLOP/watt chips long before the physical silicon completely breaks down."
+
+  - id: ornl_gpu_error_study_hpca
+    title: "Understanding GPU Errors on Large-Scale HPC Systems and the Implications on Computing Robustness"
+    author: "Bin Nie, Devesh Tiwari, Saurabh Gupta, Evgenia Smirni et al. (Oak Ridge National Laboratory, College of William and Mary)"
+    publication: "IEEE International Symposium on High-Performance Computer Architecture (HPCA 2016)"
+    date: "2016-03-12"
+    url: "https://ieeexplore.ieee.org/document/7551407"
+    key_theses:
+      - "Multi-year field study of thousands of GPUs in high-utilization production supercomputing (Titan)."
+      - "Proves that memory error rates and board-level failures increase significantly with operational temperature and continuous duty cycles."
+
