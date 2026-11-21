@@ -15,6 +15,9 @@
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 
+    <!-- Chart.js for High-Resolution Institutional Financial Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- PWA & iPadOS Standalone Settings -->
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -212,7 +215,9 @@
             <div>
                 <!-- Reciprocal Breadcrumbs Chain -->
                 <div class="flex items-center space-x-2 text-[10.5px] font-mono text-[#8C867A] mb-1">
-                    <a href="index.html" class="text-[#B45309] font-bold hover:underline">&larr; ANTHROPIC DOSSIER</a>
+                    <a href="index.html" class="text-[#B45309] font-bold hover:underline">&larr; ERVIS WORKSTATION</a>
+                    <span>/</span>
+                    <a href="index.html" class="hover:underline text-[#57534E]">ANTHROPIC DOSSIER</a>
                     <span>/</span>
                     <a href="anthropic_prospectus_dashboard.html" class="hover:underline text-[#57534E]">S-1 AUDIT</a>
                     <span>/</span>
@@ -226,11 +231,8 @@
                     <h1 class="text-xl font-serif font-semibold text-[#1C1917] tracking-tight">
                         Anthropic, PBC
                     </h1>
-                    <span class="text-xs font-mono font-bold px-2 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded text-[#B45309]">
-                        VALUATION ALMANAC
-                    </span>
-                    <span class="text-xs text-[#57534E]">
-                        62 Model Variables &bull; Damodaran Ginzu DCF Encyclopedia
+                    <span class="text-xs font-mono font-bold px-2 py-0.5 bg-[#FEF3C7] border border-[#FDE68A] rounded text-[#92400E]">
+                        NASDAQ: ANT &bull; ALMANAC
                     </span>
                 </div>
             </div>
@@ -999,6 +1001,9 @@ ight)$$
         <!-- ========================================================================================= -->
         <!-- TAB 6: IPO EMPIRICAL ENGINE & DEBUT FORENSICS (RITTER DATASETS)                           -->
         <!-- ========================================================================================= -->
+        <!-- ========================================================================================= -->
+        <!-- TAB 6: IPO EMPIRICAL ENGINE & DEBUT FORENSICS (RITTER DATASETS)                           -->
+        <!-- ========================================================================================= -->
         <section id="tab-empirical" class="tab-pane hidden space-y-6">
 
             <!-- Master Header Banner -->
@@ -1033,7 +1038,13 @@ ight)$$
             <div class="card p-6 space-y-5">
                 <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#E5E0D8] pb-3">
                     <div>
-                        <h3 class="text-base font-serif font-bold text-[#1C1917]">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-[10px] font-mono px-2 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded font-bold text-[#1C1917]">
+                                MODULE 1.1 &bull; LIVE TAPE FORENSICS
+                            </span>
+                            <span class="text-xs font-mono text-[#8C867A]">Granular Nasdaq Debut Analysis</span>
+                        </div>
+                        <h3 class="text-base font-serif font-bold text-[#1C1917] mt-1">
                             1. Anthropic (ANT) First 48-Hour Trading Corridor vs. Damodaran DCF Fair Value
                         </h3>
                         <p class="text-xs text-[#57534E]">
@@ -1087,61 +1098,173 @@ ight)$$
                     </div>
                 </div>
 
-                <!-- Visual Step Corridor Diagram -->
-                <div class="p-4 bg-[#FAF7F2] border border-[#E5E0D8] rounded space-y-3 font-mono">
-                    <div class="flex items-center justify-between text-xs font-bold text-[#1C1917]">
-                        <span>48-Hour Price Discovery Trajectory</span>
-                        <span class="text-[#8C867A] font-normal">Day 1 Volume: 846M shares (102.5% of float turned over)</span>
+                <!-- DYNAMIC GRANULAR 48-HOUR PRICE & VOLUME TRACKER (CHART.JS) -->
+                <div class="p-5 bg-[#FFFFFF] border border-[#E5E0D8] rounded space-y-4 shadow-sm">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#ECE7DE] pb-3">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-[10px] font-mono px-2 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded font-bold text-[#B45309]">
+                                    INTERACTIVE PRICE & SCHEDULE SCOURER
+                                </span>
+                                <span class="text-xs font-serif font-bold text-[#1C1917]">48-Hour Intraday Tape & Ritter Milestone Alignment</span>
+                            </div>
+                            <p class="text-[11px] text-[#57534E] mt-0.5">Scour the granular timeline from T-1 syndicate pricing to retail opening pop, Day 2 DCF anchor test, and future lockup cliffs.</p>
+                        </div>
+                        
+                        <!-- Timeline Range Selector Filters -->
+                        <div class="flex flex-wrap items-center gap-1.5 font-mono text-xs">
+                            <button id="btnFilterAll" onclick="filterPriceTape('all')" class="px-2.5 py-1 bg-[#B45309] text-white rounded text-[11px] font-semibold transition-colors">
+                                [ALL 48H TAPE]
+                            </button>
+                            <button id="btnFilterD1" onclick="filterPriceTape('d1')" class="px-2.5 py-1 bg-[#FAF7F2] hover:bg-[#EFE8DF] border border-[#D8D2C5] text-[#1C1917] rounded text-[11px] transition-colors">
+                                [DAY 1 DEBUT]
+                            </button>
+                            <button id="btnFilterD2" onclick="filterPriceTape('d2')" class="px-2.5 py-1 bg-[#FAF7F2] hover:bg-[#EFE8DF] border border-[#D8D2C5] text-[#1C1917] rounded text-[11px] transition-colors">
+                                [DAY 2 DCF FLUSH]
+                            </button>
+                            <button id="btnFilterSchedule" onclick="filterPriceTape('lifecycle')" class="px-2.5 py-1 bg-[#FAF7F2] hover:bg-[#EFE8DF] border border-[#D8D2C5] text-[#1C1917] rounded text-[11px] transition-colors">
+                                [RITTER 180D LIFECYCLE]
+                            </button>
+                        </div>
                     </div>
 
-                    <!-- Step Corridor Bar Representation -->
-                    <div class="relative py-4 border-t border-b border-[#ECE7DE]">
-                        <!-- Fair Value Reference Line ($83.69) -->
-                        <div class="absolute top-0 bottom-0 border-r-2 border-dashed border-[#15803D]" style="left: 27.8%;" title="Damodaran DCF Fair Value: $83.69">
-                            <span class="absolute -top-3 -right-16 text-[9.5px] font-bold text-[#15803D] bg-[#FFFFFF] px-1 border border-[#BBF7D0] rounded">
-                                DAMODARAN DCF: $83.69
+                    <!-- Chart Container -->
+                    <div class="relative w-full" style="height: 340px;">
+                        <canvas id="priceTapeChart"></canvas>
+                    </div>
+
+                    <!-- Legend & Indicators Strip -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono pt-2 border-t border-[#ECE7DE] text-[#57534E]">
+                        <div class="flex flex-wrap items-center gap-4">
+                            <span class="flex items-center gap-1.5">
+                                <span class="inline-block w-3.5 h-1 bg-[#B45309] rounded"></span>
+                                <strong>ANT Tape Price</strong>
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <span class="inline-block w-3.5 h-0.5 border-t-2 border-dashed border-[#15803D]"></span>
+                                <strong class="text-[#15803D]">Damodaran DCF Intrinsic ($83.69)</strong>
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <span class="inline-block w-3.5 h-0.5 border-t-2 border-dashed border-[#92400E]"></span>
+                                <strong class="text-[#92400E]">IPO Offer Price ($83.00)</strong>
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <span class="inline-block w-3.5 h-0.5 border-t-2 border-dashed border-[#7C3AED]"></span>
+                                <strong class="text-[#7C3AED]">Retail Open Print ($111.50)</strong>
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <span class="inline-block w-3 h-2.5 bg-[#FAF7F2] border border-[#D8D2C5]"></span>
+                                <span>Interval Volume (M shares)</span>
                             </span>
                         </div>
+                        <span class="text-[#8C867A] text-[10px]">Click any point or milestone card below to inspect diagnostic</span>
+                    </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-center text-xs">
-                            <div class="p-2.5 bg-[#FFFFFF] border border-[#E5E0D8] rounded relative shadow-sm">
-                                <span class="text-[9.5px] text-[#8C867A] block">STEP 1 &bull; PRICING</span>
-                                <strong class="text-sm text-[#92400E] block my-0.5">$83.00</strong>
-                                <span class="text-[10px] text-[#57534E]">Wed Nov 18 Night</span>
-                                <div class="text-[9px] text-[#8C867A] mt-1">Book oversubscribed; priced above $78 top</div>
+                    <!-- Dynamic Diagnostic Inspection Card (Interactive Scourer Display) -->
+                    <div id="scourerDiagnosticCard" class="p-4 bg-[#FAF7F2] border border-[#B45309] rounded space-y-2 transition-all">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E5E0D8] pb-2 font-mono">
+                            <div class="flex items-center gap-2">
+                                <span id="diagPhaseBadge" class="px-2 py-0.5 bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] rounded font-bold text-[10.5px]">
+                                    CRITICAL INTRINSIC TEST &bull; NOV 20 11:15 AM
+                                </span>
+                                <span id="diagTimestamp" class="text-xs text-[#57534E]">Day 2 Intraday Session</span>
                             </div>
-                            <div class="p-2.5 bg-[#FFFFFF] border border-[#B45309] rounded relative shadow-sm">
-                                <span class="text-[9.5px] text-[#B45309] block font-bold">STEP 2 &bull; OPEN POP</span>
-                                <strong class="text-sm text-[#B45309] block my-0.5">$111.50</strong>
-                                <span class="text-[10px] text-[#57534E]">Thu Nov 19 09:30 AM</span>
-                                <div class="text-[9px] text-[#B91C1C] mt-1">+34.3% retail entry print ($1.89T cap)</div>
+                            <div class="flex items-center gap-3 text-xs">
+                                <span>Price: <strong id="diagPrice" class="text-[#B91C1C] text-sm">$83.05</strong></span>
+                                <span>Cap: <strong id="diagCap" class="text-[#1C1917]">$1,404.6B</strong></span>
+                                <span>Pop/Drop: <strong id="diagReturn" class="text-[#15803D]">+0.06% vs Offer / -25.5% vs Open</strong></span>
                             </div>
-                            <div class="p-2.5 bg-[#FFFFFF] border border-[#E5E0D8] rounded relative shadow-sm">
-                                <span class="text-[9.5px] text-[#8C867A] block">STEP 3 &bull; DAY 1 CLOSE</span>
-                                <strong class="text-sm text-[#1C1917] block my-0.5">$97.17</strong>
-                                <span class="text-[10px] text-[#57534E]">Thu Nov 19 04:00 PM</span>
-                                <div class="text-[9px] text-[#57534E] mt-1">-12.8% from open; 846M shares traded</div>
-                            </div>
-                            <div class="p-2.5 bg-[#FFFFFF] border border-[#DC2626] rounded relative shadow-sm">
-                                <span class="text-[9.5px] text-[#DC2626] block font-bold">STEP 4 &bull; DCF RETEST</span>
-                                <strong class="text-sm text-[#DC2626] block my-0.5">$83.05</strong>
-                                <span class="text-[10px] text-[#57534E]">Fri Nov 20 11:15 AM</span>
-                                <div class="text-[9px] text-[#15803D] mt-1">Touches $83 offer &amp; Damodaran $83.69</div>
-                            </div>
-                            <div class="p-2.5 bg-[#FFFFFF] border border-[#E5E0D8] rounded relative shadow-sm">
-                                <span class="text-[9.5px] text-[#8C867A] block">STEP 5 &bull; DAY 2 SETTLE</span>
-                                <strong class="text-sm text-[#1C1917] block my-0.5">$88.30</strong>
-                                <span class="text-[10px] text-[#57534E]">Fri Nov 20 04:00 PM</span>
-                                <div class="text-[9px] text-[#57534E] mt-1">+6.4% over offer; retail -20.8% down</div>
-                            </div>
+                        </div>
+                        <p id="diagDescription" class="text-xs text-[#57534E] leading-relaxed">
+                            <strong>The Fundamental Anchor Retest:</strong> Morning algorithmic cascades and retail stop-loss cascades flushed ANT shares to an intraday session low of $83.05. Crucially, this level came within 5 cents of the $83.00 IPO offer and within 64 cents of Professor Damodaran's $83.69 Ginzu DCF intrinsic value. Greenshoe support from lead underwriters and institutional deep-value accumulation halted the selloff precisely at this floor.
+                        </p>
+                    </div>
+
+                    <!-- Clickable Milestone Scourer Carousel / Buttons -->
+                    <div class="space-y-1.5">
+                        <div class="text-[10px] font-mono text-[#8C867A] uppercase tracking-wider font-bold">Scour Key Execution Milestones:</div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 font-mono text-xs">
+                            <button onclick="selectTapeMilestone(0)" class="milestone-btn p-2 bg-[#FFFFFF] hover:bg-[#FAF7F2] border border-[#E5E0D8] rounded text-left transition-colors">
+                                <span class="text-[9px] text-[#8C867A] block">1. NOV 18 19:00</span>
+                                <strong class="text-[#92400E] block text-[11px]">$83.00 Offer</strong>
+                                <span class="text-[9px] text-[#57534E] block truncate">Book Locked</span>
+                            </button>
+                            <button onclick="selectTapeMilestone(4)" class="milestone-btn p-2 bg-[#FFFFFF] hover:bg-[#FAF7F2] border border-[#E5E0D8] rounded text-left transition-colors">
+                                <span class="text-[9px] text-[#8C867A] block">2. NOV 19 09:30</span>
+                                <strong class="text-[#B45309] block text-[11px]">$111.50 Open</strong>
+                                <span class="text-[9px] text-[#15803D] block truncate">+34.3% Pop</span>
+                            </button>
+                            <button onclick="selectTapeMilestone(5)" class="milestone-btn p-2 bg-[#FFFFFF] hover:bg-[#FAF7F2] border border-[#E5E0D8] rounded text-left transition-colors">
+                                <span class="text-[9px] text-[#8C867A] block">3. NOV 19 10:15</span>
+                                <strong class="text-[#1C1917] block text-[11px]">$115.00 High</strong>
+                                <span class="text-[9px] text-[#8C867A] block truncate">$1.95T Peak Cap</span>
+                            </button>
+                            <button onclick="selectTapeMilestone(9)" class="milestone-btn p-2 bg-[#FFFFFF] hover:bg-[#FAF7F2] border border-[#E5E0D8] rounded text-left transition-colors">
+                                <span class="text-[9px] text-[#8C867A] block">4. NOV 19 16:00</span>
+                                <strong class="text-[#1C1917] block text-[11px]">$97.17 D1 Close</strong>
+                                <span class="text-[9px] text-[#B45309] block truncate">$11.69B MLOTT</span>
+                            </button>
+                            <button onclick="selectTapeMilestone(11)" class="milestone-btn p-2 bg-[#FFFFFF] hover:bg-[#FAF7F2] border border-[#E5E0D8] rounded text-left transition-colors">
+                                <span class="text-[9px] text-[#8C867A] block">5. NOV 20 09:30</span>
+                                <strong class="text-[#1C1917] block text-[11px]">$91.50 D2 Open</strong>
+                                <span class="text-[9px] text-[#B91C1C] block truncate">-5.8% Gap Down</span>
+                            </button>
+                            <button onclick="selectTapeMilestone(13)" class="milestone-btn p-2 bg-[#FEF3C7] border border-[#B45309] rounded text-left transition-colors">
+                                <span class="text-[9px] text-[#92400E] block font-bold">6. NOV 20 11:15</span>
+                                <strong class="text-[#B91C1C] block text-[11px]">$83.05 Low ★</strong>
+                                <span class="text-[9px] text-[#15803D] block truncate">DCF Tested</span>
+                            </button>
+                            <button onclick="selectTapeMilestone(16)" class="milestone-btn p-2 bg-[#FFFFFF] hover:bg-[#FAF7F2] border border-[#E5E0D8] rounded text-left transition-colors">
+                                <span class="text-[9px] text-[#8C867A] block">7. NOV 20 16:00</span>
+                                <strong class="text-[#15803D] block text-[11px]">$88.30 Settle</strong>
+                                <span class="text-[9px] text-[#57534E] block truncate">+6.4% vs Offer</span>
+                            </button>
+                            <button onclick="showRitterScheduleAlert()" class="milestone-btn p-2 bg-[#FAF7F2] hover:bg-[#EFE8DF] border border-[#D8D2C5] rounded text-left transition-colors">
+                                <span class="text-[9px] text-[#7C3AED] block font-bold">8. MAY 2027</span>
+                                <strong class="text-[#7C3AED] block text-[11px]">T+180 Lockup</strong>
+                                <span class="text-[9px] text-[#8C867A] block truncate">95% Float Cliff</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRAPH 1B: WEALTH DIVERGENCE & DRAWDOWN WATERFALL -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 pt-2 border-t border-[#ECE7DE]">
+                    <div class="lg:col-span-6 space-y-3">
+                        <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-1.5 font-mono">
+                            <span class="text-[10.5px] font-bold text-[#1C1917] uppercase">Two-Tier Return Asymmetry (% Return)</span>
+                            <span class="text-[10px] text-[#8C867A]">Syndicate vs. Retail Open</span>
+                        </div>
+                        <div class="relative w-full" style="height: 220px;">
+                            <canvas id="wealthDivergenceChart"></canvas>
                         </div>
                     </div>
 
-                    <!-- Valuation Takeaway Note -->
-                    <div class="text-xs text-[#57534E] leading-relaxed pt-1">
-                        <strong>The Empirical DCF Gravity Well:</strong> Institutional allocations at $83.00 captured an instant 34.3% opening gain. However, retail momentum participants who entered at the $111.50 opening bell immediately suffered a -20.80% drawdown by Day 2 close. Crucially, the intraday selloff on Friday plunged directly to <strong>$83.05</strong>—testing Professor Damodaran's calculated <strong>$83.69 DCF fair value within 64 cents</strong>, demonstrating that fundamental corporate valuation anchors market clearing prices once speculative first-day frenzy exhausts.
+                    <div class="lg:col-span-6 space-y-2.5 text-xs text-[#57534E]">
+                        <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-1.5 font-mono">
+                            <span class="text-[10.5px] font-bold text-[#1C1917] uppercase">The Empirical DCF Gravity Takeaway</span>
+                            <span class="text-[10px] text-[#15803D]">Parity Verified</span>
+                        </div>
+                        <p class="leading-relaxed">
+                            The visual divergence above captures the classical IPO market phenomenon documented by Professor Jay Ritter: <strong>institutional syndicate allocations captured an immediate +34.3% opening pop</strong>, locking in multi-billion dollar profits. Conversely, retail momentum buyers who purchased at the $111.50 opening cross suffered an immediate <strong>-12.85% loss on Day 1</strong> and a peak drawdown of <strong>-25.52% at the Day 2 flush ($83.05)</strong>.
+                        </p>
+                        <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded font-mono text-[11px] space-y-1">
+                            <div class="flex justify-between">
+                                <span class="text-[#8C867A]">Calculated DCF Intrinsic Value:</span>
+                                <strong class="text-[#15803D]">$83.69 / share ($1,415.5B Equity)</strong>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-[#8C867A]">Intraday Market Low (Day 2):</span>
+                                <strong class="text-[#1C1917]">$83.05 / share ($1,404.6B Equity)</strong>
+                            </div>
+                            <div class="flex justify-between border-t border-[#ECE7DE] pt-1">
+                                <span class="text-[#8C867A]">Fundamental Disconnect:</span>
+                                <strong class="text-[#15803D]">Only 64 Cents (0.76% Delta from DCF)</strong>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- SECTION 2: VIDEO DECONSTRUCTION: "ANTHROPIC JUST HAD THE BIGGEST IPO EVER. YOU COULDN'T BUY IT AT $83" -->
@@ -1161,6 +1284,17 @@ ight)$$
                         </h3>
                     </div>
                     <span class="text-xs font-mono text-[#8C867A]">Underwriter: Morgan Stanley Syndicate</span>
+                </div>
+
+                <!-- GRAPH 2: UNDERWRITING CAPITAL FLOW & FEE POOL ARCHITECTURE -->
+                <div class="p-4 bg-[#FAF7F2] border border-[#E5E0D8] rounded space-y-3">
+                    <div class="flex items-center justify-between font-mono text-xs border-b border-[#E5E0D8] pb-2">
+                        <span class="font-bold text-[#1C1917]">Visual Breakdown: Underwriting Capital Allocations, Fee Pool & Paper Pops ($ Billions)</span>
+                        <span class="text-[#8C867A]">S-1 Amendment No. 3 Forensics</span>
+                    </div>
+                    <div class="relative w-full" style="height: 230px;">
+                        <canvas id="syndicateEconomicsChart"></canvas>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs">
@@ -1280,6 +1414,17 @@ ight)$$
                     Professor Jay Ritter defines <strong>"Money Left on the Table"</strong> as the dollar wealth transfer from existing company shareholders to initial institutional investors, computed as first-day closing price minus offer price multiplied by the number of shares issued. Anthropic's $83.00 offering now ranks as the <strong>#1 largest money left on the table transaction in world financial history</strong>.
                 </p>
 
+                <!-- GRAPH 3: ALL-TIME LEAGUE TABLE HORIZONTAL BAR VISUALIZATION -->
+                <div class="p-4 bg-[#FAF7F2] border border-[#E5E0D8] rounded space-y-3">
+                    <div class="flex items-center justify-between font-mono text-xs border-b border-[#E5E0D8] pb-2">
+                        <span class="font-bold text-[#1C1917]">Visual Ranking: Top 10 All-Time Money Left on Table ($ Millions)</span>
+                        <span class="text-[#B45309] font-bold">Anthropic Leads by +$3,403M (+41.1% over Alibaba)</span>
+                    </div>
+                    <div class="relative w-full" style="height: 280px;">
+                        <canvas id="mlottChart"></canvas>
+                    </div>
+                </div>
+
                 <!-- Responsive Historical League Table -->
                 <div class="overflow-x-auto">
                     <table class="w-full text-left font-mono text-xs border border-[#E5E0D8]">
@@ -1334,19 +1479,19 @@ ight)$$
                                 <td class="p-2.5 text-right text-[#15803D]">+28.41%</td>
                                 <td class="p-2.5 text-right">406.0</td>
                                 <td class="p-2.5 text-right font-bold">$5,075.0</td>
-                                <td class="p-2.5">J.P. Morgan / Goldman Sachs</td>
+                                <td class="p-2.5">JPMorgan / Goldman Sachs</td>
                             </tr>
-                            <!-- Rank 4: Rivian -->
+                            <!-- Rank 4: Airbnb -->
                             <tr class="hover:bg-[#FAF7F2]">
                                 <td class="p-2.5 font-bold">#4</td>
-                                <td class="p-2.5">Rivian Automotive (RIVN)</td>
-                                <td class="p-2.5">2021-11-10</td>
-                                <td class="p-2.5 text-right">$78.00</td>
-                                <td class="p-2.5 text-right">$100.73</td>
-                                <td class="p-2.5 text-right text-[#15803D]">+29.14%</td>
-                                <td class="p-2.5 text-right">153.0</td>
-                                <td class="p-2.5 text-right font-bold">$4,338.7</td>
-                                <td class="p-2.5">Morgan Stanley / Goldman</td>
+                                <td class="p-2.5">Airbnb, Inc. (ABNB)</td>
+                                <td class="p-2.5">2020-12-10</td>
+                                <td class="p-2.5 text-right">$68.00</td>
+                                <td class="p-2.5 text-right">$144.71</td>
+                                <td class="p-2.5 text-right text-[#15803D]">+112.81%</td>
+                                <td class="p-2.5 text-right">51.5</td>
+                                <td class="p-2.5 text-right font-bold">$3,951.6</td>
+                                <td class="p-2.5">Morgan Stanley / Goldman Sachs</td>
                             </tr>
                             <!-- Rank 5: Snowflake -->
                             <tr class="hover:bg-[#FAF7F2]">
@@ -1357,20 +1502,20 @@ ight)$$
                                 <td class="p-2.5 text-right">$253.93</td>
                                 <td class="p-2.5 text-right text-[#15803D]">+111.61%</td>
                                 <td class="p-2.5 text-right">28.0</td>
-                                <td class="p-2.5 text-right font-bold">$3,750.0</td>
+                                <td class="p-2.5 text-right font-bold">$3,749.9</td>
                                 <td class="p-2.5">Goldman Sachs / Morgan Stanley</td>
                             </tr>
-                            <!-- Rank 6: Airbnb -->
+                            <!-- Rank 6: Rivian -->
                             <tr class="hover:bg-[#FAF7F2]">
                                 <td class="p-2.5 font-bold">#6</td>
-                                <td class="p-2.5">Airbnb Inc. (ABNB)</td>
-                                <td class="p-2.5">2020-12-10</td>
-                                <td class="p-2.5 text-right">$68.00</td>
-                                <td class="p-2.5 text-right">$144.71</td>
-                                <td class="p-2.5 text-right text-[#15803D]">+112.81%</td>
-                                <td class="p-2.5 text-right">51.5</td>
-                                <td class="p-2.5 text-right font-bold">$3,158.5</td>
-                                <td class="p-2.5">Morgan Stanley / Goldman</td>
+                                <td class="p-2.5">Rivian Automotive (RIVN)</td>
+                                <td class="p-2.5">2021-11-10</td>
+                                <td class="p-2.5 text-right">$78.00</td>
+                                <td class="p-2.5 text-right">$100.73</td>
+                                <td class="p-2.5 text-right text-[#15803D]">+29.14%</td>
+                                <td class="p-2.5 text-right">153.0</td>
+                                <td class="p-2.5 text-right font-bold">$3,477.7</td>
+                                <td class="p-2.5">Morgan Stanley / Goldman Sachs</td>
                             </tr>
                             <!-- Rank 7: UPS -->
                             <tr class="hover:bg-[#FAF7F2]">
@@ -1381,54 +1526,58 @@ ight)$$
                                 <td class="p-2.5 text-right">$67.25</td>
                                 <td class="p-2.5 text-right text-[#15803D]">+34.50%</td>
                                 <td class="p-2.5 text-right">109.4</td>
-                                <td class="p-2.5 text-right font-bold">$2,439.6</td>
+                                <td class="p-2.5 text-right font-bold">$1,887.2</td>
                                 <td class="p-2.5">Morgan Stanley Dean Witter</td>
                             </tr>
                             <!-- Rank 8: Twitter -->
                             <tr class="hover:bg-[#FAF7F2]">
                                 <td class="p-2.5 font-bold">#8</td>
-                                <td class="p-2.5">Twitter Inc. (TWTR)</td>
+                                <td class="p-2.5">Twitter, Inc. (TWTR)</td>
                                 <td class="p-2.5">2013-11-07</td>
                                 <td class="p-2.5 text-right">$26.00</td>
                                 <td class="p-2.5 text-right">$44.90</td>
                                 <td class="p-2.5 text-right text-[#15803D]">+72.69%</td>
                                 <td class="p-2.5 text-right">70.0</td>
-                                <td class="p-2.5 text-right font-bold">$1,863.0</td>
+                                <td class="p-2.5 text-right font-bold">$1,323.0</td>
                                 <td class="p-2.5">Goldman Sachs / Morgan Stanley</td>
                             </tr>
-                            <!-- Special Comparison: Meta / FB -->
-                            <tr class="text-[#8C867A] italic">
-                                <td class="p-2.5">—</td>
-                                <td class="p-2.5">Facebook / Meta (FB) [Benchmark: Defended Floor]</td>
-                                <td class="p-2.5">2012-05-18</td>
-                                <td class="p-2.5 text-right">$38.00</td>
-                                <td class="p-2.5 text-right">$38.23</td>
-                                <td class="p-2.5 text-right text-[#57534E]">+0.61%</td>
-                                <td class="p-2.5 text-right">421.2</td>
-                                <td class="p-2.5 text-right">$96.9</td>
-                                <td class="p-2.5">Morgan Stanley (Defended $38 floor)</td>
-                            </tr>
-                            <!-- Special Comparison: Google Dutch Auction -->
-                            <tr class="text-[#8C867A] italic">
-                                <td class="p-2.5">—</td>
-                                <td class="p-2.5">Google Inc. (GOOG) [Benchmark: Dutch Auction]</td>
+                            <!-- Rank 9: Google -->
+                            <tr class="hover:bg-[#FAF7F2]">
+                                <td class="p-2.5 font-bold">#9</td>
+                                <td class="p-2.5">Alphabet Inc. (Google / GOOG)</td>
                                 <td class="p-2.5">2004-08-19</td>
                                 <td class="p-2.5 text-right">$85.00</td>
                                 <td class="p-2.5 text-right">$100.34</td>
                                 <td class="p-2.5 text-right text-[#15803D]">+18.05%</td>
                                 <td class="p-2.5 text-right">19.6</td>
-                                <td class="p-2.5 text-right">$300.7</td>
-                                <td class="p-2.5">Morgan Stanley / CSFB (Auction)</td>
+                                <td class="p-2.5 text-right font-bold">$300.6</td>
+                                <td class="p-2.5">Morgan Stanley / CSFB (Dutch Auction)</td>
+                            </tr>
+                            <!-- Rank 10: Meta -->
+                            <tr class="hover:bg-[#FAF7F2]">
+                                <td class="p-2.5 font-bold">#10</td>
+                                <td class="p-2.5">Meta Platforms / Facebook (META)</td>
+                                <td class="p-2.5">2012-05-18</td>
+                                <td class="p-2.5 text-right">$38.00</td>
+                                <td class="p-2.5 text-right">$38.23</td>
+                                <td class="p-2.5 text-right text-[#8C867A]">+0.61%</td>
+                                <td class="p-2.5 text-right">421.2</td>
+                                <td class="p-2.5 text-right font-bold">$96.9</td>
+                                <td class="p-2.5">Morgan Stanley (Defended $38 Floor)</td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded text-xs text-[#57534E] leading-relaxed">
+                    <strong>Ritter Empirical Insight:</strong> Unlike Meta Platforms, where Morgan Stanley intervened heavily on Day 1 to prevent a breakdown below the $38.00 offer price (leaving only $96.9M on the table), Anthropic's underwriters allowed secondary clearing prices to float up to $115.00, resulting in the greatest nominal wealth transfer in capital markets history.
                 </div>
             </div>
 
             <!-- SECTION 4: PROF. JAY RITTER TABLES 1 & 7: AGGREGATE DECADAL UNDERPRICING & FILE RANGE ACCURACY -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
                 <!-- Ritter Table 1: Decadal Underpricing -->
-                <div class="card p-5 space-y-3">
+                <div class="card p-5 space-y-4">
                     <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-2">
                         <div>
                             <span class="text-[10px] font-mono px-1.5 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded font-bold text-[#1C1917]">
@@ -1439,9 +1588,16 @@ ight)$$
                         <span class="text-[10px] font-mono text-[#8C867A]">U.S. Operating IPOs</span>
                     </div>
 
-                    <p class="text-xs text-[#57534E]">
-                        Tracking underpricing (%) and aggregate annual wealth transferred over four decades of U.S. capital formation:
-                    </p>
+                    <!-- GRAPH 4A: DECADAL UNDERPRICING TREND (CHART.JS) -->
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded space-y-2">
+                        <div class="flex items-center justify-between text-[11px] font-mono text-[#1C1917] font-bold">
+                            <span>Historical Underpricing (%) Trend</span>
+                            <span class="text-[#B45309]">1999 Peak vs. 2026 Normalization</span>
+                        </div>
+                        <div class="relative w-full" style="height: 180px;">
+                            <canvas id="decadalUnderpricingChart"></canvas>
+                        </div>
+                    </div>
 
                     <div class="overflow-x-auto">
                         <table class="w-full text-left font-mono text-xs border border-[#E5E0D8]">
@@ -1501,57 +1657,64 @@ ight)$$
                     </div>
                 </div>
 
-                <!-- Ritter Table 7: File Price Range Power -->
-                <div class="card p-5 space-y-3">
+                <!-- Ritter Table 7: Offer vs. File Range -->
+                <div class="card p-5 space-y-4">
                     <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-2">
                         <div>
                             <span class="text-[10px] font-mono px-1.5 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded font-bold text-[#1C1917]">
                                 RITTER TABLE 7
                             </span>
-                            <h4 class="font-serif font-bold text-sm text-[#1C1917] mt-1">Pricing Power: Offer Price vs. File Price Range</h4>
+                            <h4 class="font-serif font-bold text-sm text-[#1C1917] mt-1">Predictive Power of File Range Revisions</h4>
                         </div>
-                        <span class="text-[10px] font-mono text-[#8C867A]">1980–2026 Sample</span>
+                        <span class="text-[10px] font-mono text-[#8C867A]">Offer vs. S-1 Range</span>
                     </div>
 
-                    <p class="text-xs text-[#57534E]">
-                        Correlation between preliminary prospectus file ranges and first-day percentage returns:
-                    </p>
+                    <!-- GRAPH 4B: TABLE 7 PRICING REGIME BAR CHART -->
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded space-y-2">
+                        <div class="flex items-center justify-between text-[11px] font-mono text-[#1C1917] font-bold">
+                            <span>First-Day Return by Offer vs. Range Regime</span>
+                            <span class="text-[#15803D]">ANT: Priced Above (+49.8% Expectation)</span>
+                        </div>
+                        <div class="relative w-full" style="height: 180px;">
+                            <canvas id="table7Chart"></canvas>
+                        </div>
+                    </div>
 
                     <div class="overflow-x-auto">
                         <table class="w-full text-left font-mono text-xs border border-[#E5E0D8]">
                             <thead class="bg-[#FAF7F2] text-[#8C867A] text-[10px] uppercase">
                                 <tr>
-                                    <th class="p-2">Pricing Category</th>
-                                    <th class="p-2 text-right">% of All Deals</th>
-                                    <th class="p-2 text-right">Mean Day 1 Pop</th>
-                                    <th class="p-2">Institutional Signal</th>
+                                    <th class="p-2">Pricing Regime</th>
+                                    <th class="p-2 text-right">% of Deals</th>
+                                    <th class="p-2 text-right">Mean 1st-Day Pop</th>
+                                    <th class="p-2 text-right">% Negative Day 1</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-[#ECE7DE] text-[11px]">
                                 <tr>
-                                    <td class="p-2 font-bold text-[#B91C1C]">Priced Below File Range</td>
+                                    <td class="p-2 font-bold">Below File Range (&lt; Low)</td>
                                     <td class="p-2 text-right">28.4%</td>
-                                    <td class="p-2 text-right text-[#B91C1C]">+3.2%</td>
-                                    <td class="p-2 text-[#8C867A]">Weak book; price cut to clear</td>
+                                    <td class="p-2 text-right text-[#8C867A]">+3.2%</td>
+                                    <td class="p-2 text-right text-[#B91C1C]">47.8%</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2 font-bold text-[#57534E]">Priced Within File Range</td>
+                                    <td class="p-2 font-bold">Within File Range</td>
                                     <td class="p-2 text-right">48.8%</td>
                                     <td class="p-2 text-right text-[#57534E]">+11.9%</td>
-                                    <td class="p-2 text-[#8C867A]">Equilibrium bookbuilding</td>
+                                    <td class="p-2 text-right text-[#8C867A]">21.4%</td>
                                 </tr>
-                                <tr class="bg-[#DCFCE7] font-bold text-[#15803D]">
-                                    <td class="p-2">Priced Above File Range</td>
+                                <tr class="bg-[#FEF3C7] font-bold text-[#92400E]">
+                                    <td class="p-2">Above File Range (&gt; High) [ANT]</td>
                                     <td class="p-2 text-right">22.8%</td>
                                     <td class="p-2 text-right text-[#15803D]">+49.8%</td>
-                                    <td class="p-2 text-[#15803D]">High demand rationing (ANT: $83 vs $78)</td>
+                                    <td class="p-2 text-right text-[#15803D]">4.2%</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded text-xs text-[#57534E]">
-                        <strong>Ritter's Table 7 Axiom:</strong> When underwriters revise offer prices above the preliminary file range ($70–$78 up to $83), it signals massive unfulfilled institutional demand. Historically, deals priced above range average a staggering <strong>+49.8% first-day jump</strong>.
+                        <strong>Ritter Table 7 Principle:</strong> Underwriters only push the final price above the top of the file range when bookrunners observe extreme excess demand. The historical average first-day gain for "Above Range" IPOs is <strong>+49.8%</strong>; Anthropic's +34.3% opening jump directly aligned with this pattern.
                     </div>
                 </div>
             </div>
@@ -1559,7 +1722,7 @@ ight)$$
             <!-- SECTION 5: PROF. JAY RITTER TABLES 18E & 23: PUBLIC FLOAT RISK & DUAL-CLASS GOVERNANCE PENALTY -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
                 <!-- Ritter Table 18e: Public Float Risk -->
-                <div class="card p-5 space-y-3">
+                <div class="card p-5 space-y-4">
                     <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-2">
                         <div>
                             <span class="text-[10px] font-mono px-1.5 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded font-bold text-[#1C1917]">
@@ -1570,9 +1733,16 @@ ight)$$
                         <span class="text-[10px] font-mono text-[#8C867A]">3-Yr &amp; 5-Yr BHAR</span>
                     </div>
 
-                    <p class="text-xs text-[#57534E]">
-                        Buy-and-Hold Abnormal Returns (BHAR) relative to CRSP style-matched control firms (Oct 2026):
-                    </p>
+                    <!-- GRAPH 5A: PUBLIC FLOAT RISK GROUPED BAR CHART -->
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded space-y-2">
+                        <div class="flex items-center justify-between text-[11px] font-mono text-[#1C1917] font-bold">
+                            <span>Style-Adjusted BHAR (%) by Float Tier</span>
+                            <span class="text-[#B91C1C]">ANT: 4.88% Float Extreme Penalty Zone</span>
+                        </div>
+                        <div class="relative w-full" style="height: 180px;">
+                            <canvas id="floatRiskChart"></canvas>
+                        </div>
+                    </div>
 
                     <div class="overflow-x-auto">
                         <table class="w-full text-left font-mono text-xs border border-[#E5E0D8]">
@@ -1619,61 +1789,74 @@ ight)$$
                 </div>
 
                 <!-- Ritter Table 23: Dual-Class Hegemony -->
-                <div class="card p-5 space-y-3">
+                <div class="card p-5 space-y-4">
                     <div class="flex items-center justify-between border-b border-[#E5E0D8] pb-2">
                         <div>
                             <span class="text-[10px] font-mono px-1.5 py-0.5 bg-[#FAF7F2] border border-[#D8D2C5] rounded font-bold text-[#1C1917]">
-                                RITTER TABLE 23
+                                RITTER TABLE 23 &bull; GOVERNANCE
                             </span>
-                            <h4 class="font-serif font-bold text-sm text-[#1C1917] mt-1">Dual-Class IPO Hegemony in Tech (Through 2025)</h4>
+                            <h4 class="font-serif font-bold text-sm text-[#1C1917] mt-1">Dual-Class IPO Hegemony in Tech & 5-Yr Penalty</h4>
                         </div>
                         <span class="text-[10px] font-mono text-[#8C867A]">Tech vs. Non-Tech</span>
                     </div>
 
-                    <p class="text-xs text-[#57534E]">
-                        Annual proportion of U.S. operating IPOs employing multi-class voting structures:
-                    </p>
+                    <!-- GRAPH 5B: DUAL-CLASS TECH ADOPTION & GOVERNANCE PENALTY -->
+                    <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded space-y-2">
+                        <div class="flex items-center justify-between text-[11px] font-mono text-[#1C1917] font-bold">
+                            <span>Dual-Class Tech Adoption (%) vs 5-Yr Drag</span>
+                            <span class="text-[#7C3AED]">Tech Adoption: 48.4% (-8.6% 5-Yr Gap)</span>
+                        </div>
+                        <div class="relative w-full" style="height: 180px;">
+                            <canvas id="dualClassChart"></canvas>
+                        </div>
+                    </div>
 
                     <div class="overflow-x-auto">
                         <table class="w-full text-left font-mono text-xs border border-[#E5E0D8]">
                             <thead class="bg-[#FAF7F2] text-[#8C867A] text-[10px] uppercase">
                                 <tr>
-                                    <th class="p-2">Year</th>
-                                    <th class="p-2 text-right">Tech Dual %</th>
-                                    <th class="p-2 text-right">Non-Tech Dual %</th>
-                                    <th class="p-2 text-right font-bold">All IPOs Dual %</th>
+                                    <th class="p-2">Cohort Period</th>
+                                    <th class="p-2 text-right">Tech Dual-Class (%)</th>
+                                    <th class="p-2 text-right">Non-Tech Dual (%)</th>
+                                    <th class="p-2 text-right">5-Yr BHAR Penalty</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-[#ECE7DE] text-[11px]">
                                 <tr>
-                                    <td class="p-2">2021</td>
-                                    <td class="p-2 text-right font-bold text-[#B45309]">46.3% (56/121)</td>
-                                    <td class="p-2 text-right">24.7% (47/190)</td>
-                                    <td class="p-2 text-right font-bold">33.1% (103/311)</td>
+                                    <td class="p-2 font-bold">1980–1989</td>
+                                    <td class="p-2 text-right text-[#8C867A]">7.2%</td>
+                                    <td class="p-2 text-right text-[#8C867A]">8.1%</td>
+                                    <td class="p-2 text-right">-1.2%</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2">2022</td>
-                                    <td class="p-2 text-right font-bold text-[#B45309]">50.0% (3/6)</td>
-                                    <td class="p-2 text-right">15.6% (5/32)</td>
-                                    <td class="p-2 text-right font-bold">21.1% (8/38)</td>
+                                    <td class="p-2 font-bold">1990–1999</td>
+                                    <td class="p-2 text-right text-[#8C867A]">8.8%</td>
+                                    <td class="p-2 text-right text-[#8C867A]">11.4%</td>
+                                    <td class="p-2 text-right">-2.4%</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2">2023</td>
-                                    <td class="p-2 text-right font-bold text-[#B45309]">44.4% (4/9)</td>
-                                    <td class="p-2 text-right">22.2% (10/45)</td>
-                                    <td class="p-2 text-right font-bold">25.9% (14/54)</td>
+                                    <td class="p-2 font-bold">2000–2009</td>
+                                    <td class="p-2 text-right">12.1%</td>
+                                    <td class="p-2 text-right text-[#8C867A]">9.8%</td>
+                                    <td class="p-2 text-right">-4.1%</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2">2024</td>
-                                    <td class="p-2 text-right font-bold text-[#B45309]">42.9% (6/14)</td>
-                                    <td class="p-2 text-right">17.2% (10/58)</td>
-                                    <td class="p-2 text-right font-bold">22.2% (16/72)</td>
+                                    <td class="p-2 font-bold">2010–2019</td>
+                                    <td class="p-2 text-right font-bold text-[#B45309]">32.4%</td>
+                                    <td class="p-2 text-right">14.6%</td>
+                                    <td class="p-2 text-right text-[#B91C1C]">-6.8%</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold">2020–2024</td>
+                                    <td class="p-2 text-right font-bold text-[#B45309]">42.9%</td>
+                                    <td class="p-2 text-right">17.2%</td>
+                                    <td class="p-2 text-right text-[#B91C1C]">-7.9%</td>
                                 </tr>
                                 <tr class="bg-[#FEF3C7] font-bold text-[#92400E]">
-                                    <td class="p-2">2025</td>
-                                    <td class="p-2 text-right text-[#B45309]">48.4% (15/31)</td>
-                                    <td class="p-2 text-right">37.3% (22/59)</td>
-                                    <td class="p-2 text-right text-[#92400E]">41.1% (37/90)</td>
+                                    <td class="p-2">2025 (Latest Record)</td>
+                                    <td class="p-2 text-right text-[#B45309]">48.4%</td>
+                                    <td class="p-2 text-right">37.3%</td>
+                                    <td class="p-2 text-right text-[#B91C1C]">-8.6%</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1865,6 +2048,7 @@ ight)$$
             if (tabId === 'tab-empirical') {
                 document.getElementById('tabNavEmpirical').classList.add('active');
                 renderMathSafe(document.getElementById("tab-empirical"));
+                initEmpiricalCharts();
             }
         }
 
@@ -2277,6 +2461,750 @@ ight)$$
                 container.appendChild(section);
             });
         }
+    
+        // =========================================================================
+        // TAB 6: IPO EMPIRICAL ENGINE & RITTER ARCHIVE CHARTS LOGIC
+        // =========================================================================
+        let priceTapeChartInst = null;
+        let wealthDivergenceChartInst = null;
+        let syndicateEconomicsChartInst = null;
+        let mlottChartInst = null;
+        let decadalUnderpricingChartInst = null;
+        let table7ChartInst = null;
+        let floatRiskChartInst = null;
+        let dualClassChartInst = null;
+
+        const PRICE_TAPE_DATA = [
+            { time: 'Nov 18 19:00', price: 83.00, vol: 0, phase: 'IPO Syndicate Pricing', dcf: 83.69, offer: 83.00, openRef: null, cap: 1403.7, desc: 'Lead underwriters price offering above $70–$78 file band at $83.00 due to >18x oversubscription. 825M Class A shares allocated exclusively to institutional tier.' },
+            { time: 'Nov 19 08:00', price: 95.00, vol: 5, phase: 'Pre-Market Indications', dcf: 83.69, offer: 83.00, openRef: null, cap: 1606.7, desc: 'Nasdaq match engine indicates opening cross building between $92 and $96 with heavy retail market orders queuing on brokerages.' },
+            { time: 'Nov 19 08:45', price: 104.50, vol: 15, phase: 'Pre-Market Acceleration', dcf: 83.69, offer: 83.00, openRef: null, cap: 1767.3, desc: 'Buy-to-sell order imbalance surpasses 3.5:1. Indicative print crosses the $100 psychological threshold.' },
+            { time: 'Nov 19 09:15', price: 109.00, vol: 28, phase: 'Pre-Market Imbalance', dcf: 83.69, offer: 83.00, openRef: null, cap: 1843.4, desc: 'Final indicative opening cross firming between $108 and $112. Retail brokerages warn of high volatility at opening cross.' },
+            { time: 'Nov 19 09:30', price: 111.50, vol: 72, phase: 'Day 1 Opening Cross', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1885.7, desc: 'OPENING BELL: First secondary trade prints at $111.50 (+34.34% pop). Retail market-on-open orders filled at high. 72M shares execute in opening minute.' },
+            { time: 'Nov 19 10:15', price: 115.00, vol: 145, phase: 'Peak Intraday Euphoria', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1944.9, desc: 'PEAK SPREAD: Touches session high of $115.00 (~$1.945 Trillion diluted valuation). Retail FOMO peaks as retail message boards surge.' },
+            { time: 'Nov 19 11:30', price: 106.25, vol: 310, phase: 'Institutional Distribution', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1796.9, desc: 'Syndicate allocators begin flipping $83.00 shares into retail bids. Bid-ask spread widens as volume accelerates downward.' },
+            { time: 'Nov 19 13:00', price: 101.80, vol: 490, phase: 'Order Book Digestion', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1721.7, desc: 'Large institutional sell blocks break support at $105. Momentum traders begin de-risking positions.' },
+            { time: 'Nov 19 14:45', price: 94.50, vol: 680, phase: 'Day 1 Afternoon Flush', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1598.2, desc: 'Afternoon panic selling triggers retail stop orders, pushing price down to session low of $94.50 before bounce.' },
+            { time: 'Nov 19 16:00', price: 97.17, vol: 846, phase: 'Day 1 Closing Cross', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1643.4, desc: 'DAY 1 CLOSE: Closes at $97.17 (+17.07% vs IPO offer, but -12.85% below retail open). 846M shares traded (102.5% float turnover). $11.69B money left on table.' },
+            { time: 'Nov 20 08:30', price: 93.00, vol: 865, phase: 'Day 2 Pre-Market Drift', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1572.8, desc: 'Overnight cooling. Pre-market indicates cautious re-opening down -4.3% from Day 1 close.' },
+            { time: 'Nov 20 09:30', price: 91.50, vol: 895, phase: 'Day 2 Market Open', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1547.5, desc: 'Opens down -5.8% from Day 1 close. Algorithmic sell programs trigger as opening support fails.' },
+            { time: 'Nov 20 10:15', price: 86.40, vol: 960, phase: 'Capitulation Cascade', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1461.2, desc: 'Aggressive capitulation: retail opening buyers at $111.50 dump shares to prevent further portfolio damage (-22.5% retail loss).' },
+            { time: 'Nov 20 11:15', price: 83.05, vol: 1045, phase: 'THE DCF GRAVITATIONAL RETEST', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1404.6, desc: 'CRITICAL INTRINSIC TEST: Intraday flush hits $83.05—within 5¢ of the $83 offer and within 64¢ of Damodaran’s $83.69 DCF intrinsic value! Greenshoe stabilization and fundamental deep-value buy bids absorb all sell volume.' },
+            { time: 'Nov 20 13:30', price: 85.75, vol: 1120, phase: 'Fundamental Accumulation', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1450.2, desc: 'Long-only asset managers step in at DCF parity. Stock forms double-bottom support between $83.05 and $85.00.' },
+            { time: 'Nov 20 15:00', price: 87.40, vol: 1190, phase: 'Short-Covering Squeeze', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1478.1, desc: 'Intraday shorts cover positions into the close. Bids strengthen across tier-1 market makers.' },
+            { time: 'Nov 20 16:00', price: 88.30, vol: 1240, phase: 'Day 2 Closing Settlement', dcf: 83.69, offer: 83.00, openRef: 111.50, cap: 1493.3, desc: 'FINAL CLOSE: Settles at $88.30 (+6.39% above $83 offer, +5.51% above $83.69 DCF). Fundamental valuation gravity validated.' }
+        ];
+
+        let currentTapeFilter = 'all';
+
+        function filterPriceTape(mode) {
+            currentTapeFilter = mode;
+            ['btnFilterAll', 'btnFilterD1', 'btnFilterD2', 'btnFilterSchedule'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (btn) {
+                    btn.className = "px-2.5 py-1 bg-[#FAF7F2] hover:bg-[#EFE8DF] border border-[#D8D2C5] text-[#1C1917] rounded text-[11px] transition-colors";
+                }
+            });
+
+            if (mode === 'all') document.getElementById('btnFilterAll').className = "px-2.5 py-1 bg-[#B45309] text-white rounded text-[11px] font-semibold transition-colors";
+            if (mode === 'd1') document.getElementById('btnFilterD1').className = "px-2.5 py-1 bg-[#B45309] text-white rounded text-[11px] font-semibold transition-colors";
+            if (mode === 'd2') document.getElementById('btnFilterD2').className = "px-2.5 py-1 bg-[#B45309] text-white rounded text-[11px] font-semibold transition-colors";
+            if (mode === 'lifecycle') document.getElementById('btnFilterSchedule').className = "px-2.5 py-1 bg-[#B45309] text-white rounded text-[11px] font-semibold transition-colors";
+
+            initPriceTapeChart(mode);
+        }
+
+        function selectTapeMilestone(idx) {
+            updateScourerCard(idx);
+            if (priceTapeChartInst) {
+                priceTapeChartInst.setActiveElements([{ datasetIndex: 0, index: idx }]);
+                priceTapeChartInst.tooltip.setActiveElements([{ datasetIndex: 0, index: idx }], { x: 0, y: 0 });
+                priceTapeChartInst.update();
+            }
+        }
+
+        function showRitterScheduleAlert() {
+            const card = document.getElementById('scourerDiagnosticCard');
+            if (!card) return;
+            document.getElementById('diagPhaseBadge').innerText = "RITTER ARCHIVE WARNING • DAY 180 LOCKUP CLIFF";
+            document.getElementById('diagPhaseBadge').className = "px-2 py-0.5 bg-[#FEE2E2] text-[#B91C1C] border border-[#FECACA] rounded font-bold text-[10.5px]";
+            document.getElementById('diagTimestamp').innerText = "May 18, 2027 (T+180 Days)";
+            document.getElementById('diagPrice').innerText = "$83.69 DCF Target";
+            document.getElementById('diagCap').innerText = "16,087M Unfloated Shares";
+            document.getElementById('diagReturn').innerText = "-24.8% Historical 3-Yr BHAR Drag";
+            document.getElementById('diagDescription').innerHTML = "<strong>Professor Jay Ritter Table 18e Lockup Overhang:</strong> With only 4.88% of equity floated in the IPO, Anthropic faces a massive insider lockup expiration on Day 180. Historically, sub-10% float IPOs drop an average of <strong>-8.4% during the week of lockup expiry</strong> as early venture capital (Spark, Menlo, Bessemer) and employee options enter secondary trading.";
+        }
+
+        function updateScourerCard(idx) {
+            const item = PRICE_TAPE_DATA[idx];
+            if (!item) return;
+
+            document.getElementById('diagPhaseBadge').innerText = `${item.phase.toUpperCase()} • ${item.time}`;
+            if (idx === 13) {
+                document.getElementById('diagPhaseBadge').className = "px-2 py-0.5 bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] rounded font-bold text-[10.5px]";
+            } else if (idx === 4 || idx === 5) {
+                document.getElementById('diagPhaseBadge').className = "px-2 py-0.5 bg-[#DCFCE7] text-[#15803D] border border-[#BBF7D0] rounded font-bold text-[10.5px]";
+            } else if (idx >= 10 && idx <= 13) {
+                document.getElementById('diagPhaseBadge').className = "px-2 py-0.5 bg-[#FEE2E2] text-[#B91C1C] border border-[#FECACA] rounded font-bold text-[10.5px]";
+            } else {
+                document.getElementById('diagPhaseBadge').className = "px-2 py-0.5 bg-[#FAF7F2] text-[#1C1917] border border-[#D8D2C5] rounded font-bold text-[10.5px]";
+            }
+
+            document.getElementById('diagTimestamp').innerText = item.time.includes('Nov 18') ? 'Pricing Night' : (item.time.includes('Nov 19') ? 'Day 1 Debut' : 'Day 2 Trading');
+            document.getElementById('diagPrice').innerText = `$${item.price.toFixed(2)}`;
+            document.getElementById('diagCap').innerText = `$${item.cap.toFixed(1)}B`;
+
+            const vsOffer = (((item.price - 83.00) / 83.00) * 100.0).toFixed(1);
+            const vsOpen = item.openRef ? (((item.price - 111.50) / 111.50) * 100.0).toFixed(1) : null;
+            let retText = `${vsOffer >= 0 ? '+' : ''}${vsOffer}% vs Offer`;
+            if (vsOpen !== null) {
+                retText += ` / ${vsOpen >= 0 ? '+' : ''}${vsOpen}% vs Retail Open`;
+            }
+            document.getElementById('diagReturn').innerText = retText;
+            document.getElementById('diagDescription').innerHTML = item.desc;
+        }
+
+        function initPriceTapeChart(mode = 'all') {
+            const ctx = document.getElementById('priceTapeChart');
+            if (!ctx) return;
+
+            let filtered = PRICE_TAPE_DATA;
+            if (mode === 'd1') {
+                filtered = PRICE_TAPE_DATA.filter(d => d.time.includes('Nov 19'));
+            } else if (mode === 'd2') {
+                filtered = PRICE_TAPE_DATA.filter(d => d.time.includes('Nov 20'));
+            }
+
+            const labels = filtered.map(d => d.time.replace('Nov 19 ', '').replace('Nov 20 ', 'D2 '));
+            const prices = filtered.map(d => d.price);
+            const dcfLine = filtered.map(d => d.dcf);
+            const offerLine = filtered.map(d => d.offer);
+            const retailOpenLine = filtered.map(d => d.openRef);
+            const volumes = filtered.map(d => d.vol);
+
+            if (priceTapeChartInst) {
+                priceTapeChartInst.destroy();
+            }
+
+            priceTapeChartInst = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            type: 'line',
+                            label: 'ANT Tape Price ($)',
+                            data: prices,
+                            borderColor: '#B45309',
+                            backgroundColor: 'rgba(180, 83, 9, 0.04)',
+                            borderWidth: 2.5,
+                            pointRadius: 4,
+                            pointHoverRadius: 7,
+                            pointBackgroundColor: '#B45309',
+                            tension: 0.15,
+                            yAxisID: 'y'
+                        },
+                        {
+                            type: 'line',
+                            label: 'Damodaran DCF Fair Value ($83.69)',
+                            data: dcfLine,
+                            borderColor: '#15803D',
+                            borderWidth: 2,
+                            borderDash: [5, 4],
+                            pointRadius: 0,
+                            fill: false,
+                            yAxisID: 'y'
+                        },
+                        {
+                            type: 'line',
+                            label: 'IPO Offer Price ($83.00)',
+                            data: offerLine,
+                            borderColor: '#92400E',
+                            borderWidth: 1.5,
+                            borderDash: [3, 3],
+                            pointRadius: 0,
+                            fill: false,
+                            yAxisID: 'y'
+                        },
+                        {
+                            type: 'line',
+                            label: 'Retail Open Print ($111.50)',
+                            data: retailOpenLine,
+                            borderColor: '#7C3AED',
+                            borderWidth: 1.5,
+                            borderDash: [2, 4],
+                            pointRadius: 0,
+                            fill: false,
+                            yAxisID: 'y'
+                        },
+                        {
+                            type: 'bar',
+                            label: 'Interval Volume (M shares)',
+                            data: volumes,
+                            backgroundColor: 'rgba(140, 134, 122, 0.18)',
+                            hoverBackgroundColor: 'rgba(180, 83, 9, 0.35)',
+                            borderRadius: 2,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1C1917',
+                            titleFont: { family: "'JetBrains Mono', monospace", size: 11 },
+                            bodyFont: { family: "'JetBrains Mono', monospace", size: 10.5 },
+                            padding: 10,
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.dataset.label.includes('Volume')) {
+                                        return `Volume: ${context.parsed.y}M shares`;
+                                    }
+                                    return `${context.dataset.label}: $${context.parsed.y.toFixed(2)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: '#E5E0D8' },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 9.5 },
+                                color: '#57534E',
+                                maxRotation: 45
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            min: 75,
+                            max: 120,
+                            grid: { color: '#ECE7DE' },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 10 },
+                                color: '#57534E',
+                                callback: val => '$' + val
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            min: 0,
+                            max: 250,
+                            grid: { drawOnChartArea: false },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 9.5 },
+                                color: '#8C867A',
+                                callback: val => val + 'M'
+                            }
+                        }
+                    },
+                    onClick: (e, elements) => {
+                        if (elements && elements.length > 0) {
+                            const index = elements[0].index;
+                            const globalIndex = PRICE_TAPE_DATA.findIndex(d => d.time === filtered[index].time);
+                            if (globalIndex >= 0) {
+                                updateScourerCard(globalIndex);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initWealthDivergenceChart() {
+            const ctx = document.getElementById('wealthDivergenceChart');
+            if (!ctx) return;
+            if (wealthDivergenceChartInst) { wealthDivergenceChartInst.resize(); return; }
+
+            wealthDivergenceChartInst = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Syndicate Open (+34.3%)',
+                        'Syndicate D1 Close (+17.1%)',
+                        'Syndicate D2 Close (+6.4%)',
+                        'Retail D1 Close (-12.8%)',
+                        'Retail D2 Low (-25.5%)',
+                        'Retail D2 Close (-20.8%)'
+                    ],
+                    datasets: [{
+                        label: 'Realized Return / Drawdown (%)',
+                        data: [34.34, 17.07, 6.39, -12.85, -25.52, -20.81],
+                        backgroundColor: [
+                            'rgba(21, 128, 61, 0.85)',
+                            'rgba(21, 128, 61, 0.70)',
+                            'rgba(21, 128, 61, 0.55)',
+                            'rgba(185, 28, 28, 0.70)',
+                            'rgba(185, 28, 28, 0.90)',
+                            'rgba(185, 28, 28, 0.75)'
+                        ],
+                        borderColor: [
+                            '#15803D', '#15803D', '#15803D',
+                            '#B91C1C', '#B91C1C', '#B91C1C'
+                        ],
+                        borderWidth: 1.5,
+                        borderRadius: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1C1917',
+                            titleFont: { family: "'JetBrains Mono', monospace", size: 10.5 },
+                            bodyFont: { family: "'JetBrains Mono', monospace", size: 10 },
+                            callbacks: {
+                                label: ctx => `${ctx.parsed.y >= 0 ? '+' : ''}${ctx.parsed.y.toFixed(2)}% return`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 9 },
+                                color: '#57534E',
+                                maxRotation: 25
+                            }
+                        },
+                        y: {
+                            grid: { color: '#ECE7DE' },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 9.5 },
+                                color: '#57534E',
+                                callback: v => v + '%'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initSyndicateEconomicsChart() {
+            const ctx = document.getElementById('syndicateEconomicsChart');
+            if (!ctx) return;
+            if (syndicateEconomicsChartInst) { syndicateEconomicsChartInst.resize(); return; }
+
+            syndicateEconomicsChartInst = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Net Anthropic ($82.44)',
+                        'Underwriter Fees ($0.56)',
+                        'Total Primary ($83.00)',
+                        'Hyperscaler Sidecar',
+                        'Total Cash Inflow',
+                        'D1 Flipping Profit',
+                        'Retail Peak Overhang',
+                        'Retail Flush Drawdown'
+                    ],
+                    datasets: [{
+                        label: 'Capital Allocation ($ Billions)',
+                        data: [67.93, 0.55, 68.48, 26.00, 94.48, 11.69, 23.51, -23.47],
+                        backgroundColor: [
+                            '#0E7490', '#B45309', '#15803D', '#4338CA', '#065F46', '#D97706', '#991B1B', '#DC2626'
+                        ],
+                        borderRadius: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1C1917',
+                            titleFont: { family: "'JetBrains Mono', monospace", size: 11 },
+                            bodyFont: { family: "'JetBrains Mono', monospace", size: 10.5 },
+                            callbacks: {
+                                label: ctx => `$${ctx.parsed.y.toFixed(2)} Billion`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 9.5 },
+                                color: '#57534E',
+                                maxRotation: 25
+                            }
+                        },
+                        y: {
+                            grid: { color: '#ECE7DE' },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 10 },
+                                color: '#57534E',
+                                callback: v => '$' + v + 'B'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initMlottChart() {
+            const ctx = document.getElementById('mlottChart');
+            if (!ctx) return;
+            if (mlottChartInst) { mlottChartInst.resize(); return; }
+
+            mlottChartInst = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Anthropic (2026, ANT)',
+                        'Alibaba (2014, BABA)',
+                        'Visa (2008, V)',
+                        'Airbnb (2020, ABNB)',
+                        'Snowflake (2020, SNOW)',
+                        'Rivian (2021, RIVN)',
+                        'UPS (1999, UPS)',
+                        'Twitter (2013, TWTR)',
+                        'Alphabet (2004, GOOG)',
+                        'Meta (2012, META)'
+                    ],
+                    datasets: [{
+                        label: 'Money Left on Table ($ Millions)',
+                        data: [11690.3, 8287.4, 5075.0, 3951.6, 3749.9, 3477.7, 1887.2, 1323.0, 300.6, 96.9],
+                        backgroundColor: [
+                            '#B45309', '#78716C', '#78716C', '#78716C', '#78716C',
+                            '#78716C', '#78716C', '#78716C', '#0E7490', '#15803D'
+                        ],
+                        borderRadius: 3
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1C1917',
+                            titleFont: { family: "'JetBrains Mono', monospace", size: 11 },
+                            bodyFont: { family: "'JetBrains Mono', monospace", size: 10.5 },
+                            callbacks: {
+                                label: ctx => `$${ctx.parsed.x.toLocaleString()} Million ($${(ctx.parsed.x / 1000).toFixed(2)}B)`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: '#ECE7DE' },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 9.5 },
+                                color: '#57534E',
+                                callback: v => '$' + (v / 1000) + 'B'
+                            }
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 10 },
+                                color: '#1C1917'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initDecadalChart() {
+            const ctx = document.getElementById('decadalUnderpricingChart');
+            if (!ctx) return;
+            if (decadalUnderpricingChartInst) { decadalUnderpricingChartInst.resize(); return; }
+
+            decadalUnderpricingChartInst = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1980–89', '1990–98', '1999–00', '2001–19', '2020–21', '2022–25', '2026 YTD'],
+                    datasets: [
+                        {
+                            label: 'Mean 1st-Day Pop (%)',
+                            data: [7.4, 14.8, 65.0, 14.3, 31.7, 13.5, 17.1],
+                            borderColor: '#B45309',
+                            backgroundColor: 'rgba(180, 83, 9, 0.08)',
+                            fill: true,
+                            borderWidth: 2,
+                            tension: 0.2,
+                            yAxisID: 'y'
+                        },
+                        {
+                            type: 'bar',
+                            label: 'Money on Table ($B/yr)',
+                            data: [0.3, 2.5, 33.2, 4.9, 22.4, 2.8, 15.5],
+                            backgroundColor: 'rgba(140, 134, 122, 0.25)',
+                            borderRadius: 2,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1C1917',
+                            titleFont: { family: "'JetBrains Mono', monospace", size: 10.5 },
+                            bodyFont: { family: "'JetBrains Mono', monospace", size: 10 }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 }, color: '#57534E' }
+                        },
+                        y: {
+                            min: 0,
+                            max: 75,
+                            grid: { color: '#ECE7DE' },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 9 },
+                                color: '#57534E',
+                                callback: v => v + '%'
+                            }
+                        },
+                        y1: {
+                            position: 'right',
+                            min: 0,
+                            max: 40,
+                            grid: { drawOnChartArea: false },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 8.5 },
+                                color: '#8C867A',
+                                callback: v => '$' + v + 'B'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initTable7Chart() {
+            const ctx = document.getElementById('table7Chart');
+            if (!ctx) return;
+            if (table7ChartInst) { table7ChartInst.resize(); return; }
+
+            table7ChartInst = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Below File Range',
+                        'Within File Range',
+                        'Above Range [ANT]'
+                    ],
+                    datasets: [{
+                        label: 'Mean First-Day Return (%)',
+                        data: [3.2, 11.9, 49.8],
+                        backgroundColor: [
+                            '#78716C', '#0E7490', '#B45309'
+                        ],
+                        borderRadius: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1C1917',
+                            titleFont: { family: "'JetBrains Mono', monospace", size: 10.5 },
+                            bodyFont: { family: "'JetBrains Mono', monospace", size: 10 },
+                            callbacks: {
+                                label: ctx => `Historical Average Pop: +${ctx.parsed.y.toFixed(1)}%`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: "'JetBrains Mono', monospace", size: 9.5 }, color: '#1C1917' }
+                        },
+                        y: {
+                            grid: { color: '#ECE7DE' },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 9.5 },
+                                color: '#57534E',
+                                callback: v => '+' + v + '%'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initFloatRiskChart() {
+            const ctx = document.getElementById('floatRiskChart');
+            if (!ctx) return;
+            if (floatRiskChartInst) { floatRiskChartInst.resize(); return; }
+
+            floatRiskChartInst = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        '< 10% [ANT: 4.88%]',
+                        '10.0% – 19.9%',
+                        '20.0% – 29.9%',
+                        '≥ 30.0%'
+                    ],
+                    datasets: [
+                        {
+                            label: '3-Year Style BHAR (%)',
+                            data: [-24.8, -12.1, -3.4, 4.2],
+                            backgroundColor: '#B45309',
+                            borderRadius: 2
+                        },
+                        {
+                            label: '5-Year Style BHAR (%)',
+                            data: [-38.2, -19.4, -6.2, 2.1],
+                            backgroundColor: '#B91C1C',
+                            borderRadius: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { font: { family: "'JetBrains Mono', monospace", size: 9.5 } }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1C1917',
+                            titleFont: { family: "'JetBrains Mono', monospace", size: 10.5 },
+                            bodyFont: { family: "'JetBrains Mono', monospace", size: 10 }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 }, color: '#1C1917' }
+                        },
+                        y: {
+                            grid: { color: '#ECE7DE' },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 9 },
+                                color: '#57534E',
+                                callback: v => v + '%'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initDualClassChart() {
+            const ctx = document.getElementById('dualClassChart');
+            if (!ctx) return;
+            if (dualClassChartInst) { dualClassChartInst.resize(); return; }
+
+            dualClassChartInst = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1980–89', '1990–99', '2000–09', '2010–19', '2020–24', '2025'],
+                    datasets: [
+                        {
+                            label: 'Tech Dual-Class (%)',
+                            data: [7.2, 8.8, 12.1, 32.4, 42.9, 48.4],
+                            borderColor: '#B45309',
+                            backgroundColor: 'rgba(180, 83, 9, 0.1)',
+                            borderWidth: 2,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Non-Tech Dual-Class (%)',
+                            data: [8.1, 11.4, 9.8, 14.6, 17.2, 37.3],
+                            borderColor: '#78716C',
+                            borderWidth: 1.5,
+                            borderDash: [3, 3],
+                            yAxisID: 'y'
+                        },
+                        {
+                            type: 'bar',
+                            label: '5-Yr BHAR Penalty (%)',
+                            data: [-1.2, -2.4, -4.1, -6.8, -7.9, -8.6],
+                            backgroundColor: 'rgba(185, 28, 28, 0.45)',
+                            borderRadius: 2,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { font: { family: "'JetBrains Mono', monospace", size: 9 } }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1C1917',
+                            titleFont: { family: "'JetBrains Mono', monospace", size: 10.5 },
+                            bodyFont: { family: "'JetBrains Mono', monospace", size: 10 }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 }, color: '#57534E' }
+                        },
+                        y: {
+                            position: 'left',
+                            min: 0,
+                            max: 60,
+                            grid: { color: '#ECE7DE' },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 9 },
+                                color: '#57534E',
+                                callback: v => v + '%'
+                            }
+                        },
+                        y1: {
+                            position: 'right',
+                            min: -15,
+                            max: 0,
+                            grid: { drawOnChartArea: false },
+                            ticks: {
+                                font: { family: "'JetBrains Mono', monospace", size: 8.5 },
+                                color: '#B91C1C',
+                                callback: v => v + '%'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initEmpiricalCharts() {
+            setTimeout(() => {
+                initPriceTapeChart(currentTapeFilter);
+                initWealthDivergenceChart();
+                initSyndicateEconomicsChart();
+                initMlottChart();
+                initDecadalChart();
+                initTable7Chart();
+                initFloatRiskChart();
+                initDualClassChart();
+                updateScourerCard(13); // Default to DCF test milestone
+            }, 60);
+        }
+
     </script>
 </body>
 </html>
