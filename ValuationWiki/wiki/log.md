@@ -95,6 +95,26 @@ This log is an append-only timeline of all ingestion events, financial model bui
   - `wiki/index.md`
   - `wiki/log.md`
 
+## [2026-11-21] empirical | Anthropic IPO Market Debut, YouTube Video Forensics & Jay Ritter Empirical Archive Ingestion
+* **Action:** Ingested, modeled, and deployed Anthropic's first 48 hours of live trading (Nov 18–20, 2026), deconstructed the video analysis (`Y8KS_BF3AeU`), ingested Professor Jay R. Ritter's foundational empirical IPO datasets, and deployed Tab 06 inside the ERVIS Valuation Almanac (`almanac.html#empirical`) with a full Chart.js visual engine.
+* **Components Built & Integrated:**
+  - **Live Market Debut Forensics:** Priced at **$83.00** (above $70–$78 file band on >18x oversubscription). Retail opened at **$111.50 (+34.34% pop)**, hitting intraday peak of **$115.00 ($1.945T cap)** before closing Day 1 at **$97.17** on 846M shares volume (102.5% float turnover). Day 2 flushed to an intraday low of **$83.05**—testing Damodaran's **$83.69 Ginzu DCF fair value within 64 cents** and the $83.00 offer within 5 cents—rebounding to close at **$88.30** (+6.39% over offer).
+  - **YouTube Video Analysis Ingestion (`Y8KS_BF3AeU`):** Deconstructed the two-tier retail exclusion barrier, underwriter gross spread ($82.44 net purchase vs $83.00 re-offer = $548.8M fee pool for Morgan Stanley syndicate), 15% greenshoe stabilization (123.75M shs), and $26.0B strategic private sidecar.
+  - **Jay R. Ritter Empirical Archive:**
+    - *Money Left on the Table League Table:* Anthropic ranked #1 in world history with **$11.69 Billion** left on the table on its 825M Class A float, surpassing Alibaba ($8.29B) and Visa ($5.08B).
+    - *Ritter Table 1:* Mean first-day returns and aggregate money on table by era (1980–2026).
+    - *Ritter Table 7:* Predictive power of file range revisions (Above range = +49.8% average pop).
+    - *Ritter Table 18e:* Long-run style-adjusted BHAR by public float; proved sub-10% float IPOs (ANT: 4.88%) suffer severe -24.8% 3-year and -38.2% 5-year underperformance due to the Day-180 lockup supply cliff.
+    - *Ritter Table 23 & 24:* Dual-class adoption in tech (48.4% by 2025) and -8.6% 5-year governance penalty.
+  - **Granular Interactive Price & Schedule Tracker (`#priceTapeChart`):** Dual-axis Chart.js tracker with 17 granular intervals, interactive view filters (`[ALL 48H TAPE]`, `[DAY 1 DEBUT]`, `[DAY 2 DCF FLUSH]`, `[RITTER 180D LIFECYCLE]`), dynamic diagnostic card updating on hover/scrub, and wealth divergence drawdown waterfall.
+  - **Header Cleanup:** Removed messy floating descriptions across all pages (`almanac.html`, `cockpit.html`, `index.html`, `prospectus.html`, `damodaran.html`).
+* **New Wiki Pages & Updates:**
+  - `wiki/Jay_Ritter_IPO_Empirical_Archive_and_Market_Debut_Forensics.md` (New master research document)
+  - `wiki/Anthropic_IPO_Valuation_Forensics_and_Scenario_Builder.md` (Calibrated to post-split and live debut)
+  - `wiki/index.md`
+  - `wiki/log.md`
+
+
 
 
 
