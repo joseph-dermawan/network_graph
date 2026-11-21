@@ -168,13 +168,17 @@
             <div>
                 <!-- Reciprocal Breadcrumb Bar -->
                 <div class="flex items-center space-x-2 text-[10.5px] font-mono text-[#8C867A] mb-1">
-                    <a href="anthropic_case_file.html" class="text-[#B45309] font-bold hover:underline flex items-center gap-1">&larr; CASE FILE HOME</a>
+                    <a href="../../index.html" class="text-[#B45309] font-bold hover:underline">&larr; ERVIS WORKSTATION</a>
                     <span>/</span>
-                    <a href="anthropic_prospectus_dashboard.html" class="hover:underline text-[#57534E]">S-1 PROSPECTUS DASHBOARD</a>
+                    <a href="index.html" class="hover:underline text-[#57534E]">ANTHROPIC DOSSIER</a>
                     <span>/</span>
-                    <a href="damodaran_breakdown_reader.html" class="hover:underline text-[#57534E]">DAMODARAN EXCEL</a>
+                    <a href="prospectus.html" class="hover:underline text-[#57534E]">S-1 PROSPECTUS</a>
                     <span>/</span>
-                    <span class="text-[#1C1917] font-semibold">ERVIS VALUATION COCKPIT</span>
+                    <a href="damodaran.html" class="hover:underline text-[#57534E]">DAMODARAN EXCEL</a>
+                    <span>/</span>
+                    <a href="almanac.html" class="hover:underline text-[#B45309] font-bold">ALMANAC</a>
+                    <span>/</span>
+                    <span class="text-[#1C1917] font-semibold">DCF COCKPIT</span>
                 </div>
                 <div class="flex items-baseline space-x-3">
                     <h1 class="text-xl font-serif font-semibold text-[#1C1917] tracking-tight">
@@ -192,30 +196,30 @@
             <!-- Top Ticker Matrix Strip -->
             <div class="flex items-center space-x-4 text-xs font-mono">
                 <div class="text-right">
-                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">IPO Pricing Spot</div>
-                    <div class="text-sm font-bold text-[#1C1917]">$525.00 <span class="text-[10px] text-[#8C867A]">($1,733.7B)</span></div>
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">IPO Pricing</div>
+                    <div class="text-sm font-bold text-[#1C1917]">$83.00 <span class="text-[10px] text-[#8C867A]">($1,403.7B)</span></div>
+                </div>
+                <div class="h-7 w-px bg-[#E5E0D8]"></div>
+                <div class="text-right">
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Day 2 Close / Low</div>
+                    <div class="text-sm font-bold text-[#15803D]">$88.30 <span class="text-[10px] text-[#8C867A]">($83.05 Low)</span></div>
                 </div>
                 <div class="h-7 w-px bg-[#E5E0D8]"></div>
                 <div class="text-right">
                     <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Ginzu DCF Fair Value</div>
-                    <div class="text-sm font-bold text-[#15803D]">$439.24 <span class="text-[10px] text-[#8C867A]">($1,450.5B)</span></div>
+                    <div class="text-sm font-bold text-[#15803D]">$83.69 <span class="text-[10px] text-[#8C867A]">($1,415.5B)</span></div>
                 </div>
                 <div class="h-7 w-px bg-[#E5E0D8]"></div>
                 <div class="text-right">
-                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Crowd Baseline</div>
-                    <div class="text-sm font-bold text-[#4338CA]">$268.00 <span class="text-[10px] text-[#8C867A]">($884.2B)</span></div>
-                </div>
-                <div class="h-7 w-px bg-[#E5E0D8]"></div>
-                <div class="text-right">
-                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Verdict</div>
-                    <div class="text-xs font-bold px-2 py-0.5 bg-[#FEE2E2] border border-[#FECACA] rounded text-[#B91C1C]">
-                        OVERVALUED (-16.3%)
+                    <div class="text-[10px] text-[#8C867A] uppercase tracking-wider">Market Stance</div>
+                    <div class="text-xs font-bold px-2 py-0.5 bg-[#DCFCE7] border border-[#BBF7D0] rounded text-[#15803D]">
+                        DCF ANCHOR HELD (+5.5%)
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 6 Cockpit Navigation Tabs -->
+        <!-- 6 Cockpit Navigation Tabs + Almanac Tab 6 Link -->
         <div class="max-w-7xl mx-auto px-6 flex space-x-1 border-t border-[#ECE7DE] overflow-x-auto">
             <button class="nav-tab active" onclick="switchCockpitTab('tab-cockpit')">
                 [01] VALUATION COCKPIT & BRIDGE
@@ -234,6 +238,10 @@
             </button>
             <button class="nav-tab" onclick="switchCockpitTab('tab-simulator')">
                 [06] INTERACTIVE VALUATION SIMULATOR
+            </button>
+            <a href="almanac.html#empirical" class="nav-tab font-bold text-[#B45309] hover:text-[#92400E] inline-flex items-center gap-1">
+                ★ [07] IPO DEBUT &amp; RITTER ARCHIVE &rarr;
+            </a>
             </button>
         </div>
     </header>
@@ -255,8 +263,8 @@
                 </div>
                 <div class="card p-4">
                     <div class="text-[10px] font-mono text-[#8C867A] uppercase">Intrinsic Per Share</div>
-                    <div class="text-xl font-mono font-bold text-[#15803D] my-1">$439.24</div>
-                    <div class="text-[11px] text-[#57534E]">Based on 3,302.27M diluted shares</div>
+                    <div class="text-xl font-mono font-bold text-[#15803D] my-1">$83.69</div>
+                    <div class="text-[11px] text-[#57534E]">Based on 16,912.15M diluted shares</div>
                 </div>
                 <div class="card p-4">
                     <div class="text-[10px] font-mono text-[#8C867A] uppercase">Capitalized Lease Debt</div>
@@ -264,10 +272,25 @@
                     <div class="text-[11px] text-[#57534E]">PV of non-cancelable compute leases</div>
                 </div>
                 <div class="card p-4">
-                    <div class="text-[10px] font-mono text-[#8C867A] uppercase">IPO Margin of Safety</div>
-                    <div class="text-xl font-mono font-bold text-[#B45309] my-1">-16.3%</div>
-                    <div class="text-[11px] text-[#57534E]">Against $525.00 anticipated price</div>
+                    <div class="text-[10px] font-mono text-[#8C867A] uppercase">Market vs Intrinsic</div>
+                    <div class="text-xl font-mono font-bold text-[#15803D] my-1">+5.5%</div>
+                    <div class="text-[11px] text-[#57534E]">D2 Close ($88.30) vs $83.69 DCF</div>
                 </div>
+            </div>
+
+            <!-- Market Debut Forensics Banner -->
+            <div class="p-3.5 bg-[#FFFBEB] border border-[#FDE68A] rounded flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+                <div class="flex items-center gap-2.5">
+                    <span class="text-base">🏛️</span>
+                    <div>
+                        <strong class="font-mono text-[#92400E] uppercase text-[10.5px]">Live Debut Analysis &amp; Empirical Forensics:</strong>
+                        <span class="text-[#78350F] ml-1">IPO priced at $83.00 on Nov 18. Opened at $111.50 (+34.3%), closed Day 1 at $97.17 ($11.69B money left on table, all-time world record). Day 2 flushed to $83.05—testing the $83.69 DCF intrinsic anchor within 64&cent;—before settling at $88.30.</span>
+                    </div>
+                </div>
+                <a href="almanac.html#empirical" class="shrink-0 px-3.5 py-1.5 bg-[#B45309] hover:bg-[#92400E] text-white font-mono text-xs font-bold rounded transition-colors shadow-sm inline-flex items-center gap-1.5">
+                    <span>Inspect Empirical Suite (Tab 06)</span>
+                    <span>&rarr;</span>
+                </a>
             </div>
 
             <!-- Waterfall Bridge & Visual Chart Container -->
@@ -351,8 +374,8 @@
                                 <td>80.1%</td>
                             </tr>
                             <tr style="background-color: #FAF4EB;">
-                                <td><strong>Estimated Value per Share</strong> (3,302.27M Shares)</td>
-                                <td><strong>$439.24</strong></td>
+                                <td><strong>Estimated Value per Share</strong> (16,912.15M Shares)</td>
+                                <td><strong>$83.69</strong></td>
                                 <td>—</td>
                             </tr>
                         </tbody>
@@ -420,7 +443,7 @@
                             <span class="text-[10px] text-[#15803D] font-bold">&#10003; PASSED</span>
                         </div>
                         <div class="font-serif text-xs text-[#57534E] mb-1">Ginzu DCF Valuation</div>
-                        <div class="text-[11px] text-[#8C867A]">10-Yr FCFF schedule delivers $439.24 fair value.</div>
+                        <div class="text-[11px] text-[#8C867A]">10-Yr FCFF schedule delivers $83.69 fair value.</div>
                     </div>
 
                     <div class="p-3 bg-[#FEF3C7] border border-[#FDE68A] rounded">
@@ -429,7 +452,7 @@
                             <span class="text-[10px] text-[#B45309] font-bold">&#9873; MEMO</span>
                         </div>
                         <div class="font-serif text-xs text-[#92400E] mb-1">Recommendation Lock</div>
-                        <div class="text-[11px] text-[#B45309]">AVOID IPO at $525. Accumulate on post-IPO dips.</div>
+                        <div class="text-[11px] text-[#15803D]">ACCUMULATE at $70-$78 IPO band. Fair value >$80.</div>
                     </div>
                 </div>
             </div>
@@ -506,7 +529,7 @@
                         <h3 class="text-sm font-serif font-bold text-[#1C1917]">
                             Valuation Sensitivity Matrix: Margin vs. Revenue Scaling ($/share)
                         </h3>
-                        <span class="text-[11px] font-mono text-[#8C867A]">Base Target: $439.24</span>
+                        <span class="text-[11px] font-mono text-[#8C867A]">Base Target: $83.69</span>
                     </div>
 
                     <table class="fin-table">
@@ -527,9 +550,9 @@
                             </tr>
                             <tr style="background-color: #FAF4EB;">
                                 <td><strong>27.5% Margin (Damodaran Base)</strong></td>
-                                <td>$255.80</td>
-                                <td class="font-bold text-[#15803D] bg-[#DCFCE7] border border-[#BBF7D0]">$439.24</td>
-                                <td>$612.30</td>
+                                <td>$48.60</td>
+                                <td class="font-bold text-[#15803D] bg-[#DCFCE7] border border-[#BBF7D0]">$83.69</td>
+                                <td>$116.40</td>
                             </tr>
                             <tr>
                                 <td><strong>35.0% Margin (Pure SaaS Bull)</strong></td>
@@ -540,7 +563,7 @@
                         </tbody>
                     </table>
                     <div class="text-[11px] text-[#8C867A] italic">
-                        Highlighted center cell represents Damodaran's baseline ($439.24). To justify the $525 IPO price, margins must exceed 31% at $1T revenue.
+                        Highlighted center cell represents Damodaran's baseline ($83.69). At $74.00 midpoint, shares offer 11.6% margin of safety (+13.1% upside).
                     </div>
                 </div>
 
@@ -551,10 +574,10 @@
                             <h3 class="text-sm font-serif font-bold text-[#1C1917]">
                                 Reverse DCF: Market Implied Expectations
                             </h3>
-                            <span class="text-[11px] font-mono text-[#B91C1C]">IPO: $525.00</span>
+                            <span class="text-[11px] font-mono text-[#15803D]">IPO Midpoint: $74.00</span>
                         </div>
                         <p class="text-xs text-[#57534E] leading-relaxed mb-3">
-                            Backing out what operational performance the market is paying for at the <strong>$525.00 / share ($1.73 Trillion)</strong> IPO price:
+                            Backing out what operational performance the market is paying for at the <strong>$74.00 / share ($1.25 Trillion)</strong> IPO midpoint:
                         </p>
                         <div class="space-y-2 text-xs font-mono">
                             <div class="p-2 bg-[#FAF7F2] border border-[#E5E0D8] rounded flex justify-between">
@@ -1044,8 +1067,8 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div class="card p-4 border-l-4 border-l-[#15803D]">
                     <div class="text-[10px] font-mono text-[#8C867A] uppercase">Simulated Fair Value / Share</div>
-                    <div id="sim-value-share" class="text-2xl font-mono font-bold text-[#15803D] my-1">$439.24</div>
-                    <div id="sim-status" class="text-xs font-mono text-[#B91C1C]">Overvalued vs $525.00 (-16.3%)</div>
+                    <div id="sim-value-share" class="text-2xl font-mono font-bold text-[#15803D] my-1">$83.69</div>
+                    <div id="sim-status" class="text-xs font-mono text-[#15803D]">Intrinsic Parity vs $83.00 IPO (+0.8%)</div>
                 </div>
 
                 <div class="card p-4">
@@ -1062,8 +1085,8 @@
 
                 <div class="card p-4">
                     <div class="text-[10px] font-mono text-[#8C867A] uppercase">Market Price / Value Ratio</div>
-                    <div id="sim-price-ratio" class="text-2xl font-mono font-bold text-[#B45309] my-1">119.5%</div>
-                    <div class="text-xs text-[#57534E]">Ratio of $525 price to DCF value</div>
+                    <div id="sim-price-ratio" class="text-2xl font-mono font-bold text-[#15803D] my-1">88.4%</div>
+                    <div class="text-xs text-[#57534E]">Ratio of $74 price to DCF value</div>
                 </div>
             </div>
 
@@ -1165,10 +1188,10 @@
                     <div class="p-3 bg-[#FAF7F2] border border-[#B45309] rounded text-xs space-y-1">
                         <div class="flex justify-between font-mono font-bold text-[#B45309]">
                             <span>BASE-CASE (DAMODARAN)</span>
-                            <span>$439.24 / share</span>
+                            <span>$83.69 / share</span>
                         </div>
                         <p class="text-[11.5px] text-[#57534E]">
-                            $1,005B target rev, 27.5% net margin, 3.0x Sales/Cap, 9.74% WACC, 10% failure. Equity worth $1,450.5B.
+                            $1,005B target rev, 27.5% net margin, 3.0x Sales/Cap, 9.74% WACC, 10% failure. Equity worth $1,415.5B.
                         </p>
                     </div>
 
@@ -1183,7 +1206,7 @@
                     </div>
 
                     <div class="p-2.5 bg-[#FAF7F2] border border-[#E5E0D8] rounded text-xs text-[#57534E]">
-                        <strong>Simulated Implication:</strong> At the rumored $525.00 IPO price, the market implies an execution percentile above the 75th decile of all possible scenarios.
+                        <strong>Simulated Implication:</strong> At the official $70.00–$78.00 IPO band ($74 midpoint), the offering trades at an attractive entry valuation with +13.1% upside to DCF fair value.
                     </div>
                 </div>
             </div>
@@ -1236,7 +1259,7 @@
                 data: {
                     labels: ['PV 10-Yr CF', 'Terminal Val', 'Distress Haircut', 'Lease Debt', 'Cash & IPO', 'Common Equity'],
                     datasets: [{
-                        data: [421.7, 1388.7, -90.5, -485.3, 212.4, 1450.5],
+                        data: [421.7, 1388.7, -90.5, -485.3, 177.4, 1415.5],
                         backgroundColor: [
                             '#1C1917',
                             '#57534E',
@@ -1396,9 +1419,9 @@
             // Deduct Debt ($485.3B), Add Cash ($112.4B), Add IPO ($100B), Non-op ($3.9B)
             const netDebtAdj = -485.3 + 112.4 + 100.0 + 3.9;
             const simEquity = Math.max(0, simOpAssets + netDebtAdj);
-            const shares = 3302.27; // Millions
+            const shares = 16912.15; // Millions (post-split)
             const simSharePrice = (simEquity * 1000.0) / shares;
-            const spotPrice = 74.0;
+            const spotPrice = 83.0; // Final IPO Offering Price ($83.00)
             const priceRatio = (spotPrice / Math.max(1, simSharePrice)) * 100.0;
 
             // Update DOM
@@ -1410,10 +1433,10 @@
             const statusEl = document.getElementById('sim-status');
             const diffPct = ((simSharePrice - spotPrice) / spotPrice) * 100.0;
             if (diffPct >= 0) {
-                statusEl.innerText = `Undervalued vs $525.00 (+${diffPct.toFixed(1)}%)`;
+                statusEl.innerText = `Undervalued vs $83.00 IPO (+${diffPct.toFixed(1)}%)`;
                 statusEl.className = 'text-xs font-mono text-[#15803D]';
             } else {
-                statusEl.innerText = `Overvalued vs $525.00 (${diffPct.toFixed(1)}%)`;
+                statusEl.innerText = `Overvalued vs $83.00 IPO (${diffPct.toFixed(1)}%)`;
                 statusEl.className = 'text-xs font-mono text-[#B91C1C]';
             }
         }

@@ -6,25 +6,33 @@ This document provides a comprehensive institutional synthesis of the **Anthropi
 
 ## 🏛️ Executive Summary & Valuation Disconnect
 
-Anthropic's proposed IPO ask price of **$525.00 / share** implies a diluted common equity market capitalization of **$1.734 Trillion** (across 3,302.27M diluted shares).
+### 1. Offering Structure Evolution: From Pre-Split Ask to Amendment No. 3
+* **Pre-Split Initial Indications:** Anthropic's initial proposed valuation discussions implied an ask price of **$525.00 / share** on 3,302.27M diluted shares (~$1.734T equity), which compared to Professor Damodaran's pre-split intrinsic DCF of **$437.85 – $439.24 / share** ($1.450T common equity), indicating a 16.3% overvaluation premium.
+* **Amendment No. 3 (Nov 17, 2026):** Anthropic filed Amendment No. 3 to Form S-1 executing a **10-for-1 forward stock split**, establishing an official offering range of **$70.00 to $78.00 per share** ($74.00 midpoint, target valuation $1.253T) across **16,912.15M diluted shares** and offering 825.0M Class A shares.
+* **Damodaran Ginzu DCF Fair Value:** Re-anchored to **$83.69 / share ($1.415T equity)**, establishing that the $74.00 midpoint offered an 11.6% margin of safety (+13.1% upside).
 
-Rigorous intrinsic valuation modeling following Professor Aswath Damodaran's institutional framework reveals an intrinsic fair value of **$437.85 – $439.24 / share** ($1.450 Trillion common equity value), establishing that the IPO is priced at **119.5% of intrinsic value** (a **16.3% overvaluation premium** or margin-of-safety deficit).
+### 2. Live Market Pricing & 48-Hour Debut (Nov 18–20, 2026)
+* **Final IPO Price (Nov 18):** Priced above the filing band at **$83.00 / share ($1.404T equity)** due to heavy institutional oversubscription (>18x book coverage).
+* **Day 1 Retail Pop & Turnover (Nov 19):** Retail opened at **$111.50 (+34.34% pop)**, peaking at **$115.00 ($1.945T peak cap)** before closing at **$97.17** (+17.07% vs offer). Day 1 volume reached **846M shares** (102.5% of float turned over).
+* **World Record Money Left on the Table:** **$11,690.3M ($11.69 Billion)**, surpassing Alibaba ($8.29B) as the largest underpricing dollar loss in capital markets history (Prof. Jay R. Ritter dataset).
+* **Day 2 Intraday Flush & DCF Anchor Test (Nov 20):** Algorithmic cascades pushed shares to an intraday low of **$83.05**—testing Damodaran's **$83.69 DCF intrinsic value within 64 cents** and the $83.00 offer within 5 cents—before closing at **$88.30** (+6.39% vs offer, +5.5% vs DCF).
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│                       VALUATION RANGE ($/SHARE)                              │
+│                    POST-SPLIT TRADING & VALUATION MATRIX                     │
 ├──────────────────────────────────────────────────────────────────────────────┤
-│  $0.00          $284.15          $437.85 - $439.24          $525.00  $682.40 │
-│   │                │                     │                     │        │    │
-│  Liquidation     Bear Case        DAMODARAN INTRINSIC       IPO ASK   Bull   │
-│   Floor         (Downside)            BASE CASE              PRICE    Case   │
-│ (Common wiped)  (-35.0%)               (-16.3%)            (Premium) (+55.4%)│
+│  $0.00      $74.00          $83.00       $83.69       $88.30         $111.50 │
+│   │            │               │            │            │              │    │
+│ Liquidation  File Mid     FINAL IPO     DAMODARAN     DAY 2        DAY 1 RETAIL  │
+│    Floor     ($70-$78)      OFFER       INTRINSIC     CLOSE         OPEN CROSS   │
+│ (Common $0) (-11.6% disc)  PRICING      DCF ANCHOR  (+6.4% off)   (+34.3% pop)   │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-* **Investment Pitch Verdict:** **AVOID IPO / WAIT FOR CORRECTION**.
-* **Key Vulnerability:** **76.7%** of enterprise value resides in the post-2036 perpetual terminal value ($1.389T PV). Investors at $525.00 are paying for an unhedged, flawless transition into a global AGI software monopoly.
-* **Liquidation Asymmetry:** Due to **$485.3 Billion** in senior compute commitments and contractual debt claims, common equity recovery in an orderly insolvency liquidation is **$0.00**.
+* **Investment Pitch Verdict:** **ACCUMULATED AT FAIR VALUE ($83.00–$83.69) / AVOID RETAIL OPENING CHASE ($111.50)**.
+* **Key Vulnerability:** **76.7%** of enterprise value resides in the post-2036 perpetual terminal value ($1.389T PV).
+* **Liquidation Asymmetry:** Due to **$485.3 Billion** in senior compute commitments and capitalized debt claims, common equity recovery in an orderly insolvency liquidation is **$0.00**.
+* **Empirical Deep Dive:** See dedicated research dossier: [`Jay_Ritter_IPO_Empirical_Archive_and_Market_Debut_Forensics.md`](file:///Users/worldofmadness/Documents/VS%20Code/Personal%20Projects/NetworkGraph/ValuationWiki/wiki/Jay_Ritter_IPO_Empirical_Archive_and_Market_Debut_Forensics.md).
 
 ---
 
