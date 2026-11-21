@@ -31,7 +31,21 @@
     "big4_capex_2026e_usd_b": 394.0,
     "peak_dna_gap_2028_usd_b": 45.5,
     "peak_margin_compression_bps": 989.0,
-    "h100_breakeven_cost_per_m_tokens_usd": 5.74
+    "h100_breakeven_cost_per_m_tokens_usd": 5.74,
+    "circularity_network_graph": {
+      "nodes_count": 12,
+      "edges_count": 24,
+      "total_network_flow_usd_b": 480.0,
+      "aws_circularity_extraction_ratio": 7.16,
+      "gcp_circularity_extraction_ratio": 3.96,
+      "coreweave_efficiency_haircut_pct": 49.0,
+      "nvda_centrality_pct": 21.48,
+      "tsm_centrality_pct": 25.64,
+      "powl_centrality_pct": 4.82,
+      "coreweave_dscr_base": 2.78,
+      "coreweave_dscr_stressed": 0.98,
+      "wiki_reference": "Thematic_AI_Circularity_Network_and_Coreweave"
+    }
   },
   "spot_price_usd": 88.30,
   "ipo_offer_price_usd": 83.00,

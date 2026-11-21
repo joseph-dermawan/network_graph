@@ -139,3 +139,25 @@ This log is an append-only timeline of all ingestion events, financial model bui
   - `wiki/Thematic_AI_Capex_Closed_Loop_Forensics.md` (Master institutional research document)
   - `wiki/index.md`
   - `wiki/log.md`
+
+## [2026-11-21] network | Thematic AI Circularity Network, Leontief Input-Output Topology & CoreWeave Shadow Banking Forensics
+* **Action:** Formulated, modeled, simulated, and deployed a formal graph-theoretical circularity network model (12 nodes, 24 directed capital flow edges, $480B+ cumulative flows) with Leontief Input-Output matrix mathematics, PageRank absorption centrality, and CoreWeave neo-cloud shadow banking contagion modeling.
+* **Components Built & Integrated:**
+  - **Workstation UI Refactor & Rebranding:** Renamed header to `ERVIS Central`, removed cluttered badges (`Damodaran Ginzu • CFA Champion Engine`, `📖 ALMANAC`, `>_ ERVIS TERMINAL`), organized workstation quick jump buttons into clean 3-button rows (`grid-cols-3 gap-2`) across Anthropic and Powell cards, and synchronized return breadcrumbs (`&larr; ERVIS CENTRAL`).
+  - **Phase 1 Network Graph Dataset (`circularity_network_graph.json`):** 12 nodes across 4 tiers (Hyperscalers: AMZN, GOOGL, MSFT, META; AI Labs: ANT, OPENAI; Neo-Clouds & Credit: COREWEAVE, PRIVATE_CREDIT; Hardware Sinks: NVDA, AVGO, TSM, POWL) and 24 directed weighted edges tracking equity, debt, compute commitments, and hardware CapEx with margin capture rates and contract tenors.
+  - **Phase 2 Leontief & Network Simulation Engine (`ai_circularity_network_engine.py`):**
+    - Built adjacency matrix $A$ and Leontief flow matrix $(I - A)^{-1}$.
+    - Computed circularity extraction ratio $\eta$: AWS achieves **7.16x** ($164.7B ARR on $23B equity) via pure direct captive infrastructure, whereas Google Cloud achieves a blended **3.96x** ($100.9B ARR on $25.5B total capital), suffering a **-49.0% capital efficiency haircut** due to its $12.5B CoreWeave lease commitments.
+    - Derived PageRank absorption centrality: TSMC (**25.64%**), Nvidia (**21.48%**), and Powell Industries (**4.82%**) act as terminal absorbing sinks with zero outbound debt or customer financing obligations.
+    - Modeled 4 dynamic shock scenarios: Base Case, Token Deflation & CoreWeave DSCR Covenant Breach (GPU rental collapse compresses CoreWeave DSCR from 2.78x to 0.98x), Upstream Hardware Supply Constraint (+25% pricing, TSMC margins expand to 58%), and Hyperscaler CapEx Retrenchment (-30% hyperscaler CapEx).
+  - **Phase 3 Interactive SVG Visual Network Console (`thematic_capex.html`):**
+    - Built a vector-rendered directed network topology graph with custom SVG markers, interactive node clicking, HUD diagnostic drawer showing In-Degree, Out-Degree, Centrality, and Inbound/Outbound breakdown.
+    - Added scenario switcher buttons dynamically recalculating and rendering systemic contagion metrics.
+    - Integrated head-to-head Google Cloud vs. AWS CoreWeave drag comparison table detailing why Google Cloud Q3'26 EBIT margins lagged (28.0% vs. 38.5%).
+  - **Phase 4 Wiki & Model Ingestion:**
+    - Authored `ValuationWiki/wiki/Thematic_AI_Circularity_Network_and_Coreweave.md`.
+    - Synced all reports across `THEMATIC_AI_CAPEX/reports/index.html`, `US_EQUITIES/ANTHROPIC/reports/thematic_capex.html`, and `ervis-terminal/equities/anthropic/thematic_capex.html`.
+* **New Wiki Pages & Updates:**
+  - `wiki/Thematic_AI_Circularity_Network_and_Coreweave.md`
+  - `wiki/index.md`
+  - `wiki/log.md`

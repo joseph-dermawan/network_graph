@@ -2,15 +2,33 @@ import json
 import os
 
 def generate_thematic_html():
-    # Load model outputs
-    data_path = os.path.join(os.path.dirname(__file__), "..", "data", "model_outputs.json")
-    with open(data_path, "r") as f:
+    base_dir = os.path.dirname(__file__)
+    
+    # 1. Load Model Outputs
+    data_path = os.path.join(base_dir, "..", "data", "model_outputs.json")
+    with open(data_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     circ = data["circularity_summary"]
     annual_circ = data["annual_circularity_schedule"]
     depr = data["depreciation_cliff_schedule"]
     tokens = data["token_margin_trajectory"]
+
+    # 2. Load Network Graph & Simulation Outputs
+    network_data_path = os.path.join(base_dir, "..", "data", "circularity_network_graph.json")
+    with open(network_data_path, "r", encoding="utf-8") as f:
+        network_graph = json.load(f)
+
+    network_sim_path = os.path.join(base_dir, "..", "data", "network_simulation_outputs.json")
+    with open(network_sim_path, "r", encoding="utf-8") as f:
+        network_sim = json.load(f)
+
+    nodes_json = json.dumps(network_graph["nodes"])
+    edges_json = json.dumps(network_graph["edges"])
+    sim_outputs_json = json.dumps(network_sim)
+
+    head_to_head = network_sim["head_to_head_comparison"]
+    nodes_analytics = network_sim["node_analytics"]
 
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -149,6 +167,32 @@ def generate_thematic_html():
             cursor: pointer;
             box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }}
+
+        /* Network Topology SVG Interactive Styles */
+        .network-node {{
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }}
+        .network-node:hover rect {{
+            stroke-width: 2.5px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
+        }}
+        .network-edge {{
+            transition: stroke-width 0.2s ease, opacity 0.2s ease;
+        }}
+        .network-edge:hover {{
+            stroke-width: 4px !important;
+            opacity: 1 !important;
+        }}
+        .scenario-pill {{
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }}
+        .scenario-pill.active {{
+            background-color: #1C1917 !important;
+            color: #FAF7F2 !important;
+            border-color: #1C1917 !important;
+        }}
     </style>
 </head>
 <body class="min-h-screen">
@@ -230,12 +274,12 @@ def generate_thematic_html():
                     </h2>
                 </div>
                 <span class="text-xs font-mono text-[#8C867A]">
-                    Model Engine: v2.4 Active &bull; Valuation Gate: Gate 5 Institutional Sign-Off
+                    Model Engine: v2.5 Network Edition &bull; Gate 5 Institutional Sign-Off
                 </span>
             </div>
 
             <p class="text-xs text-[#57534E] leading-relaxed">
-                Beneath Anthropic's landmark $1.404T IPO lies the single largest contractual customer commitment structure in enterprise computing history: <strong>$265.6 Billion in multi-year take-or-pay cloud compute reservations</strong> disclosed in SEC Form S-1/A Note 13. When capitalized at Anthropic's 8.87% cost of capital, this obligation represents <strong>$485.3 Billion in synthetic debt claims senior to public equity</strong>, demanding $23.5B in annual imputed servicing. However, from the perspective of counterparties <strong>Amazon Web Services (AWS)</strong> and <strong>Google Cloud Platform (GCP)</strong>, these commitments create a self-reinforcing valuation flywheel: hyperscaler private equity checks are recycled directly into high-margin Cloud ARR, which public equity markets capitalize at 8.5x–9.0x EV/Sales, expanding hyperscaler market capitalizations by over <strong>60x the initial equity deployed</strong>. Meanwhile, upstream capital expenditures ($394B in 2026 across the Big 4) are absorbed by semiconductor leaders (NVDA, AVGO, TSM) and electrical power infrastructure providers (POWL), setting up an inevitable <strong>ASC 360 depreciation impairment cliff</strong> as inference token pricing drops below amortized hardware breakeven.
+                Beneath Anthropic's landmark $1.404T IPO lies the single largest contractual customer commitment structure in enterprise computing history: <strong>$265.6 Billion in multi-year take-or-pay cloud compute reservations</strong> disclosed in SEC Form S-1/A Note 13. When capitalized at Anthropic's 8.87% cost of capital, this obligation represents <strong>$485.3 Billion in synthetic debt claims senior to public equity</strong>, demanding $23.5B in annual imputed servicing. However, from the perspective of counterparties <strong>Amazon Web Services (AWS)</strong> and <strong>Google Cloud Platform (GCP)</strong>, these commitments create a self-reinforcing valuation flywheel: hyperscaler private equity checks are recycled directly into high-margin Cloud ARR, which public equity markets capitalize at 8.5x–9.0x EV/Sales, expanding hyperscaler market capitalizations by over <strong>60x the initial equity deployed</strong>. Meanwhile, capital allocation divergence in Q3'26 revealed severe margin leakage for Google due to external <strong>CoreWeave GPU leasing tolls</strong>, setting up an inevitable <strong>ASC 360 depreciation impairment cliff</strong> as inference token pricing drops below amortized hardware breakeven.
             </p>
 
             <!-- 4 Core Pillars KPI Grid -->
@@ -265,16 +309,16 @@ def generate_thematic_html():
             <!-- Strategic Structural Thesis Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-[#57534E] pt-2 border-t border-[#ECE7DE]">
                 <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
-                    <div class="text-[10.5px] font-mono font-bold text-[#15803D] uppercase mb-1">1. The Circular Equity-to-EV Multiplier</div>
-                    <p class="leading-relaxed">Amazon's $23.0B equity check yields $164.7B in high-margin AWS revenue. At an 8.5x cloud sales multiple and 38.5% EBIT margin, public markets award AWS $1.48T in incremental EV—a 64.4x multiple on the initial cash check.</p>
+                    <div class="text-[10.5px] font-mono font-bold text-[#15803D] uppercase mb-1">1. Direct vs. Leaked Circularity</div>
+                    <p class="leading-relaxed">Amazon's captive Trainium/EC2 captures $164.7B ARR at 38.5% EBIT (7.16x circular efficiency). Google's routing leaked capital through $12.5B in CoreWeave neo-cloud leases, diluting GCP efficiency by 49.0%.</p>
                 </div>
                 <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
-                    <div class="text-[10.5px] font-mono font-bold text-[#B45309] uppercase mb-1">2. Upstream Hardware & Power Absorption</div>
-                    <p class="leading-relaxed">Hyperscalers recycle cloud cash flows upstream: Nvidia (accelerators), Broadcom (custom TPU/Trainium ASICs), TSMC (3nm/2nm packaging), and Powell Industries (substation switchgear, MV transformers for 100MW+ data centers).</p>
+                    <div class="text-[10.5px] font-mono font-bold text-[#B45309] uppercase mb-1">2. Neo-Cloud Debt Shadow Banking</div>
+                    <p class="leading-relaxed">CoreWeave pledged GPUs for $10.5B in private credit loans at SOFR + 750 bps. Google and Microsoft pay rental markups servicing CoreWeave's interest, creating systemic fragility if token prices drop.</p>
                 </div>
                 <div class="p-3 bg-[#FAF7F2] border border-[#E5E0D8] rounded">
                     <div class="text-[10.5px] font-mono font-bold text-[#B91C1C] uppercase mb-1">3. The ASC 360 Depreciation Trap</div>
-                    <p class="leading-relaxed">Hyperscalers depreciate servers over 5.5 to 6.0 years, but AI clusters suffer technological obsolescence within 3.5 years. By 2028, this creates an unrecorded $45.5B annual D&A gap and a $176B balance sheet asset overhang.</p>
+                    <p class="leading-relaxed">Hyperscalers depreciate servers over 5.5 to 6.0 years, but AI clusters suffer technological obsolescence within 3.5 years. By 2028, this creates an unrecorded $45.5B annual D&A gap and a $176B balance sheet overhang.</p>
                 </div>
             </div>
         </div>
@@ -499,7 +543,333 @@ def generate_thematic_html():
             </div>
         </div>
 
-        <!-- Section 3: Granular Forensic Audit Tables -->
+        <!-- Section 3: Directed Circularity Network Topology & Neo-Cloud Drag Matrix (Q3'26 Forensics) -->
+        <div class="card p-6 space-y-6 border-t-2 border-t-[#0E7490]">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#E5E0D8] pb-3">
+                <div>
+                    <span class="text-[10.5px] font-mono uppercase tracking-wider text-[#0E7490] font-bold">
+                        Network Graph Theory & Systemic Contagion Engine
+                    </span>
+                    <h2 class="text-base font-serif font-bold text-[#1C1917]">
+                        Directed Capital Flow Topology & Q3'26 Google vs. CoreWeave Friction Audit
+                    </h2>
+                </div>
+                <span class="text-xs font-mono text-[#8C867A]">12 Entities &bull; 24 Directed Arcs &bull; Q3'26 Ingestion</span>
+            </div>
+
+            <!-- Scenario Selection Pills -->
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="text-xs font-mono font-bold text-[#57534E] uppercase mr-2">Contagion Scenario:</span>
+                <button class="scenario-pill active text-xs font-mono px-3 py-1.5 rounded border border-[#1C1917] bg-[#1C1917] text-[#FAF7F2] font-semibold" onclick="selectContagionScenario('baseline_q3_2026')">
+                    [1] Q3'26 Equilibrium Baseline
+                </button>
+                <button class="scenario-pill text-xs font-mono px-3 py-1.5 rounded border border-[#E5E0D8] bg-[#FAF7F2] text-[#57534E] hover:bg-[#EFE8DF]" onclick="selectContagionScenario('neo_cloud_debt_squeeze')">
+                    [2] CoreWeave Debt Squeeze (-35% Rent)
+                </button>
+                <button class="scenario-pill text-xs font-mono px-3 py-1.5 rounded border border-[#E5E0D8] bg-[#FAF7F2] text-[#57534E] hover:bg-[#EFE8DF]" onclick="selectContagionScenario('frontier_lab_drawdown_relief')">
+                    [3] Anthropic Drawdown Relief (-30%)
+                </button>
+                <button class="scenario-pill text-xs font-mono px-3 py-1.5 rounded border border-[#E5E0D8] bg-[#FAF7F2] text-[#57534E] hover:bg-[#EFE8DF]" onclick="selectContagionScenario('jevons_paradox_expansion')">
+                    [4] Jevons Paradox (8x Volume Surge)
+                </button>
+            </div>
+
+            <!-- Dynamic Scenario Impact Banner -->
+            <div id="scenarioBanner" class="p-3.5 bg-[#F0FDF4] border border-[#BBF7D0] rounded flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+                <div>
+                    <span id="scenarioStatusBadge" class="font-mono font-bold text-[#166534] uppercase text-[10.5px]">EQUILIBRIUM ACTIVE:</span>
+                    <span id="scenarioDescription" class="text-[#14532D] ml-1">AWS direct captive circularity generates 38.5% cloud EBIT. Google absorbs $12.5B in CoreWeave lease commitments, diluting GCP margin to 28.0%.</span>
+                </div>
+                <div class="flex items-center gap-4 font-mono text-xs shrink-0">
+                    <div>AWS EBIT: <strong id="scenAwsEbit" class="text-[#15803D]">$44.3B</strong></div>
+                    <div>GCP EBIT: <strong id="scenGcpEbit" class="text-[#B45309]">$23.8B</strong></div>
+                    <div>NVDA AI Rev: <strong id="scenNvdaRev" class="text-[#1C1917]">$135.0B</strong></div>
+                    <div>CoreWeave DSCR: <strong id="scenDscr" class="text-[#15803D]">2.78x</strong></div>
+                </div>
+            </div>
+
+            <!-- Interactive Network Canvas + Node Inspector HUD Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <!-- Left Column: SVG Force-Directed Topology Map -->
+                <div class="lg:col-span-8 card p-4 bg-[#FFFDF9] border border-[#E5E0D8] space-y-3">
+                    <div class="flex justify-between items-center text-xs font-mono">
+                        <span class="text-[#8C867A] uppercase tracking-wider text-[10px]">Interactive Flow Topology (Click Any Node to Inspect)</span>
+                        <div class="flex items-center gap-3 text-[10px]">
+                            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-[#B45309]"></span> Equity</span>
+                            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-[#15803D]"></span> ARR Recapture</span>
+                            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-[#B91C1C]"></span> Lease Outflow</span>
+                            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-[#1C1917]"></span> Hardware CapEx</span>
+                        </div>
+                    </div>
+
+                    <!-- SVG Canvas -->
+                    <div class="w-full overflow-x-auto custom-scroll">
+                        <svg viewBox="0 0 1000 620" class="w-full min-w-[700px] h-[450px]">
+                            <defs>
+                                <marker id="arrow-amber" viewBox="0 0 10 10" refX="22" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#B45309" />
+                                </marker>
+                                <marker id="arrow-green" viewBox="0 0 10 10" refX="22" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#15803D" />
+                                </marker>
+                                <marker id="arrow-red" viewBox="0 0 10 10" refX="22" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#B91C1C" />
+                                </marker>
+                                <marker id="arrow-dark" viewBox="0 0 10 10" refX="22" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#78716C" />
+                                </marker>
+                                <marker id="arrow-purple" viewBox="0 0 10 10" refX="22" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#7C3AED" />
+                                </marker>
+                            </defs>
+
+                            <!-- Column Tier Guidelines & Labels -->
+                            <text x="110" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="10" font-weight="bold" fill="#8C867A">TIER 1: CONSUMERS / DEBTORS</text>
+                            <text x="360" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="10" font-weight="bold" fill="#8C867A">TIER 2: HYPERSCALERS</text>
+                            <text x="640" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="10" font-weight="bold" fill="#8C867A">TIER 3: NEO-CLOUD CONDUIT</text>
+                            <text x="890" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="10" font-weight="bold" fill="#8C867A">TIER 4: HARDWARE & POWER SINKS</text>
+
+                            <!-- EDGES (Directed Arcs) -->
+                            <!-- Equity: AMZN -> ANT -->
+                            <path d="M 360,120 C 230,120 230,200 110,200" fill="none" stroke="#B45309" stroke-width="2.5" stroke-dasharray="4,2" marker-end="url(#arrow-amber)" class="network-edge" />
+                            <!-- ARR Recapture: ANT -> AMZN -->
+                            <path d="M 110,195 C 230,175 230,115 360,115" fill="none" stroke="#15803D" stroke-width="4.0" marker-end="url(#arrow-green)" class="network-edge" />
+                            
+                            <!-- Equity: GOOGL -> ANT -->
+                            <path d="M 360,240 C 230,240 230,205 110,205" fill="none" stroke="#B45309" stroke-width="2.0" stroke-dasharray="4,2" marker-end="url(#arrow-amber)" class="network-edge" />
+                            <!-- ARR Recapture: ANT -> GOOGL -->
+                            <path d="M 110,210 C 230,210 230,245 360,245" fill="none" stroke="#15803D" stroke-width="3.2" marker-end="url(#arrow-green)" class="network-edge" />
+
+                            <!-- Equity: MSFT -> OPENAI -->
+                            <path d="M 360,380 C 230,380 230,420 110,420" fill="none" stroke="#B45309" stroke-width="2.0" stroke-dasharray="4,2" marker-end="url(#arrow-amber)" class="network-edge" />
+                            <!-- ARR Recapture: OPENAI -> MSFT -->
+                            <path d="M 110,415 C 230,415 230,375 360,375" fill="none" stroke="#15803D" stroke-width="3.0" marker-end="url(#arrow-green)" class="network-edge" />
+
+                            <!-- COREWEAVE LEAKAGE EDGES -->
+                            <!-- Google -> CoreWeave Lease Outflow (THE DRAG) -->
+                            <path d="M 360,240 C 500,240 500,260 640,260" fill="none" stroke="#B91C1C" stroke-width="3.5" marker-end="url(#arrow-red)" class="network-edge" />
+                            <!-- Microsoft -> CoreWeave Lease -->
+                            <path d="M 360,380 C 500,380 500,270 640,265" fill="none" stroke="#B91C1C" stroke-width="2.5" marker-end="url(#arrow-red)" class="network-edge" />
+                            <!-- Private Credit -> CoreWeave Debt -->
+                            <path d="M 640,440 C 640,360 640,320 640,280" fill="none" stroke="#7C3AED" stroke-width="3.0" marker-end="url(#arrow-purple)" class="network-edge" />
+                            <!-- CoreWeave -> Nvidia Hardware CapEx -->
+                            <path d="M 640,260 C 760,260 760,140 890,135" fill="none" stroke="#78716C" stroke-width="2.5" marker-end="url(#arrow-dark)" class="network-edge" />
+
+                            <!-- HYPERSCALERS -> HARDWARE SINKS -->
+                            <!-- AMZN -> NVDA -->
+                            <path d="M 360,120 C 620,100 620,125 890,125" fill="none" stroke="#78716C" stroke-width="3.0" marker-end="url(#arrow-dark)" class="network-edge" />
+                            <!-- GOOGL -> NVDA -->
+                            <path d="M 360,240 C 620,200 620,130 890,130" fill="none" stroke="#78716C" stroke-width="2.5" marker-end="url(#arrow-dark)" class="network-edge" />
+                            <!-- MSFT -> NVDA -->
+                            <path d="M 360,380 C 620,320 620,140 890,140" fill="none" stroke="#78716C" stroke-width="3.2" marker-end="url(#arrow-dark)" class="network-edge" />
+                            <!-- META -> NVDA -->
+                            <path d="M 360,520 C 620,440 620,145 890,145" fill="none" stroke="#78716C" stroke-width="2.8" marker-end="url(#arrow-dark)" class="network-edge" />
+
+                            <!-- CUSTOM SILICON: Broadcom -->
+                            <!-- GOOGL -> AVGO (TPU) -->
+                            <path d="M 360,240 C 620,240 620,250 890,250" fill="none" stroke="#0E7490" stroke-width="3.0" marker-end="url(#arrow-dark)" class="network-edge" />
+                            <!-- AMZN -> AVGO (Trainium) -->
+                            <path d="M 360,120 C 620,180 620,245 890,245" fill="none" stroke="#0E7490" stroke-width="2.0" marker-end="url(#arrow-dark)" class="network-edge" />
+
+                            <!-- CHIP FOUNDRY: TSMC -->
+                            <!-- NVDA -> TSM -->
+                            <path d="M 890,130 C 930,220 930,300 890,390" fill="none" stroke="#B45309" stroke-width="3.2" marker-end="url(#arrow-dark)" class="network-edge" />
+                            <!-- AVGO -> TSM -->
+                            <path d="M 890,250 C 920,300 920,350 890,395" fill="none" stroke="#B45309" stroke-width="2.2" marker-end="url(#arrow-dark)" class="network-edge" />
+
+                            <!-- PHYSICAL POWER: Powell Industries -->
+                            <!-- AMZN/MSFT/GOOGL/META -> POWL -->
+                            <path d="M 360,520 C 620,530 620,515 890,515" fill="none" stroke="#0B5A3D" stroke-width="2.0" marker-end="url(#arrow-dark)" class="network-edge" />
+
+                            <!-- NODES (Group Elements) -->
+                            <!-- TIER 1 -->
+                            <g class="network-node" onclick="inspectNode('ANT')">
+                                <rect x="50" y="180" width="120" height="42" rx="4" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5" />
+                                <text x="60" y="198" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#1C1917">ANT</text>
+                                <text x="60" y="212" font-family="Inter" font-size="9" fill="#57534E">Anthropic PBC</text>
+                                <circle cx="155" cy="201" r="5" fill="#B45309" />
+                            </g>
+                            <g class="network-node" onclick="inspectNode('OPENAI')">
+                                <rect x="50" y="400" width="120" height="42" rx="4" fill="#FFFFFF" stroke="#78716C" stroke-width="1.5" />
+                                <text x="60" y="418" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#1C1917">OPENAI</text>
+                                <text x="60" y="432" font-family="Inter" font-size="9" fill="#57534E">OpenAI LLC</text>
+                            </g>
+
+                            <!-- TIER 2 -->
+                            <g class="network-node" onclick="inspectNode('AMZN')">
+                                <rect x="300" y="100" width="120" height="42" rx="4" fill="#FFFFFF" stroke="#15803D" stroke-width="2" />
+                                <text x="310" y="118" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#15803D">AMZN</text>
+                                <text x="310" y="132" font-family="Inter" font-size="9" fill="#57534E">AWS Cloud (7.16x)</text>
+                                <circle cx="405" cy="121" r="5" fill="#15803D" />
+                            </g>
+                            <g class="network-node" onclick="inspectNode('GOOGL')">
+                                <rect x="300" y="220" width="120" height="42" rx="4" fill="#FFFFFF" stroke="#B91C1C" stroke-width="2" />
+                                <text x="310" y="238" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#B91C1C">GOOGL</text>
+                                <text x="310" y="252" font-family="Inter" font-size="9" fill="#57534E">GCP (Leakage 3.82x)</text>
+                                <circle cx="405" cy="241" r="5" fill="#B91C1C" />
+                            </g>
+                            <g class="network-node" onclick="inspectNode('MSFT')">
+                                <rect x="300" y="360" width="120" height="42" rx="4" fill="#FFFFFF" stroke="#78716C" stroke-width="1.5" />
+                                <text x="310" y="378" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#1C1917">MSFT</text>
+                                <text x="310" y="392" font-family="Inter" font-size="9" fill="#57534E">Azure (5.00x)</text>
+                            </g>
+                            <g class="network-node" onclick="inspectNode('META')">
+                                <rect x="300" y="500" width="120" height="42" rx="4" fill="#FFFFFF" stroke="#78716C" stroke-width="1.5" />
+                                <text x="310" y="518" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#1C1917">META</text>
+                                <text x="310" y="532" font-family="Inter" font-size="9" fill="#57534E">Meta Platforms</text>
+                            </g>
+
+                            <!-- TIER 3 -->
+                            <g class="network-node" onclick="inspectNode('COREWEAVE')">
+                                <rect x="580" y="240" width="125" height="42" rx="4" fill="#FEF2F2" stroke="#B91C1C" stroke-width="2" />
+                                <text x="590" y="258" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#991B1B">COREWEAVE</text>
+                                <text x="590" y="272" font-family="Inter" font-size="9" fill="#57534E">Neo-Cloud ($10.5B Debt)</text>
+                                <circle cx="690" cy="261" r="5" fill="#B91C1C" />
+                            </g>
+                            <g class="network-node" onclick="inspectNode('PRIVATE_CREDIT')">
+                                <rect x="580" y="420" width="125" height="42" rx="4" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.5" />
+                                <text x="590" y="438" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#7C3AED">CREDIT</text>
+                                <text x="590" y="452" font-family="Inter" font-size="9" fill="#57534E">Blackstone/Magnetar</text>
+                            </g>
+
+                            <!-- TIER 4 -->
+                            <g class="network-node" onclick="inspectNode('NVDA')">
+                                <rect x="830" y="110" width="120" height="42" rx="4" fill="#FFFFFF" stroke="#15803D" stroke-width="2" />
+                                <text x="840" y="128" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#15803D">NVDA</text>
+                                <text x="840" y="142" font-family="Inter" font-size="9" fill="#57534E">Nvidia (Cash Sink)</text>
+                                <circle cx="935" cy="131" r="5" fill="#15803D" />
+                            </g>
+                            <g class="network-node" onclick="inspectNode('AVGO')">
+                                <rect x="830" y="230" width="120" height="42" rx="4" fill="#FFFFFF" stroke="#0E7490" stroke-width="1.5" />
+                                <text x="840" y="248" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#0E7490">AVGO</text>
+                                <text x="840" y="262" font-family="Inter" font-size="9" fill="#57534E">Broadcom (ASIC)</text>
+                            </g>
+                            <g class="network-node" onclick="inspectNode('TSM')">
+                                <rect x="830" y="370" width="120" height="42" rx="4" fill="#FFFFFF" stroke="#1C1917" stroke-width="1.5" />
+                                <text x="840" y="388" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#1C1917">TSM</text>
+                                <text x="840" y="402" font-family="Inter" font-size="9" fill="#57534E">TSMC (Bottleneck)</text>
+                            </g>
+                            <g class="network-node" onclick="inspectNode('POWL')">
+                                <rect x="830" y="490" width="120" height="42" rx="4" fill="#FFFFFF" stroke="#0B5A3D" stroke-width="1.5" />
+                                <text x="840" y="508" font-family="JetBrains Mono" font-size="11" font-weight="bold" fill="#0B5A3D">POWL</text>
+                                <text x="840" y="522" font-family="Inter" font-size="9" fill="#57534E">Powell Industries</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Right Column: Node Inspector HUD -->
+                <div class="lg:col-span-4 card p-5 bg-[#FAF7F2] border border-[#E5E0D8] flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start border-b border-[#E5E0D8] pb-2">
+                            <div>
+                                <span id="hudArchetype" class="text-[9.5px] font-mono px-2 py-0.5 bg-[#FEF2F2] text-[#991B1B] border border-[#FECACA] rounded font-bold uppercase">
+                                    HYPERSCALER_LEAKAGE
+                                </span>
+                                <h3 id="hudLabel" class="text-base font-serif font-bold text-[#1C1917] mt-1.5">
+                                    Alphabet (Google Cloud)
+                                </h3>
+                            </div>
+                            <span id="hudTicker" class="text-sm font-mono font-bold text-[#B45309]">GOOGL</span>
+                        </div>
+
+                        <!-- 4 Quick Node KPIs -->
+                        <div class="grid grid-cols-2 gap-2 font-mono text-xs">
+                            <div class="p-2 bg-[#FFFFFF] border border-[#E5E0D8] rounded">
+                                <span class="text-[9px] text-[#8C867A] uppercase block">Cumulative Inflows</span>
+                                <strong id="hudInflow" class="text-[#15803D] text-xs font-bold">$100.9 Billion</strong>
+                            </div>
+                            <div class="p-2 bg-[#FFFFFF] border border-[#E5E0D8] rounded">
+                                <span class="text-[9px] text-[#8C867A] uppercase block">Cumulative Outflows</span>
+                                <strong id="hudOutflow" class="text-[#B91C1C] text-xs font-bold">$68.5 Billion</strong>
+                            </div>
+                            <div class="p-2 bg-[#FFFFFF] border border-[#E5E0D8] rounded">
+                                <span class="text-[9px] text-[#8C867A] uppercase block">Circularity Ratio (&eta;)</span>
+                                <strong id="hudCircRatio" class="text-[#1C1917] text-xs font-bold">3.82x Blended</strong>
+                            </div>
+                            <div class="p-2 bg-[#FFFFFF] border border-[#E5E0D8] rounded">
+                                <span class="text-[9px] text-[#8C867A] uppercase block">Q3'26 Cloud EBIT %</span>
+                                <strong id="hudEbitMargin" class="text-[#B45309] text-xs font-bold">28.0% (Lagging)</strong>
+                            </div>
+                        </div>
+
+                        <!-- Forensic Node Narrative Note -->
+                        <div class="p-3 bg-[#FFFFFF] border border-[#E5E0D8] rounded space-y-1">
+                            <span class="text-[10px] font-mono uppercase font-bold text-[#57534E] block">Q3'26 Transmission Forensic:</span>
+                            <p id="hudNote" class="text-xs text-[#57534E] leading-relaxed font-sans">
+                                Triple-CapEx penalty: simultaneously funding internal TPU v5/v6 with Broadcom, buying direct Nvidia clusters, and leasing $12.5B in CoreWeave capacity, paying neo-cloud debt tolls.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-[#ECE7DE] text-[11px] font-mono text-[#8C867A] flex justify-between">
+                        <span>Centrality Score: <strong id="hudCentrality" class="text-[#1C1917]">8.45%</strong></span>
+                        <span class="text-[#0E7490] font-semibold">Live Edge Inspector Active</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Table: Google vs. AWS Q3'26 Circularity Head-to-Head -->
+            <div class="card overflow-hidden">
+                <div class="p-4 bg-[#FAF7F2] border-b border-[#E5E0D8] flex justify-between items-center">
+                    <div>
+                        <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] rounded font-bold">
+                            TABLE 00 &bull; FORENSIC DECOUPLING
+                        </span>
+                        <h3 class="text-sm font-serif font-bold text-[#1C1917] mt-1">
+                            Google Cloud (GCP) vs. Amazon Web Services (AWS): The Q3'26 Circularity Efficiency Wedge
+                        </h3>
+                    </div>
+                    <span class="text-xs font-mono text-[#B91C1C] font-bold">CoreWeave Efficiency Dilution: -49.0%</span>
+                </div>
+                <div class="overflow-x-auto custom-scroll">
+                    <table class="fin-table">
+                        <thead>
+                            <tr>
+                                <th>Hyperscaler Node</th>
+                                <th>Equity Invested ($B)</th>
+                                <th>CoreWeave Leakage Outflow ($B)</th>
+                                <th>Total Outflow Deployed ($B)</th>
+                                <th>Recaptured Anthropic ARR ($B)</th>
+                                <th>Pure Anthropic Efficiency</th>
+                                <th>Blended Circularity Efficiency</th>
+                                <th>Q3'26 Cloud EBIT %</th>
+                                <th>Structural Diagnosis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold text-[#15803D]">Amazon Web Services (AWS)</td>
+                                <td>$23.0B</td>
+                                <td class="font-bold text-[#15803D]">$0.0B (Direct Captive)</td>
+                                <td>$23.0B</td>
+                                <td class="font-bold text-[#15803D]">$164.7B</td>
+                                <td>7.16x</td>
+                                <td class="font-bold text-[#15803D]">7.16x</td>
+                                <td class="font-bold text-[#15803D]">38.5%</td>
+                                <td>Direct owned Trainium/EC2 captures full EBIT with zero intermediary markup.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-[#B91C1C]">Google Cloud Platform (GCP)</td>
+                                <td>$13.0B</td>
+                                <td class="font-bold text-[#B91C1C]">$12.5B (Lease Tolls)</td>
+                                <td>$25.5B</td>
+                                <td class="text-[#0E7490]">$100.9B</td>
+                                <td>7.76x</td>
+                                <td class="font-bold text-[#B91C1C]">3.96x (-49.0%)</td>
+                                <td class="font-bold text-[#B91C1C]">28.0%</td>
+                                <td>Neo-cloud lease commitments subsidize CoreWeave debt service, diluting margins.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Section 4: Granular Forensic Audit Tables -->
         <div class="space-y-6">
             <div class="flex items-baseline justify-between border-b border-[#E5E0D8] pb-2">
                 <div>
@@ -700,7 +1070,7 @@ def generate_thematic_html():
 
         </div>
 
-        <!-- Section 4: Mathematical Derivations & Accounting Rules -->
+        <!-- Section 5: Mathematical Derivations & Accounting Rules -->
         <div class="card p-6 bg-[#FAF7F2] space-y-4">
             <h3 class="text-sm font-serif font-bold text-[#1C1917] border-b border-[#E5E0D8] pb-2">
                 Quantitative Audit Rules & Derivation Methodology
@@ -748,6 +1118,9 @@ def generate_thematic_html():
         const annualSchedule = {json.dumps(annual_circ)};
         const deprCliff = {json.dumps(depr)};
         const tokenMargins = {json.dumps(tokens)};
+        const networkNodes = {nodes_json};
+        const networkEdges = {edges_json};
+        const networkSim = {sim_outputs_json};
 
         // Chart 1: Circular Flow Chart
         const ctxCirc = document.getElementById('circularFlowChart').getContext('2d');
@@ -930,7 +1303,7 @@ def generate_thematic_html():
             }}
         }});
 
-        // Scenario Slider Logic
+        // Scenario Slider Logic (Section 2)
         function updateScenario() {{
             const drawdown = parseFloat(document.getElementById('sliderDrawdown').value);
             const life = parseFloat(document.getElementById('sliderLife').value);
@@ -948,7 +1321,6 @@ def generate_thematic_html():
             document.getElementById('kpiRecalculatedEBIT').innerText = 'AWS: $' + adjAWS.toFixed(1) + 'B • GCP: $' + adjGCP.toFixed(1) + 'B';
 
             // Recalculate Peak Gap based on life
-            // Standard stated is 5.5 yrs. If life is 3.5, gap is 45.5. If life is 5.5, gap is 0.
             const lifeFactor = Math.max(0, (5.5 - life) / 2.0);
             const peakGap = 45.5 * lifeFactor;
             const overhang = 176.7 * lifeFactor;
@@ -980,14 +1352,79 @@ def generate_thematic_html():
                 kpiStatusElem.innerText = 'GROSS MARGIN IMPAIRMENT';
             }}
         }}
+
+        // SECTION 3: NETWORK GRAPH & CONTAGION INSPECTOR
+        function inspectNode(nodeId) {{
+            const node = networkSim.node_analytics[nodeId];
+            if (!node) return;
+
+            document.getElementById('hudLabel').innerText = node.label;
+            document.getElementById('hudTicker').innerText = node.id;
+            document.getElementById('hudArchetype').innerText = node.archetype;
+            document.getElementById('hudInflow').innerText = '$' + node.cumulative_inflow_usd_b.toFixed(1) + ' Billion';
+            document.getElementById('hudOutflow').innerText = '$' + node.cumulative_outflow_usd_b.toFixed(1) + ' Billion';
+            document.getElementById('hudCircRatio').innerText = node.circularity_ratio > 50 ? 'Pure Recipient (SINK)' : node.circularity_ratio.toFixed(2) + 'x';
+            document.getElementById('hudEbitMargin').innerText = node.q3_2026_ebit_margin_pct + '%';
+            document.getElementById('hudNote').innerText = node.q3_note;
+            document.getElementById('hudCentrality').innerText = node.network_absorption_centrality + '%';
+
+            // Highlight archetype badge
+            const badge = document.getElementById('hudArchetype');
+            if (node.archetype.includes('WINNER') || node.circularity_ratio > 5) {{
+                badge.className = 'text-[9.5px] font-mono px-2 py-0.5 bg-[#DCFCE7] text-[#166534] border border-[#BBF7D0] rounded font-bold uppercase';
+            }} else if (node.archetype.includes('LEAKAGE') || node.archetype.includes('BROKER')) {{
+                badge.className = 'text-[9.5px] font-mono px-2 py-0.5 bg-[#FEE2E2] text-[#991B1B] border border-[#FECACA] rounded font-bold uppercase';
+            }} else {{
+                badge.className = 'text-[9.5px] font-mono px-2 py-0.5 bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] rounded font-bold uppercase';
+            }}
+        }}
+
+        function selectContagionScenario(key) {{
+            const sc = networkSim.scenarios[key];
+            if (!sc) return;
+
+            // Update pills
+            document.querySelectorAll('.scenario-pill').forEach(btn => {{
+                btn.className = 'scenario-pill text-xs font-mono px-3 py-1.5 rounded border border-[#E5E0D8] bg-[#FAF7F2] text-[#57534E] hover:bg-[#EFE8DF]';
+            }});
+            event.target.className = 'scenario-pill active text-xs font-mono px-3 py-1.5 rounded border border-[#1C1917] bg-[#1C1917] text-[#FAF7F2] font-semibold';
+
+            // Update banner
+            document.getElementById('scenarioStatusBadge').innerText = sc.system_health.replace(/_/g, ' ') + ':';
+            document.getElementById('scenAwsEbit').innerText = '$' + sc.aws_cloud_ebit_usd_b.toFixed(1) + 'B';
+            document.getElementById('scenGcpEbit').innerText = '$' + sc.gcp_cloud_ebit_usd_b.toFixed(1) + 'B';
+            document.getElementById('scenNvdaRev').innerText = '$' + sc.nvda_ai_revenue_usd_b.toFixed(1) + 'B';
+            document.getElementById('scenDscr').innerText = sc.coreweave_dscr.toFixed(2) + 'x';
+
+            const banner = document.getElementById('scenarioBanner');
+            const dscrElem = document.getElementById('scenDscr');
+
+            if (sc.coreweave_dscr < 1.0) {{
+                banner.className = 'p-3.5 bg-[#FEF2F2] border border-[#FECACA] rounded flex flex-col md:flex-row items-center justify-between gap-3 text-xs';
+                dscrElem.className = 'text-[#B91C1C] font-bold';
+                document.getElementById('scenarioDescription').innerText = 'CoreWeave DSCR breaches 1.0x covenant threshold under -35% rental deflation. Private credit faces collateral haircut; Google incurs $2.4B lease impairment.';
+            }} else if (key === 'frontier_lab_drawdown_relief') {{
+                banner.className = 'p-3.5 bg-[#FFFBEB] border border-[#FDE68A] rounded flex flex-col md:flex-row items-center justify-between gap-3 text-xs';
+                dscrElem.className = 'text-[#B45309] font-bold';
+                document.getElementById('scenarioDescription').innerText = 'Anthropic takes -30% compute drawdown relief. AWS Cloud EBIT drops by -$19.0B; GCP EBIT drops by -$8.5B; upstream hardware cancellations ripple to Nvidia.';
+            }} else if (key === 'jevons_paradox_expansion') {{
+                banner.className = 'p-3.5 bg-[#F0FDF4] border border-[#BBF7D0] rounded flex flex-col md:flex-row items-center justify-between gap-3 text-xs';
+                dscrElem.className = 'text-[#15803D] font-bold';
+                document.getElementById('scenarioDescription').innerText = 'Jevons Paradox triggers 8x inference query volume surge. Cluster utilization reaches 92%, driving hyperscaler gross margins to record highs and lifting CoreWeave DSCR to 3.40x.';
+            }} else {{
+                banner.className = 'p-3.5 bg-[#F0FDF4] border border-[#BBF7D0] rounded flex flex-col md:flex-row items-center justify-between gap-3 text-xs';
+                dscrElem.className = 'text-[#15803D] font-bold';
+                document.getElementById('scenarioDescription').innerText = 'AWS direct captive circularity generates 38.5% cloud EBIT. Google absorbs $12.5B in CoreWeave lease commitments, diluting GCP margin to 28.0%.';
+            }}
+        }}
     </script>
 </body>
 </html>"""
 
     # Output paths
     paths = [
-        os.path.join(os.path.dirname(__file__), "..", "reports", "index.html"),
-        os.path.join(os.path.dirname(__file__), "..", "..", "US_EQUITIES", "ANTHROPIC", "reports", "thematic_capex.html"),
+        os.path.join(base_dir, "..", "reports", "index.html"),
+        os.path.join(base_dir, "..", "..", "US_EQUITIES", "ANTHROPIC", "reports", "thematic_capex.html"),
         "/Users/worldofmadness/Documents/VS Code/Personal Projects/ervis-terminal/equities/anthropic/thematic_capex.html"
     ]
 
