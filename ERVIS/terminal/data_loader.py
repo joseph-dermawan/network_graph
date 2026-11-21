@@ -27,6 +27,7 @@ COVERED_COMPANIES = [
     ("AMD", "Adv Micro Devices"),
     ("ORCL", "Oracle Corp"),
     ("RR", "Rolls-Royce Holdings"),
+    ("MU", "Micron Technology"),
 ]
 
 def get_covered_companies() -> List[Tuple[str, str]]:
@@ -93,7 +94,8 @@ MASTER_NET_DEBT_B = {
     "TSM": -78.80,
     "AMD": -7.82,
     "ORCL": 118.85,
-    "RR": 1.20
+    "RR": 1.20,
+    "MU": -67.96
 }
 
 def load_registry() -> Dict[str, Any]:
