@@ -37,8 +37,8 @@ OUTPUT_FILE = os.path.join(BASE_DIR, "terminal_screens_cache.json")
 ERVIS_DEPLOY_SCREENS = "/Users/worldofmadness/Documents/VS Code/Personal Projects/ervis-terminal/terminal/data/screens.json"
 
 def export_all():
-    print("[EXPORTER] Initializing Rich Terminal Console (width=132)...")
-    console = Console(record=True, width=132, force_terminal=True)
+    print("[EXPORTER] Initializing Rich Terminal Console (width=132, force_terminal=False)...")
+    console = Console(record=True, width=132, force_terminal=False, color_system="truecolor")
     
     covered = get_covered_companies()
     print(f"[EXPORTER] Discovered {len(covered)} covered companies.")
