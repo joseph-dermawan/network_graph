@@ -39,8 +39,8 @@ TOTAL_DEBT_WITH_LEASES_M = TOTAL_FUNDED_DEBT_M + OPERATING_LEASES_M # $10,481.0M
 NET_CASH_BRIDGE_M = CASH_AND_ST_INV_M - TOTAL_FUNDED_DEBT_M # +$52,141.0M ($52.14B Net Cash)
 
 DILUTED_SHARES_M = 24483.0 # 24.483 Billion diluted shares (Form 10-Q Note 3)
-SPOT_PRICE_USD = 184.25    # Q3'26 Reference spot close ($184.25)
-MARKET_CAP_M = DILUTED_SHARES_M * SPOT_PRICE_USD # $4,511,000M ($4.51 Trillion)
+SPOT_PRICE_USD = 163.93    # Live Market Trade Close ($163.93)
+MARKET_CAP_M = DILUTED_SHARES_M * SPOT_PRICE_USD # $4,013,498.2M ($4.01 Trillion)
 
 # 2. Gate 3: Cost of Capital (WACC) & Hamada Beta
 RF_10Y = 0.0458
@@ -79,8 +79,8 @@ LIQ_FLOOR_USD = 2.45
 
 # Triangulation Target
 TARGET_PRICE_USD = 120.03
-UPSIDE_PCT = ((TARGET_PRICE_USD / SPOT_PRICE_USD) - 1.0) * 100.0 # -34.85% -> -34.9%
-RATING = "UNDERWEIGHT / TRIM (-34.9%)"
+UPSIDE_PCT = ((TARGET_PRICE_USD / SPOT_PRICE_USD) - 1.0) * 100.0 # -26.78% -> -26.8%
+RATING = "UNDERWEIGHT / TRIM (-26.8%)"
 
 print(f"  * DCF Value: ${dcf_per_share:.2f}")
 print(f"  * SOTP Value: ${sotp_per_share:.2f}")
