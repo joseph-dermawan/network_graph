@@ -2,54 +2,54 @@
   "ticker": "NVDA",
   "company_name": "NVIDIA Corporation",
   "currency": "USD",
-  "spot_price_usd": 233.95,
-  "shares_outstanding_m": 24147.0,
-  "market_cap_m": 5649190.0,
+  "spot_price_usd": 184.25,
+  "shares_outstanding_m": 24483.0,
+  "market_cap_m": 4510992.8,
   "wacc_schedule": {
     "base_wacc": 0.0999,
     "terminal_wacc": 0.09,
     "cost_of_equity": 0.1,
     "after_tax_cost_of_debt": 0.044,
-    "hamada_beta": 1.253
+    "hamada_beta": 1.252
   },
   "dcf_schedule": {
-    "pv_10yr_fcff_m": 995640.9,
-    "pv_terminal_value_m": 1267758.3,
-    "enterprise_value_m": 2263399.2,
-    "equity_bridge_net_cash_m": 48944.0,
-    "equity_value_m": 2312343.2,
-    "dcf_intrinsic_value_usd": 95.76
+    "pv_10yr_fcff_m": 1048700.0,
+    "pv_terminal_value_m": 1385400.0,
+    "enterprise_value_m": 2434100.0,
+    "equity_bridge_net_cash_m": 52141.0,
+    "equity_value_m": 2486241.0,
+    "dcf_intrinsic_value_usd": 101.55
   },
   "sotp_divisional": {
-    "data_center_ev_m": 4144000.0,
-    "networking_ev_m": 375000.0,
-    "gaming_ev_m": 108000.0,
-    "automotive_ev_m": 35000.0,
-    "total_sotp_ev_m": 4662000.0,
-    "sotp_intrinsic_usd": 195.09
+    "data_center_ev_m": 3132600.0,
+    "networking_ev_m": 471600.0,
+    "gaming_ev_m": 107460.0,
+    "automotive_ev_m": 32460.0,
+    "total_sotp_ev_m": 3744120.0,
+    "sotp_intrinsic_usd": 155.06
   },
   "monte_carlo_10k": {
     "trials": 10000,
-    "p10_usd": 78.32,
-    "median_usd": 99.49,
-    "p90_usd": 125.3,
+    "p10_usd": 82.4,
+    "median_usd": 105.8,
+    "p90_usd": 134.1,
     "win_rate_percent": 0.0
   },
   "ai_capex_audit": {
-    "nvda_own_annual_capex_m": 6042.0,
-    "nvda_own_capex_as_pct_rev": 2.8,
-    "nvda_fcf_conversion_pct": 94.12,
-    "top_4_customer_capex_annual_b": 408.0,
+    "nvda_own_annual_capex_m": 6544.0,
+    "nvda_own_capex_as_pct_rev": 3.5,
+    "nvda_fcf_conversion_pct": 93.11,
+    "top_4_customer_capex_annual_b": 420.0,
     "top_4_customer_rev_contribution_pct": 42.0,
-    "estimated_customer_payback_years": "4.5 to 6.0 Years",
-    "gpu_hardware_useful_life_years": "3.5 Years (Obsolescence Risk)",
-    "structural_fragility_evaluation": "HIGH CUSTOMER CONCENTRATION RISK (If Top 4 hyperscalers pause CapEx by 15%, NVDA Data Center revenue falls ~25%)"
+    "estimated_customer_payback_years": "4.5 to 5.5 Years",
+    "gpu_hardware_useful_life_years": "3.5 Years (Obsolescence Deficit: 1.0 to 2.0 Yrs)",
+    "structural_fragility_evaluation": "ELEVATED CONCENTRATION & OBSOLESCENCE DEFICIT (Top 4 hyperscalers represent 42% of revenue. Customer payback exceeds 3.5-year GPU useful life)."
   },
-  "liquidation_floor_usd": 2.12,
+  "liquidation_floor_usd": 2.45,
   "final_triangulation": {
-    "target_price_usd": 125.93,
-    "upside_percent": -46.17,
-    "rating": "UNDERWEIGHT / SELL (-46.2%)",
-    "updated_at": "2026-10-04T14:05:37.446575"
+    "target_price_usd": 120.03,
+    "upside_percent": -34.85,
+    "rating": "UNDERWEIGHT / TRIM (-34.9%)",
+    "updated_at": "2026-11-23T22:30:00.000000"
   }
 }

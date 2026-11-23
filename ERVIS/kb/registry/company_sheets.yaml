@@ -66,11 +66,11 @@ COMPANIES:
     gsheet_id: ''
     gsheet_url: ''
     current_status: VALUATION_COMPLETED
-    last_intrinsic_value: 125.93
-    published_rating: UNDERWEIGHT / SELL (-46.2%)
-    last_published_version: draft_v1.0
-    last_published_at: '2026-10-04T14:05:37.446970'
-    last_spot_price: 233.95
+    last_intrinsic_value: 120.03
+    published_rating: UNDERWEIGHT / TRIM (-34.9%)
+    last_published_version: v2.0-Q3FY26
+    last_published_at: '2026-11-23T22:30:00'
+    last_spot_price: 184.25
   GOOGL:
     company_name: Alphabet Inc.
     market: US_EQUITIES

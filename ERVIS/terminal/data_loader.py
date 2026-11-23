@@ -84,7 +84,7 @@ def resolve_ticker(raw_ticker: str) -> str:
     return TICKER_ALIASES.get(cleaned, cleaned)
 
 MASTER_NET_DEBT_B = {
-    "NVDA": -48.91,
+    "NVDA": -52.14,
     "MSFT": -2.03,
     "AAPL": -20.56,
     "GOOGL": -64.67,
@@ -231,6 +231,8 @@ def load_company_data(ticker: str) -> Dict[str, Any]:
                 # Triangulated target price override if present
                 if "final_triangulation" in d:
                     result["target_price"] = d["final_triangulation"].get("target_price_usd") or d["final_triangulation"].get("target_price_gbp") or result["target_price"]
+                    if "rating" in d["final_triangulation"]:
+                        result["rating"] = d["final_triangulation"]["rating"]
                 elif "final_target_price_usd" in d:
                     result["target_price"] = d["final_target_price_usd"]
                 elif "gate_4_valuation" in d:
